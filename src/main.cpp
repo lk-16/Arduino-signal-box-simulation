@@ -1,0 +1,143 @@
+#include <Arduino.h>
+#include "Gleisbild.h"
+
+//Tischfeld
+const int besetztmelderAnzahl = 2;
+
+int besetztmelderLedsGelb[besetztmelderAnzahl] = {2,2};
+int besetztmelderLedsRot[besetztmelderAnzahl] = {2,2};
+int besetztmelderEingaenge[besetztmelderAnzahl] = {2,2};
+
+
+//Pinbelegung
+int schieberegisterPins[4]={2,8,9,10};
+int w1g = 22;                       //w=Weiche  bzw. Weichenrelais g=Relais für gerade
+int w1k = 23;                       //g=Relais für gerade
+int w2g = 24;
+int w2k = 25;
+int w3g = 26;
+int w3k = 27;
+
+
+int wt1 = 33;                        //Pinbelegung Weichentasten
+int wt2 = 32;
+
+int ledw1g = 102;                    //Pinbelegung der WeichenLEDs
+int ledw1k = 103;
+int ledw2g = 104;
+int ledw2k = 105;
+
+int wgt = 53;                        //Weichengruppentaste
+
+int zta1 = 2;                       // Zugstraßentaste 1 an Pin 2
+int zta2 = 3;                       // Zugstraßentaste 2 an Pin 3
+int zta3 = 4;                       // Zugstraßentaste 3 an Pin 4
+int zta4 = 5;
+//Melder
+int ftueMelderLed = 101;              //Fahrstraßentastenüberwachung
+int ftueMelderWut = 37;
+int weckerPin = 28;
+
+int adressWeichenposition1 = 1;      //Speicheradresse für die Weichenposition von Weiche 1 für den EEPROM
+int adressWeichenposition2 = 5;      //Speicheradresse für die Weichenposition von Weiche 1 für den EEPROM
+
+int weichentimeout = 1000;                //dauer des Schaltvorgangs bei den Weichen
+
+String ftueMelderName = "ftueMelder";
+
+//Signale
+int signalsperrtaste = ftueMelderWut;                //signalsperrtaste, zu testzwecken auf weichengruppentaste gestellt
+int Signalentsperrtaste = zta4;                      //s.o
+int shgt= wgt;                                       //s.o
+int allgSignaltasten[3] = {signalsperrtaste,Signalentsperrtaste,shgt}; //Signalsperrtaste, Signalentsperrtaste, Signalhaltgruppentaste, Array speichert für jedes Signal wichtige informationen, hält den schreibaufwand geringer
+
+//Signal1
+int rot1 = 106;                     //Hp0 (rot) vom Signal 1
+int gruen1 = 107;                     //Hp1 (grün)  vom Signal 1
+int gelb1 = 108;                     //Hp2 (langsamfahrt) vom Signal 1
+int sperrmelder1 =109;
+int signaltaste1 = 34;                       //Signaltaste, zu tastzwecken weichentaste 1
+
+//Objektedefinitonen
+//Gleisbesetztmelder
+besetztmeldungControl besetztmeldung(besetztmelderEingaenge, besetztmelderLedsGelb, besetztmelderLedsRot, besetztmelderAnzahl, schieberegisterPins);
+
+//Weichen
+weichen weiche1(1, w1g, w1k, ledw1g, ledw1k, adressWeichenposition1, weichentimeout, wt1, wgt, schieberegisterPins);       //Objekt Weiche1 aus der Klasse Weichen inkl. aller relevanten Informationen zu Weiche
+weichen weiche2(2, w2g, w2k, ledw2g, ledw2k, adressWeichenposition2, weichentimeout, wt2, wgt, schieberegisterPins);       //Objekt Weiche1 aus der Klasse Weichen inkl. aller relevanten Informationen zu Weiche
+
+//Melder
+melder ftueMelder(ftueMelderName, ftueMelderLed, weckerPin, ftueMelderWut, schieberegisterPins);                                    //Ausgabe von FTÜ im Seriellen Monitior funktioniert nicht
+
+//Zugtasten
+zugtasten zugtaste1(zta1, schieberegisterPins);                                                  //Objekt zugtaste1 mit Pin
+zugtasten zugtaste2(zta2, schieberegisterPins);
+zugtasten zugtaste3(zta3, schieberegisterPins);
+zugtasten zugtaste4(zta4, schieberegisterPins);
+
+//Signale
+hauptsignale hauptsignal1(rot1, gruen1, gelb1, signaltaste1, sperrmelder1, allgSignaltasten, schieberegisterPins);
+//int rotPin, int gelbPin, int gruenPin,  int signaltaste, int sperrmelder, int allgSignaltasten[3], int registerPin[4]
+void setup()
+{
+  Serial.begin(9600);
+  weiche1.setRegisterPins(2,8,9,10);
+  pinMode(ftueMelderLed, OUTPUT);
+
+  weiche1.weicheRelaisHIGH();                                               //alle möglichen Eingaben an den Relais werdengelöscht
+  weiche2.weicheRelaisHIGH();
+  weiche1.weichenpositionEEPROM();                                          //gespeicherte Weichenposition wird angezeigt und ausgeführt
+  weiche2.weichenpositionEEPROM();
+  
+  hauptsignal1.hpschalten(2); 
+  //hauptsignal1.digitalSchalten(109, HIGH);
+ 
+  
+}
+
+void loop()
+{
+  //Zugtastensteuerung
+  if (zugtaste1.getzugtastenstatus() == true && zugtaste2.getzugtastenstatus() == true)
+  {
+    weiche1.weicheGerade();
+    weiche2.weicheGerade();
+  }
+  if (zugtaste2.getzugtastenstatus() == true && zugtaste3.getzugtastenstatus() == true)
+  {
+    weiche1.weicheKurve();
+    weiche2.weicheKurve();
+  }
+  if (zugtaste3.getzugtastenstatus() == true && zugtaste4.getzugtastenstatus() == true)
+  {
+    weiche1.weicheGerade();
+    weiche2.weicheGerade();
+  }
+
+  //FTÜ-Melder
+  if (zugtaste1.getzugtastenstatus() == HIGH || zugtaste2.getzugtastenstatus() == HIGH || zugtaste3.getzugtastenstatus() == HIGH || zugtaste4.getzugtastenstatus() == HIGH)    //wenn eine Zugtaste gedrückt ist
+  {
+    ftueMelder.tueMelder();                                                                      //kontrolliere wie lange die Tasten gesrückt wurden
+  }
+  else                                                                                           //wenn keine Mehr gedrückt wird,
+  {
+    ftueMelder.setMelderStartzeit(ftueMelder.getTime());                                           //setze den Timer zurück
+    ftueMelder.setTueMelderStatus(false);                                                              //den Status auf 0
+    ftueMelder.digitalSchalten(ftueMelder.getTueLedPin(), LOW);                                                //Schalte die Led aus
+    ftueMelder.digitalSchalten(ftueMelder.getWecker(), HIGH);                                                  //Mache den Wecker aus
+    ftueMelder.setWutAktivierung(LOW);                                                             //beim Beenden der Störung wird die Unterbrechung wieder aufgehoben
+  }
+  
+  //Signale
+  hauptsignal1.hauptsignalhp0manuell();
+  hauptsignal1.signalSperren();                                                   //über weichen  und weichensperrtaste kann ein Signal gesperrt werden
+  if(digitalRead(zta2) == HIGH) hauptsignal1.hpschalten(1);
+
+
+  weiche1.weicheWechsel();            //WGT und WT können zum Umschalten einer Weiche benutzt werden
+  weiche2.weicheWechsel();
+  weiche1.weichenSchalten();          //lässt das Relais nach dem Schalten wieder zurückfallen
+  weiche2.weichenSchalten();
+}
+
+
