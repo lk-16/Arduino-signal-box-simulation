@@ -33,7 +33,6 @@
 class actors
 {
 private:
-  int _weckerPin; //Variable speichert den Pin des Weckers
   int _registerAnzahl;
   int _shPin;
   int _stPin;
@@ -41,7 +40,6 @@ private:
 
 public:
   actors(int anzahl, int sh, int st, int ds);
-  unsigned long getTime();                               //die Zeit wird ausgegeben
   void blinken(int LedPin);                              //led blinkt
   void digitalSchalten(int PinNr, boolean newPinStatus); //leds können geschaltet werden, Differenzierung zwischen Led an normalen und leds an Schieberegisteroutputs
   void setRegisterPins(int anzahl, int sh, int st, int ds);

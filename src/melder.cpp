@@ -29,12 +29,12 @@ melder::melder(String melderName, int tueMelderLed, int weckerPin, int wutPin, i
 
 void melder::tueMelder()                                                                //tastenüberwachung
 {
-  if ((actors::getTime() - _melderStartzeit >= _melderTimeout))
+  if ((millis() - _melderStartzeit >= _melderTimeout))
   {
     _tueMelderStatus = true;                                                             //FTÜ-Melder ist false keine Warnung, true melder und ggf. wecker schlägt an
     melder::blinken(_tueMelderLed);
 
-    if (actors::getTime() - _melderStartzeit >= (_melderTimeout * 2) && _wutAktivierung == LOW)      //Wenn 10 s lang eine Taste gedrückt wurde und nicht die Wut gedrückt wurde
+    if (millis() - _melderStartzeit >= (_melderTimeout * 2) && _wutAktivierung == LOW)      //Wenn 10 s lang eine Taste gedrückt wurde und nicht die Wut gedrückt wurde
     {
       digitalSchalten(_weckerPin, LOW);                                           //Relais schaltet --> Wecker klingelt
 

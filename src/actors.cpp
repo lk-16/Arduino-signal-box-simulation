@@ -30,12 +30,6 @@ int actors::getWecker()
   return _weckerPin;
 }*/
 
-unsigned long actors::getTime() //ausgabe der Zeit
-{
-  unsigned long _time = millis();
-  return _time;
-}
-
 void actors::blinken(int ledPin)
 {
   if (millis() % 1000 > 500)
