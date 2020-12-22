@@ -49,6 +49,7 @@ void melder::tueMelder()                                                        
 }
 
 
+
 int melder::getTueLedPin()                 //Herausgabe des Melder LED-Pin
 {
   return _tueMelderLed;                    //Pin wird zurückgegeben
