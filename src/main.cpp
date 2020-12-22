@@ -8,6 +8,16 @@ int besetztmelderLedsGelb[besetztmelderAnzahl] = {2,2};
 int besetztmelderLedsRot[besetztmelderAnzahl] = {2,2};
 int besetztmelderEingaenge[besetztmelderAnzahl] = {2,2};
 
+//Fahrstraßensteuerung
+const int felderAnzahl = 18;
+//feld1 und feld2
+int fahrstrassenspeicher[felderAnzahl][felderAnzahl];              //1 variable = nummer des Tischfeldes, 2. variable = nummer des Zweiten Tischfeldes                    
+
+/*Warum wird keine Unterschiedung zwischen links und rechts benötigt? 
+ * Da Züge nur mit den Signalen fahren, und nicht gegen,
+ * gibt es für jede Tasten kombi von eine Richtung, für die Fahrt in die andere Richtung, muss ein anderes Signal verwendet werden.
+*/
+
 
 //Pinbelegung
 int schieberegisterPins[4]={2,8,9,10};
@@ -80,6 +90,7 @@ hauptsignale hauptsignal1(rot1, gruen1, gelb1, signaltaste1, sperrmelder1, allgS
 //int rotPin, int gelbPin, int gruenPin,  int signaltaste, int sperrmelder, int allgSignaltasten[3], int registerPin[4]
 void setup()
 {
+  fahrstrassenspeicher[10][8] = 1;       //wenn die Tasten auf feld 10 und feld 8 gedrückt werden, soll die Fahrstraße 1 einlaufen
   Serial.begin(9600);
   weiche1.setRegisterPins(2,8,9,10);
   pinMode(ftueMelderLed, OUTPUT);
@@ -97,6 +108,16 @@ void setup()
 
 void loop()
 {
+  /*
+  //Fahrstraßen
+  //Fahrstraße1
+  //kontrolle der Belegtmelder
+  weiche1.weicheKurve();
+  weiche2.weicheKurve();
+
+  hauptsignal1.hpschalten(2);
+*/
+
   //Zugtastensteuerung
   if (zugtaste1.getzugtastenstatus() == true && zugtaste2.getzugtastenstatus() == true)
   {
@@ -121,7 +142,7 @@ void loop()
   }
   else                                                                                           //wenn keine Mehr gedrückt wird,
   {
-    ftueMelder.setMelderStartzeit(ftueMelder.getTime());                                           //setze den Timer zurück
+    ftueMelder.setMelderStartzeit(millis());                                           //setze den Timer zurück
     ftueMelder.setTueMelderStatus(false);                                                              //den Status auf 0
     ftueMelder.digitalSchalten(ftueMelder.getTueLedPin(), LOW);                                                //Schalte die Led aus
     ftueMelder.digitalSchalten(ftueMelder.getWecker(), HIGH);                                                  //Mache den Wecker aus
@@ -138,6 +159,10 @@ void loop()
   weiche2.weicheWechsel();
   weiche1.weichenSchalten();          //lässt das Relais nach dem Schalten wieder zurückfallen
   weiche2.weichenSchalten();
+
+
+  //Fahrstraßensteuerung
+
 }
 
 

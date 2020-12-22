@@ -8,8 +8,11 @@
  * Auto-Layout: Strg k, Strg f
 */
 
-//Die Klasse Signale  muss noch genauer Dokumnetiert werden. Verstehen!!
-//Das sperren von Signalen funktioniert noch nicht.
+/*Die Klasse Signale  muss noch genauer Dokumnetiert werden. Verstehen!!
+ *  Klasse Stelltisch wurde erstellt, für das erstellen des Fahrstraßenrechners fehlt noch eine funktionierende Besetztmeldung
+ * in der Klasse Stelltisch sollen einstellungen für den gesmaten Stelltisch gespeichert werden.
+ * Angefangen habe ich mit dem ein und ausschalten der Weichenausleuchtung s.h. S. 13 (noch nicht viel fertig)
+*/
 
 /**
  * @file Gleisbild.h
@@ -44,6 +47,21 @@ public:
   void digitalSchalten(int PinNr, boolean newPinStatus); //leds können geschaltet werden, Differenzierung zwischen Led an normalen und leds an Schieberegisteroutputs
   void setRegisterPins(int anzahl, int sh, int st, int ds);
 };
+
+//evtl. später, zurzeit nicht wichtig, zu kompliziert
+class stelltisch: public actors
+{
+private:
+  boolean weichenausleuchtung;                            //true, Ausleuchtung an, false Ausleuchtung aus
+
+public:
+  stelltisch(int registerPins[4]);                                           //Die für diese Funktion wichtigen Pins werden nicht im Konstruktor deklariert, so bleibt die übersicht bei weiteren Funktionen
+  ~stelltisch();
+
+  boolean getWeichenausleuchtung();                       //in dieser Methode wird der Status der Weichenausleuchtung ausgegeben. So können sich andere Klassen an diese Einstllungen halten und sie kontrollieren
+  void weichenausleuchtungEinstellen(int tasterEin, int ledein, int tasterAus, int ledAus);
+};
+
 
 /**
  * @class weichen

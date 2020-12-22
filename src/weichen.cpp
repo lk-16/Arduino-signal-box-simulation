@@ -99,14 +99,7 @@ void weichen::weichenBlinken()
   }
 
   //blinken
-  if (millis() % 1000 > 500)
-  {
-    actors::digitalSchalten(_ledPin, LOW);
-  }
-  else
-  {
-    actors::digitalSchalten(_ledPin, HIGH);
-  }
+  actors::blinken(_ledPin);
 }
 
 void weichen::weicheRelaisHIGH() //Alle Relais werden auf HIGH gesetzt
