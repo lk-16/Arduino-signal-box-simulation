@@ -163,11 +163,11 @@ class signale : public actors
 private:
   int _signalstatus;           //0 = Hp0, 1 = Hp1, 2= Hp2 (rot, Fahrt, Langsamfahrt), je nach Signal auch anders vergeben
   int _signalhaltgruppentaste; //in Kombination aus Zug oder Rangiertaste am Feld kann das Signal auf Halt gestellt werden
-  int _signaltaste;            //Taste die auf dem Selben Tischfeld wie das Sginal ist
-  int _signalSperrmelder;      //melder der Anzeig ob ein Signal gesperrt ist oder nicht
+  int _signaltaste;            //Taste die auf dem selben Tischfeld wie das Sginal ist
+  int _signalSperrmelder;      //Pin des  Melder der anzeigt ob ein Signal gesperrt ist oder nicht
   int _signalsperrtaste;       //speichert den Pin der Signalsperrtaste
   int _signalentsperrtaste;    //speichert den Pin der Siganlentsperrtaste
-  boolean _signalsperre;       //zeigt an ob das Signal gesperrt ist oder nicht(true Signalsperre aktiv)
+  boolean _signalsperre;       //zeigt an ob das Signal gesperrt ist oder nicht (true Signalsperre aktiv)
 
 protected:
   void setSignalstatus(int newSignalStatus); //Veränderung des Signalstatus
@@ -176,11 +176,11 @@ public:
   signale(int signaltastenPin, int sperrmelderPin, int allgSignaltasten[3], int registerPins[4]);      //Konstuktor: allgemeine Signaltasten beinhalten die Signalsperr- und entsperrtaste und Signalhaltgruppentaste
   int getSignalstatus();                     //Ausgabe des Signalstatus, 0, 1, 2(rot, Fahrt, Langsamfahrt)
   int getSignaltaste();                      //gibt den Pin der Signaltaste aus
-  int getSignalhaltgruppentaste();           //gibt den Pin der Singalhaltgruppentaste aus
+  int getSignalhaltgruppentaste();           //gibt den Pin der Signalhaltgruppentaste aus
   int getSignalsperrmelder();                //gibt den Pin des Signalsperrmelders aus
-  int getSignalsperrtaste();                 //gibt den Pin der Singalsperrtaste aus       
-  boolean getSignalsperre();                 //gibt aus, ob das Singalgesperrt
-  void signalSperren();                      //überprüft ob ein Singalgesperrt oder eintsperrt werden kann
+  int getSignalsperrtaste();                 //gibt den Pin der Signalsperrtaste aus       
+  boolean getSignalsperre();                 //gibt aus, ob das Signal gesperrt ist
+  void signalSperren();                      //überprüft ob ein Signal gesperrt (nur wenn Signal auf hp0 steht) oder eintsperrt werden kann und tut es wenn möglich
 };
 
 
@@ -196,15 +196,16 @@ private:
   int _gelbPin;
   int _gruenPin;
   
-  void setSignalHp0();            //Die Stati der Signale werden verändert
+  void setSignalHp0();            //Die Stati der Signale werden verändert, in hpSchalten können sie von außen verändert werden (Hilfsklassen)
   void setSignalHp1();
   void setSignalHp2();
 
 public:
-  hauptsignale(int rotPin, int gelbPin, int gruenPin,  int signaltaste, int sperrmelder, int allgSignaltasten[3], int registerPin[4]);
-  void hpschalten(int newStatus); //schaltet das Signal........................................................funktioniert
-  void hauptsignalhp0manuell();   //........................................
+  hauptsignale(int rotPin, int gelbPin, int gruenPin,  int signaltaste, int sperrmelder, int allgSignaltasten[3], int registerPin[4]);            //alle Informationen zur Ansteuereung eines Hauptsignals.
+  void hpschalten(int newStatus);                                                                                                                 //schaltet das Signal (0 = rot, 1 = grün, 2 = langsamfahrt), wenn das Signal gesperrt ist, ist kein schalten möglich
+  void hauptsignalhp0manuell();                                                                                                                   //das Hauptsignalwird mit Signalhalttaste und der zum Signalgehörigen Zugstraßentaste auf hp0 (rot) gestellt
 };
+
 
 /**
  * @class besetztmeldungControl
@@ -212,7 +213,6 @@ public:
  * Die Klasse erstellt Besetztmelder und verwaltet diese, über diese Klasse sollen die einzelen Besetztmelder abgefragt werden.
  * Über diese Klasse könne einfach alle Besetztmelder abgefragt werden.
 **/
-
 class besetztmeldungControl : public actors
 {
 private:
