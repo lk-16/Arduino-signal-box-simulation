@@ -21,12 +21,11 @@ besetztmelder::besetztmelder(int gleisPin, int ledGelb, int ledRot, int register
     pinMode(_ledGelb, OUTPUT);
     pinMode(_ledRot, OUTPUT);
 }
-
 int besetztmelder::besetztmelderAuslesen()
 {
     //der Status des Besetztmelders wird eingelesen
     boolean newBesetztmelderstatus = digitalRead(_gleisPin);
-    if (_besetztmelderAktiv && !_besetztmelderstatus == newBesetztmelderstatus)                     //wenn die Lampen des Besetztmelders an sein sollen(_besetztmelderAktiv), und der Besetztmelderstatus sich vom alten unterscheidet
+    if (_besetztmelderLicht && !_besetztmelderstatus == newBesetztmelderstatus)                     //wenn die Lampen des Besetztmelders an sein sollen(_besetztmelderAktiv), und der Besetztmelderstatus sich vom alten unterscheidet
     {
         _besetztmelderstatus=newBesetztmelderstatus;                                                //erneuere den Status des besetztmelders
                                                                                                     //passe die Led amzeige an
@@ -51,7 +50,8 @@ int besetztmelder::besetztmelderAuslesen()
     return _besetztmelderstatus;                                                                    //gibt am ende den Status des Besetztmelder zurück
 }
 
-void besetztmelder::setBesetztmelderAktiv(boolean newbesetztmelderStatus) //ein und ausschalten der Beleuchtung der Besetztmelder
+void besetztmelder::setBesetztmelderLicht(boolean newbesetztmelderStatus) //ein und ausschalten der Beleuchtung der Besetztmelder
 {
-    _besetztmelderAktiv = newbesetztmelderStatus;
+    if anders, dann änder sonst nicht
+    _besetztmelderLicht = newbesetztmelderStatus;
 }

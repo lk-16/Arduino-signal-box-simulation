@@ -63,11 +63,11 @@ int sperrmelder1 =109;
 int signaltaste1 = 34;                       //Signaltaste, zu tastzwecken weichentaste 1
 
 //Tischfeld
-const int besetztmelderAnzahl = 1;
-
+const int besetztmelderAnzahl = 2;
+int besetztmelderEingaenge[besetztmelderAnzahl] = {46,47};                     //an gnd angeschlossen
 int besetztmelderLedsGelb[besetztmelderAnzahl] = {ledw1g};
 int besetztmelderLedsRot[besetztmelderAnzahl] = {ftueMelderLed};
-int besetztmelderEingaenge[besetztmelderAnzahl] = {46};
+
 
 //Objektedefinitonen
 //Gleisbesetztmelder
@@ -91,8 +91,13 @@ hauptsignale hauptsignal1(rot1, gruen1, gelb1, signaltaste1, sperrmelder1, allgS
 //int rotPin, int gelbPin, int gruenPin,  int signaltaste, int sperrmelder, int allgSignaltasten[3], int registerPin[4]
 void setup()
 {
-  fahrstrassenspeicher[10][8] = 1;       //wenn die Tasten auf feld 10 und feld 8 gedrückt werden, soll die Fahrstraße 1 einlaufen
   Serial.begin(9600);
+  while (!Serial)                       //..................................................................................
+  {
+  // wait for serial port to connect.
+  }
+  fahrstrassenspeicher[10][8] = 1;       //wenn die Tasten auf feld 10 und feld 8 gedrückt werden, soll die Fahrstraße 1 einlaufen
+
   //weiche1.setRegisterPins(2,8,9,10);
   pinMode(ftueMelderLed, OUTPUT);
 
@@ -102,8 +107,6 @@ void setup()
   weiche2.weichenpositionEEPROM();
   
   hauptsignal1.hpschalten(2);       //....................................................................................
- 
-  
 }
 
 void loop()

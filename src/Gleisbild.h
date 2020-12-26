@@ -211,22 +211,23 @@ public:
  * @class besetztmeldungControl
  * @brief Über diese Klasse wird die Besetztmeldung gesteuert.
  * Die Klasse erstellt Besetztmelder und verwaltet diese, über diese Klasse sollen die einzelen Besetztmelder abgefragt werden.
- * Über diese Klasse könne einfach alle Besetztmelder abgefragt werden.
+ * Über diese Klasse können einfach alle Besetztmelder abgefragt werden. Die Besetztmelder sind von 0 an nummeriert
 **/
 class besetztmeldungControl : public actors
 {
 private:
   int _anzahlMelder; //anzahl an Meldern um das Objektarray im Konstruktor zu erstellen
-  //besetztmelder *_besetztmelderArray;
-  int *_gleisPins;
+    int *_gleisPins;
   int *_ledsGelb;
   int *_ledsRot;
-  
+  boolean *_besetztmelderLicht;
+  class besetztmelder **pbesetztmelder;    //.............................................................................funktioniert theoretisch
 
 public:
   besetztmeldungControl(int gleisPins[], int ledsGelb[], int ledsRot[], int anzahlMelder, int registerPins[4]);
-  //~besetztmeldungControl(); //Destruktor
+  ~besetztmeldungControl(); //Destruktor
   boolean getBesetztmelderstatus(int besetztmelder);
+  void setBesetztmelderBeleuchtung(int besetztmelder, boolean besetztmelderLicht);
   
 };
 
@@ -241,13 +242,12 @@ private:
   int _ledGelb;                     //s.o.
   int _ledRot;                      //s.o.
   boolean _besetztmelderstatus;     //hier wirde der aktuelle Status des Besetztmelders gespeichert(0 nicht besetzt, 1 besetzt)
-  boolean _besetztmelderAktiv;      //es wird gespeichert, ob der Besetzmelder auf dem Stellpult zu sehen sein soll
+  boolean _besetztmelderLicht;      //es wird gespeichert, ob der Besetzmelder auf dem Stellpult zu sehen sein soll(an/aus)
 
 public:
   besetztmelder(int gleisPin, int ledGelb, int ledRot, int registerPin[4]);       //Konstruktor der Klasse Besetztmelder
   ~besetztmelder(); //Destruktor, keine Verwendung
-  String getBesetztmelderName();
   int besetztmelderAuslesen();                                                    //auslesen des bestztmelders, aktueller Status wird zurückgegeben.................................namen überdenken
-  void setBesetztmelderAktiv(boolean newBesetztmelderStatus);
+  void setBesetztmelderLicht(boolean newBesetztmelderStatus);               //die Beleuchtung des Besetztmelder kann an und aus geschaltet werden
 };
 #endif

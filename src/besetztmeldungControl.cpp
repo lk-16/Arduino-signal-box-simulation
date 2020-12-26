@@ -21,6 +21,23 @@ besetztmeldungControl::besetztmeldungControl(int gleisPins[], int ledsGelb[], in
     _gleisPins = gleisPins; //Register werden in die Klasse übertragen
     _ledsGelb = ledsGelb;
     _ledsRot = ledsRot;
+    
+    pbesetztmelder = new besetztmelder*[_anzahlMelder];
+    for(int besetztmelderNr = 0; besetztmelderNr < _anzahlMelder; besetztmelderNr ++)
+    {
+        pbesetztmelder[besetztmelderNr] = new besetztmelder(gleisPins[besetztmelderNr], ledsGelb[besetztmelderNr], ledsRot[besetztmelderNr], registerPins);
+    }
+    
+    /*Auto **autos = new Auto*[ANZAHL];
+    autos[0] = new Auto(4,6);
+    autos[1] = new Auto(0,2);
+    */
+    //besetztmelder **pbesetztmelder = new besetztmelder*[_anzahlMelder];    //.....................................................................................funktioniert theoretisch
+    //for(int bmelderNr = 0; bmelderNr < _anzahlMelder; bmelderNr ++);
+    //Serial.println(bmelderNr);
+    //pbesetztmelder[bmelderNr-1]
+    //pbesetztmelder[]
+    //besetztmelder bestzmelderarr[anzahlMelder];
 
     /*
     _besetztmelderArray = (besetztmelder *)calloc(anzahlMelder, (sizeof(besetztmelder)));
@@ -37,7 +54,18 @@ besetztmeldungControl::besetztmeldungControl(int gleisPins[], int ledsGelb[], in
     }*/
 }
 
+besetztmeldungControl::~besetztmeldungControl()
+{
+    
+}
+
 boolean besetztmeldungControl::getBesetztmelderstatus(int besetztmelder)
 {
     return digitalRead(_gleisPins[besetztmelder]);
+}
+
+void besetztmeldungControl::setBesetztmelderBeleuchtung(int besetztmelder, boolean besetztmelderLicht)
+{
+    änder des Lichtes ++ Speichern in einem Flexibeln array
+
 }
