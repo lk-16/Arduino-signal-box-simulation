@@ -105,7 +105,9 @@ void setup()
   weiche1.weichenpositionEEPROM();                                          //gespeicherte Weichenposition wird angezeigt und ausgeführt
   weiche2.weichenpositionEEPROM();
   
-  hauptsignal1.hpschalten(2);       //....................................................................................
+  hauptsignal1.hpschalten(2);       //.................................................................................... 
+  
+  besetztmeldung.setBesetztmelderBeleuchtung(0,HIGH);                  //Der Status des Lichtes kann eingestellt werden
 }
 
 void loop()
@@ -120,7 +122,8 @@ void loop()
   hauptsignal1.hpschalten(2);
 */
   //Besetztmeldung
-  Serial.println(besetztmeldung.getBesetztmelderstatus(0));
+ 
+  besetztmeldung.getBesetztmelderstatus(0, HIGH);
 
   //Zugtastensteuerung
   if (zugtaste1.getzugtastenstatus() == true && zugtaste2.getzugtastenstatus() == true)

@@ -19,9 +19,9 @@ besetztmeldungControl::besetztmeldungControl(int gleisPins[], int ledsGelb[], in
         pbesetztmelder[besetztmelderNr] = new besetztmelder(gleisPins[besetztmelderNr], ledsGelb[besetztmelderNr], ledsRot[besetztmelderNr], registerPins);
 }
 
-boolean besetztmeldungControl::getBesetztmelderstatus(int besetztmelder)
+boolean besetztmeldungControl::getBesetztmelderstatus(int besetztmelder, boolean besetztmelderBeleuchtung)
 {
-    return pbesetztmelder[besetztmelder]->besetztmelderAuslesen();
+    return pbesetztmelder[besetztmelder]->besetztmelderAuslesen(besetztmelderBeleuchtung);
 }
 
 void besetztmeldungControl::setBesetztmelderBeleuchtung(int besetztmelder, boolean besetztmelderLichtstatus)

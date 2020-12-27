@@ -22,10 +22,11 @@ besetztmelder::besetztmelder(int gleisPin, int ledGelb, int ledRot, int register
     pinMode(_ledRot, OUTPUT);
 }
 
-boolean besetztmelder::besetztmelderAuslesen()
+boolean besetztmelder::besetztmelderAuslesen(boolean besetztmelderBeleuchtung)
 {
     //der Status des Besetztmelders wird eingelesen
-    _besetztmelderstatus = digitalRead(46);
+    _besetztmelderLicht = besetztmelderBeleuchtung;
+    _besetztmelderstatus = digitalRead(_gleisPin);
     if (_besetztmelderLicht == true)
     {                             //passe die Led amzeige an
         if (_besetztmelderstatus) //wenn das Gleis besetzt ist

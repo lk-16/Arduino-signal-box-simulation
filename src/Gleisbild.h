@@ -221,7 +221,7 @@ private:
 
 public:
   besetztmeldungControl(int gleisPins[], int ledsGelb[], int ledsRot[], int anzahlMelder, int registerPins[4]);     //Im Konstruktor wird ein Array von Objekten der Klasse Besetztmelder erstellt und initialisiert
-  boolean getBesetztmelderstatus(int besetztmelder);
+  boolean getBesetztmelderstatus(int besetztmelder, boolean besetztmelderBeleuchtung);
   void setBesetztmelderBeleuchtung(int besetztmelder, boolean besetztmelderLicht);                                  //Die Anzeige-leds des eines Besetztmelder können an und aus geschaltet werden
   };
 
@@ -240,7 +240,7 @@ private:
 
 public:
   besetztmelder(int gleisPin, int ledGelb, int ledRot, int registerPin[4]);       //Konstruktor der Klasse Besetztmelder
-  boolean besetztmelderAuslesen();                                                    //auslesen des bestztmelders, aktueller Status wird zurückgegeben.................................namen überdenken
+  boolean besetztmelderAuslesen(boolean besetztmelderBeleuchtung);                                                    //auslesen des bestztmelders, aktueller Status wird zurückgegeben.................................namen überdenken
   void setBesetztmelderLicht(boolean newBesetztmelderStatus);               //die Beleuchtung des Besetztmelder kann an und aus geschaltet werden
 };
 #endif
