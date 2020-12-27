@@ -51,7 +51,7 @@ int adressWeichenposition2 = 5;      //Speicheradresse für die Weichenposition 
 
 //Signale
 int signalsperrtaste = ftueMelderWut;                //signalsperrtaste, zu testzwecken auf weichengruppentaste gestellt
-int Signalentsperrtaste = zta4;                      //s.o
+int Signalentsperrtaste = wt1;                      //s.o
 int shgt= wgt;                                       //s.o
 int allgSignaltasten[3] = {signalsperrtaste,Signalentsperrtaste,shgt}; //Signalsperrtaste, Signalentsperrtaste, Signalhaltgruppentaste, Array speichert für jedes Signal wichtige informationen, hält den schreibaufwand geringer
 
@@ -60,11 +60,11 @@ int rot1 = 106;                     //Hp0 (rot) vom Signal 1
 int gruen1 = 107;                     //Hp1 (grün)  vom Signal 1
 int gelb1 = 108;                     //Hp2 (langsamfahrt) vom Signal 1
 int sperrmelder1 =109;
-int signaltaste1 = 34;                       //Signaltaste, zu tastzwecken weichentaste 1
+int signaltaste1 = zta3;                       //Signaltaste, zu tastzwecken weichentaste 1
 
 //Tischfeld
-const int besetztmelderAnzahl = 2;
-int besetztmelderEingaenge[besetztmelderAnzahl] = {46,47};                     //an gnd angeschlossen
+const int besetztmelderAnzahl = 1;
+int besetztmelderEingaenge[besetztmelderAnzahl] = {46};                     //an gnd angeschlossen
 int besetztmelderLedsGelb[besetztmelderAnzahl] = {ledw1g};
 int besetztmelderLedsRot[besetztmelderAnzahl] = {ftueMelderLed};
 
@@ -72,7 +72,6 @@ int besetztmelderLedsRot[besetztmelderAnzahl] = {ftueMelderLed};
 //Objektedefinitonen
 //Gleisbesetztmelder
 besetztmeldungControl besetztmeldung(besetztmelderEingaenge, besetztmelderLedsGelb, besetztmelderLedsRot, besetztmelderAnzahl, schieberegisterPins);
-
 //Weichen
 weichen weiche1(1, w1g, w1k, ledw1g, ledw1k, adressWeichenposition1, weichentimeout, wt1, wgt, schieberegisterPins);       //Objekt Weiche1 aus der Klasse Weichen inkl. aller relevanten Informationen zu Weiche
 weichen weiche2(2, w2g, w2k, ledw2g, ledw2k, adressWeichenposition2, weichentimeout, wt2, wgt, schieberegisterPins);       //Objekt Weiche1 aus der Klasse Weichen inkl. aller relevanten Informationen zu Weiche
@@ -85,7 +84,7 @@ zugtasten zugtaste1(zta1, schieberegisterPins);                                 
 zugtasten zugtaste2(zta2, schieberegisterPins);
 zugtasten zugtaste3(zta3, schieberegisterPins);
 zugtasten zugtaste4(zta4, schieberegisterPins);
-
+boolean falo;
 //Signale
 hauptsignale hauptsignal1(rot1, gruen1, gelb1, signaltaste1, sperrmelder1, allgSignaltasten, schieberegisterPins);
 //int rotPin, int gelbPin, int gruenPin,  int signaltaste, int sperrmelder, int allgSignaltasten[3], int registerPin[4]
@@ -120,6 +119,8 @@ void loop()
 
   hauptsignal1.hpschalten(2);
 */
+  //Besetztmeldung
+  Serial.println(besetztmeldung.getBesetztmelderstatus(0));
 
   //Zugtastensteuerung
   if (zugtaste1.getzugtastenstatus() == true && zugtaste2.getzugtastenstatus() == true)

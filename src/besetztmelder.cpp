@@ -21,37 +21,35 @@ besetztmelder::besetztmelder(int gleisPin, int ledGelb, int ledRot, int register
     pinMode(_ledGelb, OUTPUT);
     pinMode(_ledRot, OUTPUT);
 }
-int besetztmelder::besetztmelderAuslesen()
+
+boolean besetztmelder::besetztmelderAuslesen()
 {
     //der Status des Besetztmelders wird eingelesen
-    boolean newBesetztmelderstatus = digitalRead(_gleisPin);
-    if (_besetztmelderLicht && !_besetztmelderstatus == newBesetztmelderstatus)                     //wenn die Lampen des Besetztmelders an sein sollen(_besetztmelderAktiv), und der Besetztmelderstatus sich vom alten unterscheidet
-    {
-        _besetztmelderstatus=newBesetztmelderstatus;                                                //erneuere den Status des besetztmelders
-                                                                                                    //passe die Led amzeige an
-            if (_besetztmelderstatus)                                                               //wenn das Gleis besetzt ist
-            {
-                digitalSchalten(_ledGelb, LOW);                                                     //schalte die gelbe aus
-                digitalSchalten(_ledRot, HIGH);                                                     //und die rote Led ein
-            }
-            else                                                                                    //wenn es nicht besetzt ist(_besetztmeldestatus == 0)
-            {
-                digitalSchalten(_ledRot, LOW);                                                      //sonst schalte die rote aus
-                digitalSchalten(_ledGelb, HIGH);                                                    //und die gelbe Led an
-            }
-        
+    _besetztmelderstatus = digitalRead(46);
+    if (_besetztmelderLicht == true)
+    {                             //passe die Led amzeige an
+        if (_besetztmelderstatus) //wenn das Gleis besetzt ist
+        {
+            digitalSchalten(_ledGelb, LOW); //schalte die gelbe aus
+            digitalSchalten(_ledRot, HIGH); //und die rote Led ein
+        }
+        else //wenn es nicht besetzt ist(_besetztmeldestatus == 0)
+        {
+            digitalSchalten(_ledRot, LOW);   //sonst schalte die rote aus
+            digitalSchalten(_ledGelb, HIGH); //und die gelbe Led an
+        }
     }
-    else                                                                                            // wird keine anzeige benötigt,
-    {   
-        digitalSchalten(_ledRot, LOW);                                                              //schalte alle Leds aus
+
+    else // wird keine anzeige benötigt,
+    {
+        digitalSchalten(_ledRot, LOW); //schalte alle Leds aus
         digitalSchalten(_ledGelb, LOW);
     }
 
-    return _besetztmelderstatus;                                                                    //gibt am ende den Status des Besetztmelder zurück
+    return _besetztmelderstatus; //_besetztmelderstatus; //gibt am ende den Status des Besetztmelder zurück
 }
 
-void besetztmelder::setBesetztmelderLicht(boolean newbesetztmelderStatus) //ein und ausschalten der Beleuchtung der Besetztmelder
+void besetztmelder::setBesetztmelderLicht(boolean newbesetztmelderLicht) //ein und ausschalten der Beleuchtung der Besetztmelder
 {
-    if anders, dann änder sonst nicht
-    _besetztmelderLicht = newbesetztmelderStatus;
+    _besetztmelderLicht = newbesetztmelderLicht;
 }
