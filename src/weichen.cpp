@@ -56,7 +56,7 @@ void weichen::weicheWechsel()
 void weichen::weicheGerade() //die Weiche wird in gerade Lage vesetzt
 {
 
-  if (_weichenposition == false && weichenstatus == 0) //wenn die Weiche nicht schaltet und in der Kurve steht
+  if (_weichenposition == false && weichenstatus == 0 && weichenfestlegung == false) //wenn die Weiche nicht schaltet und in der Kurve steht
   {
     _wStartzeit = millis();
     actors::digitalSchalten(_weichenPinKurve, HIGH); //Relais werden geschaltet
@@ -71,7 +71,7 @@ void weichen::weicheGerade() //die Weiche wird in gerade Lage vesetzt
 
 void weichen::weicheKurve() //die Weiche wird in Kurvenlage versetzt
 {
-  if (_weichenposition == true && weichenstatus == 0)
+  if (_weichenposition == true && weichenstatus == 0 && weichenfestlegung == false)
   {
     _wStartzeit = millis();
     actors::digitalSchalten(_weichenPinGerade, HIGH); //Relais werden geschaltet

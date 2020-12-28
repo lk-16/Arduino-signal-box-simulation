@@ -86,7 +86,8 @@ private:                 //private Variablen für die Klasse Weichen
   unsigned long wTime;       //nicht verwendet stimmt
   unsigned long _wStartzeit; //Startzeit der Pause
   boolean _weichenposition;  //true gerade und false kurve
-
+  boolean weichenfestlegung = false; //wenn aus true, kann die Weiche nicht mehr gestellt werden
+  
 public:
   weichen(int wnr, int weichenPinGerade, int weichenPinKurve, int weichenLedPinGerade, int weichenLedPinKurve, int adressWeichenposition, int weichentimeout, int wt, int wgt, int registerPins[4]); // definieren von für alle Methoden wichtige Informationen Pins etc.
 
