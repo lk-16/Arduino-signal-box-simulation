@@ -91,7 +91,6 @@ int anzahl = 0;
 
 void setup()
 {
-  
   pinMode(ftueMelderLed, OUTPUT);
   ftueMelder.digitalSchalten(weckerPin, HIGH);
   weiche1.weicheRelaisHIGH(); //alle möglichen Eingaben an den Relais werdengelöscht
@@ -104,7 +103,8 @@ void setup()
   //weiche1.setRegisterPins(2,8,9,10);
   
   hauptsignal1.hpschalten(2); //....................................................................................
-
+  delay(1000);
+  Serial.println();
   //besetztmeldung.setBesetztmelderBeleuchtung(0,HIGH);                  //Der Status des Lichtes kann eingestellt werden 
 }
 
@@ -124,35 +124,60 @@ void loop()
   zugtastenspeicher[0] = 0;
   zugtastenspeicher[1] = 0;
   anzahl = 0;
-  if (zugtaste10.getzugtastenstatus() == true && anzahl < 2 /*&& zugtastenspeicher[0] != 10*/)
+  if (zugtaste10.getzugtastenstatus() == true && anzahl < 2)
   {
     zugtastenspeicher[anzahl] = 10;
     anzahl++;
   }
-  if (zugtaste8.getzugtastenstatus() == true && anzahl < 2 /*&& zugtastenspeicher[0] != 8*/)
+  if (zugtaste8.getzugtastenstatus() == true && anzahl < 2)
   {
     zugtastenspeicher[anzahl] = 8;
     anzahl++;
   }
-  if (zugtaste18.getzugtastenstatus() == true && anzahl < 2 /*&& zugtastenspeicher[0] != 18*/)
+  if (zugtaste18.getzugtastenstatus() == true && anzahl < 2)
   {
     zugtastenspeicher[anzahl] = 18;
     anzahl++;
   }
 
+/*
+es wird die 18 auch als 8 und 1 erkannt, liegt evtl an der größe des arrays 
+evtl. sollen die Zahlen vorher sortiert werden, damit sie nicht zu groß für eine array position sind
+*/
+
+
   if(fahrstrassenspeicher[zugtastenspeicher[0]][zugtastenspeicher[1]] == 1)
-  {
-    Serial.println("Fahrstraße 1");
-    
-    if(besetztmeldung.getBesetztmelderstatus(2, LOW)== HIGH && besetztmeldung.getBesetztmelderstatus(1, LOW) == HIGH);
+  {    
+    if((besetztmeldung.getBesetztmelderstatus(2, LOW) == LOW) && besetztmeldung.getBesetztmelderstatus(1, LOW) == LOW)
     {
-      besetztmeldung.getBesetztmelderstatus(2, HIGH);
+      besetztmeldung.setFahrstrassenelement(1, true);//das einbinden in die Fahrstraße fehlt
+      besetztmeldung.getBesetztmelderstatus(1, HIGH);
+      besetztmeldung.setFahrstrassenelement(2, true);
       besetztmeldung.getBesetztmelderstatus(2, HIGH);
       //d-weg
       //weichen
-      
+      if(weiche1.getWeichenfestlegung() == false)
+      {
+        weiche1.weicheKurve();
+        weiche1.setWeichenfestlegung(true, 1);
+      }
+      if(weiche2.getWeichenfestlegung() == false)
+      {
+        weiche2.weicheKurve();
+        weiche2.setWeichenfestlegung(true, 1);
+      }
+      Serial.println("Fahrstraße 1");
     }    
   }
+  //Serial.println(besetztmeldung.getBesetztmelderstatus(2, LOW));
+
+  if(digitalRead(ftueMelderWut)== HIGH)
+  {
+    besetztmeldung.getBesetztmelderstatus(2, LOW);
+    besetztmeldung.getBesetztmelderstatus(1, LOW);
+
+  }
+
       /*//Zugtastensteuerung
   if (zugtaste1.getzugtastenstatus() == true && zugtaste2.getzugtastenstatus() == true)
   {
@@ -190,10 +215,15 @@ void loop()
   if (digitalRead(zta2) == HIGH)
     hauptsignal1.hpschalten(1); //................................................................................................................
 
+  //Weichen
   weiche1.weicheWechsel(); //WGT und WT können zum Umschalten einer Weiche benutzt werden
   weiche2.weicheWechsel();
   weiche1.weichenSchalten(); //lässt das Relais nach dem Schalten wieder zurückfallen
   weiche2.weichenSchalten();
 
-  //Fahrstraßensteuerung
+  //Besetztmeldung
+  besetztmeldung.getBesetztmelderstatus(0, LOW); //besetztmelder sollen immer wenn sie belget sind den Status anzeigen
+  besetztmeldung.getBesetztmelderstatus(1, LOW);
+  besetztmeldung.getBesetztmelderstatus(2, LOW);
+  besetztmeldung.getBesetztmelderstatus(3, LOW);
 }

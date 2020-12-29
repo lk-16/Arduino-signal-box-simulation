@@ -19,6 +19,8 @@ besetztmeldungControl::besetztmeldungControl(int gleisPins[], int ledsGelb[], in
         pbesetztmelder[besetztmelderNr] = new besetztmelder(gleisPins[besetztmelderNr], ledsGelb[besetztmelderNr], ledsRot[besetztmelderNr], registerPins);
 }
 
+
+//aus der Klasse Control werden die entgegengenommenen Befehle auf die einzelnen 
 boolean besetztmeldungControl::getBesetztmelderstatus(int besetztmelder, boolean besetztmelderBeleuchtung)
 {
     return pbesetztmelder[besetztmelder]->besetztmelderAuslesen(besetztmelderBeleuchtung);
@@ -27,4 +29,8 @@ boolean besetztmeldungControl::getBesetztmelderstatus(int besetztmelder, boolean
 void besetztmeldungControl::setBesetztmelderBeleuchtung(int besetztmelder, boolean besetztmelderLichtstatus)
 {
     pbesetztmelder[besetztmelder]->setBesetztmelderLicht(besetztmelderLichtstatus);
+}
+void besetztmeldungControl::setFahrstrassenelement(int besetztmelderNr, boolean fahrstrassenstatus)
+{
+    pbesetztmelder[besetztmelderNr]->setFahrstrassenelement(fahrstrassenstatus);
 }

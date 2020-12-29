@@ -86,8 +86,8 @@ private:                 //private Variablen für die Klasse Weichen
   unsigned long wTime;       //nicht verwendet stimmt
   unsigned long _wStartzeit; //Startzeit der Pause
   boolean _weichenposition;  //true gerade und false kurve
-  boolean weichenausleuchtung;  //true an, die Stellungsmelder der Weiche sind angeschaltet, false die Stellungsmelder der Weiche sind ausgeschaltet
-  boolean _weichenfestlegung; //wenn aus true, kann die Weiche nicht mehr gestellt werden
+  boolean _weichenausleuchtung = true;  //true an, die Stellungsmelder der Weiche sind angeschaltet, false die Stellungsmelder der Weiche sind ausgeschaltet
+  boolean _weichenfestlegung = false; //wenn aus true, kann die Weiche nicht mehr gestellt werden
   
 public:
   weichen(int wnr, int weichenPinGerade, int weichenPinKurve, int weichenLedPinGerade, int weichenLedPinKurve, int adressWeichenposition, int weichentimeout, int wt, int wgt, int registerPins[4]); // definieren von für alle Methoden wichtige Informationen Pins etc.
@@ -226,8 +226,10 @@ private:
 
 public:
   besetztmeldungControl(int gleisPins[], int ledsGelb[], int ledsRot[], int anzahlMelder, int registerPins[4]);     //Im Konstruktor wird ein Array von Objekten der Klasse Besetztmelder erstellt und initialisiert
-  boolean getBesetztmelderstatus(int besetztmelder, boolean besetztmelderBeleuchtung);
+  //aus der Klasse Control werden die entgegengenommenen Befehle auf die einzelnen 
+  boolean getBesetztmelderstatus(int besetztmelder, boolean besetztmelderBeleuchtung);                              //gibt den Status des Besetztmelder aus
   void setBesetztmelderBeleuchtung(int besetztmelder, boolean besetztmelderLicht);                                  //Die Anzeige-leds des eines Besetztmelder können an und aus geschaltet werden
+  void setFahrstrassenelement(int besetztmelderNr, boolean fahrstrassenstatus);                                     //ein besetztmelder wird zu einem Fahrstraßenelement gemacht, somit verschwindet die besetztmeldung auch bei frei sein des Gleises nicht
   };
 
 /**
@@ -237,15 +239,17 @@ public:
 class besetztmelder : public actors
 {
 private:
-  int _gleisPin;                    //hier sind die Pins gespeichert über, die die Besetztmelder ausgelesen werden könne. sie werden über die Klasse BesetzmlderControl bestimmt(bisher noch nicht funktionsfähig)......................................................................................
+  int _gleisPin;                    //hier sind die Pins gespeichert über, die die Besetztmelder ausgelesen werden könne. sie werden über die Klasse BesetzmlderControl bestimmt.
   int _ledGelb;                     //s.o.
   int _ledRot;                      //s.o.
   boolean _besetztmelderstatus;     //hier wirde der aktuelle Status des Besetztmelders gespeichert(0 nicht besetzt, 1 besetzt)
-  boolean _besetztmelderLicht;      //es wird gespeichert, ob der Besetzmelder auf dem Stellpult zu sehen sein soll(an/aus)
+  boolean _besetztmelderLicht = false;      //es wird gespeichert, ob der Besetzmelder auf dem Stellpult zu sehen sein soll(an/aus)
+  boolean _Fahrstrassenelement = false;     //sind die Melder Teil einer Fahrstraße, sollen die immer an sein
 
 public:
   besetztmelder(int gleisPin, int ledGelb, int ledRot, int registerPin[4]);       //Konstruktor der Klasse Besetztmelder
-  boolean besetztmelderAuslesen(boolean besetztmelderBeleuchtung);                                                    //auslesen des bestztmelders, aktueller Status wird zurückgegeben.................................namen überdenken
+  boolean besetztmelderAuslesen(boolean besetztmelderBeleuchtung);          //auslesen des bestztmelders, aktueller Status wird zurückgegeben
   void setBesetztmelderLicht(boolean newBesetztmelderStatus);               //die Beleuchtung des Besetztmelder kann an und aus geschaltet werden
+  void setFahrstrassenelement(boolean Fahrstrassenelement);                 //bindet die Besetztmelder in eine Fahrstraße ein
 };
 #endif

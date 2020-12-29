@@ -61,8 +61,18 @@ void weichen::weicheGerade() //die Weiche wird in gerade Lage vesetzt
     _wStartzeit = millis();
     actors::digitalSchalten(_weichenPinKurve, HIGH); //Relais werden geschaltet
     actors::digitalSchalten(_weichenPinGerade, LOW);
-    actors::digitalSchalten(_weichenLedPinKurve, LOW); //Leds werden geschaltet
-    actors::digitalSchalten(_weichenLedPinGerade, HIGH);
+
+    if (_weichenausleuchtung == true)
+    {
+      actors::digitalSchalten(_weichenLedPinKurve, LOW); //Leds werden geschaltet
+      actors::digitalSchalten(_weichenLedPinGerade, HIGH);
+    }
+    else
+    {
+      actors::digitalSchalten(_weichenLedPinKurve, LOW); //Leds werden geschaltet
+      actors::digitalSchalten(_weichenLedPinGerade, LOW);
+    }
+
     weichenstatus = 1;
     _weichenposition = true;                                 //die Weiche liegt gerade
     EEPROM.update(_adressWeichenposition, _weichenposition); //die Weichenposition wird gespeichert
@@ -76,8 +86,17 @@ void weichen::weicheKurve() //die Weiche wird in Kurvenlage versetzt
     _wStartzeit = millis();
     actors::digitalSchalten(_weichenPinGerade, HIGH); //Relais werden geschaltet
     actors::digitalSchalten(_weichenPinKurve, LOW);
-    actors::digitalSchalten(_weichenLedPinGerade, LOW); //Leds werden geschaltet
-    actors::digitalSchalten(_weichenLedPinKurve, HIGH);
+
+    if (_weichenausleuchtung == true)
+    {
+      actors::digitalSchalten(_weichenLedPinGerade, LOW); //Leds werden geschaltet
+      actors::digitalSchalten(_weichenLedPinKurve, HIGH);
+    }
+    else
+    {
+      actors::digitalSchalten(_weichenLedPinKurve, LOW); //Leds werden geschaltet
+      actors::digitalSchalten(_weichenLedPinGerade, LOW);
+    }
     weichenstatus = 2;                                       //der Weichenstatus ist 2 also kurve. blinken und timer werden abgerufen
     _weichenposition = false;                                //die Weiche steht auf Kurvenlage
     EEPROM.update(_adressWeichenposition, _weichenposition); //die Weichenposition wird gespeichert
@@ -134,15 +153,26 @@ void weichen::weichenSchalten() //lässt die Relais wieder in die unaktiv positi
   unsigned long currentmillis = millis();
   if (!weichen::weichenstatus == 0)
   {
-    weichen::weichenBlinken();
+    if (_weichenausleuchtung == true)
+      weichen::weichenBlinken();
     if (currentmillis - _wStartzeit >= _weichentimeout)
     {
       weichen::weichenstatus = 0;
       weichen::weicheRelaisHIGH();
-      if (_weichenposition == true)
-        actors::digitalSchalten(_weichenLedPinGerade, HIGH);
-      if (_weichenposition == false)
-        actors::digitalSchalten(_weichenLedPinKurve, HIGH);
+
+      if (_weichenausleuchtung == true)
+      {
+        if (_weichenposition == true)
+          actors::digitalSchalten(_weichenLedPinGerade, HIGH);
+        if (_weichenposition == false)
+          actors::digitalSchalten(_weichenLedPinKurve, HIGH);
+      }
+      else
+      {
+        actors::digitalSchalten(_weichenLedPinKurve, LOW);
+        actors::digitalSchalten(_weichenLedPinGerade, LOW);
+      }
+
       Serial.print("Weiche ");
       Serial.print(_wnr);
       Serial.print("     "); //Ausgabe der Weichenstellung an den Seriellen Monitor
@@ -157,10 +187,10 @@ void weichen::weichenSchalten() //lässt die Relais wieder in die unaktiv positi
 void weichen::setWeichenfestlegung(boolean festlegestatus, int fahrstrassennr) //kann die Festlegung der Weichen aktivieren, die Weichen können nicht mehr verändert werden, bis die Fahrstraße ausfgelöst ist
 {
   static int _fahrstrassefestgelegt = 0; //speichert von welcher Fahrstraße die Weiche festgelegt wurde, und nur diese kann die Festlegung auch wieder lösen
-  if (_fahrstrassefestgelegt == 0)          //wenn die Weiche nicht festgelgt ist
+  if (_fahrstrassefestgelegt == 0)       //wenn die Weiche nicht festgelgt ist
   {
-    _weichenfestlegung=festlegestatus;      //kann sie von einer anderen Fahrstraße festgelgt werden, diese wird gespeichert
-    _fahrstrassefestgelegt=fahrstrassennr;  //und ide Fahrstraße entsprechend festgelegt
+    _weichenfestlegung = festlegestatus;     //kann sie von einer anderen Fahrstraße festgelgt werden, diese wird gespeichert
+    _fahrstrassefestgelegt = fahrstrassennr; //und ide Fahrstraße entsprechend festgelegt
   }
   else if (fahrstrassennr == _fahrstrassefestgelegt && _fahrstrassefestgelegt != 0) //|| _fahrstrassenfestlegung == 0)
   {
