@@ -86,7 +86,8 @@ private:                 //private Variablen für die Klasse Weichen
   unsigned long wTime;       //nicht verwendet stimmt
   unsigned long _wStartzeit; //Startzeit der Pause
   boolean _weichenposition;  //true gerade und false kurve
-  boolean weichenfestlegung = false; //wenn aus true, kann die Weiche nicht mehr gestellt werden
+  boolean weichenausleuchtung;  //true an, die Stellungsmelder der Weiche sind angeschaltet, false die Stellungsmelder der Weiche sind ausgeschaltet
+  boolean _weichenfestlegung; //wenn aus true, kann die Weiche nicht mehr gestellt werden
   
 public:
   weichen(int wnr, int weichenPinGerade, int weichenPinKurve, int weichenLedPinGerade, int weichenLedPinKurve, int adressWeichenposition, int weichentimeout, int wt, int wgt, int registerPins[4]); // definieren von für alle Methoden wichtige Informationen Pins etc.
@@ -99,6 +100,9 @@ public:
   void weicheRelaisLOW();       //alle Relais werden auf LOW also schalten gesetzt
   void weichenpositionEEPROM(); //die Weichenposition wird dauerhaft gespeichert
   void weichenSchalten();       //beendet das schalten des Relais: Methode muss für jedes Objekt der Klasse einmal im Loop vorhanden sein
+  
+  void setWeichenfestlegung(boolean festlegestatus, int fahrstrassennr);  //kann die Festlegung der Weichen aktivieren, die Weichen können nicht mehr verändert werden, bis die Fahrstraße ausfgelöst ist
+  boolean getWeichenfestlegung();
 };
 
 

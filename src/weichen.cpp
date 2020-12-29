@@ -56,7 +56,7 @@ void weichen::weicheWechsel()
 void weichen::weicheGerade() //die Weiche wird in gerade Lage vesetzt
 {
 
-  if (_weichenposition == false && weichenstatus == 0 && weichenfestlegung == false) //wenn die Weiche nicht schaltet und in der Kurve steht
+  if (_weichenposition == false && weichenstatus == 0 && _weichenfestlegung == false) //wenn die Weiche nicht schaltet und in der Kurve steht
   {
     _wStartzeit = millis();
     actors::digitalSchalten(_weichenPinKurve, HIGH); //Relais werden geschaltet
@@ -71,7 +71,7 @@ void weichen::weicheGerade() //die Weiche wird in gerade Lage vesetzt
 
 void weichen::weicheKurve() //die Weiche wird in Kurvenlage versetzt
 {
-  if (_weichenposition == true && weichenstatus == 0 && weichenfestlegung == false)
+  if (_weichenposition == true && weichenstatus == 0 && _weichenfestlegung == false)
   {
     _wStartzeit = millis();
     actors::digitalSchalten(_weichenPinGerade, HIGH); //Relais werden geschaltet
@@ -152,4 +152,24 @@ void weichen::weichenSchalten() //lässt die Relais wieder in die unaktiv positi
         Serial.println("kurve");
     }
   }
+}
+
+void weichen::setWeichenfestlegung(boolean festlegestatus, int fahrstrassennr) //kann die Festlegung der Weichen aktivieren, die Weichen können nicht mehr verändert werden, bis die Fahrstraße ausfgelöst ist
+{
+  static int _fahrstrassefestgelegt = 0; //speichert von welcher Fahrstraße die Weiche festgelegt wurde, und nur diese kann die Festlegung auch wieder lösen
+  if (_fahrstrassefestgelegt == 0)          //wenn die Weiche nicht festgelgt ist
+  {
+    _weichenfestlegung=festlegestatus;      //kann sie von einer anderen Fahrstraße festgelgt werden, diese wird gespeichert
+    _fahrstrassefestgelegt=fahrstrassennr;  //und ide Fahrstraße entsprechend festgelegt
+  }
+  else if (fahrstrassennr == _fahrstrassefestgelegt && _fahrstrassefestgelegt != 0) //|| _fahrstrassenfestlegung == 0)
+  {
+    _weichenfestlegung = festlegestatus;
+    _fahrstrassefestgelegt = 0;
+  }
+}
+
+boolean weichen::getWeichenfestlegung()
+{
+  return _weichenfestlegung;
 }

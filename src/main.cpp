@@ -37,7 +37,7 @@ int zta4 = 5;
 
 //Melder
 int ftueMelderLed = 101; //Fahrstraßentastenüberwachung
-int ftueMelderWut = 37;
+int ftueMelderWut = 34;
 int weckerPin = 28;
 String ftueMelderName = "ftueMelder";
 
@@ -59,10 +59,10 @@ int sperrmelder1 = 109;
 int signaltaste1 = zta3; //Signaltaste, zu tastzwecken weichentaste 1
 
 //Tischfeld
-const int besetztmelderAnzahl = 1;
-int besetztmelderEingaenge[besetztmelderAnzahl] = {46}; //an gnd angeschlossen
-int besetztmelderLedsGelb[besetztmelderAnzahl] = {};
-int besetztmelderLedsRot[besetztmelderAnzahl] = {ftueMelderLed};
+const int besetztmelderAnzahl = 4;
+int besetztmelderEingaenge[besetztmelderAnzahl] = {41,40,39,38}; //an gnd angeschlossen
+int besetztmelderLedsGelb[besetztmelderAnzahl] = {0,0,110,112};
+int besetztmelderLedsRot[besetztmelderAnzahl] = {0,ftueMelderLed,111,113};
 
 //Objektedefinitonen
 //Gleisbesetztmelder
@@ -91,21 +91,18 @@ int anzahl = 0;
 
 void setup()
 {
-  Serial.begin(9600);
-  while (!Serial) //..................................................................................
-  {
-    // wait for serial port to connect.
-  }
-  fahrstrassenspeicher[10][8] = 1;fahrstrassenspeicher[8][10] = 1; //wenn die Tasten auf feld 10 und feld 8 gedrückt werden, soll die Fahrstraße 1 einlaufen::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-  //weiche1.setRegisterPins(2,8,9,10);
+  
   pinMode(ftueMelderLed, OUTPUT);
-
+  ftueMelder.digitalSchalten(weckerPin, HIGH);
   weiche1.weicheRelaisHIGH(); //alle möglichen Eingaben an den Relais werdengelöscht
   weiche2.weicheRelaisHIGH();
   weiche1.weichenpositionEEPROM(); //gespeicherte Weichenposition wird angezeigt und ausgeführt
   weiche2.weichenpositionEEPROM();
+  Serial.begin(9600);
+  fahrstrassenspeicher[10][8] = 1;fahrstrassenspeicher[8][10] = 1; //wenn die Tasten auf feld 10 und feld 8 gedrückt werden, soll die Fahrstraße 1 einlaufen::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
+  //weiche1.setRegisterPins(2,8,9,10);
+  
   hauptsignal1.hpschalten(2); //....................................................................................
 
   //besetztmeldung.setBesetztmelderBeleuchtung(0,HIGH);                  //Der Status des Lichtes kann eingestellt werden 
@@ -122,9 +119,6 @@ void loop()
 
   hauptsignal1.hpschalten(2);
 */
-  //Besetztmeldung
-
-  besetztmeldung.getBesetztmelderstatus(0, HIGH);
 
   //if(zugtaste1.getzugtastenstatus() == true && anzahl < 3) zugtastenspeicher[anzahl] = 10;
   zugtastenspeicher[0] = 0;
@@ -148,19 +142,17 @@ void loop()
 
   if(fahrstrassenspeicher[zugtastenspeicher[0]][zugtastenspeicher[1]] == 1)
   {
-    //besetztmelder+ d-weg
-    //
+    Serial.println("Fahrstraße 1");
+    
+    if(besetztmeldung.getBesetztmelderstatus(2, LOW)== HIGH && besetztmeldung.getBesetztmelderstatus(1, LOW) == HIGH);
+    {
+      besetztmeldung.getBesetztmelderstatus(2, HIGH);
+      besetztmeldung.getBesetztmelderstatus(2, HIGH);
+      //d-weg
+      //weichen
+      
+    }    
   }
-  //Serial.println(fahrstrassenspeicher[zugtastenspeicher[0]][zugtastenspeicher[1]]);
-//delay(1000);
-
-
-
-  /*Serial.print("Die Tasten ");
-  Serial.println(zugtastenspeicher[0]);
-  Serial.println(zugtastenspeicher[1]);
-  
-*/
       /*//Zugtastensteuerung
   if (zugtaste1.getzugtastenstatus() == true && zugtaste2.getzugtastenstatus() == true)
   {
