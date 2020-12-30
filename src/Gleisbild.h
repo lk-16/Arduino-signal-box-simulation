@@ -43,8 +43,8 @@ private:
 
 public:
   actors(int anzahl, int sh, int st, int ds);
-  void blinken(int LedPin);                              //led blinkt
-  void digitalSchalten(int PinNr, boolean newPinStatus); //leds können geschaltet werden, Differenzierung zwischen Led an normalen und leds an Schieberegisteroutputs
+  void blinken(int LedPin);///led blinkt
+  void digitalSchalten(int PinNr, boolean newPinStatus); ///leds können geschaltet werden, Differenzierung zwischen Led an normalen und leds an Schieberegisteroutputs
   void setRegisterPins(int anzahl, int sh, int st, int ds);
 };
 
@@ -72,8 +72,8 @@ public:
 class weichen : public actors
 {
 private:                 //private Variablen für die Klasse Weichen
-  int weichenstatus = 0; //1gerade, 2kurve
-  int _wnr;              //speichert die Weichennummer des Objekts
+  int weichenstatus = 0;///1gerade, 2kurve
+  int _wnr;///speichert die Weichennummer des Objekts
   int _weichenPinGerade;
   int _weichenPinKurve;
   int _weichenLedPinGerade;
