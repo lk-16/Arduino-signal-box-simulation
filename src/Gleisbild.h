@@ -15,12 +15,11 @@
 */
 
 /**
- * @file Gleisbild.h
- * @brief Mit dieser Datei und entsprechenden .cpp-Dateien lässt sich ein Gleisbildstellpult auf einem Arduino zu simulieren.
+ * Mit dieser Datei und entsprechenden .cpp-Dateien lässt sich ein Gleisbildstellpult auf einem Arduino zu simulieren.
  * Diese Software soll es ermöglichen Weichen und Signale, per Start-Zieltasten nach dem Vorbild eines SpDrs60 Stellwerks auf der Modellbahn zu steuern.
- **/
-
-
+ * @author Lennart Klüner
+ * @file Gleisbild.h
+ *  **/
 
 #ifndef Gleisbild_h
 #define Gleisbild_h
@@ -29,10 +28,8 @@
 #include <Schieberegister.h>
 
 /**
- * @class actors
- * @brief Die Klasse actors enthält die Grundfunktionen jeder Klasse.
- * Jede Klase nutzt diese Klasse, von hier wird der Quellcode für das Steuern des Schieberegisters abgerufen, auch die Funktion zum Blinken einer Led ist hier gespeichert.
- **/
+ * Die Klasse actors enthält die Grundfunktionen jeder Klasse. Jede Klase nutzt diese Klasse, von hier wird der Quellcode für das Steuern des Schieberegisters abgerufen, auch die Funktion zum Blinken einer Led ist hier gespeichert.
+*/
 class actors
 {
 private:
@@ -42,38 +39,34 @@ private:
   int _dsPin;
 
 public:
+  /**
+   * Erstellt die Menge an Schieberegistern die angeschlossen sind, die im konstruktor vermerkt wurden.
+   * @param[in] anzahl Die Anzahl der angeschlossenen Register
+   * @param[in] sh Der Pin an dem SH_CP angeschlossen ist.
+   * @param[in] st Der Pin an dem ST_CP angeschlossen ist.
+   * @param[in] ds Der Pin an dem DS_CP angeschlossen ist.
+  */
   actors(int anzahl, int sh, int st, int ds);
-  void blinken(int LedPin);///led blinkt
-  void digitalSchalten(int PinNr, boolean newPinStatus); ///leds können geschaltet werden, Differenzierung zwischen Led an normalen und leds an Schieberegisteroutputs
-  void setRegisterPins(int anzahl, int sh, int st, int ds);
+  void blinken(int LedPin);                                             /**<Standard-Operator, lässt die angegebene Led blinken. Geschwindigkeit ist nicht einstellbar*/
+  
+  /**
+   * Digitale Ausgänge können geschaltet werden. Differenzierung zwischen Verbrauchern am Controller und am Schiebregister.
+   * @param[in] PinNr Pin der geschaltet werden soll. Schiebregister Pins = PinNr. 1,2,... +100
+   * @param[in] newPinStatus Der neue Status des Pins.
+   *   */
+  void digitalSchalten(int PinNr, boolean newPinStatus);                
+  void setRegisterPins(int anzahl, int sh, int st, int ds);             /**<die Pins des Registers lassen sich verändern (Pinvergabe genau wie beim Kontruktor der Methode actors)*/
 };
-
-//evtl. später, zurzeit nicht wichtig, zu kompliziert
-class stelltisch: public actors
-{
-private:
-  boolean weichenausleuchtung;                            //true, Ausleuchtung an, false Ausleuchtung aus
-
-public:
-  stelltisch(int registerPins[4]);                                           //Die für diese Funktion wichtigen Pins werden nicht im Konstruktor deklariert, so bleibt die übersicht bei weiteren Funktionen
-  ~stelltisch();
-
-  boolean getWeichenausleuchtung();                       //in dieser Methode wird der Status der Weichenausleuchtung ausgegeben. So können sich andere Klassen an diese Einstllungen halten und sie kontrollieren
-  void weichenausleuchtungEinstellen(int tasterEin, int ledein, int tasterAus, int ledAus);
-};
-
-
 /**
- * @class weichen
- * @brief In dieser Klasse werden Weichen gesteuert.
+ * In dieser Klasse werden Weichen gesteuert.
  * Die Klasse kann Weichen schalten und speichert deren Status im EEPROM und kann ihn abrufen, somit vergisst das 
- * Programm den Status einer Weiche nicht.
+ * Programm den Status einer Weiche auch nach dem Reset des Microcontrollers nicht.
 **/
 class weichen : public actors
 {
 private:                 //private Variablen für die Klasse Weichen
-  int weichenstatus = 0;///1gerade, 2kurve
-  int _wnr;///speichert die Weichennummer des Objekts
+  int weichenstatus = 0; //1gerade, 2kurve
+  int _wnr;              ///speichert die Weichennummer des Objekts
   int _weichenPinGerade;
   int _weichenPinKurve;
   int _weichenLedPinGerade;
@@ -83,66 +76,52 @@ private:                 //private Variablen für die Klasse Weichen
   int _wt;
   int _wgt;
   int _weckerPin;
-  unsigned long wTime;       //nicht verwendet stimmt
-  unsigned long _wStartzeit; //Startzeit der Pause
-  boolean _weichenposition;  //true gerade und false kurve
-  boolean _weichenausleuchtung = true;  //true an, die Stellungsmelder der Weiche sind angeschaltet, false die Stellungsmelder der Weiche sind ausgeschaltet
-  boolean _weichenfestlegung = false; //wenn aus true, kann die Weiche nicht mehr gestellt werden
-  
+  unsigned long wTime;                 //nicht verwendet stimmt
+  unsigned long _wStartzeit;           //Startzeit der Pause
+  boolean _weichenposition;            //true gerade und false kurve
+  boolean _weichenausleuchtung = true; //true an, die Stellungsmelder der Weiche sind angeschaltet, false die Stellungsmelder der Weiche sind ausgeschaltet
+  boolean _weichenfestlegung = false;  //wenn aus true, kann die Weiche nicht mehr gestellt werden
+
 public:
   weichen(int wnr, int weichenPinGerade, int weichenPinKurve, int weichenLedPinGerade, int weichenLedPinKurve, int adressWeichenposition, int weichentimeout, int wt, int wgt, int registerPins[4]); // definieren von für alle Methoden wichtige Informationen Pins etc.
 
-  void weicheWechsel();         //..............................................................dont exist Funktion zum Wechseln der Weiche mit Weichengruppentaste und Weichentaste in Kombination
-  void weicheGerade();          //Funktion um die Weiche in Geradelage zu versetzen
-  void weicheKurve();           //Funktion um die Weiche in Kurvenlage zu versetzten
-  void weichenBlinken();        //die Leds blinken
-  void weicheRelaisHIGH();      //Alle Relais werden auf HIGH gesetzt
-  void weicheRelaisLOW();       //alle Relais werden auf LOW also schalten gesetzt
-  void weichenpositionEEPROM(); //die Weichenposition wird dauerhaft gespeichert
-  void weichenSchalten();       //beendet das schalten des Relais: Methode muss für jedes Objekt der Klasse einmal im Loop vorhanden sein
-  
-  void setWeichenfestlegung(boolean festlegestatus, int fahrstrassennr);  //kann die Festlegung der Weichen aktivieren, die Weichen können nicht mehr verändert werden, bis die Fahrstraße ausfgelöst ist
-  boolean getWeichenfestlegung();
+  void weicheWechsel();         /**<Funktion zum Wechseln der Weiche mit Weichengruppentaste und Weichentaste in Kombination. Dies ist nur möglich wenn die Weiche nicht von einer Fahrstraße beansprucht wird.*/
+  void weicheGerade();          /**<Funktion um die Weiche in Geradeweichenlage zu versetzen. Dies ist nur möglich wenn die Weiche nicht von einer Fahrstraße beansprucht wird.*/
+  void weicheKurve();           /**<Funktion um die Weiche in Kurvenlage zu versetzten. Dies ist nur möglich wenn die Weiche nicht von einer Fahrstraße beansprucht wird.*/
+  void weichenBlinken();        /**<Die Weichen-Leds blinken je nach Lage der Weiche. Dies funktioniert nur, wenn die Weiche auch schaltet.*/
+  void weicheRelaisHIGH();      /**<Alle Weichenrelais werden auf HIGH gesetzt. Die Relais sind alle inaktiv.*/
+  void weicheRelaisLOW();       /**<Alle Weichenrelais werden auf LOW gesetzt. Die Relais sind alle aktiv.*/
+  void weichenpositionEEPROM(); /**<Die Weichenposition wird dauerhaft im EEPROM gespeichert. Dafür wird sie geupdatet, wenn eine Weiche geschaltet wurde*/
+  void weichenSchalten();       /**<Beendet nach der zuvor im Konstruktor definierten Zeit das Schalten des Relais.(je nach Weichenantrieb und Schaltdauer) Methode muss für jedes Objekt der Klasse einmal im Loop vorhanden sein.*/
+
+  void setWeichenfestlegung(boolean festlegestatus, int fahrstrassennr); /**<Kann die Festlegung der Weichen aktivieren. Die Weichenlage kann nicht mehr verändert werden, bis die Festlegung durch die Fahrstraße ausfgelöst wird.*/
+  boolean getWeichenfestlegung();                                        /**<Es wird ausgegeben, ob die Weiche festgelegt ist, oder nicht*/
 };
 
-
-/**
- * @class zugtasten
- * @brief Die Klasse gibt weiter ob zugtasten gedrückt wurden
+/**Die Klasse gibt weiter ob Zugtasten gedrückt wurden.
  * Die Klasse speichert den Pin der Zugtaste, und gibt ihren Status aus
  **/
 class zugtasten : public actors
 {
-public:
-  zugtasten(int zugtastenPin, int registerPins[4]); // definieren von für alle Methoden wichtige Informationen: Pins, Input/Output, etc.
-  boolean getzugtastenstatus();                     //Herausgabe des Zugtastenstatus
-
 private:
   //Pins
   int _weckerPin;
-  int _zugtastenPin; //,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,??
+  int _zugtastenPin;
+
+public:
+  /** Übergibt alle Pin die für die Zugtaste wichtig sind. Alle 
+   * @param[in] zugtastenPin Der Pin, an dem der Taster für die Zugtaste angeschlossen ist. (Pullup-Wiederstand nicht vergessen 1kOhm)
+   * @param[in] registerPin Die Pins aus dem Array werden an die Oberklasse actors übergeben. Das Array besteht aus der Anzahl der Register, dem Pin SH_CP, ST_CP, DS  in dieser Reihenfolge.
+   * @see actors(int anzahl, int sh, int st, int ds)
+  */
+  zugtasten(int zugtastenPin, int registerPins[4]); 
+  boolean getzugtastenstatus();                     /**<Gibt den Status der Zugtasten aus(HIGH = gedrückt, LOW = ungedrückt*/
 };
 
-/**
- * @class melder
- * @brief In der Klasse Melder werden Melder und deren Funktionen erstellt.
- * Die Klasse enthält zur Zeit nur den Programmcode für Tastenüberwachung.
+/**In der Klasse Melder werden Melder und deren Funktionen erstellt. Die Klasse enthält zur Zeit nur den Programmcode für die Tastenüberwachung.
 **/
 class melder : public actors
 {
-public:
-  melder(String melderName, int tueMelderLed, int weckerPin, int wutPin, int registerPins[4]); //definieren der Pins von Meldern
-  void tueMelder();                                                            //Löst nach 5 sec drücken einen optischen melder und nach weiteren 5 ein akustisches Signal aus
-
-  int getTueLedPin();                                        //Herausgabe des LedPins
-  boolean getWutStatus();                                    //Herausgabe des Status der Weckerunterbrechertaste
-  void setWutAktivierung(boolean newWutAktivierung);         //Veränderung des Status der WUT: aktiv/inaktiv
-  void setTueMelderStatus(boolean newTueMelderStatus);       //Veränderung des Status des gesamten Melders
-  void setMelderStartzeit(unsigned long newMelderStartzeit); //Veränderung des Beginns des Auslösen des Melders
-  int getWecker();                                       //der Pin des Weckers wird ausgegeben..............................................................................?
-//void setWecker(int wecker);                            //der Pin des Weckers wird verändert
-  
-
 private:
   String _melderName;
   int _weckerPin;
@@ -155,14 +134,33 @@ private:
 
   boolean _tueMelderStatus;
   boolean _wutAktivierung;
+
+public:
+/** Übergibt alle Pin die für die Zugtaste wichtig sind. 
+   * @param[in] melderName Name des Melder. Dieser Wird über den seriellen Monitor angezeigt, wenn der Melder auslöst.
+   * @param[in] tueMelderLed Gibt die Led an, über die der Melder u.a ausschlägt.
+   * @param[in] weckerPin Gibt den Pin an, über die der Wecker für den Melder ausschlägt.
+   * @param[in] wutPin Eingabe des Pins der Weckerunterbrechertaaste.
+   * @param[in] registerPin Die Pins aus dem Array werden an die Oberklasse actors übergeben. Das Array besteht aus der Anzahl der Register, dem Pin SH_CP, ST_CP, DS  in dieser Reihenfolge.
+   * @see actors(int anzahl, int sh, int st, int ds)
+  */
+  melder(String melderName, int tueMelderLed, int weckerPin, int wutPin, int registerPins[4]); //definieren der Pins von Meldern
+  void tueMelder();                                          /**<Löst nach 5 sec drücken einen optischen Melder und nach weiteren 5 den Wecker aus.*/
+  int getTueLedPin();                                        /**<Herausgabe des LedPins. Wird in der main benötigt, so werden bleibt der Programmcode für die TÜ-Melder egal, wie der Pin der Led benannt ist, immer gleich und nur die Objektdefinitionen müssen angepasst werden.*/
+  boolean getWutStatus();                                    /**<Herausgabe des Status der Weckerunterbrechertaste.*/
+  void setWutAktivierung(boolean newWutAktivierung);         /**<Veränderung des Status der WUT: aktiv/inaktiv.*/
+  void setTueMelderStatus(boolean newTueMelderStatus);       /**<Veränderung des Status des gesamten Melders.*/
+  void setMelderStartzeit(unsigned long newMelderStartzeit); /**<Setzt den Melder zurück (Abfragen in der main.cpp werden benötigt).*/
+  int getWecker();                                           /**<Der Pin des Weckers wird ausgegeben. Wird in der main benötigt, so werden bleibt der Programmcode für die TÜ-Melder egal, wie der Pin des Weckers benannt ist, immer gleich und nur die Objektdefinitionen müssen angepasst werden.*/
+  
+
 };
 
 /**
- * @class signale
- * @brief Die Klasse Signale enthält die Grundfunktionen jedes Signals.
- * Die Klasse speichert die Signalhaltgruppentaste und signalsperrtaste. Über sie läasst sich der Signalstatus ausgeben.
- * Das Singal kann auf Halt gestellt werden und gesperrt werden. 
-**/
+ * Die Klasse Signale enthält die Grundfunktionen jedes Signals.
+ * Die Klasse speichert die Signalhaltgruppentaste und Signalsperrtaste. Über sie lässt sich der Signalstatus ausgeben.
+ * Das Signal kann auf Halt gestellt und gesperrt werden. 
+*/
 class signale : public actors
 {
 private:
@@ -175,24 +173,29 @@ private:
   boolean _signalsperre;       //zeigt an ob das Signal gesperrt ist oder nicht (true Signalsperre aktiv)
 
 protected:
-  void setSignalstatus(int newSignalStatus); //Veränderung des Signalstatus
+  void setSignalstatus(int newSignalStatus); /**<Veränderung des Signalstatus. Dieser kann nur durch Unterklassen der Klasse Signale geändert werden, zum Beispiel die Klasse Hauptsignale.*/
 
 public:
-  signale(int signaltastenPin, int sperrmelderPin, int allgSignaltasten[3], int registerPins[4]);      //Konstuktor: allgemeine Signaltasten beinhalten die Signalsperr- und entsperrtaste und Signalhaltgruppentaste
-  int getSignalstatus();                     //Ausgabe des Signalstatus, 0, 1, 2(rot, Fahrt, Langsamfahrt)
-  int getSignaltaste();                      //gibt den Pin der Signaltaste aus
-  int getSignalhaltgruppentaste();           //gibt den Pin der Signalhaltgruppentaste aus
-  int getSignalsperrmelder();                //gibt den Pin des Signalsperrmelders aus
-  int getSignalsperrtaste();                 //gibt den Pin der Signalsperrtaste aus       
-  boolean getSignalsperre();                 //gibt aus, ob das Signal gesperrt ist
-  void signalSperren();                      //überprüft ob ein Signal gesperrt (nur wenn Signal auf hp0 steht) oder eintsperrt werden kann und tut es wenn möglich
+  /** Für die Erstellung eines Signals.
+   * @param[in] signaltastenPin Der Pin an dem die Signaltaste, bzw. die zugehörige Zugtaste (beides Identisch) angeschlossen ist.
+   * @param[in] sperrmelderPin Pin an dem eine Led angeschlossn ist, die anzeigt, ob das Signal gesperrt oder entsperrt ist.
+   * @param[in] allgSignaltasten Das Array besteht aus Signalsperr- und entsperrtaste und Signalhaltgruppentaste bzw. den dazugehörigen Anschlüssen.
+   * @param[in] registerPin Die Pins aus dem Array werden an die Oberklasse actors übergeben. Das Array besteht aus der Anzahl der Register, dem Pin SH_CP, ST_CP, DS  in dieser Reihenfolge.
+   * @see actors(int anzahl, int sh, int st, int ds)
+  */
+  signale(int signaltastenPin, int sperrmelderPin, int allgSignaltasten[3], int registerPins[4]);
+  int getSignalstatus();                                  /**<Ausgabe des Signalstatus, dem Signal, das gerade angezeigt wird. Ausgabe: 0, 1, 2(rot, Fahrt, Langsamfahrt)*/
+  int getSignaltaste();                                 /**<Gibt den Pin der Signaltaste aus. Wird von der Klasse Hauptsignale verwendet.*/
+  int getSignalhaltgruppentaste();                        /**<Gibt den Pin der Signalhaltgruppentaste aus.*/
+  int getSignalsperrmelder();                             /**<Gibt den Pin des Signalsperrmelders aus.*/
+  int getSignalsperrtaste();                              /**<Gibt den Pin der Signalsperrtaste aus.*/
+  boolean getSignalsperre();                              /**<Gibt aus, ob das Signal gesperrt ist.*/
+  void signalSperren();                                   /**<Überprüft ob ein Signal gesperrt (nur wenn Signal auf hp0 steht) oder eintsperrt werden kann und tut es wenn möglich.*/
 };
 
-
 /**
- * @class hauptsignale
- * @brief Die Klasse Hauptsignale erzwugt ein funktionierendes Hauptsignal.
- * In der Klass Hauptsignale lassen sich Signale schalten und über Signaltaste und Signalgruppentaste auf Hp0 schalten.
+ * Die Klasse Hauptsignale erzeugt ein Hauptsignal.
+ * In der Klasse Hauptsignale lassen sich Signale schalten und über Signaltaste und Signalgruppentaste auf Hp0 schalten.
 **/
 class hauptsignale : public signale
 {
@@ -200,56 +203,85 @@ private:
   int _rotPin; //Anschlusspins des Signals
   int _gelbPin;
   int _gruenPin;
-  
-  void setSignalHp0();            //Die Stati der Signale werden verändert, in hpSchalten können sie von außen verändert werden (Hilfsklassen)
+
+  void setSignalHp0(); /**<Die Stati der Signale werden visuell und die Variable über die Methode signale::setSignalstatus() verändert, in hpSchalten können sie von außerhalb der Klasse verändert werden*/
   void setSignalHp1();
   void setSignalHp2();
 
 public:
-  hauptsignale(int rotPin, int gelbPin, int gruenPin,  int signaltaste, int sperrmelder, int allgSignaltasten[3], int registerPin[4]);            //alle Informationen zur Ansteuereung eines Hauptsignals.
-  void hpschalten(int newStatus);                                                                                                                 //schaltet das Signal (0 = rot, 1 = grün, 2 = langsamfahrt), wenn das Signal gesperrt ist, ist kein schalten möglich
-  void hauptsignalhp0manuell();                                                                                                                   //das Hauptsignalwird mit Signalhalttaste und der zum Signalgehörigen Zugstraßentaste auf hp0 (rot) gestellt
+/** Für die Erstellung eines Hauptsignals.
+   * @param[in] rotPin Der Pin an dem die Signaltaste, bzw. die zugehörige Zugtaste (beides Identisch) angeschlossen ist.
+   * @param[in] gelbPin Pin an dem eine Led angeschlossn ist, die anzeigt, ob das Signal gesperrt oder entsperrt ist.
+   * @param[in] gruenPin Das Array besteht aus Signalsperr- und entsperrtaste und Signalhaltgruppentaste bzw. den dazugehörigen Anschlüssen.
+   * @param[in] signaltaste Der Pin an dem die Signaltaste, bzw. die zugehörige Zugtaste (beides Identisch) angeschlossen ist. Wird an die Klasse Signale übergeben.
+   * @param[in] sperrmelder Pin an dem eine Led angeschlossn ist, die anzeigt, ob das Signal gesperrt oder entsperrt ist. Wird an die Klasse Signale übergeben.
+   * @param[in] allgSignaltasten Dieses Array wird für den Konstruktor der Oberklasse Signale benötigt. Das Array besteht aus Signalsperr- und entsperrtaste und Signalhaltgruppentaste bzw. den dazugehörigen Anschlüssen.
+   * @param[in] registerPin Die Pins aus dem Array werden an die Oberklasse signale/actors übergeben. Das Array besteht aus der Anzahl der Register, dem Pin SH_CP, ST_CP, DS  in dieser Reihenfolge.
+   * @see actors(int anzahl, int sh, int st, int ds)
+   * @see signale(int signaltastenPin, int sperrmelderPin, int allgSignaltasten[3], int registerPins[4]);
+  */
+  hauptsignale(int rotPin, int gelbPin, int gruenPin, int signaltaste, int sperrmelder, int allgSignaltasten[3], int registerPin[4]); //alle Informationen zur Ansteuereung eines Hauptsignals.
+  void hpschalten(int newStatus);                             /**<Schaltet das Signal in die angegebene Postion. (newStatus = 0(Halt), 1(Fahrt), 2(Langsamfahrt) Wenn das Signal gesperrt ist, ist kein schalten möglich*/
+  void hauptsignalhp0manuell();                               /**<Das Hauptsignal wird mit der Signalhalttaste und der dem Signal zugeortneten Zugstraßentaste auf hp0 (rot) gestellt.*/
 };
 
-
 /**
- * @class besetztmeldungControl
- * @brief Über diese Klasse wird die Besetztmeldung gesteuert.
- * Die Klasse erstellt Besetztmelder und verwaltet diese, über diese Klasse sollen die einzelen Besetztmelder abgefragt werden.
- * Über diese Klasse können einfach alle Besetztmelder abgefragt werden. Die Besetztmelder sind von 0 an nummeriert
+ * Über diese Klasse wird die Besetztmeldung gesteuert.
+ * Die Klasse erstellt Besetztmelder und verwaltet diese, über diese Klasse werden die einzelen Besetztmelder abgefragt. Die Besetztmelder sind von 0 an nummeriert
 **/
 class besetztmeldungControl : public actors
 {
 private:
-  int _anzahlMelder;                                                                      //anzahl an Meldern, für die Objekte erstllt wurden
-  class besetztmelder **pbesetztmelder;                                                   //dynamisches Array von Objekten der Klasse besetztmelder, zur steuerung und abfrage von besetztmeldern
+  int _anzahlMelder;                    //anzahl an Meldern, für die Objekte erstllt wurden
+  class besetztmelder **pbesetztmelder; //dynamisches Array von Objekten der Klasse besetztmelder, zur steuerung und abfrage von besetztmeldern
 
 public:
-  besetztmeldungControl(int gleisPins[], int ledsGelb[], int ledsRot[], int anzahlMelder, int registerPins[4]);     //Im Konstruktor wird ein Array von Objekten der Klasse Besetztmelder erstellt und initialisiert
-  //aus der Klasse Control werden die entgegengenommenen Befehle auf die einzelnen 
-  boolean getBesetztmelderstatus(int besetztmelder, boolean besetztmelderBeleuchtung);                              //gibt den Status des Besetztmelder aus
-  void setBesetztmelderBeleuchtung(int besetztmelder, boolean besetztmelderLicht);                                  //Die Anzeige-leds des eines Besetztmelder können an und aus geschaltet werden
-  void setFahrstrassenelement(int besetztmelderNr, boolean fahrstrassenstatus);                                     //ein besetztmelder wird zu einem Fahrstraßenelement gemacht, somit verschwindet die besetztmeldung auch bei frei sein des Gleises nicht
-  };
+/** Erstellt die Angegebene Anzahl an besetztmelder und initialisiert diese. Die Initialisierung passiert mit Hilfe der drei Übergebenen Array gleisPins, ledsGleb und ledsRot.
+ * Aus der Klasse besetztmeldungControl werden die entgegengenommenen Befehle auf die einzelnen Besetztmelder verteilt.
+ * 
+ * @param[in] gleisPins Speichert in einem Array die Anschlüsse, über, die die Besetztmelder den Status des Melderabschnitts einlesen können. (0 = nicht belegt, 1 = belegt)
+ * @param[in] ledsGelb Dieses Array speichert die Anschlüsse, über, die die Besetztmelder ausgeben sollen, wenn der überwachte Gleisabschnitt frei ist.
+ * @param[in] ledsRot Dieses Array speichert die Anschlüsse, über, die die Besetztmelder ausgeben sollen wenn der überwachte Gleisabschnitt besetzt ist.
+ * @param[in] anzahlMelder Gibt an wie viele Besetztmelder erstellt werden sollen.
+ * @param[in] registerPins Die Pins aus dem Array werden an die Oberklasse actors übergeben. Das Array besteht aus der Anzahl der Register, dem Pin SH_CP, ST_CP, DS  in dieser Reihenfolge.
+ * @see actors(int anzahl, int sh, int st, int ds)
+ * @see besetztmelder(int gleisPin, int ledGelb, int ledRot, int registerPin[4]);
+*/
+  besetztmeldungControl(int gleisPins[], int ledsGelb[], int ledsRot[], int anzahlMelder, int registerPins[4]); //Im Konstruktor wird ein Array von Objekten der Klasse Besetztmelder erstellt und initialisiert
+
+  boolean getBesetztmelderstatus(int besetztmelder, boolean besetztmelderBeleuchtung); /**<Gibt den Status des angegebenen Besetztmelders aus*/
+  void setBesetztmelderBeleuchtung(int besetztmelder, boolean besetztmelderLicht);     /**<Die leds, die den Status des Besetztmelders anzeigen können an und aus geschaltet werden. Sie zeigen dennoch immer an, wenn ein Gleis besetzt ist. Die Freimeldung wird nicht mehr angezeigt*/
+  void setFahrstrassenelement(int besetztmelderNr, boolean fahrstrassenstatus);        /**<Ein Besetztmelder wird zu einem Fahrstraßenelement gemacht, somit verschwindet die Besetztmeldung auch bei frei sein des Gleises nicht. Der Besetztmelder zeigt auch die Stellung an, wenn die Beleuchtung ausgeschaltet ist.*/
+};
 
 /**
- * @brief Die Klasse Besetztmelder erstellt einzelne Besetztmelder.
- * Die Klasse kann ihren Besetztmelder abfragen
+ * Die Klasse Besetztmelder erstellt einzelne Besetztmelder.
+ * Die Klasse kann Besetztmelder abfragen. Objekte der Klasse werden von der Klasse Besetztmelder Control erstellt.
 **/
 class besetztmelder : public actors
 {
 private:
-  int _gleisPin;                    //hier sind die Pins gespeichert über, die die Besetztmelder ausgelesen werden könne. sie werden über die Klasse BesetzmlderControl bestimmt.
-  int _ledGelb;                     //s.o.
-  int _ledRot;                      //s.o.
-  boolean _besetztmelderstatus;     //hier wirde der aktuelle Status des Besetztmelders gespeichert(0 nicht besetzt, 1 besetzt)
-  boolean _besetztmelderLicht = false;      //es wird gespeichert, ob der Besetzmelder auf dem Stellpult zu sehen sein soll(an/aus)
-  boolean _Fahrstrassenelement = false;     //sind die Melder Teil einer Fahrstraße, sollen die immer an sein
+  int _gleisPin;                        //hier sind die Pins gespeichert über, die die Besetztmelder ausgelesen werden könne. sie werden über die Klasse BesetzmlderControl bestimmt.
+  int _ledGelb;                         //s.o.
+  int _ledRot;                          //s.o.
+  boolean _besetztmelderstatus;         //hier wirde der aktuelle Status des Besetztmelders gespeichert(0 nicht besetzt, 1 besetzt)
+  boolean _besetztmelderLicht = false;  //es wird gespeichert, ob der Besetzmelder auf dem Stellpult zu sehen sein soll(an/aus)
+  boolean _Fahrstrassenelement = false; //sind die Melder Teil einer Fahrstraße, sollen die immer an sein
 
 public:
-  besetztmelder(int gleisPin, int ledGelb, int ledRot, int registerPin[4]);       //Konstruktor der Klasse Besetztmelder
-  boolean besetztmelderAuslesen(boolean besetztmelderBeleuchtung);          //auslesen des bestztmelders, aktueller Status wird zurückgegeben
-  void setBesetztmelderLicht(boolean newBesetztmelderStatus);               //die Beleuchtung des Besetztmelder kann an und aus geschaltet werden
-  void setFahrstrassenelement(boolean Fahrstrassenelement);                 //bindet die Besetztmelder in eine Fahrstraße ein
+/** Erstellt die angegebene Anzahl an besetztmelder und initialisiert diese. Die Initialisierung passiert mit Hilfe der drei Übergebenen Array gleisPins, ledsGleb und ledsRot.
+ * Aus der Klasse besetztmeldungControl werden die entgegengenommenen Befehle auf die einzelnen Besetztmelder verteilt.
+ * 
+ * @param[in] gleisPin Speichert die Anschlüsse, über, die der Besetztmelder den Status des Melderabschnitts einlesen kann. (0 = nicht belegt, 1 = belegt)
+ * @param[in] ledGelb Speichert die Anschlüsse, über, die die Besetztmelder ausgeben sollen, wenn der überwachte Gleisabschnitt frei ist.
+ * @param[in] ledRot Speichert die Anschlüsse, über, die die Besetztmelder ausgeben sollen wenn der überwachte Gleisabschnitt besetzt ist.
+ * @param[in] registerPins Die Pins aus dem Array werden an die Oberklasse besetztmeldungControl/actors übergeben. Das Array besteht aus der Anzahl der Register, dem Pin SH_CP, ST_CP, DS  in dieser Reihenfolge.
+ * @see actors(int anzahl, int sh, int st, int ds)
+ * @see besetztmelder(int gleisPin, int ledGelb, int ledRot, int registerPin[4]);
+*/
+  besetztmelder(int gleisPin, int ledGelb, int ledRot, int registerPin[4]); //Konstruktor der Klasse Besetztmelder
+  boolean besetztmelderAuslesen(boolean besetztmelderBeleuchtung);          /**<Auslesen des Besetztmelders, aktueller Status wird zurückgegeben und die Anzeige je nach Einstellung in besetztmelderLicht und fahrstrassenelement geschaltet*/
+  void setBesetztmelderLicht(boolean newBesetztmelderStatus);               /**<Die Beleuchtung des Besetztmelder kann an und aus geschaltet werden.  Sie zeigen dennoch immer an, wenn ein Gleis besetzt ist. Die Freimeldung wird nicht mehr angezeigt*/
+  void setFahrstrassenelement(boolean Fahrstrassenelement);                 /**Der Besetztmelder wird zu einem Fahrstraßenelement gemacht, somit verschwindet die Besetztmeldung auch bei frei sein des Gleises nicht. Der Besetztmelder zeigt auch Frei oder belegt sein an, wenn besetztmelderLicht ausgeschaltet ist.*/
 };
 #endif
