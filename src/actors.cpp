@@ -55,4 +55,8 @@ void actors::digitalSchalten(int PinNr, boolean newPinStatus)
 
 void actors::setRegisterPins(int anzahl, int sh, int st, int ds)
 {
+  _registerAnzahl = anzahl;
+  _shPin = sh;
+  _stPin = st;
+  _dsPin = ds;
 }
