@@ -251,7 +251,8 @@ public:
 
   boolean getBesetztmelderstatus(int besetztmelder, boolean besetztmelderBeleuchtung); /**<Gibt den Status des angegebenen Besetztmelders aus*/
   void setBesetztmelderBeleuchtung(int besetztmelder, boolean besetztmelderLicht);     /**<Die leds, die den Status des Besetztmelders anzeigen können an und aus geschaltet werden. Sie zeigen dennoch immer an, wenn ein Gleis besetzt ist. Die Freimeldung wird nicht mehr angezeigt*/
-  void setFahrstrassenelement(int besetztmelderNr, boolean fahrstrassenstatus);        /**<Ein Besetztmelder wird zu einem Fahrstraßenelement gemacht, somit verschwindet die Besetztmeldung auch bei frei sein des Gleises nicht. Der Besetztmelder zeigt auch die Stellung an, wenn die Beleuchtung ausgeschaltet ist.*/
+  void setFahrstrassenelement(int besetztmelderNr, int fahrstrassenNr, boolean fahrstrassenstatus);        /**<Ein Besetztmelder wird zu einem Fahrstraßenelement gemacht, somit verschwindet die Besetztmeldung auch bei frei sein des Gleises nicht. Der Besetztmelder zeigt auch die Stellung an, wenn die Beleuchtung ausgeschaltet ist.*/
+  boolean getFahrstrassenelement(int besetztmelderNr);                                                                        /**<Es wird ausgegeben, ob ein Besetztmeldr von einer Fahrstrasse beansprucht ist.*/
 };
 
 /**
@@ -266,7 +267,7 @@ private:
   int _ledRot;                          //s.o.
   boolean _besetztmelderstatus;         //hier wirde der aktuelle Status des Besetztmelders gespeichert(0 nicht besetzt, 1 besetzt)
   boolean _besetztmelderLicht = false;  //es wird gespeichert, ob der Besetzmelder auf dem Stellpult zu sehen sein soll(an/aus)
-  boolean _Fahrstrassenelement = false; //sind die Melder Teil einer Fahrstraße, sollen die immer an sein
+  boolean _fahrstrassenelement = false; //sind die Melder Teil einer Fahrstraße, sollen die immer an sein und der boolean ist true
 
 public:
 /** Erstellt die angegebene Anzahl an besetztmelder und initialisiert diese. Die Initialisierung passiert mit Hilfe der drei Übergebenen Array gleisPins, ledsGleb und ledsRot.
@@ -282,6 +283,7 @@ public:
   besetztmelder(int gleisPin, int ledGelb, int ledRot, int registerPin[4]); //Konstruktor der Klasse Besetztmelder
   boolean besetztmelderAuslesen(boolean besetztmelderBeleuchtung);          /**<Auslesen des Besetztmelders, aktueller Status wird zurückgegeben und die Anzeige je nach Einstellung in besetztmelderLicht und fahrstrassenelement geschaltet*/
   void setBesetztmelderLicht(boolean newBesetztmelderStatus);               /**<Die Beleuchtung des Besetztmelder kann an und aus geschaltet werden.  Sie zeigen dennoch immer an, wenn ein Gleis besetzt ist. Die Freimeldung wird nicht mehr angezeigt*/
-  void setFahrstrassenelement(boolean Fahrstrassenelement);                 /**Der Besetztmelder wird zu einem Fahrstraßenelement gemacht, somit verschwindet die Besetztmeldung auch bei frei sein des Gleises nicht. Der Besetztmelder zeigt auch Frei oder belegt sein an, wenn besetztmelderLicht ausgeschaltet ist.*/
+  void setFahrstrassenelement(int fahrstrassennr, boolean Fahrstrassenelement);                 /**<Der Besetztmelder wird zu einem Fahrstraßenelement gemacht, somit verschwindet die Besetztmeldung auch bei frei sein des Gleises nicht. Der Besetztmelder zeigt auch Frei oder belegt sein an, wenn besetztmelderLicht ausgeschaltet ist. Die festlegung und beanspruchung durch eine Fahrstrasse kann nur durch die selbige wieder aufgehoben werden*/
+  boolean getFahrstrassenelement();                                                             /**<Die Methode gibt aus, ob der Besetztmelder durch eine Fahrstraße beansprucht ist.*/
 };
 #endif

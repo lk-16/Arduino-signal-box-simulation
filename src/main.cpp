@@ -1,16 +1,6 @@
 #include <Arduino.h>
 #include "Gleisbild.h"
 
-//Fahrstraßensteuerung
-const int felderAnzahl = 18;
-//feld1 und feld2
-int fahrstrassenspeicher[felderAnzahl][felderAnzahl]; //1 variable = nummer des Tischfeldes, 2. variable = nummer des Zweiten Tischfeldes
-
-/*Warum wird keine Unterschiedung zwischen links und rechts benötigt? 
- * Da Züge nur mit den Signalen fahren, und nicht gegen,
- * gibt es für jede Tasten kombi von eine Richtung, für die Fahrt in die andere Richtung, muss ein anderes Signal verwendet werden.
-*/
-
 //Pinbelegung
 int schieberegisterPins[4] = {2, 8, 9, 10};
 int w1g = 22; //w=Weiche  bzw. Weichenrelais g=Relais für gerade
@@ -58,11 +48,11 @@ int gelb1 = 108;  //Hp2 (langsamfahrt) vom Signal 1
 int sperrmelder1 = 109;
 int signaltaste1 = zta3; //Signaltaste, zu tastzwecken weichentaste 1
 
-//Tischfeld
-const int besetztmelderAnzahl = 4;
-int besetztmelderEingaenge[besetztmelderAnzahl] = {41,40,39,38}; //an gnd angeschlossen
-int besetztmelderLedsGelb[besetztmelderAnzahl] = {0,0,110,112};
-int besetztmelderLedsRot[besetztmelderAnzahl] = {0,ftueMelderLed,111,113};
+//Besetztmelder
+const int besetztmelderAnzahl = 6;
+int besetztmelderEingaenge[besetztmelderAnzahl] = {42, 41, 40, 39, 38, 37}; //an gnd angeschlossen
+int besetztmelderLedsGelb[besetztmelderAnzahl] = {0, 0, 0, 0, 110, 112};
+int besetztmelderLedsRot[besetztmelderAnzahl] = {0, 0, ftueMelderLed, 111, 0, 113};
 
 //Objektedefinitonen
 //Gleisbesetztmelder
@@ -75,19 +65,31 @@ weichen weiche2(2, w2g, w2k, ledw2g, ledw2k, adressWeichenposition2, weichentime
 melder ftueMelder(ftueMelderName, ftueMelderLed, weckerPin, ftueMelderWut, schieberegisterPins); //Ausgabe von FTÜ im Seriellen Monitior funktioniert nicht
 
 //Zugtasten
-zugtasten zugtaste1(zta1, schieberegisterPins);                                                  //Objekt zugtaste1 mit Pin
+zugtasten zugtaste1(zta1, schieberegisterPins); //Objekt zugtaste1 mit Pin
 zugtasten zugtaste8(zta2, schieberegisterPins);
 zugtasten zugtaste10(zta3, schieberegisterPins);
 zugtasten zugtaste18(zta4, schieberegisterPins);
-boolean falo;
+
 //Signale
 hauptsignale hauptsignal1(rot1, gruen1, gelb1, signaltaste1, sperrmelder1, allgSignaltasten, schieberegisterPins);
 //int rotPin, int gelbPin, int gruenPin,  int signaltaste, int sperrmelder, int allgSignaltasten[3], int registerPin[4]
 
+//Fahrstraßensteuerung
+int zugtastenspeicher[2]; //es werden die Zugtasten gespeichert, die gedrückt wurden.
+int anzahl = 0;           //zählt wie viele zugtasten gedrückt wurden
+boolean fahrstrassenstati[2];
 
 //Fahrstraßensteuerung
-int zugtastenspeicher[2];
-int anzahl = 0;
+const int felderAnzahl = 18;
+//feld1 und feld2
+int fahrstrassenspeicher[felderAnzahl][felderAnzahl]; //1 variable = nummer des Tischfeldes, 2. variable = nummer des Zweiten Tischfeldes
+int freigabe2 = 1;
+int besetztmelderposition2[] = {3, 4, 1, 2};
+int besetztmelderzahl = 0;
+/*Warum wird keine Unterschiedung zwischen links und rechts benötigt? 
+ * Da Züge nur mit den Signalen fahren, und nicht gegen,
+ * gibt es für jede Tasten kombi von eine Richtung, für die Fahrt in die andere Richtung, muss ein anderes Signal verwendet werden.
+*/
 
 void setup()
 {
@@ -98,38 +100,26 @@ void setup()
   weiche1.weichenpositionEEPROM(); //gespeicherte Weichenposition wird angezeigt und ausgeführt
   weiche2.weichenpositionEEPROM();
   Serial.begin(9600);
-  fahrstrassenspeicher[10][8] = 1;fahrstrassenspeicher[8][10] = 1; //wenn die Tasten auf feld 10 und feld 8 gedrückt werden, soll die Fahrstraße 1 einlaufen::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
   //weiche1.setRegisterPins(2,8,9,10);
-  
-  hauptsignal1.hpschalten(2); //....................................................................................
-  delay(1000);
-  Serial.println();
-  //besetztmeldung.setBesetztmelderBeleuchtung(0,HIGH);                  //Der Status des Lichtes kann eingestellt werden 
+
+  hauptsignal1.hpschalten(0); //....................................................................................
+  //besetztmeldung.setBesetztmelderBeleuchtung(0,HIGH);                  //Der Status des Lichtes kann eingestellt werden
+
+  fahrstrassenspeicher[10][8] = 2;
+  fahrstrassenspeicher[8][10] = 2; //wenn die Tasten auf feld 10 und feld 8 gedrückt werden, soll die Fahrstraße 1 einlaufen::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 }
 
 void loop()
 {
-  /*
-  //Fahrstraßen
-  //Fahrstraße1
-  //kontrolle der Belegtmelder
-  weiche1.weicheKurve();
-  weiche2.weicheKurve();
-
-  hauptsignal1.hpschalten(2);
-*/
-
-  //if(zugtaste1.getzugtastenstatus() == true && anzahl < 3) zugtastenspeicher[anzahl] = 10;
   zugtastenspeicher[0] = 0;
   zugtastenspeicher[1] = 0;
   anzahl = 0;
-  if (zugtaste10.getzugtastenstatus() == true && anzahl < 2)
+  if (zugtaste10.getzugtastenstatus() == true && anzahl < 2)      //Wenn die Zugstrassentaste gedrückt wurde, und noch nicht zwei Tasten gedrückt wurden
   {
-    zugtastenspeicher[anzahl] = 10;
-    anzahl++;
+    zugtastenspeicher[anzahl] = 10;//speichere das Feld auf dem die taste gedrückt wurde
+    anzahl++;//erhöhe die anzahl der gedrückten anzahl an tasten um 1
   }
-  if (zugtaste8.getzugtastenstatus() == true && anzahl < 2)
+  if (zugtaste8.getzugtastenstatus() == true && anzahl < 2)     //s.o.
   {
     zugtastenspeicher[anzahl] = 8;
     anzahl++;
@@ -139,46 +129,92 @@ void loop()
     zugtastenspeicher[anzahl] = 18;
     anzahl++;
   }
-
-/*
+  /*
 es wird die 18 auch als 8 und 1 erkannt, liegt evtl an der größe des arrays 
 evtl. sollen die Zahlen vorher sortiert werden, damit sie nicht zu groß für eine array position sind
 */
 
 
-  if(fahrstrassenspeicher[zugtastenspeicher[0]][zugtastenspeicher[1]] == 1)
-  {    
-    if((besetztmeldung.getBesetztmelderstatus(2, LOW) == LOW) && besetztmeldung.getBesetztmelderstatus(1, LOW) == LOW)
-    {
-      besetztmeldung.setFahrstrassenelement(1, true);//das einbinden in die Fahrstraße fehlt
-      besetztmeldung.getBesetztmelderstatus(1, HIGH);
-      besetztmeldung.setFahrstrassenelement(2, true);
-      besetztmeldung.getBesetztmelderstatus(2, HIGH);
-      //d-weg
-      //weichen
-      if(weiche1.getWeichenfestlegung() == false)
-      {
-        weiche1.weicheKurve();
-        weiche1.setWeichenfestlegung(true, 1);
-      }
-      if(weiche2.getWeichenfestlegung() == false)
-      {
-        weiche2.weicheKurve();
-        weiche2.setWeichenfestlegung(true, 1);
-      }
-      Serial.println("Fahrstraße 1");
-    }    
-  }
-  //Serial.println(besetztmeldung.getBesetztmelderstatus(2, LOW));
-
-  if(digitalRead(ftueMelderWut)== HIGH)
+  if (fahrstrassenspeicher[zugtastenspeicher[0]][zugtastenspeicher[1]] == 2)
   {
-    besetztmeldung.getBesetztmelderstatus(2, LOW);
-    besetztmeldung.getBesetztmelderstatus(1, LOW);
 
+    if ((besetztmeldung.getBesetztmelderstatus(2, LOW) == LOW) && besetztmeldung.getBesetztmelderstatus(1, LOW) == LOW //wenn die besetztmelder unbesetzt sind
+        && besetztmeldung.getFahrstrassenelement(2) == false && besetztmeldung.getFahrstrassenelement(2) == false      //und sie nicht in eine Fahrstrasse eingebunden sind
+        && weiche1.getWeichenfestlegung() == false && weiche2.getWeichenfestlegung() == false)                         //und wenn die Weichen nicht in eine Fahrstrasse eingebunden sind
+
+    {
+      //Besetztmeldung
+      besetztmeldung.setFahrstrassenelement(1, 2, true); //binde die Besetztmelder in die Fahrstrasse ein
+      besetztmeldung.setFahrstrassenelement(2, 2, true);
+      //Weichen
+      weiche1.weicheKurve();                 //Weiche wird geschaltet
+      weiche1.setWeichenfestlegung(true, 2); //weiche wird festgelegt
+      weiche2.weicheKurve();
+      weiche2.setWeichenfestlegung(true, 2);
+
+      hauptsignal1.hpschalten(1);
+      fahrstrassenstati[1] = true; //die Fahrstrasse wird als aktiv deklariert
+      Serial.println("Fahrstraße 2");
+    }
+  }
+  /*if (fahrstrassenstati[1] == true)
+  {
+
+    if (besetztmeldung.getBesetztmelderstatus(2, LOW) == HIGH)
+    {
+      hauptsignal1.hpschalten(0);
+      besetztmeldung.setFahrstrassenelement(1, 2, false);
+    }
+    if (besetztmeldung.getBesetztmelderstatus(1, LOW) == HIGH)
+    {
+      hauptsignal1.hpschalten(0);
+      besetztmeldung.setFahrstrassenelement(1, 2, false);
+    }
+
+    //alle besetztmelder müssen in der Fahrstraße einmal rot gewesen sein und am ende wieder frei sein
+  }
+  int freigabe2 = 1;
+  int besetztmelderposition2[] = {3,4,1,2};
+  in besetztmelderzahl = 0;
+  dreidimensionales array [tasterfeld1][tasterfeld1][1. ebene Fahrstrasse 2. bis weitere ebene besetztmelder]
+  erster und letzter besetztmelder sind besonders
+  int fahrstrassenspeicher[tischfeld][tischfeld][ebene] 
+    1. Ebene: Fahrstrassennr
+    2. Ebene: Anzahl der Besetztmelder
+    3. bis ... Ebene: Nummern der Besetztmelder
+  */
+  if (fahrstrassenstati[1] == true)
+  {
+    //1. besetztmelder
+    //auf einen Besetztmelder sind immer zwei zahlen festgelegt, die erste Zahl wird beim besetztsein des melder eingespeichert, die zweite, wird erst dnn eingespeichert, wenn die erste eingespeichert ist,
+    //der nächste besetztmelder kann erst freigegeben werden, wenn der erste freigegeben ist, also die Zahl eine bestimmte höhe hat.
+
+    if (besetztmeldung.getBesetztmelderstatus(besetztmelderposition2[besetztmelderzahl], LOW) == HIGH && freigabe2 == besetztmelderzahl * 2 + 1) //wenn der Besetztmelder besetzt ist und die freigabe der Besetztmelder Zahl plus eins entspricht
+    {
+      hauptsignal1.hpschalten(0);
+      freigabe2++; //beim ersten mal ist die freigabe1 und wird auf 2 erhöht. wenn dies passiert ist, und der Besetztmelder wieder frei geworden ist, wird der Besetztmelder als Fahrstrassenelement aufgelöst
+    }
+
+    if (besetztmeldung.getBesetztmelderstatus(besetztmelderposition2[besetztmelderzahl], LOW) == LOW && freigabe2 == besetztmelderzahl * 2 + 2)
+    {
+      besetztmeldung.setFahrstrassenelement(besetztmelderposition2[besetztmelderzahl], 2, false);
+      freigabe2++;         //3
+      besetztmelderzahl++; //es geht mit dem nächsten besetztmelder der Fahrstrasse weiter
+
+      if (besetztmelderzahl == 4)
+      {
+        freigabe2 = 1;
+        fahrstrassenstati[1] = false;
+        weiche1.setWeichenfestlegung(false, 2);
+        weiche2.setWeichenfestlegung(false, 2);
+      }
+    }
+    Serial.println(freigabe2);
+    //alle besetztmelder müssen in der Fahrstraße einmal rot gewesen sein und am ende wieder frei sein
   }
 
-      /*//Zugtastensteuerung
+  delay(500);
+  /*//Zugtastensteuerung
   if (zugtaste1.getzugtastenstatus() == true && zugtaste2.getzugtastenstatus() == true)
   {
     weiche1.weicheGerade();
@@ -195,8 +231,8 @@ evtl. sollen die Zahlen vorher sortiert werden, damit sie nicht zu groß für ei
     weiche2.weicheGerade();
   }*/
 
-      //FTÜ-Melder
-  if(zugtaste1.getzugtastenstatus() == HIGH || zugtaste8.getzugtastenstatus() == HIGH || zugtaste10.getzugtastenstatus() == HIGH || zugtaste18.getzugtastenstatus() == HIGH) //wenn eine Zugtaste gedrückt ist
+  //FTÜ-Melder
+  if (zugtaste1.getzugtastenstatus() == HIGH || zugtaste8.getzugtastenstatus() == HIGH || zugtaste10.getzugtastenstatus() == HIGH || zugtaste18.getzugtastenstatus() == HIGH) //wenn eine Zugtaste gedrückt ist
   {
     ftueMelder.tueMelder(); //kontrolliere wie lange die Tasten gesrückt wurden
   }
@@ -212,8 +248,8 @@ evtl. sollen die Zahlen vorher sortiert werden, damit sie nicht zu groß für ei
   //Signale
   hauptsignal1.hauptsignalhp0manuell(); //über die Signalhaltgruppentaste und die Zugtaste auf dem Feld des Signals kann ein Signal auf hp0 gestellt werden
   hauptsignal1.signalSperren();         //über weichen  und weichensperrtaste kann ein Signal gesperrt werden
-  if (digitalRead(zta2) == HIGH)
-    hauptsignal1.hpschalten(1); //................................................................................................................
+  //if (digitalRead(zta2) == HIGH)
+  //  hauptsignal1.hpschalten(1);
 
   //Weichen
   weiche1.weicheWechsel(); //WGT und WT können zum Umschalten einer Weiche benutzt werden

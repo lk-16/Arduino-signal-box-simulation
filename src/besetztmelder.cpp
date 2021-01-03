@@ -27,13 +27,13 @@ boolean besetztmelder::besetztmelderAuslesen(boolean besetztmelderBeleuchtung)
     //der Status des Besetztmelders wird eingelesen
     _besetztmelderLicht = besetztmelderBeleuchtung;
     _besetztmelderstatus = digitalRead(_gleisPin);
-    
-    if (_besetztmelderstatus == false && (_besetztmelderLicht || _Fahrstrassenelement)) //wenn das Gleis  nicht besetzt ist und die Anzeige an ist, oder wenn der Besetztmelder Teil einer Fahrstraße ist
+
+    if (_besetztmelderstatus == false && (_besetztmelderLicht || _fahrstrassenelement)) //wenn das Gleis  nicht besetzt ist und die Anzeige an ist, oder wenn der Besetztmelder Teil einer Fahrstraße ist
     {
         digitalSchalten(_ledRot, LOW);   //sonst schalte die rote aus
         digitalSchalten(_ledGelb, HIGH); //und die gelbe Led an
     }
-    else if (!_besetztmelderstatus && !_besetztmelderLicht && !_Fahrstrassenelement) // wird keine anzeige benötigt,
+    else if (!_besetztmelderstatus && !_besetztmelderLicht && !_fahrstrassenelement) // wird keine anzeige benötigt,
     {
         digitalSchalten(_ledRot, LOW); //schalte alle Leds aus
         digitalSchalten(_ledGelb, LOW);
@@ -52,7 +52,21 @@ void besetztmelder::setBesetztmelderLicht(boolean newbesetztmelderLicht) //ein u
     _besetztmelderLicht = newbesetztmelderLicht;
 }
 
-void besetztmelder::setFahrstrassenelement(boolean fahrstrassenelement)
+void besetztmelder::setFahrstrassenelement(int fahrstrassennr, boolean fahrstrassenelement)//nr der Fahrstraße, soll es zu einem Fahrstraßenelement werden oder nicht
 {
-    _Fahrstrassenelement=fahrstrassenelement;
+    static int _fahrstrasse = 0; //speichert von welcher Fahrstraße der Besetztmelder festgelegt wurde, und nur diese kann die Festlegung auch wieder lösen
+    if (_fahrstrasse == 0)       //wenn der Melder nicht beansprucht ist
+    {
+        _fahrstrassenelement = fahrstrassenelement;     //kann sie von einer anderen Fahrstraße festgelgt werden, diese wird gespeichert
+        _fahrstrasse = fahrstrassennr; //und die Fahrstraße entsprechend festgelegen
+    }
+    else if (fahrstrassennr == _fahrstrasse && _fahrstrasse != 0) //|| _fahrstrassenfestlegung == 0)
+    {
+        _fahrstrassenelement = fahrstrassenelement;                 //der Status, ob die weiche festgelegt wurde wird geänder
+        if(_fahrstrassenelement == 0) _fahrstrasse = 0;             //wenn die Fahrstraße nicht mehr beansprucht ist, kann sie von allen anderen Fahrstraßen verendet werden
+    }
+}
+boolean besetztmelder::getFahrstrassenelement()
+{
+    return _fahrstrassenelement;
 }

@@ -30,7 +30,11 @@ void besetztmeldungControl::setBesetztmelderBeleuchtung(int besetztmelder, boole
 {
     pbesetztmelder[besetztmelder]->setBesetztmelderLicht(besetztmelderLichtstatus);
 }
-void besetztmeldungControl::setFahrstrassenelement(int besetztmelderNr, boolean fahrstrassenstatus)
+void besetztmeldungControl::setFahrstrassenelement(int besetztmelderNr, int fahrstrassenNr, boolean fahrstrassenstatus)
 {
-    pbesetztmelder[besetztmelderNr]->setFahrstrassenelement(fahrstrassenstatus);
+    pbesetztmelder[besetztmelderNr]->setFahrstrassenelement(fahrstrassenNr, fahrstrassenstatus);
+}
+boolean besetztmeldungControl::getFahrstrassenelement(int besetztmelderNr)
+{
+    return pbesetztmelder[besetztmelderNr]->getFahrstrassenelement();
 }
