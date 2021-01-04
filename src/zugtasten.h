@@ -23,7 +23,7 @@
 /**Die Klasse gibt weiter ob Zugtasten gedrückt wurden.
  * Die Klasse speichert den Pin der Zugtaste, und gibt ihren Status aus
  */
-class zugtasten : public actors
+class zugtasten
 {
 private:
   //Pins
@@ -33,10 +33,8 @@ private:
 public:
   /** Übergibt alle Pin die für die Zugtaste wichtig sind. Alle 
    * @param[in] zugtastenPin Der Pin, an dem der Taster für die Zugtaste angeschlossen ist. (Pullup-Wiederstand nicht vergessen 1kOhm)
-   * @param[in] registerPin Die Pins aus dem Array werden an die Oberklasse actors übergeben. Das Array besteht aus der Anzahl der Register, dem Pin SH_CP, ST_CP, DS  in dieser Reihenfolge.
-   * @see actors(int anzahl, int sh, int st, int ds)
   */
-  zugtasten(int zugtastenPin, int registerPins[4]); 
+  zugtasten(int zugtastenPin); 
   boolean getzugtastenstatus();                     /**<Gibt den Status der Zugtasten aus(HIGH = gedrückt, LOW = ungedrückt*/
 };
 

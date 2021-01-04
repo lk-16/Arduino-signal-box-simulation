@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include "weichen.h"
 #include "zugtasten.h"
+#include "zugtastenControl.h"
 #include "besetztmeldungControl.h"
 #include "hauptsignale.h"
 #include "melder.h"
@@ -69,10 +70,10 @@ weichen weiche2(2, w2g, w2k, ledw2g, ledw2k, adressWeichenposition2, weichentime
 melder ftueMelder(ftueMelderName, ftueMelderLed, weckerPin, ftueMelderWut, schieberegisterPins); //Ausgabe von FTÜ im Seriellen Monitior funktioniert nicht
 
 //Zugtasten
-zugtasten zugtaste1(zta1, schieberegisterPins); //Objekt zugtaste1 mit Pin
-zugtasten zugtaste8(zta2, schieberegisterPins);
-zugtasten zugtaste10(zta3, schieberegisterPins);
-zugtasten zugtaste18(zta4, schieberegisterPins);
+zugtasten zugtaste1(zta1); //Objekt zugtaste1 mit Pin
+zugtasten zugtaste8(zta2);
+zugtasten zugtaste10(zta3);
+zugtasten zugtaste18(zta4);
 
 //Signale
 hauptsignale hauptsignal1(rot1, gruen1, gelb1, signaltaste1, sperrmelder1, allgSignaltasten, schieberegisterPins);

@@ -13,8 +13,7 @@
 //Methoden der Klasse Weichen
 
 //definieren von für alle Methoden wichtige Informationen Pins etc.
-zugtasten::zugtasten(int zugtastenPin, int registerPins[4])
-  : actors(registerPins[0], registerPins[1], registerPins[2], registerPins[3])
+zugtasten::zugtasten(int zugtastenPin)
 {
   _zugtastenPin = zugtastenPin;
   pinMode(_zugtastenPin, INPUT_PULLUP);

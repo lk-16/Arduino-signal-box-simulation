@@ -22,7 +22,7 @@ class besetztmeldungControl : public actors
 {
 private:
   int _anzahlMelder;                    //anzahl an Meldern, für die Objekte erstllt wurden
-  class besetztmelder **pbesetztmelder; //dynamisches Array von Objekten der Klasse besetztmelder, zur steuerung und abfrage von besetztmeldern
+  class besetztmelder **_pbesetztmelder; //dynamisches Array von Objekten der Klasse besetztmelder, zur steuerung und abfrage von besetztmeldern
 
 public:
 /** Erstellt die Angegebene Anzahl an besetztmelder und initialisiert diese. Die Initialisierung passiert mit Hilfe der drei Übergebenen Array gleisPins, ledsGleb und ledsRot.
