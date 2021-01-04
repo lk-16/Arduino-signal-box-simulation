@@ -5,9 +5,8 @@
 */
 
 #include "Arduino.h"
-#include <EEPROM.h>
-#include "Schieberegister.h"
-#include "Gleisbild.h"
+#include "melder.h"
+#include "actors.h"
 
 
 //Methoden der Klasse Melder
@@ -23,7 +22,7 @@ melder::melder(String melderName, int tueMelderLed, int weckerPin, int wutPin, i
   _weckerPin= weckerPin;
   //definieren ob Anschlüsse Aus- oder Eingang sind
   pinMode(_tueMelderLed, OUTPUT);                   //Tastenüberwachung led Melder
-  pinMode(_wutPin, INPUT);                          //Tastenüberwachung Weckerunterbrechertaste
+  pinMode(_wutPin, INPUT_PULLUP);                          //Tastenüberwachung Weckerunterbrechertaste
   pinMode(_weckerPin, OUTPUT); 
 }
 

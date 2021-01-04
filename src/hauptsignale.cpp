@@ -5,9 +5,8 @@
 */
 
 #include "Arduino.h"
-#include <EEPROM.h>
-#include "Schieberegister.h"
-#include "Gleisbild.h"
+#include "hauptsignale.h"
+#include "signale.h"
 
 //Methoden der Klasse Hauptsignale, Unterklassen der Klasse actors und signale
 hauptsignale::hauptsignale(int rotPin, int gelbPin, int gruenPin,  int signaltaste, int sperrmelder, int allgSignaltasten[3], int registerPin[4])
@@ -25,24 +24,24 @@ hauptsignale::hauptsignale(int rotPin, int gelbPin, int gruenPin,  int signaltas
 
 void hauptsignale::setSignalHp0()
 {
-  actors::digitalSchalten(_gruenPin, LOW);
-  actors::digitalSchalten(_gelbPin, LOW);
+  signale::digitalSchalten(_gruenPin, LOW);
+  signale::digitalSchalten(_gelbPin, LOW);
   //timer?
-  actors::digitalSchalten(_rotPin, HIGH); //alle Lichter werden auf Low gestellt und dann Halt (rot) auf HIGH
+  signale::digitalSchalten(_rotPin, HIGH); //alle Lichter werden auf Low gestellt und dann Halt (rot) auf HIGH
 }
 
 void hauptsignale::setSignalHp1()
 {
-  actors::digitalSchalten(_rotPin, LOW);
-  actors::digitalSchalten(_gelbPin, LOW);
-  actors::digitalSchalten(_gruenPin, HIGH);
+  signale::digitalSchalten(_rotPin, LOW);
+  signale::digitalSchalten(_gelbPin, LOW);
+  signale::digitalSchalten(_gruenPin, HIGH);
 }
 
 void hauptsignale::setSignalHp2()
 {
-  actors::digitalSchalten(_rotPin, LOW); //.. nur Halt also rot geht aus, alle anderen bleiben an
-  actors::digitalSchalten(_gelbPin, HIGH);
-  actors::digitalSchalten(_gruenPin, HIGH);
+  signale::digitalSchalten(_rotPin, LOW); //.. nur Halt also rot geht aus, alle anderen bleiben an
+  signale::digitalSchalten(_gelbPin, HIGH);
+  signale::digitalSchalten(_gruenPin, HIGH);
 }
 
 void hauptsignale::hpschalten(int newStatus) //funktion stellt das Signal

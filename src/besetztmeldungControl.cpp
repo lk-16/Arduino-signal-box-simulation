@@ -4,10 +4,8 @@
     Lennart Klüner 05.09.2020
 */
 
-#include "Arduino.h"
-#include <EEPROM.h>
-#include "Schieberegister.h"
-#include "Gleisbild.h"
+#include "besetztmeldungControl.h"
+#include "besetztmelder.h"
 
 //Methoden der Klasse besetztmeldungControl
 besetztmeldungControl::besetztmeldungControl(int gleisPins[], int ledsGelb[], int ledsRot[], int anzahlMelder, int registerPins[4])

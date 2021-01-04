@@ -1,7 +1,9 @@
 #include <Arduino.h>
-#include "Gleisbild.h"
+#include "weichen.h"
 #include "zugtasten.h"
-#include "actors.h"
+#include "besetztmeldungControl.h"
+#include "hauptsignale.h"
+#include "melder.h"
 
 //Pinbelegung
 int schieberegisterPins[4] = {2, 8, 9, 10};

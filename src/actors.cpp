@@ -6,7 +6,6 @@
 
 #include "Arduino.h"
 #include <EEPROM.h>
-#include "Schieberegister.h"
 #include "actors.h"
 
 //Methoden der Klasse actors

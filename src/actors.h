@@ -1,24 +1,19 @@
-/*Libary zum testen:
- *  Ich möchte Weicehn über diese Libary schalten und
- *  vielleicht auch Signale für die Modelleisenbahn
+/*Libary für die Steuerung einews Gleisbildstellpults
+ *  mit dieser Library können weichen Signale etc. gesteuert werden
  *  Lennart Klüner 05.09.2020
- *  gesamt: ca. 12.000 Zeichen
- *  ca.  1.600 Worte
- * 
- * Auto-Layout: Strg k, Strg f
 */
 
 /**
- * Mit dieser Datei und entsprechenden .cpp-Dateien lässt sich ein Gleisbildstellpult auf einem Arduino zu simulieren.
- * Diese Software soll es ermöglichen Weichen und Signale, per Start-Zieltasten nach dem Vorbild eines SpDrs60 Stellwerks auf der Modellbahn zu steuern.
+ * Diese Datei enthält die Basisklasse actors, alle Klassen sind von dieser Klasse abhängig.
  * @author Lennart Klüner
+ * @file actors.h
 */
 
 #ifndef actors_h
 #define actors_h
 #include <Arduino.h>
 #include <Schieberegister.h>
-#include "actors.h"
+
 
 /**
  * Die Klasse actors enthält die Grundfunktionen jeder Klasse. Jede Klase nutzt diese Klasse, von hier wird der Quellcode für das Steuern des Schieberegisters abgerufen, auch die Funktion zum Blinken einer Led ist hier gespeichert.

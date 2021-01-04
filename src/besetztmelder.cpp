@@ -4,10 +4,7 @@
     Lennart Klüner 05.09.2020
 */
 
-#include "Arduino.h"
-#include <EEPROM.h>
-#include "Schieberegister.h"
-#include "Gleisbild.h"
+#include "besetztmelder.h"
 
 //Methoden der Klasse besetztmelder
 besetztmelder::besetztmelder(int gleisPin, int ledGelb, int ledRot, int registerPin[4])
@@ -21,7 +18,6 @@ besetztmelder::besetztmelder(int gleisPin, int ledGelb, int ledRot, int register
     pinMode(_ledGelb, OUTPUT);
     pinMode(_ledRot, OUTPUT);
 }
-
 boolean besetztmelder::besetztmelderAuslesen(boolean besetztmelderBeleuchtung)
 {
     //der Status des Besetztmelders wird eingelesen

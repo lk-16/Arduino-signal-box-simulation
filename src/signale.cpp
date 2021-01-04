@@ -4,10 +4,9 @@
     Lennart Klüner 05.09.2020
 */
 
-#include "Arduino.h"
-#include <EEPROM.h>
-#include "Schieberegister.h"
-#include "Gleisbild.h"
+#include <Arduino.h>
+#include "actors.h"
+#include "signale.h"
 
 //Methoden der Klasse signal, Unterklasse der Klasse actors
 signale::signale(int signaltastenPin, int sperrmelderPin, int allgSignaltasten[3], int registerPins[4])      //Konstuktor: allgemeine Signaltasten beinhalten die Signalsperr- und entsperrtaste und Signalhaltgruppentaste

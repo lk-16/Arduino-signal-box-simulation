@@ -7,7 +7,7 @@
 #include "Arduino.h"
 #include <EEPROM.h>
 #include "Schieberegister.h"
-#include "Gleisbild.h"
+#include "weichen.h"
 
 //Methoden der Klasse Weichen
 

@@ -9,9 +9,9 @@
 */
 
 /**
- * Mit dieser Datei und entsprechenden .cpp-Dateien lässt sich ein Gleisbildstellpult auf einem Arduino zu simulieren.
- * Diese Software soll es ermöglichen Weichen und Signale, per Start-Zieltasten nach dem Vorbild eines SpDrs60 Stellwerks auf der Modellbahn zu steuern.
+ * Diese Datei beinhaltet die Klasse zugtasten.
  * @author Lennart Klüner
+ * @file zugtasten.h
 */
 
 #ifndef zugtasten_h
