@@ -26,37 +26,9 @@
 #include <Arduino.h>
 #include <EEPROM.h>
 #include <Schieberegister.h>
+#include "actors.h"
+#include "zugtasten.h"
 
-/**
- * Die Klasse actors enthält die Grundfunktionen jeder Klasse. Jede Klase nutzt diese Klasse, von hier wird der Quellcode für das Steuern des Schieberegisters abgerufen, auch die Funktion zum Blinken einer Led ist hier gespeichert.
-*/
-class actors
-{
-private:
-  int _registerAnzahl;
-  int _shPin;
-  int _stPin;
-  int _dsPin;
-
-public:
-  /**
-   * Erstellt die Menge an Schieberegistern die angeschlossen sind, die im konstruktor vermerkt wurden.
-   * @param[in] anzahl Die Anzahl der angeschlossenen Register
-   * @param[in] sh Der Pin an dem SH_CP angeschlossen ist.
-   * @param[in] st Der Pin an dem ST_CP angeschlossen ist.
-   * @param[in] ds Der Pin an dem DS_CP angeschlossen ist.
-  */
-  actors(int anzahl, int sh, int st, int ds);
-  void blinken(int LedPin);                                             /**<Standard-Operator, lässt die angegebene Led blinken. Geschwindigkeit ist nicht einstellbar*/
-  
-  /**
-   * Digitale Ausgänge können geschaltet werden. Differenzierung zwischen Verbrauchern am Controller und am Schiebregister.
-   * @param[in] PinNr Pin der geschaltet werden soll. Schiebregister Pins = PinNr. 1,2,... +100
-   * @param[in] newPinStatus Der neue Status des Pins.
-   *   */
-  void digitalSchalten(int PinNr, boolean newPinStatus);                
-  void setRegisterPins(int anzahl, int sh, int st, int ds);             /**<die Pins des Registers lassen sich verändern (Pinvergabe genau wie beim Kontruktor der Methode actors)*/
-};
 /**
  * In dieser Klasse werden Weichen gesteuert.
  * Die Klasse kann Weichen schalten und speichert deren Status im EEPROM und kann ihn abrufen, somit vergisst das 
@@ -98,25 +70,6 @@ public:
   boolean getWeichenfestlegung();                                        /**<Es wird ausgegeben, ob die Weiche festgelegt ist, oder nicht*/
 };
 
-/**Die Klasse gibt weiter ob Zugtasten gedrückt wurden.
- * Die Klasse speichert den Pin der Zugtaste, und gibt ihren Status aus
- **/
-class zugtasten : public actors
-{
-private:
-  //Pins
-  int _weckerPin;
-  int _zugtastenPin;
-
-public:
-  /** Übergibt alle Pin die für die Zugtaste wichtig sind. Alle 
-   * @param[in] zugtastenPin Der Pin, an dem der Taster für die Zugtaste angeschlossen ist. (Pullup-Wiederstand nicht vergessen 1kOhm)
-   * @param[in] registerPin Die Pins aus dem Array werden an die Oberklasse actors übergeben. Das Array besteht aus der Anzahl der Register, dem Pin SH_CP, ST_CP, DS  in dieser Reihenfolge.
-   * @see actors(int anzahl, int sh, int st, int ds)
-  */
-  zugtasten(int zugtastenPin, int registerPins[4]); 
-  boolean getzugtastenstatus();                     /**<Gibt den Status der Zugtasten aus(HIGH = gedrückt, LOW = ungedrückt*/
-};
 
 /**In der Klasse Melder werden Melder und deren Funktionen erstellt. Die Klasse enthält zur Zeit nur den Programmcode für die Tastenüberwachung.
 **/

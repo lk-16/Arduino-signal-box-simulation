@@ -7,7 +7,7 @@
 #include "Arduino.h"
 #include <EEPROM.h>
 #include "Schieberegister.h"
-#include "Gleisbild.h"
+#include "actors.h"
 
 //Methoden der Klasse actors
 actors::actors(int anzahl, int sh, int st, int ds)

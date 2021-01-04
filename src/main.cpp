@@ -1,5 +1,7 @@
 #include <Arduino.h>
 #include "Gleisbild.h"
+#include "zugtasten.h"
+#include "actors.h"
 
 //Pinbelegung
 int schieberegisterPins[4] = {2, 8, 9, 10};
@@ -51,7 +53,7 @@ int signaltaste1 = zta3; //Signaltaste, zu tastzwecken weichentaste 1
 //Besetztmelder
 const int besetztmelderAnzahl = 6;
 int besetztmelderEingaenge[besetztmelderAnzahl] = {42, 41, 40, 39, 38, 37}; //an gnd angeschlossen
-int besetztmelderLedsGelb[besetztmelderAnzahl] = {0, 0, 0, 0, 110, 112};
+int besetztmelderLedsGelb[besetztmelderAnzahl] = {0, 0, 0, 110, 0, 112};
 int besetztmelderLedsRot[besetztmelderAnzahl] = {0, 0, ftueMelderLed, 111, 0, 113};
 
 //Objektedefinitonen
@@ -101,7 +103,6 @@ void setup()
   weiche2.weichenpositionEEPROM();
   Serial.begin(9600);
 
-  hauptsignal1.hpschalten(0); //....................................................................................
   //besetztmeldung.setBesetztmelderBeleuchtung(0,HIGH);                  //Der Status des Lichtes kann eingestellt werden
 
   fahrstrassenspeicher[10][8] = 2;
@@ -143,6 +144,8 @@ evtl. sollen die Zahlen vorher sortiert werden, damit sie nicht zu groß für ei
 
     {
       //Besetztmeldung
+      besetztmeldung.setFahrstrassenelement(3, 2, true);
+      besetztmeldung.setFahrstrassenelement(4, 2, true);
       besetztmeldung.setFahrstrassenelement(1, 2, true); //binde die Besetztmelder in die Fahrstrasse ein
       besetztmeldung.setFahrstrassenelement(2, 2, true);
       //Weichen
@@ -156,23 +159,7 @@ evtl. sollen die Zahlen vorher sortiert werden, damit sie nicht zu groß für ei
       Serial.println("Fahrstraße 2");
     }
   }
-  /*if (fahrstrassenstati[1] == true)
-  {
-
-    if (besetztmeldung.getBesetztmelderstatus(2, LOW) == HIGH)
-    {
-      hauptsignal1.hpschalten(0);
-      besetztmeldung.setFahrstrassenelement(1, 2, false);
-    }
-    if (besetztmeldung.getBesetztmelderstatus(1, LOW) == HIGH)
-    {
-      hauptsignal1.hpschalten(0);
-      besetztmeldung.setFahrstrassenelement(1, 2, false);
-    }
-
-    //alle besetztmelder müssen in der Fahrstraße einmal rot gewesen sein und am ende wieder frei sein
-  }
-  int freigabe2 = 1;
+  /*int freigabe2 = 1;
   int besetztmelderposition2[] = {3,4,1,2};
   in besetztmelderzahl = 0;
   dreidimensionales array [tasterfeld1][tasterfeld1][1. ebene Fahrstrasse 2. bis weitere ebene besetztmelder]
@@ -182,6 +169,8 @@ evtl. sollen die Zahlen vorher sortiert werden, damit sie nicht zu groß für ei
     2. Ebene: Anzahl der Besetztmelder
     3. bis ... Ebene: Nummern der Besetztmelder
   */
+ int maxlang = 4;
+ int fahrstrassenspeicher[felderAnzahl][felderAnzahl][2+maxlang]; //in der ersten zeile wir die Fahrstrassen nr angegeben un in der zeiten die Zahl der Besetztmelder
   if (fahrstrassenstati[1] == true)
   {
     //1. besetztmelder
@@ -212,7 +201,6 @@ evtl. sollen die Zahlen vorher sortiert werden, damit sie nicht zu groß für ei
     //alle besetztmelder müssen in der Fahrstraße einmal rot gewesen sein und am ende wieder frei sein
   }
 
-  delay(500);
   /*//Zugtastensteuerung
   if (zugtaste1.getzugtastenstatus() == true && zugtaste2.getzugtastenstatus() == true)
   {
@@ -261,4 +249,6 @@ evtl. sollen die Zahlen vorher sortiert werden, damit sie nicht zu groß für ei
   besetztmeldung.getBesetztmelderstatus(1, LOW);
   besetztmeldung.getBesetztmelderstatus(2, LOW);
   besetztmeldung.getBesetztmelderstatus(3, LOW);
+  besetztmeldung.getBesetztmelderstatus(4, LOW);
+  besetztmeldung.getBesetztmelderstatus(5, LOW);
 }
