@@ -100,7 +100,6 @@ void setup()
   weiche1.weichenpositionEEPROM(); //gespeicherte Weichenposition wird angezeigt und ausgeführt
   weiche2.weichenpositionEEPROM();
   Serial.begin(9600);
-  //weiche1.setRegisterPins(2,8,9,10);
 
   hauptsignal1.hpschalten(0); //....................................................................................
   //besetztmeldung.setBesetztmelderBeleuchtung(0,HIGH);                  //Der Status des Lichtes kann eingestellt werden
