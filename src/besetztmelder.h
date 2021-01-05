@@ -8,18 +8,18 @@
 /**
  * Diese Datei enthält die Klasse besetztmelder.
  * @author Lennart Klüner
- * @file besetztmelder.h
+ * @file Besetztmelder.h
 */
 
-#ifndef besetztmelder_h
-#define besetztmelder_h
-#include "actors.h"
+#ifndef Besetztmelder_h
+#define Besetztmelder_h
+#include "Actor.h"
 
 /**
  * Die Klasse Besetztmelder erstellt einzelne Besetztmelder.
  * Die Klasse kann Besetztmelder abfragen. Objekte der Klasse werden von der Klasse Besetztmelder Control erstellt.
 **/
-class besetztmelder : public actors
+class Besetztmelder : public Actor
 {
 private:
   int _gleisPin;                        //hier sind die Pins gespeichert über, die die Besetztmelder ausgelesen werden könne. sie werden über die Klasse BesetzmlderControl bestimmt.
@@ -40,7 +40,7 @@ public:
  * @see actors(int anzahl, int sh, int st, int ds)
  * @see besetztmelder(int gleisPin, int ledGelb, int ledRot, int registerPin[4]);
 */
-  besetztmelder(int gleisPin, int ledGelb, int ledRot, int registerPin[4]); //Konstruktor der Klasse Besetztmelder
+  Besetztmelder(int gleisPin, int ledGelb, int ledRot, int registerPin[4]); //Konstruktor der Klasse Besetztmelder
   boolean besetztmelderAuslesen(boolean besetztmelderBeleuchtung);          /**<Auslesen des Besetztmelders, aktueller Status wird zurückgegeben und die Anzeige je nach Einstellung in besetztmelderLicht und fahrstrassenelement geschaltet*/
   void setBesetztmelderLicht(boolean newBesetztmelderStatus);               /**<Die Beleuchtung des Besetztmelder kann an und aus geschaltet werden.  Sie zeigen dennoch immer an, wenn ein Gleis besetzt ist. Die Freimeldung wird nicht mehr angezeigt*/
   void setFahrstrassenelement(int fahrstrassennr, boolean Fahrstrassenelement);                 /**<Der Besetztmelder wird zu einem Fahrstraßenelement gemacht, somit verschwindet die Besetztmeldung auch bei frei sein des Gleises nicht. Der Besetztmelder zeigt auch Frei oder belegt sein an, wenn besetztmelderLicht ausgeschaltet ist. Die festlegung und beanspruchung durch eine Fahrstrasse kann nur durch die selbige wieder aufgehoben werden*/

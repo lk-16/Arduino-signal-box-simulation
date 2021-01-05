@@ -7,20 +7,20 @@
 /**
  * Diese Datei enthält die Klasse weichen.
  * @author Lennart Klüner
- * @file weichen.h
+ * @file Weiche.h
 */
 
-#ifndef weichen_h
-#define weichen_h
+#ifndef Weiche_h
+#define Weiche_h
 #include <Arduino.h>
-#include "actors.h"
+#include "Actor.h"
 
 /**
  * In dieser Klasse werden Weichen gesteuert.
  * Die Klasse kann Weichen schalten und speichert deren Status im EEPROM und kann ihn abrufen, somit vergisst das 
  * Programm den Status einer Weiche auch nach dem Reset des Microcontrollers nicht.
 **/
-class weichen : public actors
+class Weiche : public Actor
 {
 private:                 //private Variablen für die Klasse Weichen
   int weichenstatus = 0; //1gerade, 2kurve
@@ -41,7 +41,7 @@ private:                 //private Variablen für die Klasse Weichen
   boolean _weichenfestlegung = false;  //wenn aus true, kann die Weiche nicht mehr gestellt werden
 
 public:
-  weichen(int wnr, int weichenPinGerade, int weichenPinKurve, int weichenLedPinGerade, int weichenLedPinKurve, int adressWeichenposition, int weichentimeout, int wt, int wgt, int registerPins[4]); // definieren von für alle Methoden wichtige Informationen Pins etc.
+  Weiche(int wnr, int weichenPinGerade, int weichenPinKurve, int weichenLedPinGerade, int weichenLedPinKurve, int adressWeichenposition, int weichentimeout, int wt, int wgt, int registerPins[4]); // definieren von für alle Methoden wichtige Informationen Pins etc.
 
   void weicheWechsel();         /**<Funktion zum Wechseln der Weiche mit Weichengruppentaste und Weichentaste in Kombination. Dies ist nur möglich wenn die Weiche nicht von einer Fahrstraße beansprucht wird.*/
   void weicheGerade();          /**<Funktion um die Weiche in Geradeweichenlage zu versetzen. Dies ist nur möglich wenn die Weiche nicht von einer Fahrstraße beansprucht wird.*/

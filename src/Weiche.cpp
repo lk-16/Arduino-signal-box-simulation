@@ -7,13 +7,13 @@
 #include "Arduino.h"
 #include <EEPROM.h>
 #include "Schieberegister.h"
-#include "weichen.h"
+#include "Weiche.h"
 
 //Methoden der Klasse Weichen
 
 //definieren von für alle Methoden wichtige Informationen Pins etc.
-weichen::weichen(int wnr, int weichenPinGerade, int weichenPinKurve, int weichenLedPinGerade, int weichenLedPinKurve, int adressWeichenposition, int weichentimeout, int wt, int wgt, int registerPins[4])
-    : actors(registerPins[0], registerPins[1], registerPins[2], registerPins[3])
+Weiche::Weiche(int wnr, int weichenPinGerade, int weichenPinKurve, int weichenLedPinGerade, int weichenLedPinKurve, int adressWeichenposition, int weichentimeout, int wt, int wgt, int registerPins[4])
+    : Actor(registerPins[0], registerPins[1], registerPins[2], registerPins[3])
 {
   Serial.begin(9600);
   _wnr = wnr; //öffentliche Variablen der Klasse Weichen werden zu privaten Variablen der Klasse Weichen
@@ -35,7 +35,7 @@ weichen::weichen(int wnr, int weichenPinGerade, int weichenPinKurve, int weichen
 }
 
 //die Weiche wechselt ihre Position
-void weichen::weicheWechsel()
+void Weiche::weicheWechsel()
 {
   boolean _wtstatus = digitalRead(_wt);
   boolean _wgtstatus = digitalRead(_wgt);
@@ -44,33 +44,33 @@ void weichen::weicheWechsel()
   {
     if (_weichenposition == true) //wenn die Weiche auf gerade steht schalte auf gerade
     {
-      weichen::weicheKurve(); //stelle die Weiche auf Kurve
+      Weiche::weicheKurve(); //stelle die Weiche auf Kurve
     }
     if (_weichenposition == false) //wenn die Weiche auf Kurve steht schalte auf Kurve
     {
-      weichen::weicheGerade(); //stelle die Weiche auf Gerade
+      Weiche::weicheGerade(); //stelle die Weiche auf Gerade
     }
   }
 }
 
-void weichen::weicheGerade() //die Weiche wird in gerade Lage vesetzt
+void Weiche::weicheGerade() //die Weiche wird in gerade Lage vesetzt
 {
 
   if (_weichenposition == false && weichenstatus == 0 && _weichenfestlegung == false) //wenn die Weiche nicht schaltet und in der Kurve steht
   {
     _wStartzeit = millis();
-    actors::digitalSchalten(_weichenPinKurve, HIGH); //Relais werden geschaltet
-    actors::digitalSchalten(_weichenPinGerade, LOW);
+    Actor::digitalSchalten(_weichenPinKurve, HIGH); //Relais werden geschaltet
+    Actor::digitalSchalten(_weichenPinGerade, LOW);
 
     if (_weichenausleuchtung == true)
     {
-      actors::digitalSchalten(_weichenLedPinKurve, LOW); //Leds werden geschaltet
-      actors::digitalSchalten(_weichenLedPinGerade, HIGH);
+      Actor::digitalSchalten(_weichenLedPinKurve, LOW); //Leds werden geschaltet
+      Actor::digitalSchalten(_weichenLedPinGerade, HIGH);
     }
     else
     {
-      actors::digitalSchalten(_weichenLedPinKurve, LOW); //Leds werden geschaltet
-      actors::digitalSchalten(_weichenLedPinGerade, LOW);
+      Actor::digitalSchalten(_weichenLedPinKurve, LOW); //Leds werden geschaltet
+      Actor::digitalSchalten(_weichenLedPinGerade, LOW);
     }
 
     weichenstatus = 1;
@@ -79,23 +79,23 @@ void weichen::weicheGerade() //die Weiche wird in gerade Lage vesetzt
   }
 }
 
-void weichen::weicheKurve() //die Weiche wird in Kurvenlage versetzt
+void Weiche::weicheKurve() //die Weiche wird in Kurvenlage versetzt
 {
   if (_weichenposition == true && weichenstatus == 0 && _weichenfestlegung == false)
   {
     _wStartzeit = millis();
-    actors::digitalSchalten(_weichenPinGerade, HIGH); //Relais werden geschaltet
-    actors::digitalSchalten(_weichenPinKurve, LOW);
+    Actor::digitalSchalten(_weichenPinGerade, HIGH); //Relais werden geschaltet
+    Actor::digitalSchalten(_weichenPinKurve, LOW);
 
     if (_weichenausleuchtung == true)
     {
-      actors::digitalSchalten(_weichenLedPinGerade, LOW); //Leds werden geschaltet
-      actors::digitalSchalten(_weichenLedPinKurve, HIGH);
+      Actor::digitalSchalten(_weichenLedPinGerade, LOW); //Leds werden geschaltet
+      Actor::digitalSchalten(_weichenLedPinKurve, HIGH);
     }
     else
     {
-      actors::digitalSchalten(_weichenLedPinKurve, LOW); //Leds werden geschaltet
-      actors::digitalSchalten(_weichenLedPinGerade, LOW);
+      Actor::digitalSchalten(_weichenLedPinKurve, LOW); //Leds werden geschaltet
+      Actor::digitalSchalten(_weichenLedPinGerade, LOW);
     }
     weichenstatus = 2;                                       //der Weichenstatus ist 2 also kurve. blinken und timer werden abgerufen
     _weichenposition = false;                                //die Weiche steht auf Kurvenlage
@@ -103,7 +103,7 @@ void weichen::weicheKurve() //die Weiche wird in Kurvenlage versetzt
   }
 }
 
-void weichen::weichenBlinken()
+void Weiche::weichenBlinken()
 { //eine Weichenled kann Blinken
 
   //festlegen, welche Led benötigt wird.
@@ -118,59 +118,59 @@ void weichen::weichenBlinken()
   }
 
   //blinken
-  actors::blinken(_ledPin);
+  Actor::blinken(_ledPin);
 }
 
-void weichen::weicheRelaisHIGH() //Alle Relais werden auf HIGH gesetzt
+void Weiche::weicheRelaisHIGH() //Alle Relais werden auf HIGH gesetzt
 {
-  actors::digitalSchalten(_weichenPinKurve, HIGH);
-  actors::digitalSchalten(_weichenPinGerade, HIGH);
+  Actor::digitalSchalten(_weichenPinKurve, HIGH);
+  Actor::digitalSchalten(_weichenPinGerade, HIGH);
 }
 
-void weichen::weicheRelaisLOW() //Alle Relais werden auf HIGH gesetzt
+void Weiche::weicheRelaisLOW() //Alle Relais werden auf HIGH gesetzt
 {
-  actors::digitalSchalten(_weichenPinKurve, LOW);
-  actors::digitalSchalten(_weichenPinGerade, LOW);
+  Actor::digitalSchalten(_weichenPinKurve, LOW);
+  Actor::digitalSchalten(_weichenPinGerade, LOW);
 }
 
-void weichen::weichenpositionEEPROM() //die weichenposition wird abgerufen und auf die Variablen übertragen
+void Weiche::weichenpositionEEPROM() //die weichenposition wird abgerufen und auf die Variablen übertragen
 {
   _weichenposition = EEPROM.read(_adressWeichenposition); //lese die Weichenposition ein
   if (_weichenposition == true)
   {
     _weichenposition = false; //die Weichenposition wird auf false gesetzt, damit die Weichen erneut geschaltet werden kann
-    weichen::weicheGerade();
+  Weiche::weicheGerade();
   }
   else
   {
     _weichenposition = true; //die Weichenposition wird auf false gesetzt, damit die Weichen erneut geschaltet werden kann
-    weichen::weicheKurve();
+    Weiche::weicheKurve();
   }
 }
 
-void weichen::weichenSchalten() //lässt die Relais wieder in die unaktiv position zurückfallen
+void Weiche::weichenSchalten() //lässt die Relais wieder in die unaktiv position zurückfallen
 {
   unsigned long currentmillis = millis();
-  if (!weichen::weichenstatus == 0)
+  if (!Weiche::weichenstatus == 0)
   {
     if (_weichenausleuchtung == true)
-      weichen::weichenBlinken();
+      Weiche::weichenBlinken();
     if (currentmillis - _wStartzeit >= _weichentimeout)
     {
-      weichen::weichenstatus = 0;
-      weichen::weicheRelaisHIGH();
+      Weiche::weichenstatus = 0;
+      Weiche::weicheRelaisHIGH();
 
       if (_weichenausleuchtung == true)
       {
         if (_weichenposition == true)
-          actors::digitalSchalten(_weichenLedPinGerade, HIGH);
+          Actor::digitalSchalten(_weichenLedPinGerade, HIGH);
         if (_weichenposition == false)
-          actors::digitalSchalten(_weichenLedPinKurve, HIGH);
+          Actor::digitalSchalten(_weichenLedPinKurve, HIGH);
       }
       else
       {
-        actors::digitalSchalten(_weichenLedPinKurve, LOW);
-        actors::digitalSchalten(_weichenLedPinGerade, LOW);
+        Actor::digitalSchalten(_weichenLedPinKurve, LOW);
+        Actor::digitalSchalten(_weichenLedPinGerade, LOW);
       }
 
       Serial.print("Weiche ");
@@ -184,7 +184,7 @@ void weichen::weichenSchalten() //lässt die Relais wieder in die unaktiv positi
   }
 }
 
-void weichen::setWeichenfestlegung(boolean festlegestatus, int fahrstrassennr) //kann die Festlegung der Weichen aktivieren, die Weichen können nicht mehr verändert werden, bis die Fahrstraße ausfgelöst ist
+void Weiche::setWeichenfestlegung(boolean festlegestatus, int fahrstrassennr) //kann die Festlegung der Weichen aktivieren, die Weichen können nicht mehr verändert werden, bis die Fahrstraße ausfgelöst ist
 {
   static int _fahrstrassefestgelegt = 0; //speichert von welcher Fahrstraße die Weiche festgelegt wurde, und nur diese kann die Festlegung auch wieder lösen
   if (_fahrstrassefestgelegt == 0)       //wenn die Weiche nicht festgelgt ist
@@ -199,7 +199,7 @@ void weichen::setWeichenfestlegung(boolean festlegestatus, int fahrstrassennr) /
   }
 }
 
-boolean weichen::getWeichenfestlegung()
+boolean Weiche::getWeichenfestlegung()
 {
   return _weichenfestlegung;
 }

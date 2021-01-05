@@ -7,19 +7,19 @@
 #include "Arduino.h"
 #include <EEPROM.h>
 #include "Schieberegister.h"
-#include "zugtasten.h"
+#include "Zugtaste.h"
 
 
 //Methoden der Klasse Weichen
 
 //definieren von für alle Methoden wichtige Informationen Pins etc.
-zugtasten::zugtasten(int zugtastenPin)
+Zugtaste::Zugtaste(int zugtastenPin)
 {
   _zugtastenPin = zugtastenPin;
   pinMode(_zugtastenPin, INPUT_PULLUP);
 }
 
-boolean zugtasten::getzugtastenstatus()                          //boolean um den Zugtastenstatus zu erfahren.
+boolean Zugtaste::getzugtastenstatus()                          //boolean um den Zugtastenstatus zu erfahren.
 {
   boolean _zugtastenstatus = digitalRead(_zugtastenPin);
   return _zugtastenstatus;

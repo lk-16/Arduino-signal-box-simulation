@@ -6,19 +6,19 @@
 /**
  * Diese Datei enthält die Klasse Melder
  * @author Lennart Klüner
- * @file melder.h
+ * @file Melder.h
 */
 
-#ifndef melder_h
-#define melder_h
+#ifndef Melder_h
+#define Melder_h
 #include <Arduino.h>
-#include "actors.h"
+#include "Actor.h"
 
 
 
 /**In der Klasse Melder werden Melder und deren Funktionen erstellt. Die Klasse enthält zur Zeit nur den Programmcode für die Tastenüberwachung.
 */
-class melder : public actors
+class Melder : public Actors
 {
 private:
   String _melderName;

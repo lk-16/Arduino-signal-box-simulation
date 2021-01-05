@@ -1,10 +1,10 @@
 #include <Arduino.h>
-#include "weichen.h"
-#include "zugtasten.h"
-#include "zugtastenControl.h"
-#include "besetztmeldungControl.h"
-#include "hauptsignale.h"
-#include "melder.h"
+#include "Weiche.h"
+#include "Zugtaste.h"
+#include "ZugtastenControl.h"
+#include "BesetztmeldungControl.h"
+#include "Hauptsignal.h"
+#include "Melder.h"
 
 //Pinbelegung
 int schieberegisterPins[4] = {2, 8, 9, 10};
@@ -61,23 +61,26 @@ int besetztmelderLedsRot[besetztmelderAnzahl] = {0, 0, ftueMelderLed, 111, 0, 11
 
 //Objektedefinitonen
 //Gleisbesetztmelder
-besetztmeldungControl besetztmeldung(besetztmelderEingaenge, besetztmelderLedsGelb, besetztmelderLedsRot, besetztmelderAnzahl, schieberegisterPins);
+BesetztmeldungControl besetztmeldung(besetztmelderEingaenge, besetztmelderLedsGelb, besetztmelderLedsRot, besetztmelderAnzahl, schieberegisterPins);
 //Weichen
-weichen weiche1(1, w1g, w1k, ledw1g, ledw1k, adressWeichenposition1, weichentimeout, wt1, wgt, schieberegisterPins); //Objekt Weiche1 aus der Klasse Weichen inkl. aller relevanten Informationen zu Weiche
-weichen weiche2(2, w2g, w2k, ledw2g, ledw2k, adressWeichenposition2, weichentimeout, wt2, wgt, schieberegisterPins); //Objekt Weiche1 aus der Klasse Weichen inkl. aller relevanten Informationen zu Weiche
+Weiche weiche1(1, w1g, w1k, ledw1g, ledw1k, adressWeichenposition1, weichentimeout, wt1, wgt, schieberegisterPins); //Objekt Weiche1 aus der Klasse Weichen inkl. aller relevanten Informationen zu Weiche
+Weiche weiche2(2, w2g, w2k, ledw2g, ledw2k, adressWeichenposition2, weichentimeout, wt2, wgt, schieberegisterPins); //Objekt Weiche1 aus der Klasse Weichen inkl. aller relevanten Informationen zu Weiche
 
 //Melder
-melder ftueMelder(ftueMelderName, ftueMelderLed, weckerPin, ftueMelderWut, schieberegisterPins); //Ausgabe von FTÜ im Seriellen Monitior funktioniert nicht
-
-//Zugtasten
-zugtasten zugtaste1(zta1); //Objekt zugtaste1 mit Pin
-zugtasten zugtaste8(zta2);
-zugtasten zugtaste10(zta3);
-zugtasten zugtaste18(zta4);
+Melder ftueMelder(ftueMelderName, ftueMelderLed, weckerPin, ftueMelderWut, schieberegisterPins); //Ausgabe von FTÜ im Seriellen Monitior funktioniert nicht
 
 //Signale
-hauptsignale hauptsignal1(rot1, gruen1, gelb1, signaltaste1, sperrmelder1, allgSignaltasten, schieberegisterPins);
+Hauptsignal hauptsignal1(rot1, gruen1, gelb1, signaltaste1, sperrmelder1, allgSignaltasten, schieberegisterPins);
 //int rotPin, int gelbPin, int gruenPin,  int signaltaste, int sperrmelder, int allgSignaltasten[3], int registerPin[4]
+
+//Zugtasten
+const int zugtastenanzahl = 4;
+int zugtastenPins[zugtastenanzahl] = {zta1, zta2, zta3, zta4};
+ZugtastenControl zugtastenC(zugtastenanzahl, zugtastenPins);
+//zugtasten zugtaste1(zta1); //Objekt zugtaste1 mit Pin
+//zugtasten zugtaste8(zta2);
+//zugtasten zugtaste10(zta3);
+//zugtasten zugtaste18(zta4);
 
 //Fahrstraßensteuerung
 int zugtastenspeicher[2]; //es werden die Zugtasten gespeichert, die gedrückt wurden.
@@ -86,11 +89,17 @@ boolean fahrstrassenstati[2];
 
 //Fahrstraßensteuerung
 const int felderAnzahl = 18;
-//feld1 und feld2
+const int maxlang = 4; //maximale Länge von 4 Besetztmeldern
+int fahrstrasse = -1;
 int fahrstrassenspeicher[felderAnzahl][felderAnzahl]; //1 variable = nummer des Tischfeldes, 2. variable = nummer des Zweiten Tischfeldes
 int freigabe2 = 1;
-int besetztmelderposition2[] = {3, 4, 1, 2};
-int besetztmelderzahl = 0;
+int besetztmelderposition[/*Fahrstrassenanzahl*/ 1][/*ebene*/ 5] = {{4, 3, 4, 1, 2}}; //0. ebene Besetztmelder anzahl, in den nächsten ebenen sind die Besetztmelder in Reihenfolge gespeichert
+int besetztmelderzahl = 0;                                                            //anhand dieser Zahl lässt sich der Wert von Freigabe berechnen, enthält bis zu welchem Besetztmelder die Fahrstrasse aufgelöst ist.
+/*int fahrstrassenspeicher[tischfeld][tischfeld][ebene] 
+    1. Ebene: Fahrstrassennr
+    2. Ebene: Anzahl der Besetztmelder
+    3. bis ... Ebene: Nummern der Besetztmelder
+*/
 /*Warum wird keine Unterschiedung zwischen links und rechts benötigt? 
  * Da Züge nur mit den Signalen fahren, und nicht gegen,
  * gibt es für jede Tasten kombi von eine Richtung, für die Fahrt in die andere Richtung, muss ein anderes Signal verwendet werden.
@@ -108,8 +117,8 @@ void setup()
 
   //besetztmeldung.setBesetztmelderBeleuchtung(0,HIGH);                  //Der Status des Lichtes kann eingestellt werden
 
-  fahrstrassenspeicher[10][8] = 2;
-  fahrstrassenspeicher[8][10] = 2; //wenn die Tasten auf feld 10 und feld 8 gedrückt werden, soll die Fahrstraße 1 einlaufen::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+  fahrstrassenspeicher[2][1] = 2;
+  fahrstrassenspeicher[1][2] = 2; //wenn die Tasten auf feld 10 und feld 8 gedrückt werden, soll die Fahrstraße 1 einlaufen::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 }
 
 void loop()
@@ -117,35 +126,34 @@ void loop()
   zugtastenspeicher[0] = 0;
   zugtastenspeicher[1] = 0;
   anzahl = 0;
-  if (zugtaste10.getzugtastenstatus() == true && anzahl < 2)      //Wenn die Zugstrassentaste gedrückt wurde, und noch nicht zwei Tasten gedrückt wurden
+  for (int j = 0; j < zugtastenC.getZugtastenAnzahl(); j++)
   {
-    zugtastenspeicher[anzahl] = 10;//speichere das Feld auf dem die taste gedrückt wurde
-    anzahl++;//erhöhe die anzahl der gedrückten anzahl an tasten um 1
+    if (zugtastenC.getZugtastenstatus(j) == true && anzahl < 2) //Wenn die Zugstrassentaste gedrückt wurde, und noch nicht zwei Tasten gedrückt wurden
+    {
+      zugtastenspeicher[anzahl] = j; //speichere das Feld auf dem die taste gedrückt wurde
+      anzahl++;                      //erhöhe die anzahl der gedrückten anzahl an tasten um 1
+    }
   }
-  if (zugtaste8.getzugtastenstatus() == true && anzahl < 2)     //s.o.
-  {
-    zugtastenspeicher[anzahl] = 8;
-    anzahl++;
-  }
-  if (zugtaste18.getzugtastenstatus() == true && anzahl < 2)
-  {
-    zugtastenspeicher[anzahl] = 18;
-    anzahl++;
-  }
-  /*
-es wird die 18 auch als 8 und 1 erkannt, liegt evtl an der größe des arrays 
+  
+/*es wird die 18 auch als 8 und 1 erkannt, liegt evtl an der größe des arrays 
 evtl. sollen die Zahlen vorher sortiert werden, damit sie nicht zu groß für eine array position sind
+um die weichen auch zu überwachen, muss weicehncontrol her.
 */
-
-
-  if (fahrstrassenspeicher[zugtastenspeicher[0]][zugtastenspeicher[1]] == 2)
+  fahrstrasse = fahrstrassenspeicher[zugtastenspeicher[0]][zugtastenspeicher[1]];
+  if (fahrstrasse == 2)
   {
-
-    if ((besetztmeldung.getBesetztmelderstatus(2, LOW) == LOW) && besetztmeldung.getBesetztmelderstatus(1, LOW) == LOW //wenn die besetztmelder unbesetzt sind
-        && besetztmeldung.getFahrstrassenelement(2) == false && besetztmeldung.getFahrstrassenelement(2) == false      //und sie nicht in eine Fahrstrasse eingebunden sind
-        && weiche1.getWeichenfestlegung() == false && weiche2.getWeichenfestlegung() == false)                         //und wenn die Weichen nicht in eine Fahrstrasse eingebunden sind
+    int besetzt = 0;
+    for (int j = 0; j < besetztmelderposition[fahrstrasse][0]; j++)//wiederhole bis du alle besetztmelder überprüft hast(menge an besetztmeldern werden über besetztmelder position eingebracht)
+    {
+      if (besetztmeldung.getBesetztmelderstatus(besetztmelderposition[fahrstrasse][j + 1], LOW) == LOW)
+        besetzt++;
+    }
+    if (besetztmeldung.getBesetztmelderstatus(2, LOW) == LOW && besetztmeldung.getBesetztmelderstatus(1, LOW) == LOW                                                                                                              //wenn die besetztmelder unbesetzt sind
+        && besetztmeldung.getBesetztmelderstatus(3, LOW) == LOW && besetztmeldung.getBesetztmelderstatus(4, LOW) == LOW && besetztmeldung.getFahrstrassenelement(2) == false && besetztmeldung.getFahrstrassenelement(2) == false //und sie nicht in eine Fahrstrasse eingebunden sind
+        && weiche1.getWeichenfestlegung() == false && weiche2.getWeichenfestlegung() == false)                                                                                                                                    //und wenn die Weichen nicht in eine Fahrstrasse eingebunden sind
 
     {
+
       //Besetztmeldung
       besetztmeldung.setFahrstrassenelement(3, 2, true);
       besetztmeldung.setFahrstrassenelement(4, 2, true);
@@ -162,37 +170,26 @@ evtl. sollen die Zahlen vorher sortiert werden, damit sie nicht zu groß für ei
       Serial.println("Fahrstraße 2");
     }
   }
-  /*int freigabe2 = 1;
-  int besetztmelderposition2[] = {3,4,1,2};
-  in besetztmelderzahl = 0;
-  dreidimensionales array [tasterfeld1][tasterfeld1][1. ebene Fahrstrasse 2. bis weitere ebene besetztmelder]
-  erster und letzter besetztmelder sind besonders
-  int fahrstrassenspeicher[tischfeld][tischfeld][ebene] 
-    1. Ebene: Fahrstrassennr
-    2. Ebene: Anzahl der Besetztmelder
-    3. bis ... Ebene: Nummern der Besetztmelder
-  */
- int maxlang = 4;
- int fahrstrassenspeicher[felderAnzahl][felderAnzahl][2+maxlang]; //in der ersten zeile wir die Fahrstrassen nr angegeben un in der zeiten die Zahl der Besetztmelder
+  
   if (fahrstrassenstati[1] == true)
   {
     //1. besetztmelder
     //auf einen Besetztmelder sind immer zwei zahlen festgelegt, die erste Zahl wird beim besetztsein des melder eingespeichert, die zweite, wird erst dnn eingespeichert, wenn die erste eingespeichert ist,
     //der nächste besetztmelder kann erst freigegeben werden, wenn der erste freigegeben ist, also die Zahl eine bestimmte höhe hat.
 
-    if (besetztmeldung.getBesetztmelderstatus(besetztmelderposition2[besetztmelderzahl], LOW) == HIGH && freigabe2 == besetztmelderzahl * 2 + 1) //wenn der Besetztmelder besetzt ist und die freigabe der Besetztmelder Zahl plus eins entspricht
+    if (besetztmeldung.getBesetztmelderstatus(besetztmelderposition[0][besetztmelderzahl + 1], LOW) == HIGH && freigabe2 == besetztmelderzahl * 2 + 1) //wenn der Besetztmelder besetzt ist und die freigabe der Besetztmelder Zahl plus eins entspricht
     {
       hauptsignal1.hpschalten(0);
       freigabe2++; //beim ersten mal ist die freigabe1 und wird auf 2 erhöht. wenn dies passiert ist, und der Besetztmelder wieder frei geworden ist, wird der Besetztmelder als Fahrstrassenelement aufgelöst
     }
 
-    if (besetztmeldung.getBesetztmelderstatus(besetztmelderposition2[besetztmelderzahl], LOW) == LOW && freigabe2 == besetztmelderzahl * 2 + 2)
+    if (besetztmeldung.getBesetztmelderstatus(besetztmelderposition[0][besetztmelderzahl + 1], LOW) == LOW && freigabe2 == besetztmelderzahl * 2 + 2)
     {
-      besetztmeldung.setFahrstrassenelement(besetztmelderposition2[besetztmelderzahl], 2, false);
+      besetztmeldung.setFahrstrassenelement(besetztmelderposition[0][besetztmelderzahl + 1], 2, false);
       freigabe2++;         //3
       besetztmelderzahl++; //es geht mit dem nächsten besetztmelder der Fahrstrasse weiter
 
-      if (besetztmelderzahl == 4)
+      if (besetztmelderzahl == besetztmelderposition[0][0])
       {
         freigabe2 = 1;
         fahrstrassenstati[1] = false;
@@ -203,26 +200,8 @@ evtl. sollen die Zahlen vorher sortiert werden, damit sie nicht zu groß für ei
     Serial.println(freigabe2);
     //alle besetztmelder müssen in der Fahrstraße einmal rot gewesen sein und am ende wieder frei sein
   }
-
-  /*//Zugtastensteuerung
-  if (zugtaste1.getzugtastenstatus() == true && zugtaste2.getzugtastenstatus() == true)
-  {
-    weiche1.weicheGerade();
-    weiche2.weicheGerade();
-  }
-  if (zugtaste2.getzugtastenstatus() == true && zugtaste3.getzugtastenstatus() == true)
-  {
-    weiche1.weicheKurve();
-    weiche2.weicheKurve();
-  }
-  if (zugtaste3.getzugtastenstatus() == true && zugtaste4.getzugtastenstatus() == true)
-  {
-    weiche1.weicheGerade();
-    weiche2.weicheGerade();
-  }*/
-
   //FTÜ-Melder
-  if (zugtaste1.getzugtastenstatus() == HIGH || zugtaste8.getzugtastenstatus() == HIGH || zugtaste10.getzugtastenstatus() == HIGH || zugtaste18.getzugtastenstatus() == HIGH) //wenn eine Zugtaste gedrückt ist
+  if (zugtastenC.zugtastenGedrueckt()) //wenn eine Zugtaste gedrückt ist
   {
     ftueMelder.tueMelder(); //kontrolliere wie lange die Tasten gesrückt wurden
   }

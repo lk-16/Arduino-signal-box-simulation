@@ -4,37 +4,37 @@
     Lennart Klüner 05.09.2020
 */
 
-#include "besetztmeldungControl.h"
-#include "besetztmelder.h"
+#include "BesetztmeldungControl.h"
+#include "Besetztmelder.h"
 
 //Methoden der Klasse besetztmeldungControl
-besetztmeldungControl::besetztmeldungControl(int gleisPins[], int ledsGelb[], int ledsRot[], int anzahlMelder, int registerPins[4])
-    : actors(registerPins[0], registerPins[1], registerPins[2], registerPins[3])
+BesetztmeldungControl::BesetztmeldungControl(int gleisPins[], int ledsGelb[], int ledsRot[], int anzahlMelder, int registerPins[4])
+    : Actor(registerPins[0], registerPins[1], registerPins[2], registerPins[3])
 {
     _anzahlMelder = anzahlMelder;
     //array wird definiert
-    _pbesetztmelder = new besetztmelder *[_anzahlMelder];
+    _pbesetztmelder = new Besetztmelder *[_anzahlMelder];
     //und initialisiert
     for (int besetztmelderNr = 0; besetztmelderNr < _anzahlMelder; besetztmelderNr++)
-        _pbesetztmelder[besetztmelderNr] = new besetztmelder(gleisPins[besetztmelderNr], ledsGelb[besetztmelderNr], ledsRot[besetztmelderNr], registerPins);
+        _pbesetztmelder[besetztmelderNr] = new Besetztmelder(gleisPins[besetztmelderNr], ledsGelb[besetztmelderNr], ledsRot[besetztmelderNr], registerPins);
 }
 
 
 //aus der Klasse Control werden die entgegengenommenen Befehle auf die einzelnen 
-boolean besetztmeldungControl::getBesetztmelderstatus(int besetztmelder, boolean besetztmelderBeleuchtung)
+boolean BesetztmeldungControl::getBesetztmelderstatus(int besetztmelder, boolean besetztmelderBeleuchtung)
 {
     return _pbesetztmelder[besetztmelder]->besetztmelderAuslesen(besetztmelderBeleuchtung);
 }
 
-void besetztmeldungControl::setBesetztmelderBeleuchtung(int besetztmelder, boolean besetztmelderLichtstatus)
+void BesetztmeldungControl::setBesetztmelderBeleuchtung(int besetztmelder, boolean besetztmelderLichtstatus)
 {
     _pbesetztmelder[besetztmelder]->setBesetztmelderLicht(besetztmelderLichtstatus);
 }
-void besetztmeldungControl::setFahrstrassenelement(int besetztmelderNr, int fahrstrassenNr, boolean fahrstrassenstatus)
+void BesetztmeldungControl::setFahrstrassenelement(int besetztmelderNr, int fahrstrassenNr, boolean fahrstrassenstatus)
 {
     _pbesetztmelder[besetztmelderNr]->setFahrstrassenelement(fahrstrassenNr, fahrstrassenstatus);
 }
-boolean besetztmeldungControl::getFahrstrassenelement(int besetztmelderNr)
+boolean BesetztmeldungControl::getFahrstrassenelement(int besetztmelderNr)
 {
     return _pbesetztmelder[besetztmelderNr]->getFahrstrassenelement();
 }

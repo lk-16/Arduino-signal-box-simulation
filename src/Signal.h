@@ -6,20 +6,20 @@
 /**
  * Diese Datei enthält die Klasse signale.
  * @author Lennart Klüner
- * @file signale.h
+ * @file Signal.h
 */
 
-#ifndef signale_h
-#define signale_h
+#ifndef Signal_h
+#define Signal_h
 #include <Arduino.h>
-#include "actors.h"
+#include "Actor.h"
 
 /**
  * Die Klasse Signale enthält die Grundfunktionen jedes Signals.
  * Die Klasse speichert die Signalhaltgruppentaste und Signalsperrtaste. Über sie lässt sich der Signalstatus ausgeben.
  * Das Signal kann auf Halt gestellt und gesperrt werden. 
 */
-class signale : public actors
+class Signal : public Actor
 {
 private:
   int _signalstatus;           //0 = Hp0, 1 = Hp1, 2= Hp2 (rot, Fahrt, Langsamfahrt), je nach Signal auch anders vergeben
@@ -41,7 +41,7 @@ public:
    * @param[in] registerPin Die Pins aus dem Array werden an die Oberklasse actors übergeben. Das Array besteht aus der Anzahl der Register, dem Pin SH_CP, ST_CP, DS  in dieser Reihenfolge.
    * @see actors(int anzahl, int sh, int st, int ds)
   */
-  signale(int signaltastenPin, int sperrmelderPin, int allgSignaltasten[3], int registerPins[4]);
+  Signal(int signaltastenPin, int sperrmelderPin, int allgSignaltasten[3], int registerPins[4]);
   int getSignalstatus();                                  /**<Ausgabe des Signalstatus, dem Signal, das gerade angezeigt wird. Ausgabe: 0, 1, 2(rot, Fahrt, Langsamfahrt)*/
   int getSignaltaste();                                 /**<Gibt den Pin der Signaltaste aus. Wird von der Klasse Hauptsignale verwendet.*/
   int getSignalhaltgruppentaste();                        /**<Gibt den Pin der Signalhaltgruppentaste aus.*/

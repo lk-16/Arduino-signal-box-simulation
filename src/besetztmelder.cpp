@@ -4,11 +4,11 @@
     Lennart Klüner 05.09.2020
 */
 
-#include "besetztmelder.h"
+#include "Besetztmelder.h"
 
 //Methoden der Klasse besetztmelder
-besetztmelder::besetztmelder(int gleisPin, int ledGelb, int ledRot, int registerPin[4])
-    : actors(registerPin[0], registerPin[1], registerPin[2], registerPin[3])
+Besetztmelder::Besetztmelder(int gleisPin, int ledGelb, int ledRot, int registerPin[4])
+    : Actor(registerPin[0], registerPin[1], registerPin[2], registerPin[3])
 {
     _gleisPin = gleisPin;
     _ledGelb = ledGelb;
@@ -18,7 +18,7 @@ besetztmelder::besetztmelder(int gleisPin, int ledGelb, int ledRot, int register
     pinMode(_ledGelb, OUTPUT);
     pinMode(_ledRot, OUTPUT);
 }
-boolean besetztmelder::besetztmelderAuslesen(boolean besetztmelderBeleuchtung)
+boolean Besetztmelder::besetztmelderAuslesen(boolean besetztmelderBeleuchtung)
 {
     //der Status des Besetztmelders wird eingelesen
     _besetztmelderLicht = besetztmelderBeleuchtung;
@@ -43,12 +43,12 @@ boolean besetztmelder::besetztmelderAuslesen(boolean besetztmelderBeleuchtung)
     return _besetztmelderstatus; //_besetztmelderstatus; //gibt am ende den Status des Besetztmelder zurück
 }
 
-void besetztmelder::setBesetztmelderLicht(boolean newbesetztmelderLicht) //ein und ausschalten der Beleuchtung der Besetztmelder
+void Besetztmelder::setBesetztmelderLicht(boolean newbesetztmelderLicht) //ein und ausschalten der Beleuchtung der Besetztmelder
 {
     _besetztmelderLicht = newbesetztmelderLicht;
 }
 
-void besetztmelder::setFahrstrassenelement(int fahrstrassennr, boolean fahrstrassenelement)//nr der Fahrstraße, soll es zu einem Fahrstraßenelement werden oder nicht
+void Besetztmelder::setFahrstrassenelement(int fahrstrassennr, boolean fahrstrassenelement)//nr der Fahrstraße, soll es zu einem Fahrstraßenelement werden oder nicht
 {
     static int _fahrstrasse = 0; //speichert von welcher Fahrstraße der Besetztmelder festgelegt wurde, und nur diese kann die Festlegung auch wieder lösen
     if (_fahrstrasse == 0)       //wenn der Melder nicht beansprucht ist
@@ -62,7 +62,7 @@ void besetztmelder::setFahrstrassenelement(int fahrstrassennr, boolean fahrstras
         if(_fahrstrassenelement == 0) _fahrstrasse = 0;             //wenn die Fahrstraße nicht mehr beansprucht ist, kann sie von allen anderen Fahrstraßen verendet werden
     }
 }
-boolean besetztmelder::getFahrstrassenelement()
+boolean Besetztmelder::getFahrstrassenelement()
 {
     return _fahrstrassenelement;
 }

@@ -6,11 +6,11 @@
 /**
  * Diese Datei enthält die Basisklasse actors, alle Klassen sind von dieser Klasse abhängig.
  * @author Lennart Klüner
- * @file actors.h
+ * @file Actor.h
 */
 
-#ifndef actors_h
-#define actors_h
+#ifndef Actor_h
+#define Actor_h
 #include <Arduino.h>
 #include <Schieberegister.h>
 
@@ -18,7 +18,7 @@
 /**
  * Die Klasse actors enthält die Grundfunktionen jeder Klasse. Jede Klase nutzt diese Klasse, von hier wird der Quellcode für das Steuern des Schieberegisters abgerufen, auch die Funktion zum Blinken einer Led ist hier gespeichert.
 */
-class actors
+class Actor
 {
 private:
   int _registerAnzahl;
@@ -34,7 +34,7 @@ public:
    * @param[in] st Der Pin an dem ST_CP angeschlossen ist.
    * @param[in] ds Der Pin an dem DS_CP angeschlossen ist.
   */
-  actors(int anzahl, int sh, int st, int ds);
+  Actor(int anzahl, int sh, int st, int ds);
   void blinken(int LedPin);                                             /**<Standard-Operator, lässt die angegebene Led blinken. Geschwindigkeit ist nicht einstellbar*/
   
   /**

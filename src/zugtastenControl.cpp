@@ -4,12 +4,12 @@
     Lennart Klüner 05.09.2020
 */
 
-#include "zugtastenControl.h"
-#include "zugtasten.h"
+#include "ZugtastenControl.h"
+#include "Zugtaste.h"
 
 //Methoden der Klasse besetztmeldungControl
 zugtastenControl::zugtastenControl(int anzahlZugtasten, int zugtastenPins[])
-   
+
 {
     _anzahlZugtasten = anzahlZugtasten;
     _pzugtasten = new zugtasten *[_anzahlZugtasten];
@@ -25,4 +25,15 @@ int zugtastenControl::getZugtastenAnzahl()
 boolean zugtastenControl::getZugtastenstatus(int zugtastenNr)
 {
     return _pzugtasten[zugtastenNr]->getzugtastenstatus();
+}
+
+boolean zugtastenControl::zugtastenGedrueckt()
+{
+    int zugtastenpress = 0;
+    for (int i = 0; i < _anzahlZugtasten; i++)
+    {
+        if (zugtastenControl::getZugtastenstatus(i) == HIGH)
+            zugtastenpress++;
+    }
+    return zugtastenpress;
 }

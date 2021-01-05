@@ -11,24 +11,25 @@
 /**
  * Diese Datei beinhaltet die Klasse zugtasten.
  * @author Lennart Klüner
- * @file zugtasten.h
+ * @file ZugtastenControl.h
 */
 
-#ifndef zugtastenControl_h
-#define zugtastenControl_h
+#ifndef ZugtastenControl_h
+#define ZugtastenControl_h
 #include <Arduino.h>
-#include "actors.h"
+#include "Actor.h"
 
 
-class zugtastenControl
+class ZugtastenControl
 {
 private:
     int _anzahlZugtasten;/**<Speichert die Anzahl der Erstellten Objekte der Klasse Zugtasten.*/
-    class zugtasten **_pzugtasten;/**<Pointer auf ein Array von objekten der Klasse zugtasten.*/
+    class Zugtaste **_pzugtasten;/**<Pointer auf ein Array von objekten der Klasse zugtasten.*/
 public:
-    zugtastenControl(int anzahlZugtasten, int zugtastenPins[]);/**<Konstruktor, erstellt das Array von objekten nach der angegeben Anzahl.*/
+    ZugtastenControl(int anzahlZugtasten, int zugtastenPins[]);/**<Konstruktor, erstellt das Array von objekten nach der angegeben Anzahl.*/
     int getZugtastenAnzahl();/**<gibt die Anzahl an erstellten Objekten der Klasse zugtasten an.*/
     boolean getZugtastenstatus(int zugtastenNr);/**<Gibt den den Status der angegeben Zugtaste aus.*/
+    boolean zugtastenGedrueckt();
 };
 
 #endif

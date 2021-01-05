@@ -5,12 +5,12 @@
 */
 
 #include <Arduino.h>
-#include "actors.h"
-#include "signale.h"
+#include "Actor.h"
+#include "Signal.h"
 
 //Methoden der Klasse signal, Unterklasse der Klasse actors
-signale::signale(int signaltastenPin, int sperrmelderPin, int allgSignaltasten[3], int registerPins[4])      //Konstuktor: allgemeine Signaltasten beinhalten die Signalsperr- und entsperrtaste und Signalhaltgruppentaste
-    : actors(registerPins[0], registerPins[1], registerPins[2], registerPins[3])
+Signal::Signal(int signaltastenPin, int sperrmelderPin, int allgSignaltasten[3], int registerPins[4])      //Konstuktor: allgemeine Signaltasten beinhalten die Signalsperr- und entsperrtaste und Signalhaltgruppentaste
+    : Actor(registerPins[0], registerPins[1], registerPins[2], registerPins[3])
 {
   _signalsperrtaste = allgSignaltasten[0];
   _signalentsperrtaste = allgSignaltasten[1];
@@ -25,44 +25,41 @@ signale::signale(int signaltastenPin, int sperrmelderPin, int allgSignaltasten[3
   pinMode(_signalSperrmelder, OUTPUT);
 }
 
-int signale::getSignalstatus()
+int Signal::getSignalstatus()
 {
   return _signalstatus;
 }
 
-void signale::setSignalstatus(int newSignalstatus)
+void Signal::setSignalstatus(int newSignalstatus)
 {
   _signalstatus = newSignalstatus;
 }
 
-int signale::getSignaltaste()
+int Signal::getSignaltaste()
 {
   return _signaltaste;
 }
 
-int signale::getSignalhaltgruppentaste()
+int Signal::getSignalhaltgruppentaste()
 {
   return _signalhaltgruppentaste;
 }
 
-int signale::getSignalsperrmelder()
+int Signal::getSignalsperrmelder()
 {
   return _signalhaltgruppentaste;
 }
 
-int signale::getSignalsperrtaste()
+int Signal::getSignalsperrtaste()
 {
   return _signalsperrtaste;
 }
 
-boolean signale::getSignalsperre()
+boolean Signal::getSignalsperre()
 {
   return _signalsperre;
 }
-
-
-
-void signale::signalSperren()
+void Signal::signalSperren()
 {
   if (_signalsperre == true) //wenn das Signal gesperrt ist.
   {
@@ -71,11 +68,11 @@ void signale::signalSperren()
     {
       _signalsperre = false;                                //Signalsperrre ist Inaktiv
       Serial.println("entsperrt");
-      digitalSchalten(_signalSperrmelder, LOW); //stelle den Sperrmelder aus
+      Actor::digitalSchalten(_signalSperrmelder, LOW); //stelle den Sperrmelder aus
     }
     else
     {                               
-      digitalSchalten(_signalSperrmelder, HIGH);
+      Actor::digitalSchalten(_signalSperrmelder, HIGH);
     }
   }
   else                                                    //wenn das Signal nicht gesperrt ist
@@ -85,7 +82,7 @@ void signale::signalSperren()
     {
       _signalsperre = true;                                //Signalsperrre ist Akitv
       Serial.println("gesperrt");
-      digitalSchalten(_signalSperrmelder, HIGH); //stelle den Sperrmelder an
+      Actor::digitalSchalten(_signalSperrmelder, HIGH); //stelle den Sperrmelder an
     }
     else
     {                               

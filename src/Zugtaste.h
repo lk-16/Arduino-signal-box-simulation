@@ -1,5 +1,5 @@
 /*Libary zum testen:
- *  Ich möchte Weicehn über diese Libary schalten und
+ *  Ich möchte Weichen über diese Libary schalten und
  *  vielleicht auch Signale für die Modelleisenbahn
  *  Lennart Klüner 05.09.2020
  *  gesamt: ca. 12.000 Zeichen
@@ -11,19 +11,19 @@
 /**
  * Diese Datei beinhaltet die Klasse zugtasten.
  * @author Lennart Klüner
- * @file zugtasten.h
+ * @file Zugtaste.h
 */
 
-#ifndef zugtasten_h
-#define zugtasten_h
+#ifndef Zugtaste_h
+#define Zugtaste_h
 #include <Arduino.h>
 #include <Schieberegister.h>
-#include "actors.h"
+#include "Actor.h"
 
 /**Die Klasse gibt weiter ob Zugtasten gedrückt wurden.
  * Die Klasse speichert den Pin der Zugtaste, und gibt ihren Status aus
  */
-class zugtasten
+class Zugtaste
 {
 private:
   //Pins
@@ -34,7 +34,7 @@ public:
   /** Übergibt alle Pin die für die Zugtaste wichtig sind. Alle 
    * @param[in] zugtastenPin Der Pin, an dem der Taster für die Zugtaste angeschlossen ist. (Pullup-Wiederstand nicht vergessen 1kOhm)
   */
-  zugtasten(int zugtastenPin); 
+  Zugtaste(int zugtastenPin); 
   boolean getzugtastenstatus();                     /**<Gibt den Status der Zugtasten aus(HIGH = gedrückt, LOW = ungedrückt*/
 };
 
