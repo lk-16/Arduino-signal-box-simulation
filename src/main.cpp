@@ -78,19 +78,19 @@ int zugtastenPins[zugtastenanzahl] = {zta1, zta2, zta3, zta4};
 ZugtastenControl zugtastenC(zugtastenanzahl, zugtastenPins);
 
 //Fahrstraßensteuerung
+const int fahrstrassenanzahl = 3;
 int zugtastenspeicher[2]; //es werden die Zugtasten gespeichert, die gedrückt wurden.
 int anzahl = 0;           //zählt wie viele zugtasten gedrückt wurden
-boolean fahrstrassenstati[2];
+boolean fahrstrassenstati[2];//Beinhaltet, welche Fahrstrassen aktiv sind.
 
-//Fahrstraßensteuerung
 int const felderAnzahl = 18;
 const int maxlang = 4; //maximale Länge von 4 Besetztmeldern
-int fahrstrasse = -1;
+int fahrstrasse;//zeigt an welche Fahrstrasse kurzzeitig aktiv ist.
 int fahrstrassenspeicher[felderAnzahl][felderAnzahl]; //1 variable = nummer des Tischfeldes, 2. variable = nummer des Zweiten Tischfeldes
 int freigabe2 = 1;
-int besetztmelderposition[/*Fahrstrassenanzahl*/ 3][/*ebene*/ 5][2] = {{{}},
-                                                                       {{}},
-                                                                       {{4}, {3}, {4, 1}, {1, 2}, 2}}; //0. ebene Besetztmelder anzahl, in den nächsten ebenen sind die Besetztmelder in Reihenfolge gespeichert
+int besetztmelderposition[fahrstrassenanzahl][/*Reihen(Bestztm.*/ 5][3] = {{{}},
+                                                                           {{}},
+                                                                           {{4}, {3}, {4, 1, 0}, {1, 2, 0}, 2}}; //0. ebene Besetztmelder anzahl, in den nächsten ebenen sind die Besetztmelder in Reihenfolge gespeichert. Die nächste Dimeinsion speichert, ob das Feld auf dem Besetztmelder eine Weiche ist, und darunter steht in welche richtung die geschaltet werden muss
 int besetztmelderzahl = 0;                                                                             //anhand dieser Zahl lässt sich der Wert von Freigabe berechnen, enthält bis zu welchem Besetztmelder die Fahrstrasse aufgelöst ist.
 /*int fahrstrassenspeicher[tischfeld][tischfeld][ebene] 
     1. Ebene: Fahrstrassennr
@@ -136,7 +136,7 @@ um die weichen auch zu überwachen, muss weicehncontrol her.
 */
 
   fahrstrasse = fahrstrassenspeicher[zugtastenspeicher[0]][zugtastenspeicher[1]];
-  if (fahrstrasse == 2)
+  if (fahrstrasse != 0)
   {
 
     int besetzt = 0;
@@ -155,23 +155,26 @@ um die weichen auch zu überwachen, muss weicehncontrol her.
     {
 
       //Besetztmeldung
-      besetztmeldung.setFahrstrassenelement(3, 2, true);
-      besetztmeldung.setFahrstrassenelement(4, 2, true);
-      besetztmeldung.setFahrstrassenelement(1, 2, true); //binde die Besetztmelder in die Fahrstrasse ein
-      besetztmeldung.setFahrstrassenelement(2, 2, true);
+      for (int j = 0; j < besetztmelderposition[fahrstrasse][0][0]; j++)//einbinden der Besetztmelder in die Fahrstrasse
+      {
+        besetztmeldung.setFahrstrassenelement(j, fahrstrasse, true);
+        if(besetztmelderposition[fahrstrasse][j][1] > 0)
+          weichen.weichenStellen(besetztmelderposition[fahrstrasse][j][1]-1,besetztmelderposition[fahrstrasse][j][2]);
+      }
       //Weichen
-      weichen.weichenKurve(0);                 //Weiche wird geschaltet
+     /* weichen.weichenKurve(0);                 //Weiche wird geschaltet
       weichen.setWeichenfestlegung(0, true, 2); //weiche wird festgelegt
       weichen.weichenKurve(1);
       weichen.setWeichenfestlegung(1, true, 2);
-
+*/
       hauptsignal1.hpschalten(1);
-      fahrstrassenstati[1] = true; //die Fahrstrasse wird als aktiv deklariert
-      Serial.println("Fahrstraße 2");
+      fahrstrassenstati[fahrstrasse-1] = true; //die Fahrstrasse wird als aktiv deklariert
+      Serial.print("Fahrstraße ");Serial.println(fahrstrasse);
     }
   }
-
-  if (fahrstrassenstati[1] == true)
+for(int kontrollen=0;kontrollen<fahrstrassenanzahl-1; kontrollen++)
+{
+  if (fahrstrassenstati[kontrollen] == true)
   {
     //1. besetztmelder
     //auf einen Besetztmelder sind immer zwei zahlen festgelegt, die erste Zahl wird beim besetztsein des melder eingespeichert, die zweite, wird erst dnn eingespeichert, wenn die erste eingespeichert ist,
@@ -191,15 +194,18 @@ um die weichen auch zu überwachen, muss weicehncontrol her.
 
       if (besetztmelderzahl == besetztmelderposition[2][0][0])
       {
-        freigabe2 = 1;
-        fahrstrassenstati[1] = false;
-        weichen.setWeichenfestlegung(0, false, 2);
+        besetztmelderzahl=0;
+        freigabe2 = 1;                  //Die Freigabe wird wieder Zurückgesetzt.
+        fahrstrassenstati[1] = false;   //die Fahrstrasse wird wieder als inaktiv gemeldet.
+        weichen.setWeichenfestlegung(0, false, 2);  //die Weichenfestlegung wird aufgehoben
         weichen.setWeichenfestlegung(1, false, 2);
       }
     }
     Serial.println(freigabe2);
     //alle besetztmelder müssen in der Fahrstraße einmal rot gewesen sein und am ende wieder frei sein
   }
+}
+
   //FTÜ-Melder
   if (zugtastenC.zugtastenGedrueckt()) //wenn eine Zugtaste gedrückt ist
   {

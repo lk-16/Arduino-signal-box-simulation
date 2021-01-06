@@ -9,7 +9,6 @@
 
 //Methoden der Klasse besetztmeldungControl
 WeichenControl::WeichenControl(int anzahlWeichen, int weichenPinGerade[], int weichenPinKurve[], int weichenLedPinGerade[], int weichenLedPinKurve[], int adressWeichenposition[], int weichentimeout, int wt[], int wgt, int registerPins[4])
-    : Actor(registerPins[0], registerPins[1], registerPins[2], registerPins[3])
 {
     _anzahlWeichen = anzahlWeichen;
     //array wird definiert
@@ -23,6 +22,12 @@ void WeichenControl::weichenWechseln()
 {
     for (int weichenNr = 0; weichenNr < _anzahlWeichen; weichenNr++)
         _pWeiche[weichenNr]->weicheWechsel();
+}
+
+void WeichenControl::weichenStellen(int weichenNr, boolean weichenlage)
+{
+    if(weichenlage)_pWeiche[weichenNr]->weicheGerade();
+    else _pWeiche[weichenNr]->weicheKurve();
 }
 
 void WeichenControl::weichenGerade(int weichenNr)

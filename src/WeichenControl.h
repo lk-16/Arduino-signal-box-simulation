@@ -11,7 +11,6 @@
 
 #ifndef WeichenControl_h
 #define WeichenControl_h
-#include "Actor.h"
 #include "Weiche.h"
 
 
@@ -19,29 +18,30 @@
  * Über diese Klasse werden die Weichen gesteuert.
  * Die Klasse erstellt Weichen und verwaltet diese, über diese Klasse werden die einzelen weichen geschaltet und abgefragt werden. Die Besetztmelder sind von 0 an nummeriert
 */
-class WeichenControl : public Actor
+class WeichenControl
 {
 private:
   int _anzahlWeichen;                    //anzahl an Meldern, für die Objekte erstllt wurden
   class Weiche **_pWeiche; //dynamisches Array von Objekten der Klasse besetztmelder, zur steuerung und abfrage von besetztmeldern
 
 public:
-/**Erstellt die Angegebene Anzahl an besetztmelder und initialisiert diese. Die Initialisierung passiert mit Hilfe der drei Übergebenen Array gleisPins, ledsGleb und ledsRot.
- * Aus der Klasse besetztmeldungControl werden die entgegengenommenen Befehle auf die einzelnen Besetztmelder verteilt.
- * 
- * @param[in] gleisPins Speichert in einem Array die Anschlüsse, über, die die Besetztmelder den Status des Melderabschnitts einlesen können. (0 = nicht belegt, 1 = belegt)
- * @param[in] ledsGelb Dieses Array speichert die Anschlüsse, über, die die Besetztmelder ausgeben sollen, wenn der überwachte Gleisabschnitt frei ist.
- * @param[in] ledsRot Dieses Array speichert die Anschlüsse, über, die die Besetztmelder ausgeben sollen wenn der überwachte Gleisabschnitt besetzt ist.
- * @param[in] anzahlMelder Gibt an wie viele Besetztmelder erstellt werden sollen.
- * @param[in] registerPins Die Pins aus dem Array werden an die Oberklasse actors übergeben. Das Array besteht aus der Anzahl der Register, dem Pin SH_CP, ST_CP, DS  in dieser Reihenfolge.
- * @see actors(int anzahl, int sh, int st, int ds)
- * @see besetztmelder(int gleisPin, int ledGelb, int ledRot, int registerPin[4]);
+/**Diese Klasse erstellt nach der angegebenen Menge Objekte der Klasse Weiche und initialisiert diese. 
+ * @param[in] anzahlWeichen Speichert in einem Array die Anzhal der Weichen die erstellt werden sollen.
+ * @param[in] weichenPinGerade Das Array speichert die Anschlüsse des Relais, das die Weiche gerade stellt.
+ * @param[in] weichenPinKurve Das Array speichert die Anschlüsse des Relais, das die Weiche in Kurvenlage stellt.
+ * @param[in] weichenLedPinGerade Das Array speichert den Anschluss der Led, die die Gerade Lage der Weiche anzeigt.
+ * @param[in] weichenLedPinKurve Das Array speichert den Anschluss der Led, die die Gerade Lage der Weiche anzeigt.
+ * @param[in] adressWeichenposition Das Array bestimmt den speicherort an dem die Weichenposition gespeichert werden soll.
+ * @param[in] weichentimeout Bestimmt wie lange die Weiche geschaltet wird. 
+ * @param[in] wt Das Array deklariert den Eingang an dem die Weichentaste angeschlossen ist.
+ * @param[in] wgt Übergibt den AnschlussPin der Weichengruppentaste.
+ * @param[in] registerPins Die Pins aus dem Array werden an die Klasse Weiche und von dieser an die Oberklasse Actor übergeben. Das Array besteht aus der Anzahl der Register, dem Pin SH_CP, ST_CP, DS  in dieser Reihenfolge.
 */
   WeichenControl(int anzahlweichen, int weichenPinGerade[], int weichenPinKurve[], int weichenLedPinGerade[], int weichenLedPinKurve[], int adressWeichenposition[], int weichentimeout, int wt[], int wgt, int registerPins[4]); //Im Konstruktor wird ein Array von Objekten der Klasse Weichen erstellt und initialisiert
   void weichenWechseln();                     /**<Funktion zum Wechseln der Weiche mit Weichengruppentaste und Weichentaste in Kombination. Dies ist nur möglich wenn die Weiche nicht von einer Fahrstraße beansprucht wird.*/
+  void weichenStellen(int weichenNr, boolean weichenlage);/**<Stellt die angegebene Weiche. true = gerade, false = kurve*/
   void weichenGerade(int weichenNr);          /**<Funktion um die Weiche in Geradeweichenlage zu versetzen. Dies ist nur möglich wenn die Weiche nicht von einer Fahrstraße beansprucht wird.*/
   void weichenKurve(int weichenNr);           /**<Funktion um die Weiche in Kurvenlage zu versetzten. Dies ist nur möglich wenn die Weiche nicht von einer Fahrstraße beansprucht wird.*/
-  //void weichenBlinken(int weichennr);        /**<Die Weichen-Leds blinken je nach Lage der Weiche. Dies funktioniert nur, wenn die Weiche auch schaltet.*/
   void weichenRelaisHIGH();      /**<Alle Weichenrelais werden auf HIGH gesetzt. Die Relais sind alle inaktiv.*/
   void weichenRelaisLOW();       /**<Alle Weichenrelais werden auf LOW gesetzt. Die Relais sind alle aktiv.*/
   void weichenpositionenEEPROM(); /**<Die Weichenposition wird dauerhaft im EEPROM gespeichert. Dafür wird sie geupdatet, wenn eine Weiche geschaltet wurde*/
