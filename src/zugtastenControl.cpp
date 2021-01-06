@@ -8,31 +8,31 @@
 #include "Zugtaste.h"
 
 //Methoden der Klasse besetztmeldungControl
-zugtastenControl::zugtastenControl(int anzahlZugtasten, int zugtastenPins[])
+ZugtastenControl::ZugtastenControl(int anzahlZugtasten, int zugtastenPins[])
 
 {
     _anzahlZugtasten = anzahlZugtasten;
-    _pzugtasten = new zugtasten *[_anzahlZugtasten];
+    _pzugtasten = new Zugtaste *[_anzahlZugtasten];
     for (int zugtastenNr = 0; zugtastenNr < _anzahlZugtasten; zugtastenNr++)
-        _pzugtasten[zugtastenNr] = new zugtasten(zugtastenPins[zugtastenNr]);
+        _pzugtasten[zugtastenNr] = new Zugtaste(zugtastenPins[zugtastenNr]);
 }
 
-int zugtastenControl::getZugtastenAnzahl()
+int ZugtastenControl::getZugtastenAnzahl()
 {
     return _anzahlZugtasten;
 }
 
-boolean zugtastenControl::getZugtastenstatus(int zugtastenNr)
+boolean ZugtastenControl::getZugtastenstatus(int zugtastenNr)
 {
     return _pzugtasten[zugtastenNr]->getzugtastenstatus();
 }
 
-boolean zugtastenControl::zugtastenGedrueckt()
+boolean ZugtastenControl::zugtastenGedrueckt()
 {
     int zugtastenpress = 0;
     for (int i = 0; i < _anzahlZugtasten; i++)
     {
-        if (zugtastenControl::getZugtastenstatus(i) == HIGH)
+        if (ZugtastenControl::getZugtastenstatus(i) == HIGH)
             zugtastenpress++;
     }
     return zugtastenpress;

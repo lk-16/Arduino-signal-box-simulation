@@ -9,9 +9,9 @@
 
 //Methoden der Klasse besetztmeldungControl
 WeichenControl::WeichenControl(int anzahlWeichen, int weichenPinGerade[], int weichenPinKurve[], int weichenLedPinGerade[], int weichenLedPinKurve[], int adressWeichenposition[], int weichentimeout, int wt[], int wgt, int registerPins[4])
-    : actors(registerPins[0], registerPins[1], registerPins[2], registerPins[3])
+    : Actor(registerPins[0], registerPins[1], registerPins[2], registerPins[3])
 {
-    _anzahlWeichen = _anzahlWeichen;
+    _anzahlWeichen = anzahlWeichen;
     //array wird definiert
     _pWeiche = new Weiche *[_anzahlWeichen];
     //und initialisiert
@@ -19,22 +19,52 @@ WeichenControl::WeichenControl(int anzahlWeichen, int weichenPinGerade[], int we
         _pWeiche[weichenNr] = new Weiche(weichenNr, weichenPinGerade[weichenNr], weichenPinKurve[weichenNr], weichenLedPinGerade[weichenNr], weichenLedPinKurve[weichenNr], adressWeichenposition[weichenNr], weichentimeout, wt[weichenNr], wgt, registerPins);
 }
 
-
-/*//aus der Klasse Control werden die entgegengenommenen Befehle auf die einzelnen 
-boolean besetztmeldungControl::getBesetztmelderstatus(int besetztmelder, boolean besetztmelderBeleuchtung)
+void WeichenControl::weichenWechseln()
 {
-    return _pbesetztmelder[besetztmelder]->besetztmelderAuslesen(besetztmelderBeleuchtung);
+    for (int weichenNr = 0; weichenNr < _anzahlWeichen; weichenNr++)
+        _pWeiche[weichenNr]->weicheWechsel();
 }
 
-void besetztmeldungControl::setBesetztmelderBeleuchtung(int besetztmelder, boolean besetztmelderLichtstatus)
+void WeichenControl::weichenGerade(int weichenNr)
 {
-    _pbesetztmelder[besetztmelder]->setBesetztmelderLicht(besetztmelderLichtstatus);
+    _pWeiche[weichenNr]->weicheGerade();
 }
-void besetztmeldungControl::setFahrstrassenelement(int besetztmelderNr, int fahrstrassenNr, boolean fahrstrassenstatus)
+
+void WeichenControl::weichenKurve(int weichenNr)
 {
-    _pbesetztmelder[besetztmelderNr]->setFahrstrassenelement(fahrstrassenNr, fahrstrassenstatus);
+    _pWeiche[weichenNr]->weicheKurve();
 }
-boolean besetztmeldungControl::getFahrstrassenelement(int besetztmelderNr)
+
+void WeichenControl::weichenRelaisHIGH()
 {
-    return _pbesetztmelder[besetztmelderNr]->getFahrstrassenelement();
-}*/
+    for (int weichenNr = 0; weichenNr < _anzahlWeichen; weichenNr++)
+        _pWeiche[weichenNr]->weicheRelaisHIGH();
+}
+
+void WeichenControl::weichenRelaisLOW()
+{
+    for (int weichenNr = 0; weichenNr < _anzahlWeichen; weichenNr++)
+        _pWeiche[weichenNr]->weicheRelaisLOW();
+}
+
+void WeichenControl::weichenpositionenEEPROM()
+{
+    for (int weichenNr = 0; weichenNr < _anzahlWeichen; weichenNr++)
+        _pWeiche[weichenNr]->weichenpositionEEPROM();
+}
+
+void WeichenControl::weichenSchalten()
+{
+    for (int weichenNr = 0; weichenNr < _anzahlWeichen; weichenNr++)
+        _pWeiche[weichenNr]->weicheSchalten();
+}
+
+void WeichenControl::setWeichenfestlegung(int weichenNr, boolean festlegestatus, int fahrstrassennr)
+{
+    _pWeiche[weichenNr]->setWeichenfestlegung(festlegestatus, fahrstrassennr);
+}
+
+boolean WeichenControl::getWeichenfestlegung(int weichenNr)
+{
+    return _pWeiche[weichenNr]->getWeichenfestlegung();
+}

@@ -11,7 +11,7 @@
 
 //Methoden der Klasse Melder
 Melder::Melder(String melderName, int tueMelderLed, int weckerPin, int wutPin, int registerPins[4])
-  : Actors(registerPins[0], registerPins[1], registerPins[2], registerPins[3])   //Led des Melders, Name des Melders(für Serielle Kommunitation z.B. FTÜ,GTÜ)................doesn't works
+  : Actor(registerPins[0], registerPins[1], registerPins[2], registerPins[3])   //Led des Melders, Name des Melders(für Serielle Kommunitation z.B. FTÜ,GTÜ)
 {
   Serial.begin(9600);                               //Die Serielle Kommunikation wird gestartet
 
@@ -35,13 +35,13 @@ void Melder::tueMelder()                                                        
 
     if (millis() - _melderStartzeit >= (_melderTimeout * 2) && _wutAktivierung == LOW)      //Wenn 10 s lang eine Taste gedrückt wurde und nicht die Wut gedrückt wurde
     {
-      Actors::digitalSchalten(_weckerPin, LOW);                                           //Relais schaltet --> Wecker klingelt
+      Actor::digitalSchalten(_weckerPin, LOW);                                           //Relais schaltet --> Wecker klingelt
 
     }
-    if (melder::getWutStatus() == HIGH)                                                 //wenn Weckerunterbrechertaste gedrückt
+    if (Melder::getWutStatus() == HIGH)                                                 //wenn Weckerunterbrechertaste gedrückt
     {
       _wutAktivierung = HIGH;                                                            //die Weckerunterbrechertaste wurde gedrückt
-      Actors::digitalSchalten(_weckerPin, HIGH);                                          //Relais fällt zurück --> Wecker wird gestoppt
+      Actor::digitalSchalten(_weckerPin, HIGH);                                          //Relais fällt zurück --> Wecker wird gestoppt
     }
     Serial.println(_melderName);                                                        //Meldername und Status wird über den seriellen Monitor angezeigt............................... Ausgabe der Meldernamen funktioniert noch nicht
   }

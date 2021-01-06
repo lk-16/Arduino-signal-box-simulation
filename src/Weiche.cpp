@@ -148,7 +148,7 @@ void Weiche::weichenpositionEEPROM() //die weichenposition wird abgerufen und au
   }
 }
 
-void Weiche::weichenSchalten() //lässt die Relais wieder in die unaktiv position zurückfallen
+void Weiche::weicheSchalten() //lässt die Relais wieder in die unaktiv position zurückfallen
 {
   unsigned long currentmillis = millis();
   if (!Weiche::weichenstatus == 0)

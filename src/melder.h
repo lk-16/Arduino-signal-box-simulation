@@ -18,7 +18,7 @@
 
 /**In der Klasse Melder werden Melder und deren Funktionen erstellt. Die Klasse enthält zur Zeit nur den Programmcode für die Tastenüberwachung.
 */
-class Melder : public Actors
+class Melder : public Actor
 {
 private:
   String _melderName;
@@ -42,7 +42,7 @@ public:
    * @param[in] registerPin Die Pins aus dem Array werden an die Oberklasse actors übergeben. Das Array besteht aus der Anzahl der Register, dem Pin SH_CP, ST_CP, DS  in dieser Reihenfolge.
    * @see actors(int anzahl, int sh, int st, int ds)
   */
-  melder(String melderName, int tueMelderLed, int weckerPin, int wutPin, int registerPins[4]); //definieren der Pins von Meldern
+  Melder(String melderName, int tueMelderLed, int weckerPin, int wutPin, int registerPins[4]); //definieren der Pins von Meldern
   void tueMelder();                                          /**<Löst nach 5 sec drücken einen optischen Melder und nach weiteren 5 den Wecker aus.*/
   int getTueLedPin();                                        /**<Herausgabe des LedPins. Wird in der main benötigt, so werden bleibt der Programmcode für die TÜ-Melder egal, wie der Pin der Led benannt ist, immer gleich und nur die Objektdefinitionen müssen angepasst werden.*/
   boolean getWutStatus();                                    /**<Herausgabe des Status der Weckerunterbrechertaste.*/
