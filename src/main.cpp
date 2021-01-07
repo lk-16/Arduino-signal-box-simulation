@@ -89,7 +89,7 @@ int fahrstrasse;//zeigt an welche Fahrstrasse kurzzeitig aktiv ist.
 int fahrstrassenspeicher[felderAnzahl][felderAnzahl]; //1 variable = nummer des Tischfeldes, 2. variable = nummer des Zweiten Tischfeldes
 int freigabe2 = 1;
 int besetztmelderposition[fahrstrassenanzahl][/*Reihen(Bestztm.*/ 5][3] = {{{}},
-                                                                           {{}},
+                                                                           {{3}, {3}, {4, 1, 1}, {5}},
                                                                            {{4}, {3}, {4, 1, 0}, {1, 2, 0}, 2}}; //0. ebene Besetztmelder anzahl, in den nächsten ebenen sind die Besetztmelder in Reihenfolge gespeichert. Die nächste Dimeinsion speichert, ob das Feld auf dem Besetztmelder eine Weiche ist, und darunter steht in welche richtung die geschaltet werden muss
 int besetztmelderzahl = 0;                                                                             //anhand dieser Zahl lässt sich der Wert von Freigabe berechnen, enthält bis zu welchem Besetztmelder die Fahrstrasse aufgelöst ist.
 /*int fahrstrassenspeicher[tischfeld][tischfeld][ebene] 
@@ -112,7 +112,7 @@ void setup()
 
   //besetztmeldung.setBesetztmelderBeleuchtung(0,HIGH);                  //Der Status des Lichtes kann eingestellt werden
 
-  fahrstrassenspeicher[2][1] = 2;
+  fahrstrassenspeicher[2][3] = 1;
   fahrstrassenspeicher[1][2] = 2; //wenn die Tasten auf feld 10 und feld 8 gedrückt werden, soll die Fahrstraße 1 einlaufen::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 }
 
@@ -158,8 +158,13 @@ um die weichen auch zu überwachen, muss weicehncontrol her.
       for (int j = 0; j < besetztmelderposition[fahrstrasse][0][0]; j++)//einbinden der Besetztmelder in die Fahrstrasse
       {
         besetztmeldung.setFahrstrassenelement(j, fahrstrasse, true);
-        if(besetztmelderposition[fahrstrasse][j][1] > 0)
+        if(besetztmelderposition[fahrstrasse][j][1] > 0 && weichen.getWeichenfestlegung(besetztmelderposition[fahrstrasse][j][1]-1) == false)
+        {
           weichen.weichenStellen(besetztmelderposition[fahrstrasse][j][1]-1,besetztmelderposition[fahrstrasse][j][2]);
+          weichen.setWeichenfestlegung(besetztmelderposition[fahrstrasse][j][1]-1, true, fahrstrasse);
+
+        }
+        
       }
       //Weichen
      /* weichen.weichenKurve(0);                 //Weiche wird geschaltet
@@ -172,33 +177,39 @@ um die weichen auch zu überwachen, muss weicehncontrol her.
       Serial.print("Fahrstraße ");Serial.println(fahrstrasse);
     }
   }
-for(int kontrollen=0;kontrollen<fahrstrassenanzahl-1; kontrollen++)
+  
+for(int kontrollen=1;kontrollen<fahrstrassenanzahl; kontrollen++)
 {
-  if (fahrstrassenstati[kontrollen] == true)
+  if (fahrstrassenstati[kontrollen-1] == true)
   {
     //1. besetztmelder
     //auf einen Besetztmelder sind immer zwei zahlen festgelegt, die erste Zahl wird beim besetztsein des melder eingespeichert, die zweite, wird erst dnn eingespeichert, wenn die erste eingespeichert ist,
     //der nächste besetztmelder kann erst freigegeben werden, wenn der erste freigegeben ist, also die Zahl eine bestimmte höhe hat.
-    if (besetztmeldung.getBesetztmelderstatus(besetztmelderposition[2][besetztmelderzahl + 1][0], LOW) == HIGH && freigabe2 == besetztmelderzahl * 2 + 1) //wenn der Besetztmelder besetzt ist und die freigabe der Besetztmelder Zahl plus eins entspricht
+    if (besetztmeldung.getBesetztmelderstatus(besetztmelderposition[kontrollen][besetztmelderzahl + 1][0], LOW) == HIGH) //wenn der Besetztmelder besetzt ist und die freigabe der Besetztmelder Zahl plus eins entspricht
     {
-      hauptsignal1.hpschalten(0);
+      hauptsignal1.hpschalten(0);//immer wenn ein Besetztmelder innerhalb einer fahrstrasse belegt wird, soll das zugehörige signal rot werden
+      if(freigabe2 == besetztmelderzahl * 2 + 1)
       freigabe2++; //beim ersten mal ist die freigabe1 und wird auf 2 erhöht. wenn dies passiert ist, und der Besetztmelder wieder frei geworden ist, wird der Besetztmelder als Fahrstrassenelement aufgelöst
     }
 
-    if (besetztmeldung.getBesetztmelderstatus(besetztmelderposition[2][besetztmelderzahl + 1][0], LOW) == LOW && freigabe2 == besetztmelderzahl * 2 + 2)
+    if (besetztmeldung.getBesetztmelderstatus(besetztmelderposition[kontrollen][besetztmelderzahl + 1][0], LOW) == LOW && freigabe2 == besetztmelderzahl * 2 + 2)
     {
-
-      besetztmeldung.setFahrstrassenelement(besetztmelderposition[2][besetztmelderzahl + 1][0], 2, false);
+      //Auflösung der Besetztmelderfestlegung
+      besetztmeldung.setFahrstrassenelement(besetztmelderposition[kontrollen][besetztmelderzahl + 1][0], 2, false);
+      //Auflösung der Weichenfestlegung
+      if(besetztmelderposition[kontrollen][besetztmelderzahl+1][1] > 0 && weichen.getWeichenfestlegung(besetztmelderposition[kontrollen][besetztmelderzahl+1][1]-1) == true)//besetztmelderZahl+1, weil die erste Position des arrays besetztmelderposition nur die Anzhal der Besetztmelder enthält und die namen der melder erst im nächsten feld erscheinen
+        {
+          weichen.setWeichenfestlegung((besetztmelderposition[kontrollen][besetztmelderzahl+1][1])-1, false, kontrollen);//die WEichenzahl die Herauskommt muss um 1 verkleinert werden, sonst gäbe es keine WEiche 0
+        }
+      
       freigabe2++;         //3
       besetztmelderzahl++; //es geht mit dem nächsten besetztmelder der Fahrstrasse weiter
-
-      if (besetztmelderzahl == besetztmelderposition[2][0][0])
+      
+      if (besetztmelderzahl == besetztmelderposition[2][0][0])//wenn die gesamte Fahrstrße wieder freigegeben ist
       {
         besetztmelderzahl=0;
-        freigabe2 = 1;                  //Die Freigabe wird wieder Zurückgesetzt.
+        freigabe2 = 1;                  //Der Freigabe Zähler wird wieder Zurückgesetzt.
         fahrstrassenstati[1] = false;   //die Fahrstrasse wird wieder als inaktiv gemeldet.
-        weichen.setWeichenfestlegung(0, false, 2);  //die Weichenfestlegung wird aufgehoben
-        weichen.setWeichenfestlegung(1, false, 2);
       }
     }
     Serial.println(freigabe2);
