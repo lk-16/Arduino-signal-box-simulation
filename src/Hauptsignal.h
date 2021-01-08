@@ -11,6 +11,7 @@
 
 #ifndef Hauptsignal_h
 #define Hauptsignal_h
+#include "Arduino.h"
 #include "Signal.h"
 /**
  * Die Klasse Hauptsignale erzeugt ein Hauptsignal.
@@ -40,8 +41,8 @@ public:
    * @see signale(int signaltastenPin, int sperrmelderPin, int allgSignaltasten[3], int registerPins[4]);
   */
   Hauptsignal(int rotPin, int gelbPin, int gruenPin, int signaltaste, int sperrmelder, int allgSignaltasten[3], int registerPin[4]); //alle Informationen zur Ansteuereung eines Hauptsignals.
-  void hpschalten(int newStatus);                             /**<Schaltet das Signal in die angegebene Postion. (newStatus = 0(Halt), 1(Fahrt), 2(Langsamfahrt) Wenn das Signal gesperrt ist, ist kein schalten möglich*/
-  void hauptsignalhp0manuell();                               /**<Das Hauptsignal wird mit der Signalhalttaste und der dem Signal zugeortneten Zugstraßentaste auf hp0 (rot) gestellt.*/
+  void hauptsignalSchalten(int newStatus);                             /**<Schaltet das Signal in die angegebene Postion. (newStatus = 0(Halt), 1(Fahrt), 2(Langsamfahrt) Wenn das Signal gesperrt ist, ist kein schalten möglich*/
+  void hauptsignalHp0Manuell();                               /**<Das Hauptsignal wird mit der Signalhalttaste und der dem Signal zugeortneten Zugstraßentaste auf hp0 (rot) gestellt.*/
 };
 
 #endif

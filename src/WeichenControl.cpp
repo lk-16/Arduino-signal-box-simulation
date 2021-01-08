@@ -26,8 +26,10 @@ void WeichenControl::weichenWechseln()
 
 void WeichenControl::weichenStellen(int weichenNr, boolean weichenlage)
 {
-    if(weichenlage)_pWeiche[weichenNr]->weicheGerade();
-    else _pWeiche[weichenNr]->weicheKurve();
+    if (weichenlage)
+        _pWeiche[weichenNr]->weicheGerade();
+    else
+        _pWeiche[weichenNr]->weicheKurve();
 }
 
 void WeichenControl::weichenGerade(int weichenNr)
@@ -64,7 +66,7 @@ void WeichenControl::weichenSchalten()
         _pWeiche[weichenNr]->weicheSchalten();
 }
 
-void WeichenControl::setWeichenfestlegung(int weichenNr, boolean festlegestatus, int fahrstrassennr)
+void WeichenControl::setWeichenfestlegung(int weichenNr, int fahrstrassennr, boolean festlegestatus)
 {
     _pWeiche[weichenNr]->setWeichenfestlegung(festlegestatus, fahrstrassennr);
 }
@@ -72,4 +74,9 @@ void WeichenControl::setWeichenfestlegung(int weichenNr, boolean festlegestatus,
 boolean WeichenControl::getWeichenfestlegung(int weichenNr)
 {
     return _pWeiche[weichenNr]->getWeichenfestlegung();
+}
+
+boolean WeichenControl::getWeichenposition(int weichenNr)
+{
+    return _pWeiche[weichenNr]->getWeichenposition();
 }

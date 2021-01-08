@@ -13,6 +13,7 @@
 
 #ifndef Besetztmelder_h
 #define Besetztmelder_h
+#include "Arduino.h"
 #include "Actor.h"
 
 /**
@@ -28,6 +29,7 @@ private:
   boolean _besetztmelderstatus;         //hier wirde der aktuelle Status des Besetztmelders gespeichert(0 nicht besetzt, 1 besetzt)
   boolean _besetztmelderLicht = false;  //es wird gespeichert, ob der Besetzmelder auf dem Stellpult zu sehen sein soll(an/aus)
   boolean _fahrstrassenelement = false; //sind die Melder Teil einer Fahrstraße, sollen die immer an sein und der boolean ist true
+  int _fahrstrasse = 0; //speichert von welcher Fahrstraße der Besetztmelder festgelegt wurde, und nur diese kann die Festlegung auch wieder lösen
 
 public:
 /** Erstellt die angegebene Anzahl an besetztmelder und initialisiert diese. Die Initialisierung passiert mit Hilfe der drei Übergebenen Array gleisPins, ledsGleb und ledsRot.

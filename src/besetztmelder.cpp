@@ -3,7 +3,7 @@
     vielleicht auch Signale für die Modelleisenbahn
     Lennart Klüner 05.09.2020
 */
-
+#include "Arduino.h"
 #include "Besetztmelder.h"
 
 //Methoden der Klasse besetztmelder
@@ -48,18 +48,18 @@ void Besetztmelder::setBesetztmelderLicht(boolean newbesetztmelderLicht) //ein u
     _besetztmelderLicht = newbesetztmelderLicht;
 }
 
-void Besetztmelder::setFahrstrassenelement(int fahrstrassennr, boolean fahrstrassenelement)//nr der Fahrstraße, soll es zu einem Fahrstraßenelement werden oder nicht
+void Besetztmelder::setFahrstrassenelement(int fahrstrassennr, boolean fahrstrassenelement) //nr der Fahrstraße, soll es zu einem Fahrstraßenelement werden oder nicht
 {
-    static int _fahrstrasse = 0; //speichert von welcher Fahrstraße der Besetztmelder festgelegt wurde, und nur diese kann die Festlegung auch wieder lösen
-    if (_fahrstrasse == 0)       //wenn der Melder nicht beansprucht ist
+    if (_fahrstrasse == 0) //wenn der Melder nicht beansprucht ist
     {
-        _fahrstrassenelement = fahrstrassenelement;     //kann sie von einer anderen Fahrstraße festgelgt werden, diese wird gespeichert
-        _fahrstrasse = fahrstrassennr; //und die Fahrstraße entsprechend festgelegen
+        _fahrstrassenelement = fahrstrassenelement; //kann sie von einer anderen Fahrstraße festgelgt werden, diese wird gespeichert
+        _fahrstrasse = fahrstrassennr;              //und die Fahrstraße entsprechend festgelegen
     }
-    else if (fahrstrassennr == _fahrstrasse && _fahrstrasse != 0) //|| _fahrstrassenfestlegung == 0)
+    else if (fahrstrassennr == _fahrstrasse) //|| _fahrstrassenfestlegung == 0)
     {
-        _fahrstrassenelement = fahrstrassenelement;                 //der Status, ob die weiche festgelegt wurde wird geänder
-        if(_fahrstrassenelement == 0) _fahrstrasse = 0;             //wenn die Fahrstraße nicht mehr beansprucht ist, kann sie von allen anderen Fahrstraßen verendet werden
+        _fahrstrassenelement = fahrstrassenelement; //der Status, ob die weiche festgelegt wurde wird geänder
+        if (_fahrstrassenelement == 0)
+            _fahrstrasse = 0; //wenn die Fahrstraße nicht mehr beansprucht ist, kann sie von allen anderen Fahrstraßen verendet werden
     }
 }
 boolean Besetztmelder::getFahrstrassenelement()

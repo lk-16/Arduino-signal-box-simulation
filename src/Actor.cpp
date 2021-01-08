@@ -4,7 +4,7 @@
     Lennart Klüner 05.09.2020
 */
 
-#include "Arduino.h"
+#include <Arduino.h>
 #include <EEPROM.h>
 #include "Actor.h"
 

@@ -74,7 +74,6 @@ void Weiche::weicheGerade() //die Weiche wird in gerade Lage vesetzt
     }
 
     weichenstatus = 1;
-    _weichenposition = true;                                 //die Weiche liegt gerade
     EEPROM.update(_adressWeichenposition, _weichenposition); //die Weichenposition wird gespeichert
   }
 }
@@ -98,7 +97,6 @@ void Weiche::weicheKurve() //die Weiche wird in Kurvenlage versetzt
       Actor::digitalSchalten(_weichenLedPinGerade, LOW);
     }
     weichenstatus = 2;                                       //der Weichenstatus ist 2 also kurve. blinken und timer werden abgerufen
-    _weichenposition = false;                                //die Weiche steht auf Kurvenlage
     EEPROM.update(_adressWeichenposition, _weichenposition); //die Weichenposition wird gespeichert
   }
 }
@@ -157,7 +155,9 @@ void Weiche::weicheSchalten() //lässt die Relais wieder in die unaktiv position
       Weiche::weichenBlinken();
     if (currentmillis - _wStartzeit >= _weichentimeout)
     {
-      Weiche::weichenstatus = 0;
+      if(weichenstatus== 1) _weichenposition = true;                   //die Weiche steht auf Kurvenlage
+      else if(weichenstatus == 2) _weichenposition = false;            //die Weiche liegt gerade
+      weichenstatus = 0;
       Weiche::weicheRelaisHIGH();
 
       if (_weichenausleuchtung == true)
@@ -186,7 +186,6 @@ void Weiche::weicheSchalten() //lässt die Relais wieder in die unaktiv position
 
 void Weiche::setWeichenfestlegung(boolean festlegestatus, int fahrstrassennr) //kann die Festlegung der Weichen aktivieren, die Weichen können nicht mehr verändert werden, bis die Fahrstraße ausfgelöst ist
 {
-  static int _fahrstrassefestgelegt = 0; //speichert von welcher Fahrstraße die Weiche festgelegt wurde, und nur diese kann die Festlegung auch wieder lösen
   if (_fahrstrassefestgelegt == 0)       //wenn die Weiche nicht festgelgt ist
   {
     _weichenfestlegung = festlegestatus;     //kann sie von einer anderen Fahrstraße festgelgt werden, diese wird gespeichert
@@ -202,4 +201,9 @@ void Weiche::setWeichenfestlegung(boolean festlegestatus, int fahrstrassennr) //
 boolean Weiche::getWeichenfestlegung()
 {
   return _weichenfestlegung;
+}
+
+boolean Weiche::getWeichenposition()
+{
+  return _weichenposition;
 }
