@@ -12,6 +12,7 @@
 #ifndef WeichenControl_h
 #define WeichenControl_h
 #include "Weiche.h"
+#include "Besetztmelder.h"
 
 /**
  * Über diese Klasse werden die Weichen gesteuert.
@@ -45,10 +46,11 @@ public:
   void weichenRelaisLOW();                                                                                                                                                                                                        /**<Alle Weichenrelais werden auf LOW gesetzt. Die Relais sind alle aktiv.*/
   void weichenpositionenEEPROM();                                                                                                                                                                                                 /**<Die Weichenposition wird dauerhaft im EEPROM gespeichert. Dafür wird sie geupdatet, wenn eine Weiche geschaltet wurde*/
   void weichenSchalten();                                                                                                                                                                                                         /**<Beendet nach der zuvor im Konstruktor definierten Zeit das Schalten des Relais.(je nach Weichenantrieb und Schaltdauer) Methode muss für jedes Objekt der Klasse einmal im Loop vorhanden sein.*/
-
   void setWeichenfestlegung(int weichenNr, int fahrstrassenNr, boolean festlegestatus); /**<Kann die Festlegung der Weichen aktivieren. Die Weichenlage kann nicht mehr verändert werden, bis die Festlegung durch die Fahrstraße ausfgelöst wird.*/
   boolean getWeichenfestlegung(int weichenNr);                                          /**<Es wird ausgegeben, ob die Weiche festgelegt ist, oder nicht*/
   boolean getWeichenposition(int weichenNr);                                            /**<Es wird der akuelle Status der angegebenen Weiche ausgegeben. (true = gerade, false = kurve)*/
+  void setWeicheBesetzt(int WeichenNr, boolean besetztmelderstatus);
+  friend class Besetztmelder;/**<veränder den Status der Weiche und läasst die roten Leds die Stellung anzeigen*/
 };
 
 #endif

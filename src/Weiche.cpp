@@ -65,18 +65,7 @@ void Weiche::weicheGerade() //die Weiche wird in gerade Lage vesetzt
     _wStartzeit = millis();
     Actor::digitalSchalten(_weichenPinKurve, HIGH); //Relais werden geschaltet
     Actor::digitalSchalten(_weichenPinGerade, LOW);
-
-    if (_weichenausleuchtung == true)
-    {
-      Actor::digitalSchalten(_weichenLedPinKurve, LOW); //Leds werden geschaltet
-      Actor::digitalSchalten(_weichenLedPinGerade, HIGH);
-    }
-    else
-    {
-      Actor::digitalSchalten(_weichenLedPinKurve, LOW); //Leds werden geschaltet
-      Actor::digitalSchalten(_weichenLedPinGerade, LOW);
-    }
-
+    Weiche::setWeichenLeds(true);
     weichenstatus = 1;
     EEPROM.update(_adressWeichenposition, _weichenposition); //die Weichenposition wird gespeichert
   }
@@ -90,16 +79,7 @@ void Weiche::weicheKurve() //die Weiche wird in Kurvenlage versetzt
     Actor::digitalSchalten(_weichenPinGerade, HIGH); //Relais werden geschaltet
     Actor::digitalSchalten(_weichenPinKurve, LOW);
 
-    if (_weichenausleuchtung == true)
-    {
-      Actor::digitalSchalten(_weichenLedPinGerade, LOW); //Leds werden geschaltet
-      Actor::digitalSchalten(_weichenLedPinKurve, HIGH);
-    }
-    else
-    {
-      Actor::digitalSchalten(_weichenLedPinKurve, LOW); //Leds werden geschaltet
-      Actor::digitalSchalten(_weichenLedPinGerade, LOW);
-    }
+    Weiche::setWeichenLeds(false);
     weichenstatus = 2;                                       //der Weichenstatus ist 2 also kurve. blinken und timer werden abgerufen
     EEPROM.update(_adressWeichenposition, _weichenposition); //die Weichenposition wird gespeichert
   }
@@ -141,7 +121,7 @@ void Weiche::weichenpositionEEPROM() //die weichenposition wird abgerufen und au
   if (_weichenposition == true)
   {
     _weichenposition = false; //die Weichenposition wird auf false gesetzt, damit die Weichen erneut geschaltet werden kann
-  Weiche::weicheGerade();
+    Weiche::weicheGerade();
   }
   else
   {
@@ -159,24 +139,12 @@ void Weiche::weicheSchalten() //lässt die Relais wieder in die unaktiv position
       Weiche::weichenBlinken();
     if (currentmillis - _wStartzeit >= _weichentimeout)
     {
-      if(weichenstatus== 1) _weichenposition = true;                   //die Weiche steht auf Kurvenlage
-      else if(weichenstatus == 2) _weichenposition = false;            //die Weiche liegt gerade
+      if (weichenstatus == 1)
+        _weichenposition = true; //die Weiche steht auf Kurvenlage
+      else if (weichenstatus == 2)
+        _weichenposition = false; //die Weiche liegt gerade
       weichenstatus = 0;
       Weiche::weicheRelaisHIGH();
-
-      if (_weichenausleuchtung == true)
-      {
-        if (_weichenposition == true)
-          Actor::digitalSchalten(_weichenLedPinGerade, HIGH);
-        if (_weichenposition == false)
-          Weiche::setWeichenLeds(false);
-          //Actor::digitalSchalten(_weichenLedPinKurve, HIGH);
-      }
-      else
-      {
-        Actor::digitalSchalten(_weichenLedPinKurve, LOW);
-        Actor::digitalSchalten(_weichenLedPinGerade, LOW);
-      }
 
       Serial.print("Weiche ");
       Serial.print(_wnr);
@@ -187,11 +155,18 @@ void Weiche::weicheSchalten() //lässt die Relais wieder in die unaktiv position
         Serial.println("kurve");
     }
   }
+  else
+  {
+    if (_weichenposition == true)
+      Weiche::setWeichenLeds(true);
+    if (_weichenposition == false)
+      Weiche::setWeichenLeds(false);
+  }
 }
 
 void Weiche::setWeichenfestlegung(boolean festlegestatus, int fahrstrassennr) //kann die Festlegung der Weichen aktivieren, die Weichen können nicht mehr verändert werden, bis die Fahrstraße ausfgelöst ist
 {
-  if (_fahrstrassefestgelegt == 0)       //wenn die Weiche nicht festgelgt ist
+  if (_fahrstrassefestgelegt == 0) //wenn die Weiche nicht festgelgt ist
   {
     _weichenfestlegung = festlegestatus;     //kann sie von einer anderen Fahrstraße festgelgt werden, diese wird gespeichert
     _fahrstrassefestgelegt = fahrstrassennr; //und ide Fahrstraße entsprechend festgelegt
@@ -214,45 +189,67 @@ boolean Weiche::getWeichenposition()
 }
 void Weiche::setWeichebesetzt(boolean besetztmelderstatus)
 {
-  _besetzt=besetztmelderstatus;
+  _besetzt = besetztmelderstatus;
 }
 
 //private
 void Weiche::setWeichenLeds(boolean weichenlage)
 {
-  if(_besetzt == true)
+  if (_weichenausleuchtung == true)
   {
-    if(weichenlage == true)
+    if (_besetzt == true)
     {
-      Actor::digitalSchalten(_weichenLedPinKurve, LOW);
-      Actor::digitalSchalten(_weichenLedPinKurveRot, LOW);
-      Actor::digitalSchalten(_weichenLedPinGerade, LOW);
-      Actor::digitalSchalten(_weichenLedPinGeradeRot, HIGH);
+      if (weichenlage == true)
+      {
+        Actor::digitalSchalten(_weichenLedPinKurve, LOW);
+        Actor::digitalSchalten(_weichenLedPinKurveRot, LOW);
+        Actor::digitalSchalten(_weichenLedPinGerade, LOW);
+        Actor::digitalSchalten(_weichenLedPinGeradeRot, HIGH);
+      }
+      else
+      {
+        Actor::digitalSchalten(_weichenLedPinGerade, LOW);
+        Actor::digitalSchalten(_weichenLedPinGeradeRot, LOW);
+        Actor::digitalSchalten(_weichenLedPinKurve, LOW);
+        Actor::digitalSchalten(_weichenLedPinKurveRot, HIGH);
+      }
     }
-    else
+    else //wenn nicht besetzt
     {
-      Actor::digitalSchalten(_weichenLedPinGerade, LOW);
-      Actor::digitalSchalten(_weichenLedPinGeradeRot, LOW);
-      Actor::digitalSchalten(_weichenLedPinKurve, LOW);
-      Actor::digitalSchalten(_weichenLedPinKurveRot, HIGH);
+      if (weichenlage == true)
+      {
+        Actor::digitalSchalten(_weichenLedPinKurve, LOW);
+        Actor::digitalSchalten(_weichenLedPinKurveRot, LOW);
+        Actor::digitalSchalten(_weichenLedPinGeradeRot, LOW);
+        Actor::digitalSchalten(_weichenLedPinGerade, HIGH);
+      }
+      else
+      {
+        Actor::digitalSchalten(_weichenLedPinGerade, LOW);
+        Actor::digitalSchalten(_weichenLedPinGeradeRot, LOW);
+        Actor::digitalSchalten(_weichenLedPinKurveRot, LOW);
+        Actor::digitalSchalten(_weichenLedPinKurve, HIGH);
+      }
     }
-    
   }
-  else//wenn nicht besetzt
+  else
   {
-    if(weichenlage == true)
+    if (_besetzt == true)
     {
-      Actor::digitalSchalten(_weichenLedPinKurve, LOW);
-      Actor::digitalSchalten(_weichenLedPinKurveRot, LOW);
-      Actor::digitalSchalten(_weichenLedPinGeradeRot, LOW);
-      Actor::digitalSchalten(_weichenLedPinGerade, HIGH);
-    }
-    else
-    {
-      Actor::digitalSchalten(_weichenLedPinGerade, LOW);
-      Actor::digitalSchalten(_weichenLedPinGeradeRot, LOW);
-      Actor::digitalSchalten(_weichenLedPinKurveRot, LOW);
-      Actor::digitalSchalten(_weichenLedPinKurve, HIGH);
+      if (weichenlage == true)
+      {
+        Actor::digitalSchalten(_weichenLedPinKurve, LOW);
+        Actor::digitalSchalten(_weichenLedPinKurveRot, LOW);
+        Actor::digitalSchalten(_weichenLedPinGerade, LOW);
+        Actor::digitalSchalten(_weichenLedPinGeradeRot, HIGH);
+      }
+      else
+      {
+        Actor::digitalSchalten(_weichenLedPinGerade, LOW);
+        Actor::digitalSchalten(_weichenLedPinGeradeRot, LOW);
+        Actor::digitalSchalten(_weichenLedPinKurve, LOW);
+        Actor::digitalSchalten(_weichenLedPinKurveRot, HIGH);
+      }
     }
   }
 }

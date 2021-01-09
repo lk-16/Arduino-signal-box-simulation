@@ -43,7 +43,7 @@ private:                 //private Variablen für die Klasse Weichen
   boolean _weichenausleuchtung = true; //true an, die Stellungsmelder der Weiche sind angeschaltet, false die Stellungsmelder der Weiche sind ausgeschaltet
   boolean _weichenfestlegung = false;  //wenn aus true, kann die Weiche nicht mehr gestellt werden
   int _fahrstrassefestgelegt = 0;      //speichert von welcher Fahrstraße die Weiche festgelegt wurde, und nur diese kann die Festlegung auch wieder lösen
-  void setWeichenLeds(boolean weichenlage);//kurve oder gerade und Pinstatus
+  void setWeichenLeds(boolean weichenlage);//kurve oder gerade und Pinstatus, schaltet je nach Besetztmelderstatus und beleuchtungsstatus die passenden Weichenspitzenmelder
 
 public:
 /** Erstellt Weichen.

@@ -8,20 +8,20 @@
 #include "Besetztmelder.h"
 
 //Methoden der Klasse besetztmeldungControl
-BesetztmeldungControl::BesetztmeldungControl(int gleisPins[], int ledsGelb[], int ledsRot[], int anzahlMelder, int registerPins[4])
+BesetztmeldungControl::BesetztmeldungControl(int gleisPins[], int ledsGelb[], int ledsRot[], int weichenbesetztmelder[], int anzahlMelder, int registerPins[4])
 {
     _anzahlMelder = anzahlMelder;
     //array wird definiert
     _pbesetztmelder = new Besetztmelder *[_anzahlMelder];
     //und initialisiert
     for (int besetztmelderNr = 0; besetztmelderNr < _anzahlMelder; besetztmelderNr++)
-        _pbesetztmelder[besetztmelderNr] = new Besetztmelder(gleisPins[besetztmelderNr], ledsGelb[besetztmelderNr], ledsRot[besetztmelderNr], registerPins);
+        _pbesetztmelder[besetztmelderNr] = new Besetztmelder(gleisPins[besetztmelderNr], ledsGelb[besetztmelderNr], ledsRot[besetztmelderNr], weichenbesetztmelder[besetztmelderNr], registerPins);
 }
 
 //aus der Klasse Control werden die entgegengenommenen Befehle auf die einzelnen Besetztmelder verteilt.
-boolean BesetztmeldungControl::getBesetztmelderstatus(int besetztmelder, boolean besetztmelderBeleuchtung)
+boolean BesetztmeldungControl::getBesetztmelderstatus(int besetztmelder, boolean besetztmelderBeleuchtung, WeichenControl WeichenControl)
 {
-    return _pbesetztmelder[besetztmelder]->besetztmelderAuslesen(besetztmelderBeleuchtung);
+    return _pbesetztmelder[besetztmelder]->besetztmelderAuslesen(besetztmelderBeleuchtung, WeichenControl);
 }
 
 void BesetztmeldungControl::setBesetztmelderBeleuchtung(int besetztmelder, boolean besetztmelderLichtstatus)
@@ -37,8 +37,8 @@ boolean BesetztmeldungControl::getFahrstrassenelement(int besetztmelderNr)
     return _pbesetztmelder[besetztmelderNr]->getFahrstrassenelement();
 }
 
-void BesetztmeldungControl::besetztmelderAusfuehren()
+void BesetztmeldungControl::besetztmelderAusfuehren(WeichenControl WeichenControl)
 {
     for (int besetztmelderNr = 0; besetztmelderNr < _anzahlMelder; besetztmelderNr++)
-        _pbesetztmelder[besetztmelderNr]->besetztmelderAuslesen(LOW);
+        _pbesetztmelder[besetztmelderNr]->besetztmelderAuslesen(LOW, WeichenControl);
 }

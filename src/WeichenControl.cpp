@@ -80,3 +80,8 @@ boolean WeichenControl::getWeichenposition(int weichenNr)
 {
     return _pWeiche[weichenNr]->getWeichenposition();
 }
+
+void WeichenControl::setWeicheBesetzt(int weichenNr, boolean besetztmelderstatus)
+{
+    _pWeiche[weichenNr]->setWeichebesetzt(besetztmelderstatus);
+}

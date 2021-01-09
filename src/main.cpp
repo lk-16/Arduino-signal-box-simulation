@@ -70,7 +70,7 @@ const int anzahlWeichen = 2;
 int weichenPinsGerade[anzahlWeichen] = {w1g, w2g};
 int weichenPinsKurve[anzahlWeichen] = {w1k, w2k};
 int weichenLedPinsGerade[anzahlWeichen] = {ledw1g, ledw2g};
-int weichenLedPinsGeradeRot[anzahlWeichen] = {};
+int weichenLedPinsGeradeRot[anzahlWeichen] = {ftueMelderLed, 111};
 int weichenLedPinsKurve[anzahlWeichen] = {ledw1k, ledw2k};
 int weichenLedPinsKurveRot[anzahlWeichen] = {};
 int adressWeichenpositionen[anzahlWeichen] = {1, 5};
@@ -140,7 +140,7 @@ void loop()
     int belegt = 0;
     for (int j = 0; j < besetztmelderposition[fahrstrasse][0][0]; j++) //wiederhole bis du alle besetztmelder überprüft hast(menge an besetztmeldern werden über besetztmelder position eingebracht)
     {
-      if (besetztmeldung.getBesetztmelderstatus(besetztmelderposition[fahrstrasse][j + 1][0], LOW) == HIGH || besetztmeldung.getFahrstrassenelement(besetztmelderposition[fahrstrasse][j + 1][0]) == true //wenn der Besetztmelder belegt oder festgelegt ist.
+      if (besetztmeldung.getBesetztmelderstatus(besetztmelderposition[fahrstrasse][j + 1][0], LOW, weichen) == HIGH || besetztmeldung.getFahrstrassenelement(besetztmelderposition[fahrstrasse][j + 1][0]) == true //wenn der Besetztmelder belegt oder festgelegt ist.
           || (besetztmelderposition[fahrstrasse][j + 1][1] > 0 && weichen.getWeichenfestlegung(besetztmelderposition[fahrstrasse][j + 1][1] - 1) == true))                                                //Kontrolle ob Weichen schon in eine Fahrstraße eingebunden sind(weichennr aus Weichenpostion muss -1 genommen werden, da sonst die Weiche null nicht von den anderen zu unterschreiden wäre.
         belegt++;
     }
@@ -193,14 +193,14 @@ void loop()
     {
       //auf einen Besetztmelder sind immer zwei zahlen festgelegt, die erste Zahl wird beim besetztsein des melder eingespeichert, die zweite, wird erst dnn eingespeichert, wenn die erste eingespeichert ist,
       //der nächste besetztmelder kann erst freigegeben werden, wenn der erste freigegeben ist, also die Zahl eine bestimmte höhe hat.
-      if (besetztmeldung.getBesetztmelderstatus(besetztmelderposition[kontrollen][besetztmelderzahl[kontrollen - 1] + 1][0], LOW) == HIGH) //wenn der Besetztmelder besetzt ist und die freigabe der Besetztmelder Zahl plus eins entspricht
+      if (besetztmeldung.getBesetztmelderstatus(besetztmelderposition[kontrollen][besetztmelderzahl[kontrollen - 1] + 1][0], LOW, weichen) == HIGH) //wenn der Besetztmelder besetzt ist und die freigabe der Besetztmelder Zahl plus eins entspricht
       {
         hauptsignale.hauptsignalSchalten(besetztmelderposition[kontrollen][0][1] - 1, 0); //immer wenn ein Besetztmelder innerhalb einer fahrstrasse belegt wird, soll das zugehörige signal rot werden
         if (freigabe[kontrollen - 1] == besetztmelderzahl[kontrollen - 1] * 2 + 1)
           freigabe[kontrollen - 1]++; //beim ersten mal ist die freigabe1 und wird auf 2 erhöht. wenn dies passiert ist, und der Besetztmelder wieder frei geworden ist, wird der Besetztmelder als Fahrstrassenelement aufgelöst
       }
 
-      if (besetztmeldung.getBesetztmelderstatus(besetztmelderposition[kontrollen][besetztmelderzahl[kontrollen - 1] + 1][0], LOW) == LOW && freigabe[kontrollen - 1] == besetztmelderzahl[kontrollen - 1] * 2 + 2)
+      if (besetztmeldung.getBesetztmelderstatus(besetztmelderposition[kontrollen][besetztmelderzahl[kontrollen - 1] + 1][0], LOW, weichen) == LOW && freigabe[kontrollen - 1] == besetztmelderzahl[kontrollen - 1] * 2 + 2)
       {
         //Auflösung der Besetztmelderfestlegung
         besetztmeldung.setFahrstrassenelement(besetztmelderposition[kontrollen][besetztmelderzahl[kontrollen - 1] + 1][0], kontrollen, false);
@@ -248,10 +248,10 @@ void loop()
 
   //Besetztmeldung
   //besetztmeldung.besetztmelderAusfuehren();//besetztmelder sollen immer wenn sie belegt sind den Status anzeigen.
-  besetztmeldung.getBesetztmelderstatus(0, LOW);
-  besetztmeldung.getBesetztmelderstatus(1, LOW);
-  besetztmeldung.getBesetztmelderstatus(2, LOW);
-  besetztmeldung.getBesetztmelderstatus(3, LOW);
-  besetztmeldung.getBesetztmelderstatus(4, LOW);
-  besetztmeldung.getBesetztmelderstatus(5, LOW);
+  besetztmeldung.getBesetztmelderstatus(0, LOW, weichen);
+  besetztmeldung.getBesetztmelderstatus(1, LOW, weichen);
+  besetztmeldung.getBesetztmelderstatus(2, LOW, weichen);
+  besetztmeldung.getBesetztmelderstatus(3, LOW, weichen);
+  besetztmeldung.getBesetztmelderstatus(4, LOW, weichen);
+  besetztmeldung.getBesetztmelderstatus(5, LOW, weichen);
 }
