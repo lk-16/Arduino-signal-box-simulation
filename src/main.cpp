@@ -59,20 +59,23 @@ HauptsignalControl hauptsignale(hauptsignalanzahl, rot, gelb, gruen, signaltaste
 
 //Gleisbesetztmelder
 const int besetztmelderAnzahl = 6;
+int weichenbesetztmelder[besetztmelderAnzahl] ={0,1,0,0,2,0};//übergeben der Weichennr
 int besetztmelderEingaenge[besetztmelderAnzahl] = {42, 41, 40, 39, 38, 37}; //an gnd angeschlossen
 int besetztmelderLedsGelb[besetztmelderAnzahl] = {0, 0, 0, 110, 0, 112};
 int besetztmelderLedsRot[besetztmelderAnzahl] = {0, 0, ftueMelderLed, 111, 0, 113};
-BesetztmeldungControl besetztmeldung(besetztmelderEingaenge, besetztmelderLedsGelb, besetztmelderLedsRot, besetztmelderAnzahl, schieberegisterPins);
+BesetztmeldungControl besetztmeldung(besetztmelderEingaenge, besetztmelderLedsGelb, besetztmelderLedsRot, weichenbesetztmelder, besetztmelderAnzahl, schieberegisterPins);
 
 //Weichen
 const int anzahlWeichen = 2;
 int weichenPinsGerade[anzahlWeichen] = {w1g, w2g};
 int weichenPinsKurve[anzahlWeichen] = {w1k, w2k};
 int weichenLedPinsGerade[anzahlWeichen] = {ledw1g, ledw2g};
+int weichenLedPinsGeradeRot[anzahlWeichen] = {};
 int weichenLedPinsKurve[anzahlWeichen] = {ledw1k, ledw2k};
+int weichenLedPinsKurveRot[anzahlWeichen] = {};
 int adressWeichenpositionen[anzahlWeichen] = {1, 5};
 int weichentasten[anzahlWeichen] = {wt1, wt2};
-WeichenControl weichen(anzahlWeichen, weichenPinsGerade, weichenPinsKurve, weichenLedPinsGerade, weichenLedPinsKurve, adressWeichenpositionen, weichentimeout, weichentasten, wgt, schieberegisterPins);
+WeichenControl weichen(anzahlWeichen, weichenPinsGerade, weichenPinsKurve, weichenLedPinsGerade, weichenLedPinsGeradeRot, weichenLedPinsKurve, weichenLedPinsKurveRot, adressWeichenpositionen, weichentimeout, weichentasten, wgt, schieberegisterPins);
 
 //Melder
 Melder ftueMelder(ftueMelderName, ftueMelderLed, weckerPin, ftueMelderWut, schieberegisterPins); //Ausgabe von FTÜ im Seriellen Monitior funktioniert nicht

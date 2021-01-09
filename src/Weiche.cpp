@@ -12,7 +12,7 @@
 //Methoden der Klasse Weichen
 
 //definieren von für alle Methoden wichtige Informationen Pins etc.
-Weiche::Weiche(int wnr, int weichenPinGerade, int weichenPinKurve, int weichenLedPinGerade, int weichenLedPinKurve, int adressWeichenposition, int weichentimeout, int wt, int wgt, int registerPins[4])
+Weiche::Weiche(int wnr, int weichenPinGerade, int weichenPinKurve, int weichenLedPinGerade, int weichenLedPinGeradeRot, int weichenLedPinKurve, int weichenLedPinKurveRot, int adressWeichenposition, int weichentimeout, int wt, int wgt, int registerPins[4])
     : Actor(registerPins[0], registerPins[1], registerPins[2], registerPins[3])
 {
   Serial.begin(9600);
@@ -20,7 +20,9 @@ Weiche::Weiche(int wnr, int weichenPinGerade, int weichenPinKurve, int weichenLe
   _weichenPinGerade = weichenPinGerade;
   _weichenPinKurve = weichenPinKurve;
   _weichenLedPinGerade = weichenLedPinGerade;
+  _weichenLedPinGeradeRot = weichenLedPinGeradeRot;
   _weichenLedPinKurve = weichenLedPinKurve;
+  _weichenLedPinKurveRot = weichenLedPinKurveRot;
   _adressWeichenposition = adressWeichenposition;
   _weichentimeout = weichentimeout;
   _wt = wt;
@@ -29,7 +31,9 @@ Weiche::Weiche(int wnr, int weichenPinGerade, int weichenPinKurve, int weichenLe
   pinMode(_weichenPinGerade, OUTPUT); //define that the pins on the board are outputs
   pinMode(_weichenPinKurve, OUTPUT);
   pinMode(_weichenLedPinGerade, OUTPUT);
+  pinMode(_weichenLedPinGeradeRot, OUTPUT);
   pinMode(_weichenLedPinKurve, OUTPUT);
+  pinMode(_weichenLedPinKurveRot, OUTPUT);
   pinMode(wt, INPUT_PULLUP);
   pinMode(wgt, INPUT_PULLUP);
 }
@@ -165,7 +169,8 @@ void Weiche::weicheSchalten() //lässt die Relais wieder in die unaktiv position
         if (_weichenposition == true)
           Actor::digitalSchalten(_weichenLedPinGerade, HIGH);
         if (_weichenposition == false)
-          Actor::digitalSchalten(_weichenLedPinKurve, HIGH);
+          Weiche::setWeichenLeds(false);
+          //Actor::digitalSchalten(_weichenLedPinKurve, HIGH);
       }
       else
       {
@@ -206,4 +211,48 @@ boolean Weiche::getWeichenfestlegung()
 boolean Weiche::getWeichenposition()
 {
   return _weichenposition;
+}
+void Weiche::setWeichebesetzt(boolean besetztmelderstatus)
+{
+  _besetzt=besetztmelderstatus;
+}
+
+//private
+void Weiche::setWeichenLeds(boolean weichenlage)
+{
+  if(_besetzt == true)
+  {
+    if(weichenlage == true)
+    {
+      Actor::digitalSchalten(_weichenLedPinKurve, LOW);
+      Actor::digitalSchalten(_weichenLedPinKurveRot, LOW);
+      Actor::digitalSchalten(_weichenLedPinGerade, LOW);
+      Actor::digitalSchalten(_weichenLedPinGeradeRot, HIGH);
+    }
+    else
+    {
+      Actor::digitalSchalten(_weichenLedPinGerade, LOW);
+      Actor::digitalSchalten(_weichenLedPinGeradeRot, LOW);
+      Actor::digitalSchalten(_weichenLedPinKurve, LOW);
+      Actor::digitalSchalten(_weichenLedPinKurveRot, HIGH);
+    }
+    
+  }
+  else//wenn nicht besetzt
+  {
+    if(weichenlage == true)
+    {
+      Actor::digitalSchalten(_weichenLedPinKurve, LOW);
+      Actor::digitalSchalten(_weichenLedPinKurveRot, LOW);
+      Actor::digitalSchalten(_weichenLedPinGeradeRot, LOW);
+      Actor::digitalSchalten(_weichenLedPinGerade, HIGH);
+    }
+    else
+    {
+      Actor::digitalSchalten(_weichenLedPinGerade, LOW);
+      Actor::digitalSchalten(_weichenLedPinGeradeRot, LOW);
+      Actor::digitalSchalten(_weichenLedPinKurveRot, LOW);
+      Actor::digitalSchalten(_weichenLedPinKurve, HIGH);
+    }
+  }
 }

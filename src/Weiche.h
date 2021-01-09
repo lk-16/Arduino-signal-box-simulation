@@ -29,6 +29,9 @@ private:                 //private Variablen für die Klasse Weichen
   int _weichenPinKurve;
   int _weichenLedPinGerade;
   int _weichenLedPinKurve;
+  int _weichenLedPinGeradeRot;//Für besetztmelder
+  int _weichenLedPinKurveRot;//s.o.
+  boolean _besetzt = false;//wenn true, sollen die roten Leds verwendet werden.
   int _adressWeichenposition;   //adresse zu speicherung der Weichenpostion auf dem EEPROM des Arduinos
   unsigned int _weichentimeout; //wie lange soll die Weiche schalten (unsigend ist nötig, da sonst unsigned und singed typen miteinander verglichen werden)
   int _wt;
@@ -40,9 +43,25 @@ private:                 //private Variablen für die Klasse Weichen
   boolean _weichenausleuchtung = true; //true an, die Stellungsmelder der Weiche sind angeschaltet, false die Stellungsmelder der Weiche sind ausgeschaltet
   boolean _weichenfestlegung = false;  //wenn aus true, kann die Weiche nicht mehr gestellt werden
   int _fahrstrassefestgelegt = 0;      //speichert von welcher Fahrstraße die Weiche festgelegt wurde, und nur diese kann die Festlegung auch wieder lösen
+  void setWeichenLeds(boolean weichenlage);//kurve oder gerade und Pinstatus
 
 public:
-  Weiche(int wnr, int weichenPinGerade, int weichenPinKurve, int weichenLedPinGerade, int weichenLedPinKurve, int adressWeichenposition, int weichentimeout, int wt, int wgt, int registerPins[4]); // definieren von für alle Methoden wichtige Informationen Pins etc.
+/** Erstellt Weichen.
+ * @param[in] wnr Nummer der Weiche.
+ * @param[in] weichenPinGerade Schaltet das Relais, welches einen Wechsel Geradelage auslöst.
+ * @param[in] weichenPinKurve Schaltet das Relais, welches einen Wechsel in Kurvenlage auslöst.
+ * @param[in] weichenLedPinGerade Speichert die Ledanschlüsse, über, die die Weiche, wenn sie gerade ist anzeigen kann, das sie nicht besetzt ist.
+ * @param[in] weichenLedPinGeradeRot Speichert die Anschlüsse, über, die die Weiche, wenn sie gerade ist die Besetztmeldung anzeigen kann.
+ * @param[in] weichenLedPinKurve Speichert die Anschlüsse, über, die die Weiche, wenn sie in Kurvenlage anzeigen kann, das sie nicht besetzt ist.
+ * @param[in] weichenLedPinKurveRot Speichert die Anschlüsse, über, die die Weiche, wenn sie in Kurvenlage ist die Besetztmeldung anzeigen kann.
+ * @param[in] adressWeichenposition An dieser Speicherposition wird die Weichenlage gspeichert
+ * @param[in] wt Speichert die Anschlüsse, an der die Weichentaste angeschlossen ist.
+ * @param[in] wgt Speichert die Anschlüsse, an der die Weichengruppentaste angeschlossen ist.
+ * @param[in] registerPins Die Pins aus dem Array werden an die Oberklasse besetztmeldungControl/actors übergeben. Das Array besteht aus der Anzahl der Register, dem Pin SH_CP, ST_CP, DS  in dieser Reihenfolge.
+ * @see actors(int anzahl, int sh, int st, int ds)
+ * @see besetztmelder(int gleisPin, int ledGelb, int ledRot, int registerPin[4]);
+*/
+  Weiche(int wnr, int weichenPinGerade, int weichenPinKurve, int weichenLedPinGerade, int weichenLedPinGeradeRot, int weichenLedPinKurve, int weichenLedPinKurveRot, int adressWeichenposition, int weichentimeout, int wt, int wgt, int registerPins[4]); // definieren von für alle Methoden wichtige Informationen Pins etc.
 
   void weicheWechsel();         /**<Funktion zum Wechseln der Weiche mit Weichengruppentaste und Weichentaste in Kombination. Dies ist nur möglich wenn die Weiche nicht von einer Fahrstraße beansprucht wird.*/
   void weicheGerade();          /**<Funktion um die Weiche in Geradeweichenlage zu versetzen. Dies ist nur möglich wenn die Weiche nicht von einer Fahrstraße beansprucht wird.*/
@@ -56,6 +75,7 @@ public:
   void setWeichenfestlegung(boolean festlegestatus, int fahrstrassennr); /**<Kann die Festlegung der Weichen aktivieren. Die Weichenlage kann nicht mehr verändert werden, bis die Festlegung durch die Fahrstraße ausfgelöst wird.*/
   boolean getWeichenfestlegung();                                        /**<Es wird ausgegeben, ob die Weiche festgelegt ist, oder nicht*/
   boolean getWeichenposition();                                          /**<Gibt die Weichenposition aus, wenn die Weiche umgelaufen ist.*/
+  void setWeichebesetzt(boolean besetztmelderstatus);
 };
 
 #endif
