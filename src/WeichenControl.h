@@ -23,6 +23,7 @@ class WeichenControl
 private:
   int _anzahlWeichen;      //anzahl an Meldern, für die Objekte erstllt wurden
   class Weiche **_pWeiche; //dynamisches Array von Objekten der Klasse besetztmelder, zur steuerung und abfrage von besetztmeldern
+  void setWeicheBesetzt(int WeichenNr, boolean besetztmelderstatus);
 
 public:
   /**Diese Klasse erstellt nach der angegebenen Menge Objekte der Klasse Weiche und initialisiert diese. 
@@ -49,7 +50,6 @@ public:
   void setWeichenfestlegung(int weichenNr, int fahrstrassenNr, boolean festlegestatus); /**<Kann die Festlegung der Weichen aktivieren. Die Weichenlage kann nicht mehr verändert werden, bis die Festlegung durch die Fahrstraße ausfgelöst wird.*/
   boolean getWeichenfestlegung(int weichenNr);                                          /**<Es wird ausgegeben, ob die Weiche festgelegt ist, oder nicht*/
   boolean getWeichenposition(int weichenNr);                                            /**<Es wird der akuelle Status der angegebenen Weiche ausgegeben. (true = gerade, false = kurve)*/
-  void setWeicheBesetzt(int WeichenNr, boolean besetztmelderstatus);
   friend class Besetztmelder;/**<veränder den Status der Weiche und läasst die roten Leds die Stellung anzeigen*/
 };
 

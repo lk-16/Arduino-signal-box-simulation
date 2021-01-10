@@ -26,8 +26,10 @@ Melder::Melder(String melderName, int tueMelderLed, int weckerPin, int wutPin, i
   pinMode(_weckerPin, OUTPUT); 
 }
 
-void Melder::tueMelder()                                                                //tastenüberwachung
+void Melder::tueMelder(ZugtastenControl ZugtastenControl)                                                                //tastenüberwachung
 {
+  if (ZugtastenControl.zugtastenGedrueckt()) //wenn eine Zugtaste gedrückt ist
+  {
   if ((millis() - _melderStartzeit >= _melderTimeout))
   {
     _tueMelderStatus = true;                                                             //FTÜ-Melder ist false keine Warnung, true melder und ggf. wecker schlägt an
@@ -44,6 +46,16 @@ void Melder::tueMelder()                                                        
       Actor::digitalSchalten(_weckerPin, HIGH);                                          //Relais fällt zurück --> Wecker wird gestoppt
     }
     Serial.println(_melderName);                                                        //Meldername und Status wird über den seriellen Monitor angezeigt............................... Ausgabe der Meldernamen funktioniert noch nicht
+  }
+  }
+  
+  else //wenn keine Mehr gedrückt wird,
+  {
+    _melderStartzeit = millis();                    //setze den Timer zurück
+    _tueMelderStatus = false;                       //den Status auf 0
+    Melder::digitalSchalten(_tueMelderLed, LOW); //Schalte die Led aus
+    Melder::digitalSchalten(_weckerPin, HIGH);   //Mache den Wecker aus
+    _wutAktivierung = false;                          //beim Beenden der Störung wird die Unterbrechung wieder aufgehoben
   }
 }
 

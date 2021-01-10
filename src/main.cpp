@@ -59,7 +59,7 @@ HauptsignalControl hauptsignale(hauptsignalanzahl, rot, gelb, gruen, signaltaste
 
 //Gleisbesetztmelder
 const int besetztmelderAnzahl = 6;
-int weichenbesetztmelder[besetztmelderAnzahl] ={0,1,0,0,2,0};//übergeben der Weichennr
+int weichenbesetztmelder[besetztmelderAnzahl] ={0,2,0,0,1,0};//übergeben der Weichennr
 int besetztmelderEingaenge[besetztmelderAnzahl] = {42, 41, 40, 39, 38, 37}; //an gnd angeschlossen
 int besetztmelderLedsGelb[besetztmelderAnzahl] = {0, 0, 0, 110, 0, 112};
 int besetztmelderLedsRot[besetztmelderAnzahl] = {0, 0, ftueMelderLed, 111, 0, 113};
@@ -96,10 +96,10 @@ int fahrstrasse;                                      //zeigt an welche Fahrstra
 int fahrstrassenspeicher[felderAnzahl][felderAnzahl]; //1 variable = nummer des Tischfeldes, 2. variable = nummer des Zweiten Tischfeldes ergibt die zu betätigende Fahrstrasse
 int freigabe[fahrstrassenanzahl] = {1, 1, 1};         //zählt wie viele halbe Besetztmelder schon freigegeben wurden
 int besetztmelderposition[fahrstrassenanzahl + 1][/*Reihen(Bestztm.*/ 5][5] = {
-    {{}}, //erster belibt leer, es gibt keine Fahrstrasse null, da sie in einem Array nicht gespeichert werden kann. Alle Ziffern sind automatisch null.
-    {{3, 1}, {3}, {4, 1, 1 /*, 2, 1*/}, {5}},
+    {{}},
+    {{3, 1}, {3}, {4, 1, 1}, {5}},
     {{4, 1}, {3}, {4, 1, 0}, {1, 2, 0}, {2}},
-    {{3, 1}, {0}, {1, 2, 1 /*, 2, 1*/}, {2}},
+    {{3, 1}, {0}, {1, 2, 1}, {2}},
 };                                               //0. ebene Besetztmelder anzahl, in den nächsten ebenen sind die Besetztmelder in Reihenfolge gespeichert. Die nächste Dimeinsion speichert, ob das Feld auf dem Besetztmelder eine Weiche ist, und darunter steht in welche richtung die geschaltet werden muss. Folgend steht, ob es eine Falnkenschutz weiche gibt                                                                            //anhand dieser Zahl lässt sich der Wert von Freigabe berechnen, enthält bis zu welchem Besetztmelder die Fahrstrasse aufgelöst ist.
 int besetztmelderzahl[fahrstrassenanzahl] = {0}; //die anzahl der Besetztmelder die schon freigegeben wurde
 
@@ -114,8 +114,8 @@ void setup()
 
   //Fahrstrassentastenkombinationen
   fahrstrassenspeicher[2][3] = 1;
-  fahrstrassenspeicher[1][2] = 2; //wenn die Tasten auf feld 10 und feld 8 gedrückt werden, soll die Fahrstraße 1 einlaufen
-  fahrstrassenspeicher[0][1] = 3;
+  fahrstrassenspeicher[1][2] = 2; 
+  fahrstrassenspeicher[0][1] = 3;//wenn die Tasten auf feld 10 und feld 8 gedrückt werden, soll die Fahrstraße 1 einlaufen
 }
 
 void loop()
@@ -126,8 +126,8 @@ void loop()
   anzahl = 0;
   for (int j = 0; j < zugtastenC.getZugtastenAnzahl(); j++)
   {
-    if (zugtastenC.getZugtastenstatus(j) == true && anzahl < 2) //Wenn die Zugstrassentaste gedrückt wurde, und noch nicht zwei Tasten gedrückt wurden
-    {
+    if (zugtastenC.getZugtastenstatus(j) == true && anzahl < 2)//Wenn die Zugstrassentaste gedrückt wurde...
+    {                                                        //...und noch nicht zwei Tasten gedrückt wurden
       zugtastenspeicher[anzahl] = j; //speichere das Feld auf dem die taste gedrückt wurde
       anzahl++;                      //erhöhe die anzahl der gedrückten anzahl an tasten um 1
     }
@@ -223,7 +223,8 @@ void loop()
       //alle besetztmelder müssen in der Fahrstraße einmal rot gewesen sein und am ende wieder frei sein
     }
   }
-
+  ftueMelder.tueMelder(zugtastenC);
+/*
   //FTÜ-Melder
   if (zugtastenC.zugtastenGedrueckt()) //wenn eine Zugtaste gedrückt ist
   {
@@ -237,7 +238,7 @@ void loop()
     ftueMelder.digitalSchalten(ftueMelder.getWecker(), HIGH);   //Mache den Wecker aus
     ftueMelder.setWutAktivierung(LOW);                          //beim Beenden der Störung wird die Unterbrechung wieder aufgehoben
   }
-
+*/
   //Signale
   hauptsignale.hauptsignaleHp0Manuell(); //über die Signalhaltgruppentaste und die Zugtaste auf dem Feld des Signals kann ein Signal auf hp0 gestellt werden
   hauptsignale.hauptsignaleSperren();    //über weichen  und weichensperrtaste kann ein Signal gesperrt werden

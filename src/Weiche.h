@@ -44,6 +44,7 @@ private:                 //private Variablen für die Klasse Weichen
   boolean _weichenfestlegung = false;  //wenn aus true, kann die Weiche nicht mehr gestellt werden
   int _fahrstrassefestgelegt = 0;      //speichert von welcher Fahrstraße die Weiche festgelegt wurde, und nur diese kann die Festlegung auch wieder lösen
   void setWeichenLeds(boolean weichenlage);//kurve oder gerade und Pinstatus, schaltet je nach Besetztmelderstatus und beleuchtungsstatus die passenden Weichenspitzenmelder
+  void weichenBlinken();        /**<Die Weichen-Leds blinken je nach Lage der Weiche. Dies funktioniert nur, wenn die Weiche auch schaltet.*/
 
 public:
 /** Erstellt Weichen.
@@ -66,16 +67,15 @@ public:
   void weicheWechsel();         /**<Funktion zum Wechseln der Weiche mit Weichengruppentaste und Weichentaste in Kombination. Dies ist nur möglich wenn die Weiche nicht von einer Fahrstraße beansprucht wird.*/
   void weicheGerade();          /**<Funktion um die Weiche in Geradeweichenlage zu versetzen. Dies ist nur möglich wenn die Weiche nicht von einer Fahrstraße beansprucht wird.*/
   void weicheKurve();           /**<Funktion um die Weiche in Kurvenlage zu versetzten. Dies ist nur möglich wenn die Weiche nicht von einer Fahrstraße beansprucht wird.*/
-  void weichenBlinken();        /**<Die Weichen-Leds blinken je nach Lage der Weiche. Dies funktioniert nur, wenn die Weiche auch schaltet.*/
   void weicheRelaisHIGH();      /**<Alle Weichenrelais werden auf HIGH gesetzt. Die Relais sind alle inaktiv.*/
   void weicheRelaisLOW();       /**<Alle Weichenrelais werden auf LOW gesetzt. Die Relais sind alle aktiv.*/
-  void weichenpositionEEPROM(); /**<Die Weichenposition wird dauerhaft im EEPROM gespeichert. Dafür wird sie geupdatet, wenn eine Weiche geschaltet wurde*/
+  void weichenpositionEEPROM(); /**<Die Weichenposition wird aus dem EEPROM abgerufen und ausgeführt. Die Methode wird am Anfang benötigt, so wird sicher gestellt, das alle Weichen in der vom Stellpult ange-nommenen Lage sind*/
   void weicheSchalten();        /**<Beendet nach der zuvor im Konstruktor definierten Zeit das Schalten des Relais.(je nach Weichenantrieb und Schaltdauer) Methode muss für jedes Objekt der Klasse einmal im Loop vorhanden sein.*/
 
   void setWeichenfestlegung(boolean festlegestatus, int fahrstrassennr); /**<Kann die Festlegung der Weichen aktivieren. Die Weichenlage kann nicht mehr verändert werden, bis die Festlegung durch die Fahrstraße ausfgelöst wird.*/
   boolean getWeichenfestlegung();                                        /**<Es wird ausgegeben, ob die Weiche festgelegt ist, oder nicht*/
   boolean getWeichenposition();                                          /**<Gibt die Weichenposition aus, wenn die Weiche umgelaufen ist.*/
-  void setWeichebesetzt(boolean besetztmelderstatus);
+  void setWeichebesetzt(boolean besetztmelderstatus);/**<Ändert die Weichenausleuchtung auf die RotenLeds um die Besetztmeldung anzuzeigen. Da die Weichen mit WeichenControl erstellt werden, benötigt es keine Zugriffseinschränkung, diese findet sich in WeichenControl, nur Besetztmelder können von dort auf diese Methode von Weiche zugreifen.*/
 };
 
 #endif
