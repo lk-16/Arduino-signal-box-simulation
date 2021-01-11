@@ -106,8 +106,6 @@ int besetztmelderzahl[fahrstrassenanzahl] = {0}; //die anzahl der Besetztmelder 
 
 void setup()
 {
-  pinMode(ftueMelderLed, OUTPUT);
-  ftueMelder.digitalSchalten(weckerPin, HIGH);
   weichen.weichenRelaisHIGH();       //alle möglichen Eingaben an den Relais werden gelöscht
   weichen.weichenpositionenEEPROM(); //gespeicherte Weichenposition wird angezeigt und ausgeführt
   Serial.begin(600);
@@ -224,21 +222,6 @@ void loop()
     }
   }
   ftueMelder.tueMelder(zugtastenC);
-/*
-  //FTÜ-Melder
-  if (zugtastenC.zugtastenGedrueckt()) //wenn eine Zugtaste gedrückt ist
-  {
-    ftueMelder.tueMelder(); //kontrolliere wie lange die Tasten gesrückt wurden
-  }
-  else //wenn keine Mehr gedrückt wird,
-  {
-    ftueMelder.setMelderStartzeit(millis());                    //setze den Timer zurück
-    ftueMelder.setTueMelderStatus(false);                       //den Status auf 0
-    ftueMelder.digitalSchalten(ftueMelder.getTueLedPin(), LOW); //Schalte die Led aus
-    ftueMelder.digitalSchalten(ftueMelder.getWecker(), HIGH);   //Mache den Wecker aus
-    ftueMelder.setWutAktivierung(LOW);                          //beim Beenden der Störung wird die Unterbrechung wieder aufgehoben
-  }
-*/
   //Signale
   hauptsignale.hauptsignaleHp0Manuell(); //über die Signalhaltgruppentaste und die Zugtaste auf dem Feld des Signals kann ein Signal auf hp0 gestellt werden
   hauptsignale.hauptsignaleSperren();    //über weichen  und weichensperrtaste kann ein Signal gesperrt werden

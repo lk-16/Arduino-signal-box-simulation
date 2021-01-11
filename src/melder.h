@@ -45,13 +45,5 @@ public:
   */
   Melder(String melderName, int tueMelderLed, int weckerPin, int wutPin, int registerPins[4]); //definieren der Pins von Meldern
   void tueMelder(ZugtastenControl ZugtastenControl);         /**<Löst nach 5 sec drücken einen optischen Melder und nach weiteren 5 den Wecker aus.*/
-  int getTueLedPin();                                        /**<Herausgabe des LedPins. Wird in der main benötigt, so werden bleibt der Programmcode für die TÜ-Melder egal, wie der Pin der Led benannt ist, immer gleich und nur die Objektdefinitionen müssen angepasst werden.*/
-  boolean getWutStatus();                                    /**<Herausgabe des Status der Weckerunterbrechertaste.*/
-  void setWutAktivierung(boolean newWutAktivierung);         /**<Veränderung des Status der WUT: aktiv/inaktiv.*/
-  void setTueMelderStatus(boolean newTueMelderStatus);       /**<Veränderung des Status des gesamten Melders.*/
-  void setMelderStartzeit(unsigned long newMelderStartzeit); /**<Setzt den Melder zurück (Abfragen in der main.cpp werden benötigt).*/
-  int getWecker();                                           /**<Der Pin des Weckers wird ausgegeben. Wird in der main benötigt, so werden bleibt der Programmcode für die TÜ-Melder egal, wie der Pin des Weckers benannt ist, immer gleich und nur die Objektdefinitionen müssen angepasst werden.*/
-  
-
 };
 #endif

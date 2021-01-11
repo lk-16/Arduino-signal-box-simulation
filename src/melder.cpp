@@ -24,6 +24,8 @@ Melder::Melder(String melderName, int tueMelderLed, int weckerPin, int wutPin, i
   pinMode(_tueMelderLed, OUTPUT);                   //Tastenüberwachung led Melder
   pinMode(_wutPin, INPUT_PULLUP);                          //Tastenüberwachung Weckerunterbrechertaste
   pinMode(_weckerPin, OUTPUT); 
+
+  digitalSchalten(_weckerPin, HIGH);
 }
 
 void Melder::tueMelder(ZugtastenControl ZugtastenControl)                                                                //tastenüberwachung
@@ -40,7 +42,7 @@ void Melder::tueMelder(ZugtastenControl ZugtastenControl)                       
       Actor::digitalSchalten(_weckerPin, LOW);                                           //Relais schaltet --> Wecker klingelt
 
     }
-    if (Melder::getWutStatus() == HIGH)                                                 //wenn Weckerunterbrechertaste gedrückt
+    if (digitalRead(_wutPin) == HIGH)                                                 //wenn Weckerunterbrechertaste gedrückt
     {
       _wutAktivierung = HIGH;                                                            //die Weckerunterbrechertaste wurde gedrückt
       Actor::digitalSchalten(_weckerPin, HIGH);                                          //Relais fällt zurück --> Wecker wird gestoppt
@@ -57,36 +59,4 @@ void Melder::tueMelder(ZugtastenControl ZugtastenControl)                       
     Melder::digitalSchalten(_weckerPin, HIGH);   //Mache den Wecker aus
     _wutAktivierung = false;                          //beim Beenden der Störung wird die Unterbrechung wieder aufgehoben
   }
-}
-
-
-int Melder::getTueLedPin()                 //Herausgabe des Melder LED-Pin
-{
-  return _tueMelderLed;                    //Pin wird zurückgegeben
-}
-
-boolean Melder::getWutStatus()                        //gib den aktuellen Status der Weckerunterbrechertaste aus
-{
-  boolean wutstatus = digitalRead(_wutPin);
-  return wutstatus;
-}
-
-void Melder::setWutAktivierung(boolean aktivierung)   //verändere den Status der WUT-Aktivierung, ist die WUT aktiv oder nicht
-{
-  _wutAktivierung = aktivierung;
-}
-
-void Melder::setTueMelderStatus(boolean newTueMelderStatus)         //verändere den Status der Tastenüberwachung, aktiviert oder nicht aktiviert
-{
-  _tueMelderStatus = newTueMelderStatus;
-}
-
-void Melder::setMelderStartzeit(unsigned long newMelderStartzeit)   //verändere die Startzeit des melders um die Länge des Tastendrucks zu messen
-{
-  _melderStartzeit = newMelderStartzeit;
-}
-
-int Melder::getWecker()
-{
-  return _weckerPin;
 }
