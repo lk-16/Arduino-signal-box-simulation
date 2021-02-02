@@ -24,7 +24,7 @@ private:
   int _gelbPin;
   int _gruenPin;
 
-  void setSignalHp0(); /**<Die Stati der Signale werden visuell und die Variable über die Methode signale::setSignalstatus() verändert, in hpSchalten können sie von außerhalb der Klasse verändert werden*/
+  void setSignalHp0(); /**<Die Stati der Signale werden visuell und die Variable zum speichern des Signalstatus über die Methode signale::setSignalstatus() verändert, in hpSchalten können sie von außerhalb der Klasse verändert werden*/
   void setSignalHp1();
   void setSignalHp2();
 
