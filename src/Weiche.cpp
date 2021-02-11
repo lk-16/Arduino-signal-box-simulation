@@ -34,8 +34,8 @@ Weiche::Weiche(int wnr, int weichenPinGerade, int weichenPinKurve, int weichenLe
   pinMode(_weichenLedPinGeradeRot, OUTPUT);
   pinMode(_weichenLedPinKurve, OUTPUT);
   pinMode(_weichenLedPinKurveRot, OUTPUT);
-  pinMode(wt, INPUT_PULLUP);
-  pinMode(wgt, INPUT_PULLUP);
+  pinMode(wt, INPUT);
+  pinMode(wgt, INPUT);
 }
 
 //die Weiche wechselt ihre Position

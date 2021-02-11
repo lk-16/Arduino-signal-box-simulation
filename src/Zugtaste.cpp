@@ -16,7 +16,7 @@
 Zugtaste::Zugtaste(int zugtastenPin)
 {
   _zugtastenPin = zugtastenPin;
-  pinMode(_zugtastenPin, INPUT_PULLUP);
+  pinMode(_zugtastenPin, INPUT);
 }
 
 boolean Zugtaste::getzugtastenstatus()                          //boolean um den Zugtastenstatus zu erfahren.
