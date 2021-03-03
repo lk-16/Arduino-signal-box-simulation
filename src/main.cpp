@@ -6,7 +6,7 @@
 #include "Melder.h"
 
 //Pinbelegung
-int schieberegisterPins[4] = {2, 8, 9, 10};
+int schieberegisterPins[4] = {4, 8, 9, 10};
 int w1g = 22; //w=Weiche  bzw. Weichenrelais g=Relais für gerade
 int w1k = 23; //g=Relais für gerade
 int w2g = 24;
@@ -14,31 +14,40 @@ int w2k = 25;
 int w3g = 26;
 int w3k = 27;
 
-int wt1 = 33; //Pinbelegung Weichentasten
-int wt2 = 32;
+int wt1 = 11; //Pinbelegung Weichentasten
+int wt2 = 20;
+int wt3 = 2;
 
 int ledw1g = 102; //Pinbelegung der WeichenLEDs
 int ledw1k = 103;
 int ledw2g = 104;
 int ledw2k = 105;
-int weichentimeout = 1000; //dauer des Schaltvorgangs bei den Weichen
-int wgt = 53;              //Weichengruppentaste
+int ledw3g = 104;
+int ledw3k = 105;
 
-int zta1 = 2; // Zugstraßentaste 1 an Pin 2
-int zta2 = 3; // Zugstraßentaste 2 an Pin 3
-int zta3 = 4; // Zugstraßentaste 3 an Pin 4
-int zta4 = 5;
+int weichentimeout = 1000; //dauer des Schaltvorgangs bei den Weichen
+int wgt = 18;              //Weichengruppentaste
+
+int zta1 = 5; // Zugstraßentaste 1 an Pin 2
+int zta2; // Zugstraßentaste 2 an Pin 3
+int zta3 = 12; // Zugstraßentaste 3 an Pin 4
+int zta4 = 3;
+int zta5 = 6;
+int zta6;
+int zta7 = 13;
+int zta8 = 4;
+int zta9 = 7;
 
 //Melder
 int ftueMelderLed = 101; //Fahrstraßentastenüberwachung
-int ftueMelderWut = 34;
+int ftueMelderWut = 19;
 int weckerPin = 28;
 String ftueMelderName = "ftueMelder";
 
 //Signale
-int signalsperrtaste = ftueMelderWut;                                    //signalsperrtaste, zu testzwecken auf weichengruppentaste gestellt
-int Signalentsperrtaste = wt1;                                           //s.o
-int shgt = wgt;                                                          //s.o
+int signalsperrtaste = 16;                                    //signalsperrtaste, zu testzwecken auf weichengruppentaste gestellt
+int Signalentsperrtaste = 17;                                           //s.o
+int shgt = 15;                                                          //s.o
 int allgSignaltasten[3] = {signalsperrtaste, Signalentsperrtaste, shgt}; //Signalsperrtaste, Signalentsperrtaste, Signalhaltgruppentaste, Array speichert für jedes Signal wichtige informationen, hält den schreibaufwand geringer
 
 //Signal1
@@ -47,6 +56,27 @@ int gruen1 = 107; //Hp1 (grün)  vom Signal 1
 int gelb1 = 108;  //Hp2 (langsamfahrt) vom Signal 1
 int sperrmelder1 = 109;
 int signaltaste1 = zta3; //Signaltaste, zu tastzwecken weichentaste 1
+
+//Signal2
+int rot2 = 106;   //Hp0 (rot) vom Signal 1
+int gruen2 = 107; //Hp1 (grün)  vom Signal 1
+int gelb2 = 108;  //Hp2 (langsamfahrt) vom Signal 1
+int sperrmelder2 = 109;
+int signaltaste2 = zta3; //Signaltaste, zu tastzwecken weichentaste 1
+
+//Signal3
+int rot3 = 106;   //Hp0 (rot) vom Signal 1
+int gruen3 = 107; //Hp1 (grün)  vom Signal 1
+int gelb3 = 108;  //Hp2 (langsamfahrt) vom Signal 1
+int sperrmelder3 = 109;
+int signaltaste3 = zta3; //Signaltaste, zu tastzwecken weichentaste 1
+
+//Signal4
+int rot4 = 106;   //Hp0 (rot) vom Signal 1
+int gruen4 = 107; //Hp1 (grün)  vom Signal 1
+int gelb4 = 108;  //Hp2 (langsamfahrt) vom Signal 1
+int sperrmelder4 = 109;
+int signaltaste4 = zta3; //Signaltaste, zu tastzwecken weichentaste 1
 
 const int hauptsignalanzahl = 1;
 int rot[hauptsignalanzahl] = {rot1};
@@ -106,7 +136,7 @@ int besetztmelderzahl[fahrstrassenanzahl] = {0}; //die anzahl der Besetztmelder 
 
 void setup()
 {
-  weichen.weichenRelaisHIGH();       //alle möglichen Eingaben an den Relais werden gelöscht
+  /*weichen.weichenRelaisHIGH();       //alle möglichen Eingaben an den Relais werden gelöscht
   weichen.weichenpositionenEEPROM(); //gespeicherte Weichenposition wird angezeigt und ausgeführt
   Serial.begin(600);
 
@@ -114,10 +144,18 @@ void setup()
   fahrstrassenspeicher[2][3] = 1;
   fahrstrassenspeicher[1][2] = 2; 
   fahrstrassenspeicher[0][1] = 3;//wenn die Tasten auf feld 10 und feld 8 gedrückt werden, soll die Fahrstraße 1 einlaufen
+*/
+
 }
 
 void loop()
 {
+  int k = 133;
+  ftueMelder.digitalSchalten(k, HIGH);
+  delay(1000);
+  ftueMelder.digitalSchalten(k, LOW);
+  delay(1000);
+  /*
   //abfragen aller Zugtasten
   zugtastenspeicher[0] = 0;
   zugtastenspeicher[1] = 0;
@@ -238,4 +276,5 @@ void loop()
   besetztmeldung.getBesetztmelderstatus(3, LOW, weichen);
   besetztmeldung.getBesetztmelderstatus(4, LOW, weichen);
   besetztmeldung.getBesetztmelderstatus(5, LOW, weichen);
+*/
 }
