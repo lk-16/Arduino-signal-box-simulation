@@ -18,10 +18,10 @@ Signal::Signal(int signaltastenPin, int sperrmelderPin, int allgSignaltasten[3],
   _signaltaste = signaltastenPin;
   _signalSperrmelder = sperrmelderPin;
 
-  pinMode(_signalsperrtaste, INPUT);
-  pinMode(_signalentsperrtaste, INPUT);
-  pinMode(_signalhaltgruppentaste, INPUT);
-  pinMode(_signaltaste, INPUT);
+  pinMode(_signalsperrtaste, INPUT_PULLUP);
+  pinMode(_signalentsperrtaste, INPUT_PULLUP);
+  pinMode(_signalhaltgruppentaste, INPUT_PULLUP);
+  pinMode(_signaltaste, INPUT_PULLUP);
   pinMode(_signalSperrmelder, OUTPUT);
 }
 
@@ -47,7 +47,7 @@ int Signal::getSignalhaltgruppentaste()
 
 int Signal::getSignalsperrmelder()
 {
-  return _signalhaltgruppentaste;
+  return _signalSperrmelder;
 }
 
 int Signal::getSignalsperrtaste()
@@ -64,7 +64,7 @@ void Signal::signalSperren()
   if (_signalsperre == true) //wenn das Signal gesperrt ist.
   {
     //Serial.println("gesperrt");
-    if (digitalRead(_signalentsperrtaste) == HIGH && digitalRead(_signaltaste) == HIGH) //wenn die Signalsperr- und Signaltaste gedrückt, das Signal ist ja Rot
+    if (digitalRead(_signalentsperrtaste) == LOW && digitalRead(_signaltaste) == LOW) //wenn die Signalsperr- und Signaltaste gedrückt, das Signal ist ja Rot
     {
       _signalsperre = false;                                //Signalsperrre ist Inaktiv
       Serial.println("entsperrt");
@@ -78,7 +78,7 @@ void Signal::signalSperren()
   else                                                    //wenn das Signal nicht gesperrt ist
   {
     //Serial.println("entsperrt");
-    if (digitalRead(_signalsperrtaste) == HIGH && digitalRead(_signaltaste) == HIGH && _signalstatus == 0) //wenn die Signalsperr- und Signaltaste gedrückt und das Signal Rot ist
+    if (digitalRead(_signalsperrtaste) == LOW && digitalRead(_signaltaste) == LOW && _signalstatus == 0) //wenn die Signalsperr- und Signaltaste gedrückt und das Signal Rot ist
     {
       _signalsperre = true;                                //Signalsperrre ist Akitv
       Serial.println("gesperrt");

@@ -22,7 +22,7 @@ Melder::Melder(String melderName, int tueMelderLed, int weckerPin, int wutPin, i
   _weckerPin= weckerPin;
   //definieren ob Anschlüsse Aus- oder Eingang sind
   pinMode(_tueMelderLed, OUTPUT);                   //Tastenüberwachung led Melder
-  pinMode(_wutPin, INPUT);                          //Tastenüberwachung Weckerunterbrechertaste
+  pinMode(_wutPin, INPUT_PULLUP);                          //Tastenüberwachung Weckerunterbrechertaste
   pinMode(_weckerPin, OUTPUT); 
 
   digitalSchalten(_weckerPin, HIGH);
@@ -42,7 +42,7 @@ void Melder::tueMelder(ZugtastenControl ZugtastenControl)                       
       Actor::digitalSchalten(_weckerPin, LOW);                                           //Relais schaltet --> Wecker klingelt
 
     }
-    if (digitalRead(_wutPin) == HIGH)                                                 //wenn Weckerunterbrechertaste gedrückt
+    if (digitalRead(_wutPin) == LOW)                                                 //wenn Weckerunterbrechertaste gedrückt
     {
       _wutAktivierung = HIGH;                                                            //die Weckerunterbrechertaste wurde gedrückt
       Actor::digitalSchalten(_weckerPin, HIGH);                                          //Relais fällt zurück --> Wecker wird gestoppt

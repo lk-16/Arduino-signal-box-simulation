@@ -16,11 +16,11 @@
 Zugtaste::Zugtaste(int zugtastenPin)
 {
   _zugtastenPin = zugtastenPin;
-  pinMode(_zugtastenPin, INPUT);
+  pinMode(_zugtastenPin, INPUT_PULLUP);
 }
 
 boolean Zugtaste::getzugtastenstatus()                          //boolean um den Zugtastenstatus zu erfahren.
 {
-  boolean _zugtastenstatus = digitalRead(_zugtastenPin);
+  boolean _zugtastenstatus = digitalRead(_zugtastenPin);//invertiert, damit das ganz noch mit der Zugtastensteuerung funktioniert. da interne Pullups verwendet werden
   return _zugtastenstatus;
 }

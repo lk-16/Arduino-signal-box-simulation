@@ -34,8 +34,8 @@ Weiche::Weiche(int wnr, int weichenPinGerade, int weichenPinKurve, int weichenLe
   pinMode(_weichenLedPinGeradeRot, OUTPUT);
   pinMode(_weichenLedPinKurve, OUTPUT);
   pinMode(_weichenLedPinKurveRot, OUTPUT);
-  pinMode(wt, INPUT);
-  pinMode(wgt, INPUT);
+  pinMode(_wt, INPUT_PULLUP);
+  pinMode(_wgt, INPUT_PULLUP);
 }
 
 //die Weiche wechselt ihre Position
@@ -44,7 +44,7 @@ void Weiche::weicheWechsel()
   boolean _wtstatus = digitalRead(_wt);
   boolean _wgtstatus = digitalRead(_wgt);
 
-  if (_wtstatus == HIGH && _wgtstatus == HIGH) //wenn die wt und wgt gedrückt werden
+  if (_wtstatus == LOW && _wgtstatus == LOW) //wenn die wt und wgt gedrückt werden
   {
     if (_weichenposition == true) //wenn die Weiche auf gerade steht schalte auf gerade
     {

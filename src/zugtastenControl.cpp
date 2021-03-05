@@ -32,7 +32,7 @@ boolean ZugtastenControl::zugtastenGedrueckt()
     int zugtastenpress = 0;
     for (int i = 0; i < _anzahlZugtasten; i++)
     {
-        if (ZugtastenControl::getZugtastenstatus(i) == HIGH)
+        if (ZugtastenControl::getZugtastenstatus(i) == LOW)
             zugtastenpress++;
     }
     return zugtastenpress;
