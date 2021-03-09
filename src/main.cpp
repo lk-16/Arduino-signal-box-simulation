@@ -182,7 +182,7 @@ void setup()
             }
           }
           verbindungen[h * b - reihenfolge0][h * b - nullenb] = 1;//notiere, dass die Schiene oberhalb des Gleises verbunden ist.
-        }
+        }//tiefen und breitensuche
       }
     }
   }
