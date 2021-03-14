@@ -5,6 +5,7 @@
 #include "HauptsignalControl.h"
 #include "Melder.h"
 
+//megaatmega2560
 //Pinbelegung
 int schieberegisterPins[4] = {4, 8, 9, 10};
 int w1g = 24; //w=Weiche  bzw. Weichenrelais g=Relais für gerade
@@ -144,48 +145,149 @@ int besetztmelderzahl[fahrstrassenanzahl] = {0};                 //die anzahl de
 //Fahrstraßenfindung:
 const int breite = 9;
 const int hoehe = 3;
-const char stellpult[hoehe][breite] = {{'0', '0', '0', '0', '0', '0', '0', '/', '|'},
-                                       {'|', '-', '-', '-', '<', '-', '<', '-', '|'},
-                                       {'0', '|', '-', '-', '-', '>', '-', '-', '|'}};
+const char stellpult[hoehe][breite] = {{'0', '0', '0', '0', '0', '0', '0', '/', ')'},
+                                       {'(', '-', '-', '-', '<', '-', '<', '-', ')'},
+                                       {'0', '(', '-', '-', '-', '>', '-', '-', ')'}};
 int verbindungen[besetztmelderAnzahl][besetztmelderAnzahl];
 
 void setup()
 {
+  //Die unbenutzten Felder(0) dürfen nicht mitgezählt werden, damit die FElder sich auf die Besetztmelder übertragen lassen.
   int reihenfolge0; // zählt wie viele nullen hintereinander liegen
   for (int h = 0; h < hoehe; h++)
   {
     for (int b = 0; b < breite; b++)
     {
+      //unbelegtes
       if (stellpult[h][b] == '0')
       {
         reihenfolge0++;
       }
+      //geraden
       if (stellpult[h][b] == '-')
       {
         verbindungen[h * b - reihenfolge0][h * b - reihenfolge0 - 1] = 1; //Notiere die Verbindung davor und dahinter als Verbindung
         verbindungen[h * b - reihenfolge0][h * b - reihenfolge0 + 1] = 1;
       }
+      //ende rechts
+      if (stellpult[h][b] == ')')
+      {
+        verbindungen[h * b - reihenfolge0][h * b - reihenfolge0 - 1] = 1;
+      }
+      //ende links
+      if (stellpult[h][b] == '(')
+      {
+        verbindungen[h * b - reihenfolge0][h * b - reihenfolge0 + 1] = 1;
+      }
+      //Kurve
+      if (stellpult[h][b] == '/')
+      {
+        verbindungen[h * b - reihenfolge0][h * b - reihenfolge0 + 1] = 1; //Suche nach dem Feld links
+        //suche das Feld schräg unterhalb der Kurve
+        int reihenfolge01 = reihenfolge0;  //zum zählen der nullen, die es von der Start zur zielposition gibt
+        for (int h3 = h; h3 < h - 1; h3++) //suche solange, bis du auf der Richtigen höhe bist
+        {
+          for (int b3 = b; b3 < b - 1; b3++) //suche solange bis zu in der Rictigen breite bist
+          {
+            if (b3 == b - 1 && h3 == h - 1)
+              verbindungen[h * b - reihenfolge0][b3 * h3 - reihenfolge01] = 1; //1. Position Ausgangssymbol, 2. Position zielsymbol
+            else if (stellpult[h3][b3] == '0')
+              reihenfolge01++; //wenn in einem FEld vom Start zum ziel eine Null liegt, dann notiere das.
+          }
+        }
+        verbindungen[h * b - reihenfolge0][h * b - reihenfolge0 + 1] = 1;
+      }
+
+      //Weiche nach links
+      if (stellpult[h][b] == '>') // wenn an der Stelle eine Weiche liegt
+      {
+        verbindungen[h * b - reihenfolge0][h * b - reihenfolge0 - 1] = 1; //notiere, das die Schiene hinter dem Gleis verbunden ist
+        verbindungen[h * b - reihenfolge0][h * b - reihenfolge0 + 1] = 1; //notiere, das die Schiene gerade vor dem Gleis verbunden ist
+
+        //oberhalb
+        if (stellpult[h - 1][b - 1] == '<') //ist die verbundene Weiche oberhalb verbunden.
+        {
+          //Suche nach der Nummer des Besetztmelders
+          int nullenb = 0; //zähler, wie viele Nullen bei der Suche nach dem passenden Gleis liegen
+          for (int h2 = 0; h2 <= h - 1; h2++)
+          {
+            for (int k = 0; k <= b - 1; k++) //wiederhole bis du eine Position weiter rechts bist als die Unterliegende Weiche
+            {
+              if (stellpult[h2][k] == '0')
+              {
+                nullenb++; //Finde heraus, wie viele Nullen vor dem Besetztmelder lagen.
+              }
+              if (h2 == h - 1 && k == b - 1)
+                verbindungen[h * b - reihenfolge0][h2 * k - nullenb] = 1; //notiere, dass die Schiene oberhalb des Gleises verbunden ist.
+            }
+          }
+        }
+
+        //unterhalb
+        else if (stellpult[h + 1][b - 1] == '<') //ist die verbundene Weiche unterhalb verbunden.
+        {
+          //Suche nach der Nummer des Besetztmelders
+          int nullenb = 0; //zähler, wie viele Nullen bei der Suche nach dem passenden
+          for (int h2 = 0; h2 <= h + 1; h2++)
+          {
+            for (int k = 0; k <= b - 1; k++) //wiederhole bis du eine Position weiter rechts bist als die Unterliegende Weiche
+            {
+              if (stellpult[h2][k] == '0')
+              {
+                nullenb++; //Finde heraus, wie viele Nullen vor dem Besetztmelder lagen.
+              }
+              if (h2 == h + 1 && k == b - 1)
+                verbindungen[h * b - reihenfolge0][h2 * k - nullenb] = 1; //notiere, dass die Schiene oberhalb des Gleises verbunden ist.
+            }
+          }
+        }
+      }
+      //weiche nach rechts
       if (stellpult[h][b] == '<') // wenn an der Stelle eine Weiche liegt
       {
         verbindungen[h * b - reihenfolge0][h * b - reihenfolge0 - 1] = 1; //notiere, das die Schiene hinter dem Gleis verbunden ist
         verbindungen[h * b - reihenfolge0][h * b - reihenfolge0 + 1] = 1; //notiere, das die Schiene gerade vor dem Gleis verbunden ist
 
-        if (stellpult[h - 1][b + 1] == '/' || stellpult[h - 1][b + 1] == '>')//ist die verbundene Weiche oberhalb verbunden.
+        //oberhalb
+        if (stellpult[h - 1][b + 1] == '/' || stellpult[h - 1][b + 1] == '>') //ist die verbundene Weiche oberhalb verbunden.
         {
           //Suche nach der Nummer des Besetztmelders
-          int nullenb = 0;             //zähler, wie viele Nullen bei der Suche nach dem passenden
-          for (int k = 0; k <= b; k++) //wiederhole bis du eine Position weiter rechts bist als die Unterliegende Weiche
+          int nullenb = 0; //zähler, wie viele Nullen bei der Suche nach dem passenden
+          for (int h2 = 0; h2 <= h - 1; h2++)
           {
-            if (stellpult[h - 1][k] == '0')
+            for (int k = 0; k <= b + 1; k++) //wiederhole bis du eine Position weiter rechts bist als die Unterliegende Weiche
             {
-              nullenb++; //Finde heraus, wie viele Nullen vor dem Besetztmelder lagen.
+              if (stellpult[h2][k] == '0')
+              {
+                nullenb++; //Finde heraus, wie viele Nullen vor dem Besetztmelder lagen.
+              }
+              if (h2 == h - 1 && k == b + 1)
+                verbindungen[h * b - reihenfolge0][h2 * k - nullenb] = 1; //notiere, dass die Schiene oberhalb des Gleises verbunden ist.
             }
           }
-          verbindungen[h * b - reihenfolge0][h * b - nullenb] = 1;//notiere, dass die Schiene oberhalb des Gleises verbunden ist.
-        }//tiefen und breitensuche
+        }
+        else if (stellpult[h + 1][b + 1] == '>') //ist die verbundene Weiche unterhalb verbunden.
+        {
+          //Suche nach der Nummer des Besetztmelders
+          int nullenb = 0; //zähler, wie viele Nullen bei der Suche nach dem passenden
+          for (int h2 = 0; h2 <= h + 1; h2++)
+          {
+            for (int k = 0; k <= b + 1; k++) //wiederhole bis du eine Position weiter rechts bist als die überleigende Weiche
+            {
+              if (stellpult[h2][k] == '0')
+              {
+                nullenb++; //Finde heraus, wie viele Nullen vor dem Besetztmelder lagen.
+              }
+              if (h2 == h + 1 && k == b + 1)
+              {
+                verbindungen[h * b - reihenfolge0][h2 * k - nullenb] = 1; //notiere, dass die Schiene unterhalb des Gleises verbunden ist.
+              }
+            }
+          }
+        }
       }
     }
-  }
+  }                                  //tiefen und breitensuche
   weichen.weichenRelaisHIGH();       //alle möglichen Eingaben an den Relais werden gelöscht
   weichen.weichenpositionenEEPROM(); //gespeicherte Weichenposition wird angezeigt und ausgeführt
   Serial.begin(600);
