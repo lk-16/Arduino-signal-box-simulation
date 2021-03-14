@@ -145,7 +145,7 @@ void setup()
 {
   weichen.weichenRelaisHIGH();       //alle möglichen Eingaben an den Relais werden gelöscht
   weichen.weichenpositionenEEPROM(); //gespeicherte Weichenposition wird angezeigt und ausgeführt
-  Serial.begin(600);
+  
 
   //Fahrstrassentastenkombinationen
   fahrstrassenspeicher[2][4] = 1;//minus 1 wegen array
@@ -156,6 +156,8 @@ void setup()
   fahrstrassenspeicher[5][7] = 6;
   fahrstrassenspeicher[1][7] = 7;
   fahrstrassenspeicher[0][1] = 8; //wenn die Tasten auf feld 1 und feld 2 gedrückt werden, soll die Fahrstraße 8 einlaufen
+
+  
 }
 
 void loop()
