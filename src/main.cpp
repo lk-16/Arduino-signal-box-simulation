@@ -410,7 +410,7 @@ void loop()
         if (besetztmelderzahl[kontrollen - 1] == besetztmelderposition[kontrollen][0][0]) //wenn die gesamte Fahrstrße wieder freigegeben ist
         {
           besetztmelderzahl[kontrollen - 1] = 0;
-          freigabe[kontrollen - 1] = 1;              //Der Freigabe Zähler wird wieder Zurückgesetzt.
+          freigabe[kontrollen - 1] = 1;              //Der Freigabe Zähler wird wieder zurückgesetzt.
           fahrstrassenstati[kontrollen - 1] = false; //die Fahrstrasse wird wieder als inaktiv gemeldet.
         }
       }
