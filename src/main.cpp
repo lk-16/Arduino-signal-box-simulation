@@ -290,7 +290,8 @@ void setup()
   }                                  //tiefen und breitensuche
   weichen.weichenRelaisHIGH();       //alle möglichen Eingaben an den Relais werden gelöscht
   weichen.weichenpositionenEEPROM(); //gespeicherte Weichenposition wird angezeigt und ausgeführt
-  Serial.begin(600);
+  Serial.begin(9600);
+  
 
   //Fahrstrassentastenkombinationen
   fahrstrassenspeicher[2][4] = 1; //minus 1 wegen array
@@ -305,6 +306,7 @@ void setup()
 
 void loop()
 {
+  Serial.println("Hallo");
   /* int kai = 122;
   ftueMelder.digitalSchalten(kai,HIGH);
   delay(100);
