@@ -276,15 +276,15 @@ void loop()
 
 
     ftueMelder.tueMelder(zugtastenC);
-    //Signale
+    //Signale................................................
     //hauptsignale.hauptsignaleHp0Manuell(); //über die Signalhaltgruppentaste und die Zugtaste auf dem Feld des Signals kann ein Signal auf hp0 gestellt werden
     hauptsignale.hauptsignaleSperren();    //über weichen  und weichensperrtaste kann ein Signal gesperrt werden
 
-    //Weichen
+    //Weichen..................................................
     weichen.weichenWechseln(); //WGT und WT können zum Umschalten einer Weiche benutzt werden
     weichen.weichenSchalten(); //lässt das Relais nach dem Schalten wieder zurückfallen
 
-    //Besetztmeldung
+    //Besetztmeldung.........................................
     //besetztmelder sollen immer wenn sie belegt sind den Status anzeigen.
     for (int h = 0; h < 19; h++)
     {
