@@ -4,9 +4,9 @@
  */
 
 /**
- * Diese Datei enthält die Basisklasse actors, alle Klassen sind von dieser Klasse abhängig.
+ * Diese Datei enthält die Klasse Gleissymbol, in dieser wird jedes Objekt eines Gleissymbols gespeichert.
  * @author Lennart Klüner
- * @file Actor.h
+ * @file Gleissymbol.h
  */
 
 #ifndef Gleissymbol_h
@@ -35,11 +35,11 @@ public:
      * @see Weiche.h
      * @see Hauptsignal.h
      */
-    Gleissymbol(Besetztmelder * besetztmelder, Weiche * weiche, Hauptsignal  * signal);
-    Besetztmelder * getBesetztmelder();
-    Weiche * getWeiche();
-    Hauptsignal * getHausptsignal();
-    void update();
+    Gleissymbol(Besetztmelder * besetztmelder, Weiche * weiche = nullptr, Hauptsignal  * signal = nullptr);//Konstruktor der Klasse Gleissymbol
+    Besetztmelder * getBesetztmelder();             /**Gibt einen Pointer auf den Besetztmelder zurück.*/
+    Weiche * getWeiche();                           /**Gibt einen Pointer auf den Weiche zurück, sonst null*/
+    Hauptsignal * getHausptsignal();                /**Gibt einen Pointer auf das Hauptsignal zurück, sonst null.*/
+    void update();                                  /**Updatet die Weichenposition (weicheWechsel, weicheSchalten), signalsperren, besetztmelder*/
     
 };
 #endif

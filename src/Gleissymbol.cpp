@@ -7,7 +7,7 @@
 #include "Gleissymbol.h"
 
 
-Gleissymbol::Gleissymbol(Besetztmelder * besetztmelder, Weiche * weiche, Hauptsignal * signal)
+Gleissymbol::Gleissymbol(Besetztmelder * besetztmelder, Weiche * weiche = nullptr, Hauptsignal * signal = nullptr)
 {
     _besetztmelder = besetztmelder;
     _weiche = weiche;
