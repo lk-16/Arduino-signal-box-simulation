@@ -50,6 +50,37 @@ boolean Besetztmelder::besetztmelderAuslesen(boolean besetztmelderBeleuchtung, W
     
 }
 
+boolean Besetztmelder::besetztmelderAuslesen(boolean besetztmelderBeleuchtung, Weiche weiche)
+{
+    //der Status des Besetztmelders wird eingelesen
+    _besetztmelderLicht = besetztmelderBeleuchtung;
+    _besetztmelderstatus = digitalRead(_gleisPin);
+    if (_weichenbesetztmelder != 0)
+    {
+        weiche.setWeichebesetzt(_besetztmelderstatus);
+    }
+    else
+    {
+        if (_besetztmelderstatus == false && (_besetztmelderLicht || _fahrstrassenelement)) //wenn das Gleis  nicht besetzt ist und die Anzeige an ist, oder wenn der Besetztmelder Teil einer Fahrstraße ist
+        {
+            Actor::digitalSchalten(_ledRot, LOW); //sonst schalte die rote aus
+            digitalSchalten(_ledGelb, HIGH);      //und die gelbe Led an
+        }
+        else if (!_besetztmelderstatus && !_besetztmelderLicht && !_fahrstrassenelement) // wird keine anzeige benötigt,
+        {
+            digitalSchalten(_ledRot, LOW); //schalte alle Leds aus
+            digitalSchalten(_ledGelb, LOW);
+        }
+        else //wenn das Gleis besetzt ist(_besetztmeldestatus == 1)
+        {
+            digitalSchalten(_ledGelb, LOW); //schalte die gelbe aus
+            digitalSchalten(_ledRot, HIGH); //und die rote Led ein
+        }
+}
+        return _besetztmelderstatus; //_besetztmelderstatus; //gibt am ende den Status des Besetztmelder zurück
+    
+}
+
 void Besetztmelder::setBesetztmelderLicht(boolean newbesetztmelderLicht) //ein und ausschalten der Beleuchtung der Besetztmelder
 {
     _besetztmelderLicht = newbesetztmelderLicht;
