@@ -21,9 +21,9 @@
 class Gleissymbol
 {
 private:
-    Hauptsignal * _signal = nullptr;
-    Weiche * _weiche =nullptr;
-    Besetztmelder * _besetztmelder = nullptr;
+    Hauptsignal * _signal = nullptr; //Pointer auf das Hauptsignal des Gleissymbols
+    Weiche * _weiche =nullptr;      //Pointer auf die Weiche des Gleissymbols
+    Besetztmelder * _besetztmelder = nullptr;   //Pointer auf den Besetztmelder des Gleissymbols
 
 public:
     /**
@@ -39,7 +39,7 @@ public:
     Besetztmelder * getBesetztmelder();             /**Gibt einen Pointer auf den Besetztmelder zurück.*/
     Weiche * getWeiche();                           /**Gibt einen Pointer auf den Weiche zurück, sonst null*/
     Hauptsignal * getHausptsignal();                /**Gibt einen Pointer auf das Hauptsignal zurück, sonst null.*/
-    void update();                                  /**Updatet die Weichenposition (weicheWechsel, weicheSchalten), signalsperren, besetztmelder*/
+    void update();                                  /**Updatet, wenn vorhanden, die Weichenposition (weicheWechsel, weicheSchalten), signalsperren, besetztmelder*/
     
 };
 #endif
