@@ -6,29 +6,33 @@
 
 #include "Gleissymbol.h"
 
-
-Gleissymbol::Gleissymbol(Besetztmelder * besetztmelder, Weiche * weiche = nullptr, Hauptsignal * signal = nullptr)
+Gleissymbol::Gleissymbol(Besetztmelder *besetztmelder, Weiche *weiche = nullptr, Hauptsignal *signal = nullptr)
 {
     _besetztmelder = besetztmelder;
     _weiche = weiche;
     _signal = signal;
 }
-Besetztmelder * Gleissymbol::getBesetztmelder()
+Besetztmelder *Gleissymbol::getBesetztmelder()
 {
     return _besetztmelder;
 }
-Weiche * Gleissymbol::getWeiche()
+Weiche *Gleissymbol::getWeiche()
 {
     return _weiche;
 }
-Hauptsignal * Gleissymbol::getHausptsignal()
+Hauptsignal *Gleissymbol::getHausptsignal()
 {
     return _signal;
 }
 void Gleissymbol::update()
 {
-    _signal->signalSperren();
-    _weiche->weicheWechsel();
-    _weiche->weicheSchalten();
-    _besetztmelder->besetztmelderAuslesen(LOW, *_weiche);
+    if (_signal != nullptr)//wenn es ein signal gibt.
+        _signal->signalSperren();
+    if (_weiche != nullptr) //wenn es eine Weiche gibt
+    {
+        _weiche->weicheWechsel();
+        _weiche->weicheSchalten();
+    }
+    if (_besetztmelder != nullptr)  //wenn es einen Besetztmelder gibt.
+        _besetztmelder->besetztmelderAuslesen(LOW, *_weiche);
 }
