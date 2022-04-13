@@ -19,6 +19,7 @@
 #include <Arduino.h>
 #include <Schieberegister.h>
 #include "Actor.h"
+#include "Gleissymbol.h"
 
 /**Die Klasse gibt weiter ob Zugtasten gedrückt wurden.
  * Die Klasse speichert den Pin der Zugtaste, und gibt ihren Status aus
@@ -29,12 +30,13 @@ private:
   //Pins
   int _weckerPin;
   int _zugtastenPin;
-
+  Gleissymbol *_symbol = nullptr;
 public:
   /** Übergibt alle Pin die für die Zugtaste wichtig sind. Alle 
    * @param[in] zugtastenPin Der Pin, an dem der Taster für die Zugtaste angeschlossen ist. (Pullup-Wiederstand nicht vergessen 1kOhm)
+   * @param[in] symbol Symbol, auf dem die Zugtaste liegt
   */
-  Zugtaste(int zugtastenPin); 
+  Zugtaste(int zugtastenPin, Gleissymbol *symbol = nullptr);   
   boolean getzugtastenstatus();                     /**<Gibt den Status der Zugtasten aus(HIGH = gedrückt, LOW = ungedrückt*/
 };
 

@@ -13,9 +13,10 @@
 //Methoden der Klasse Weichen
 
 //definieren von für alle Methoden wichtige Informationen Pins etc.
-Zugtaste::Zugtaste(int zugtastenPin)
+Zugtaste::Zugtaste(int zugtastenPin, Gleissymbol *symbol = nullptr)
 {
   _zugtastenPin = zugtastenPin;
+  _symbol = symbol;
   pinMode(_zugtastenPin, INPUT_PULLUP);
 }
 
