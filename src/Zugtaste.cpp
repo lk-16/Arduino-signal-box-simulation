@@ -25,3 +25,13 @@ boolean Zugtaste::getzugtastenstatus()                          //boolean um den
   boolean _zugtastenstatus = digitalRead(_zugtastenPin);//invertiert, damit das ganz noch mit der Zugtastensteuerung funktioniert. da interne Pullups verwendet werden
   return _zugtastenstatus;
 }
+
+void Zugtaste::setGleissymbol(Gleissymbol *symbol)
+{
+  _symbol=symbol;
+}
+
+Gleissymbol *Zugtaste::getGleissymbol()
+{
+  return _symbol;
+}

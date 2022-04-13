@@ -31,6 +31,8 @@ public:
     int getZugtastenAnzahl();/**<gibt die Anzahl an erstellten Objekten der Klasse zugtasten an.*/
     boolean getZugtastenstatus(int zugtastenNr);/**<Gibt den den Status der angegeben Zugtaste aus.*/
     boolean zugtastenGedrueckt();
+    void setGleissymbol(int zugtastenNr, Gleissymbol *symbol);
+    Gleissymbol *getGleissymbol(int zugtastenNr);
 };
 
 #endif

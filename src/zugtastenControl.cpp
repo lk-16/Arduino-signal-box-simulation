@@ -37,3 +37,13 @@ boolean ZugtastenControl::zugtastenGedrueckt()
     }
     return zugtastenpress;
 }
+
+void ZugtastenControl::setGleissymbol(int zugtastenNr, Gleissymbol *symbol)
+{
+    _pzugtasten[zugtastenNr]->setGleissymbol(symbol);
+}
+
+Gleissymbol *ZugtastenControl::getGleissymbol(int zugtastenNr)
+{
+    return _pzugtasten[zugtastenNr]->getGleissymbol();
+}

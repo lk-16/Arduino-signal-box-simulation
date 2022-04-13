@@ -38,6 +38,8 @@ public:
   */
   Zugtaste(int zugtastenPin, Gleissymbol *symbol = nullptr);   
   boolean getzugtastenstatus();                     /**<Gibt den Status der Zugtasten aus(HIGH = gedrückt, LOW = ungedrückt*/
+  void setGleissymbol(Gleissymbol *symbol);
+  Gleissymbol *getGleissymbol();
 };
 
 #endif
