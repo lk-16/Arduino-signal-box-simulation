@@ -36,7 +36,7 @@ public:
      * @see Weiche.h
      * @see Hauptsignal.h
      */
-    Gleissymbol(Besetztmelder * besetztmelder, Weiche * weiche = nullptr, Hauptsignal  * signal = nullptr);//Konstruktor der Klasse Gleissymbol
+    Gleissymbol(Besetztmelder * besetztmelder = nullptr, Weiche * weiche = nullptr, Hauptsignal  * signal = nullptr);//Konstruktor der Klasse Gleissymbol
     Besetztmelder * getBesetztmelder();             /**<Gibt einen Pointer auf den Besetztmelder zurück.*/
     Weiche * getWeiche();                           /**<Gibt einen Pointer auf den Weiche zurück, sonst null*/
     Hauptsignal * getHausptsignal();                /**<Gibt einen Pointer auf das Hauptsignal zurück, sonst null.*/

@@ -28,6 +28,7 @@ class Graph
      * @param [in] speicher Array des Graphen, die Verbindungen sind hier gespeichert.
     */
         Graph(int anzahlKnoten, Gleissymbol speicher[/*anzahlKnoten*/][4]);
+
         boolean wegSuchen(Gleissymbol *start, Gleissymbol *ziel);/**<Die Methode gibt zurück, ob es einen weg gibt und markiert Ihn, wenn möglich*/
         //boolean equals(Gleissymbol *symbol1, Gleissymbol *symbol2);
         void resetMarkierungen();/**<Setzt alle Markierungen zurück auf False*/
