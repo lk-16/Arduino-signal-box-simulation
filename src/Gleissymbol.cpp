@@ -36,3 +36,13 @@ void Gleissymbol::update()
     if (_besetztmelder != nullptr)  //wenn es einen Besetztmelder gibt.
         _besetztmelder->besetztmelderAuslesen(LOW, *_weiche);
 }
+
+void Gleissymbol::setMarkierung(boolean status)
+{
+    _markiert = status;
+}
+
+boolean Gleissymbol::getMarkierung()
+{
+    return _markiert;
+}
