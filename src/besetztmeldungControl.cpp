@@ -18,6 +18,10 @@ BesetztmeldungControl::BesetztmeldungControl(int gleisPins[], int ledsGelb[], in
         _pbesetztmelder[besetztmelderNr] = new Besetztmelder(gleisPins[besetztmelderNr], ledsGelb[besetztmelderNr], ledsRot[besetztmelderNr], weichenbesetztmelder[besetztmelderNr], registerPins);
 }
 
+Besetztmelder *BesetztmeldungControl::getBesetztmelder(int BesetztmelderNr)
+{
+    return _pbesetztmelder[BesetztmelderNr];
+}
 //aus der Klasse Control werden die entgegengenommenen Befehle auf die einzelnen Besetztmelder verteilt.
 boolean BesetztmeldungControl::getBesetztmelderstatus(int besetztmelder, boolean besetztmelderBeleuchtung, WeichenControl WeichenControl)
 {

@@ -22,6 +22,10 @@ HauptsignalControl::HauptsignalControl(int anzahlHauptsignale, int ledPinsRot[],
     
 }
 
+Hauptsignal *HauptsignalControl::getHauptsignal(int hauptsignalNr)
+{
+    return _pHauptsignale[hauptsignalNr];
+}
 void HauptsignalControl::hauptsignalSchalten(int hauptsignalNr, int newStatus)
 {
     _pHauptsignale[hauptsignalNr]->hauptsignalSchalten(newStatus);

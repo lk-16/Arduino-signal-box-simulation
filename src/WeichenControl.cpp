@@ -18,6 +18,10 @@ WeichenControl::WeichenControl(int anzahlWeichen, int weichenPinGerade[], int we
         _pWeiche[weichenNr] = new Weiche(weichenNr, weichenPinGerade[weichenNr], weichenPinKurve[weichenNr], weichenLedGerade[weichenNr], weichenLedGeradeRot[weichenNr], weichenLedKurve[weichenNr], weichenLedKurveRot[weichenNr], adressWeichenposition[weichenNr], weichentimeout, wt[weichenNr], wgt, registerPins);
 }
 
+Weiche *WeichenControl::getWeiche(int weichenNr)
+{
+    return _pWeiche[weichenNr];
+}
 void WeichenControl::weichenWechseln()
 {
     for (int weichenNr = 0; weichenNr < _anzahlWeichen; weichenNr++)

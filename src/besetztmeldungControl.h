@@ -36,7 +36,7 @@ public:
  * @see Besetztmelder(int gleisPin, int ledGelb, int ledRot, int registerPin[4]);
 */
   BesetztmeldungControl(int gleisPins[], int ledsGelb[], int ledsRot[], int weichenbesetztmelder[], int anzahlMelder, int registerPins[4]); //Im Konstruktor wird ein Array von Objekten der Klasse Besetztmelder erstellt und initialisiert
-
+  Besetztmelder *getBesetztmelder(int besetztmelderNr);
   boolean getBesetztmelderstatus(int besetztmelder, boolean besetztmelderBeleuchtung, class WeichenControl WeichenControl);              /**<Gibt den Status des angegebenen Besetztmelders aus*/
   void setBesetztmelderBeleuchtung(int besetztmelder, boolean besetztmelderLicht);                  /**<Die leds, die den Status des Besetztmelders anzeigen können an und aus geschaltet werden. Sie zeigen dennoch immer an, wenn ein Gleis besetzt ist. Die Freimeldung wird nicht mehr angezeigt*/
   void setFahrstrassenelement(int besetztmelderNr, int fahrstrassenNr, boolean fahrstrassenstatus); /**<Ein Besetztmelder wird zu einem Fahrstraßenelement gemacht, somit verschwindet die Besetztmeldung auch bei frei sein des Gleises nicht. Der Besetztmelder zeigt auch die Stellung an, wenn die Beleuchtung ausgeschaltet ist.*/

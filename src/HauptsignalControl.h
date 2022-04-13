@@ -38,6 +38,7 @@ public:
  * @see signale(int signaltastenPin, int sperrmelderPin, int allgSignaltasten[3], int registerPins[4]);
 */
   HauptsignalControl(int anzahlHauptsignale, int ledPinsRot[], int ledPinsGelb[], int ledPinsGruen[], int signaltasten[], int sperrmelder[], int allgSignaltasten[3], int registerPin[4]); //Im Konstruktor wird ein Array von Objekten der Klasse Besetztmelder erstellt und initialisiert
+  Hauptsignal *getHauptsignal(int hauptsignalNr);
   void hauptsignalSchalten(int hauptsignalNr, int newStatus);                             /**<Schaltet das angegebene Signal in die angegebene Postion. (newStatus = 0(Halt), 1(Fahrt), 2(Langsamfahrt) Wenn das Signal gesperrt ist, ist kein schalten möglich*/
   void hauptsignaleHp0Manuell();                               /**<Die Hauptsignale wird mit der Signalhalttaste und der dem Signal zugeortneten Zugstraßentaste auf hp0 (rot) gestellt.*/
   void hauptsignaleSperren();                                  /**<Alle erstellten Hauptsignale können über diese Methode in der main.cpp über Signalsperr/entsperrtaste und Signaltaste, wenn sie in Haltstellung sind gegen umstellen gesperrt werden.*/
