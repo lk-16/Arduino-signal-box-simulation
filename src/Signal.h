@@ -28,7 +28,7 @@ private:
   int _signalSperrmelder;      //Pin des  Melder der anzeigt ob ein Signal gesperrt ist oder nicht
   int _signalsperrtaste;       //speichert den Pin der Signalsperrtaste
   int _signalentsperrtaste;    //speichert den Pin der Siganlentsperrtaste
-  boolean _signalsperre;       //zeigt an ob das Signal gesperrt ist oder nicht (true Signalsperre aktiv)
+  boolean _signalsperre = false;       //zeigt an ob das Signal gesperrt ist oder nicht (true Signalsperre aktiv)
 
 protected:
   void setSignalstatus(int newSignalStatus); /**<Veränderung des Signalstatus. Dieser kann nur durch Unterklassen der Klasse Signale geändert werden, zum Beispiel die Klasse Hauptsignale.*/
