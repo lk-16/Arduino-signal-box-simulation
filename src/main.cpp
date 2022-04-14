@@ -142,11 +142,12 @@ int besetztmelderposition[fahrstrassenanzahl + 1][/*Reihen(Bestztm.)*/ 9][5 /*Ti
 };                                                               // 0. ebene Besetztmelder anzahl(menge), in den nächsten ebenen sind die Besetztmelder in Reihenfolge gespeichert. Die nächste Dimeinsion speichert, ob das Feld auf dem Besetztmelder eine Weiche ist, und darunter steht in welche richtung die geschaltet werden muss. Folgend steht, ob es eine Falnkenschutz weiche gibt                                                                            //anhand dieser Zahl lässt sich der Wert von Freigabe berechnen, enthält bis zu welchem Besetztmelder die Fahrstrasse aufgelöst ist.
 int besetztmelderzahl[fahrstrassenanzahl] = {0};                 // die anzahl der Besetztmelder die schon freigegeben wurde
 
+
 /*
   2. Gleissymbole erstellen
   3. Gleissymbole den Zugtasten zuweisen
 */
-
+Graph *graph = nullptr;
 char gleissymboltyp[besetztmelderAnzahl] = {'-', '+',
                                             '+', 's', '-', '-', '<', '-', '<', 's', '+',
                                             '+', 's', '-', '-', '<', '-', 's', '+'}; //- normales Gleis, + Zugtaste, < weiche, s signal und zugtaste (lesart wie die besetztmelder von links oben nach rechts unten)
@@ -155,7 +156,7 @@ void setup()
 {
   weichen.weichenRelaisHIGH();       // alle möglichen Eingaben an den Relais werden gelöscht
   weichen.weichenpositionenEEPROM(); // gespeicherte Weichenposition wird angezeigt und ausgeführt
-  Serial.begin(600);
+  Serial.begin(9600);
 
   // Fahrstrassentastenkombinationen
   fahrstrassenspeicher[2][4] = 1; // minus 1 wegen array
@@ -171,7 +172,7 @@ void setup()
 
 
 //new:
-  Gleissymbol *symbole[besetztmelderAnzahl][4] ={nullptr};
+  Gleissymbol *symbole[besetztmelderAnzahl][4];// ={nullptr};
   int zta = 0;    // zugtastenzähler
   int signal = 0; // signalzähler
   int weiche = 0; // weichenzähler
@@ -187,7 +188,7 @@ void setup()
     }
     else if(gleissymboltyp[i] == 's')//signal und zugtaste
     {
-      symbole[i][0] = new Gleissymbol(besetztmeldung.getBesetztmelder(i),nullptr,hauptsignale.getHauptsignal(signal));
+      symbole[i][0] =  new Gleissymbol(besetztmeldung.getBesetztmelder(i),nullptr,hauptsignale.getHauptsignal(signal));
       zugtastenC.setGleissymbol(zta,symbole[i][0]);
       zta++;
       signal++;
@@ -255,6 +256,15 @@ void setup()
 //18
   symbole[18][1] = symbole[17][0];
 
+  graph = new Graph(besetztmelderAnzahl, &symbole);
+  Serial.println("Hello");
+
+  Serial.println(graph->getKnoten(3)->getMarkierung());
+  graph->getKnoten(3)->setMarkierung(true);
+  Serial.println(graph->getKnoten(3)->getMarkierung());
+  Serial.println(graph->getNachbar(2,1)->getMarkierung());
+  //Serial.println(graph->getKnoten(18)->getBesetztmelder()->besetztmelderAuslesen(LOW,weichen));
+  Serial.println("Fertig");
 }
 
 void loop()

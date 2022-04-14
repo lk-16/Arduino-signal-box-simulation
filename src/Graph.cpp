@@ -16,15 +16,69 @@ Graph::Graph(int anzahlKnoten, Gleissymbol speicher[/*anzahlKnoten*/][4])
     }
 }
 
+boolean Graph::equals(Gleissymbol *symbol1, Gleissymbol *symbol2)
+{
+    return true;
+}
+
+boolean Graph::noWay(int KnotenNr)
+{
+    return true;
+}
+
 boolean Graph::wegSuchen(Gleissymbol *start, Gleissymbol *ziel)
 {
-    int i;
-    while (start == &_speicher[i][0])
+    if(equals(start,ziel))
     {
-        /* code */
+        start->setMarkierung(true);
+        return true;
     }
-    
+    else
+    {
+        if(start->getMarkierung())
+        {
+            return false;
+        }
+        
+        
+        //suche die eigenen Verbindungen
+        int knotenNr=0;//counter
+        while(!(knotenNr >=_anzahlKnoten) && !equals(&_speicher[knotenNr][0],start))//mach solange i nicht größer ist als anzahl Knoten und solange _speicher und start nicht gleich sind
+        {
+            knotenNr++;
+        }
+        if(noWay(knotenNr))//wenn kein weiterer weg
+        {
+            return false;
+        }
+        /*else//wenn es einen weg gibt
+        {
+            //durchsuche jede Ecke
+            int k = 0;
+            while(_speicher[knotenNr][k] != nullptr)
+            {
 
+            }
+        }*/
+    }
+
+    /*
+        if start == ziel
+            markiere
+            return true
+        
+        else wenn nicht amziel
+            wenn schon markiert
+                return false
+            else
+                markieren das eigene Gleissymbol
+            
+            position des Gleissymbols start suchen im Array
+            rekusion:
+            rufe verbindungen mit (start=selbst, ziel =) auf
+
+    */
+   return true;
 }
 
 void Graph::resetMarkierungen()
@@ -39,7 +93,7 @@ boolean Graph::isReset()
 {
     for(int i = 0; i < _anzahlKnoten; i++)//durchlauf jeden Knoten
     {
-        for(int j = 0; j = _anzahlKnoten; j++)//durchlaufe seine Nachbarn
+        for(int j = 0; j < 4; j++)//durchlaufe seine Nachbarn...................................................................................................................................
         {
             if(_speicher[i][j].getMarkierung()==true)
             return false;
@@ -47,4 +101,26 @@ boolean Graph::isReset()
         }
     }
     return true;
+}
+
+Gleissymbol * Graph::getKnoten(int knotenNr)
+{
+    if(knotenNr<_anzahlKnoten && knotenNr >= 0)
+    return &_speicher[knotenNr][0];
+    else
+    {
+        Serial.println("Error: Der Gesuchte Knoten existiert nicht. (Graph.cpp, getKnoten())");
+        return nullptr;
+    }
+}
+
+Gleissymbol * Graph::getNachbar(int knotenNr, int nachbar = 1)
+{
+    if(knotenNr<_anzahlKnoten && knotenNr >= 0 &&  nachbar < 4 && nachbar > 0)
+    return &_speicher[knotenNr][nachbar];
+    else
+    {
+        Serial.println("Error: Der gesuchte Nachbar der Knotens existiert nicht, die Zahl liegt nicht im Wertebereich zwischen 1 und 4. (Graph.cpp, getNachbar())");
+        return nullptr;
+    }
 }

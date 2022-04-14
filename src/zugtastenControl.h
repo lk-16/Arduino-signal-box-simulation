@@ -18,7 +18,7 @@
 #define ZugtastenControl_h
 #include <Arduino.h>
 #include "Actor.h"
-
+#include "Gleissymbol.h"
 
 class ZugtastenControl
 {
