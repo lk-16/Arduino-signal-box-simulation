@@ -215,13 +215,15 @@ void setup()
   Serial.println(graph->getNachbar(2,0)->getMarkierung());
   
   Serial.println("Fertig");
-  Serial.println(graph->nextWay(8));
+  graph->resetMarkierungen();
+  Serial.println(graph->wegSuchen(graph->getKnoten(2),graph->getKnoten(18)));
+  /*Serial.println(graph->nextWay(8));
   graph->getKnoten(graph->nextWay(8))->setMarkierung(true);
   Serial.println(graph->nextWay(8));
   graph->getKnoten(graph->nextWay(8))->setMarkierung(true);
   Serial.println(graph->nextWay(8));
   graph->getKnoten(graph->nextWay(8))->setMarkierung(true);
-  Serial.println(graph->nextWay(8));
+  Serial.println(graph->nextWay(8));*/
 
 //..........tests...............................................................................................................
 }

@@ -20,78 +20,64 @@ Graph::Graph(int anzahlKnoten, Gleissymbol knoten[], int nachbarn[][3])
 
 boolean Graph::equals(Gleissymbol *symbol1, Gleissymbol *symbol2)
 {
-    if(symbol1 == symbol2)return true;
-    else return false;
+    if (symbol1 == symbol2)
+        return true;
+    else
+        return false;
+}
+
+int Graph::nextWay(Gleissymbol *symbol)
+{
+    int counter = 0;
+    while (counter < _anzahlKnoten && !equals(symbol, &_knoten[counter])) // suche nach der Nr des Knotens
+    {
+        counter++;
+    }
+    if (counter >= _anzahlKnoten)
+        return -1; // wenn kein Knoten gefunden wurde gibt -1 zurück
+    else
+        return nextWay(counter);
 }
 
 int Graph::nextWay(int knotenNr)
 {
     int counter = 0;
-    while(counter<_maxNachbarn && _nachbarn[knotenNr][counter] >= 0)
-    //suche Solange nach Nachbarn, bis am Ende des Arrays oder bei Wert außerhalb des Werte bereichs oder 
+    while (counter < _maxNachbarn && _nachbarn[knotenNr][counter] >= 0)
+    // suche Solange nach Nachbarn, bis am Ende des Arrays oder bei Wert außerhalb des Werte bereichs oder
     {
-        if(_knoten[_nachbarn[knotenNr][counter]].getMarkierung() == false)
+        if (_knoten[_nachbarn[knotenNr][counter]].getMarkierung() == false)
         {
             return _nachbarn[knotenNr][counter];
         }
         counter++;
-        
     }
     return -1;
 }
 
-boolean Graph::wegSuchen(Gleissymbol *start, Gleissymbol *ziel)
+int Graph::wegSuchen(Gleissymbol *start, Gleissymbol *ziel)
 {
-    if (equals(start, ziel))
+    start->setMarkierung(true);
+    if (equals(start, ziel)) // wenn am Ziel
     {
         start->setMarkierung(true);
-        return true;
+        return 1;
     }
     else
     {
-        if (start->getMarkierung())
+        boolean found = false; // wenn rückgabe von weg suchen true weg gefunden
+        while (nextWay(start) >= 0 && !found)
         {
-            return false;
-        }
-
-        // suche die eigenen Verbindungen
-        int knotenNr = 0;                                                          // counter
-        while (!(knotenNr >= _anzahlKnoten) && !equals(&_knoten[knotenNr], start)) // mach solange i nicht größer ist als anzahl Knoten und solange _speicher und start nicht gleich sind
-        {
-            knotenNr++;
-        }
-        //if (noWay(knotenNr)) // wenn kein weiterer weg
-        {
-            return false;
-        }
-        /*else//wenn es einen weg gibt
-        {
-            //durchsuche jede Ecke
-            int k = 0;
-            while(_speicher[knotenNr][k] != nullptr)
+            int laenge = 0;
+            laenge = wegSuchen(&_knoten[nextWay(start)], ziel);
+            if(laenge > 0)
             {
-
+                found = true;
+                return laenge +1;
             }
-        }*/
+        }
+
+        return -1;
     }
-
-    /*
-        if start == ziel
-            markiere
-            return true
-
-        else wenn nicht amziel
-            wenn schon markiert
-                return false
-            else
-                markieren das eigene Gleissymbol
-
-            position des Gleissymbols start suchen im Array
-            rekusion:
-            rufe verbindungen mit (start=selbst, ziel =) auf
-
-    */
-    return true;
 }
 
 void Graph::resetMarkierungen()
@@ -126,7 +112,7 @@ Gleissymbol *Graph::getKnoten(int knotenNr)
 Gleissymbol *Graph::getNachbar(int knotenNr, int nachbar)
 {
     if (knotenNr < _anzahlKnoten && knotenNr >= 0 && nachbar < _maxNachbarn && nachbar >= 0 && _nachbarn[knotenNr][nachbar] > -1)
-        
+
         return &_knoten[_nachbarn[knotenNr][nachbar]];
     else
     {

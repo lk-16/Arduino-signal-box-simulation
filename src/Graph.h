@@ -33,8 +33,9 @@ class Graph
     */
         Graph(int anzahlKnoten, Gleissymbol knoten[], int nachbarn[][3]);
         boolean equals(Gleissymbol *symbol1, Gleissymbol *symbol2);/**Gibt zurück, ob Zwei zeiger auf ein Gleissymbol auf das selbe zeigen.*/
+        int nextWay(Gleissymbol *symbol);
         int nextWay(int knotenNr);/**<Die Methode gibt die Nr des nächsten nicht markierten Nachbarn der angegebenen Knotennummer zurück*/
-        boolean wegSuchen(Gleissymbol *start, Gleissymbol *ziel);/**<Die Methode gibt zurück, ob es einen weg gibt und markiert Ihn, wenn möglich*/
+        int wegSuchen(Gleissymbol *start, Gleissymbol *ziel);/**<Die Methode gibt die länge eines Weges zurück, ob es einen weg gibt und markiert Ihn, wenn möglich*/
         void resetMarkierungen();/**<Setzt alle Markierungen zurück auf False*/
         boolean isReset();/**<Methode zur Überprüfung des Resets derMarkierungen*/
         Gleissymbol * getKnoten(int knotenNr);/**<Gibt den Knoten unter der KnotenNr zurück*/
