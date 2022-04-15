@@ -6,13 +6,15 @@
 
 #include "Graph.h"
 
-Graph::Graph(int anzahlKnoten, Gleissymbol speicher[/*anzahlKnoten*/][4])
+Graph::Graph(int anzahlKnoten, Gleissymbol knoten[], int nachbarn[][3])
 {
     _anzahlKnoten = anzahlKnoten;
-    _speicher = new Gleissymbol *[_anzahlKnoten]; // erstelle ein Pointer auf ein Array
-    for (int i = 0; i < _anzahlKnoten; i++)       // weise den Parameter speicher _speicher zu
+    //_knoten = new Gleissymbol *[_anzahlKnoten];
+    _knoten = knoten;
+    _nachbarn = new int *[_anzahlKnoten];
+    for (int i = 0; i < _anzahlKnoten; i++)
     {
-        _speicher[i] = speicher[i];
+        _nachbarn[i] = nachbarn[i];
     }
 }
 
@@ -28,26 +30,25 @@ boolean Graph::noWay(int KnotenNr)
 
 boolean Graph::wegSuchen(Gleissymbol *start, Gleissymbol *ziel)
 {
-    if(equals(start,ziel))
+    if (equals(start, ziel))
     {
         start->setMarkierung(true);
         return true;
     }
     else
     {
-        if(start->getMarkierung())
+        if (start->getMarkierung())
         {
             return false;
         }
-        
-        
-        //suche die eigenen Verbindungen
-        int knotenNr=0;//counter
-        while(!(knotenNr >=_anzahlKnoten) && !equals(&_speicher[knotenNr][0],start))//mach solange i nicht größer ist als anzahl Knoten und solange _speicher und start nicht gleich sind
+
+        // suche die eigenen Verbindungen
+        int knotenNr = 0;                                                          // counter
+        while (!(knotenNr >= _anzahlKnoten) && !equals(&_knoten[knotenNr], start)) // mach solange i nicht größer ist als anzahl Knoten und solange _speicher und start nicht gleich sind
         {
             knotenNr++;
         }
-        if(noWay(knotenNr))//wenn kein weiterer weg
+        if (noWay(knotenNr)) // wenn kein weiterer weg
         {
             return false;
         }
@@ -66,47 +67,43 @@ boolean Graph::wegSuchen(Gleissymbol *start, Gleissymbol *ziel)
         if start == ziel
             markiere
             return true
-        
+
         else wenn nicht amziel
             wenn schon markiert
                 return false
             else
                 markieren das eigene Gleissymbol
-            
+
             position des Gleissymbols start suchen im Array
             rekusion:
             rufe verbindungen mit (start=selbst, ziel =) auf
 
     */
-   return true;
+    return true;
 }
 
 void Graph::resetMarkierungen()
 {
     for (int i = 0; i < _anzahlKnoten; i++)
     {
-        _speicher[i][0].setMarkierung(false);
+        _knoten[i].setMarkierung(false);
     }
 }
 
 boolean Graph::isReset()
 {
-    for(int i = 0; i < _anzahlKnoten; i++)//durchlauf jeden Knoten
+    for (int i = 0; i < _anzahlKnoten; i++) // durchlauf jeden Knoten
     {
-        for(int j = 0; j < 4; j++)//durchlaufe seine Nachbarn...................................................................................................................................
-        {
-            if(_speicher[i][j].getMarkierung()==true)
+        if (_knoten[i].getMarkierung() == true)
             return false;
-
-        }
     }
     return true;
 }
 
-Gleissymbol * Graph::getKnoten(int knotenNr)
+Gleissymbol *Graph::getKnoten(int knotenNr)
 {
-    if(knotenNr<_anzahlKnoten && knotenNr >= 0)
-    return &_speicher[knotenNr][0];
+    if (knotenNr < _anzahlKnoten && knotenNr >= 0)
+        return &_knoten[knotenNr];
     else
     {
         Serial.println("Error: Der Gesuchte Knoten existiert nicht. (Graph.cpp, getKnoten())");
@@ -114,13 +111,14 @@ Gleissymbol * Graph::getKnoten(int knotenNr)
     }
 }
 
-Gleissymbol * Graph::getNachbar(int knotenNr, int nachbar = 1)
+Gleissymbol *Graph::getNachbar(int knotenNr, int nachbar)
 {
-    if(knotenNr<_anzahlKnoten && knotenNr >= 0 &&  nachbar < 4 && nachbar > 0)
-    return &_speicher[knotenNr][nachbar];
+    if (knotenNr < _anzahlKnoten && knotenNr >= 0 && nachbar < maxNachbarn && nachbar >= 0 && _nachbarn[knotenNr][nachbar] > -1)
+        
+        return &_knoten[_nachbarn[knotenNr][nachbar]];
     else
     {
-        Serial.println("Error: Der gesuchte Nachbar der Knotens existiert nicht, die Zahl liegt nicht im Wertebereich zwischen 1 und 4. (Graph.cpp, getNachbar())");
+        Serial.println("Error: Der gesuchte Nachbar der Knotens existiert nicht. (Graph.cpp, getNachbar())");
         return nullptr;
     }
 }

@@ -143,12 +143,14 @@ int besetztmelderposition[fahrstrassenanzahl + 1][/*Reihen(Bestztm.)*/ 9][5 /*Ti
 int besetztmelderzahl[fahrstrassenanzahl] = {0};                 // die anzahl der Besetztmelder die schon freigegeben wurde
 
 
-/*
-  2. Gleissymbole erstellen
-  3. Gleissymbole den Zugtasten zuweisen
-*/
+
 Graph *graph = nullptr;
-char gleissymboltyp[besetztmelderAnzahl] = {'-', '+',
+int nachbarn[besetztmelderAnzahl][3] = {//Nachbarn ders einzelnen Gleisymbole. Nach nummerierung in einem 2d Array gespeichert
+      {1,8,-1},{0,-1,-1},{3,-1,-1},{2,4,-1},{3,5,-1},
+      {4,6,-1},{5,7,15},{6,8,-1},{7,9,0},{8,10,-1},
+      {9,-1,-1},{12,-1,-1},{11,13,-1},{12,14,-1},{13,15,-1},
+      {14,16,6},{15,17,-1},{16,18,-1},{17,-1,-1}};
+char gleissymboltyp[besetztmelderAnzahl] = {'-', '+',//wird für die Zuweisung der Aktoren zu den Gleisbildsymbolen benötigt, in Kombination mit Control
                                             '+', 's', '-', '-', '<', '-', '<', 's', '+',
                                             '+', 's', '-', '-', '<', '-', 's', '+'}; //- normales Gleis, + Zugtaste, < weiche, s signal und zugtaste (lesart wie die besetztmelder von links oben nach rechts unten)
 
@@ -172,99 +174,50 @@ void setup()
 
 
 //new:
-  Gleissymbol *symbole[besetztmelderAnzahl][4];// ={nullptr};
+  
+  Gleissymbol knoten[besetztmelderAnzahl];//Speichert die Knoten, des Graphen
+  
   int zta = 0;    // zugtastenzähler
   int signal = 0; // signalzähler
   int weiche = 0; // weichenzähler
   for (int i = 0; i < besetztmelderAnzahl; i++)//erstellen der Gleissymbole bezüglich des Array gleissymboltyp
   {
     if (gleissymboltyp[i] == '-')//wenn normales Gleis
-      symbole[i][0] = new Gleissymbol(besetztmeldung.getBesetztmelder(i));
+      knoten[i] =  Gleissymbol(besetztmeldung.getBesetztmelder(i));
     else if(gleissymboltyp[i] == '+')//zugtaste
     {
-      symbole[i][0] = new Gleissymbol(besetztmeldung.getBesetztmelder(i));//
-      zugtastenC.setGleissymbol(zta,symbole[i][0]);//weise Gleissymbol einer Zugtaste zu
+      knoten[i] =  Gleissymbol(besetztmeldung.getBesetztmelder(i));//
+      zugtastenC.setGleissymbol(zta,&knoten[i]);//weise Gleissymbol einer Zugtaste zu
       zta++;
     }
     else if(gleissymboltyp[i] == 's')//signal und zugtaste
     {
-      symbole[i][0] =  new Gleissymbol(besetztmeldung.getBesetztmelder(i),nullptr,hauptsignale.getHauptsignal(signal));
-      zugtastenC.setGleissymbol(zta,symbole[i][0]);
+      knoten[i] =  Gleissymbol(besetztmeldung.getBesetztmelder(i),nullptr,hauptsignale.getHauptsignal(signal));
+      zugtastenC.setGleissymbol(zta,&knoten[i]);
       zta++;
       signal++;
     }
     else if(gleissymboltyp[i]== '<')//weiche
     {
-      symbole[i][0] = new Gleissymbol(besetztmeldung.getBesetztmelder(i), weichen.getWeiche(i));
+      knoten[i] = Gleissymbol(besetztmeldung.getBesetztmelder(i), weichen.getWeiche(i));
       weiche++;
     }
   }
-  //verknüpfen der Symbole
-  //0
-  symbole[0][1] = symbole[8][0];
-  symbole[0][2] = symbole[1][0];
-  //1
-  symbole[1][1] = symbole[0][0];
-  //2
-  symbole[2][1] = symbole[3][0];
-  //3
-  symbole[3][1] = symbole[2][0];
-  symbole[3][2] = symbole[4][0];
-  //4
-  symbole[4][1] = symbole[3][0];
-  symbole[4][2] = symbole[5][0];
-  //5
-  symbole[5][1] = symbole[4][0];
-  symbole[5][2] = symbole[6][0];
-  //6
-  symbole[6][1] = symbole[5][0];
-  symbole[6][2] = symbole[7][0];
-  symbole[6][3] = symbole[15][0];
-  //7
-  symbole[7][1] = symbole[6][0];
-  symbole[7][2] = symbole[8][0];
-  //8
-  symbole[8][1] = symbole[7][0];
-  symbole[8][2] = symbole[9][0];
-  symbole[8][3] = symbole[0][0];
-  //9
-  symbole[9][1] = symbole[8][0];
-  symbole[9][2] = symbole[10][0];
-  //10
-  symbole[10][1] = symbole[9][0];
-  //11
-  symbole[11][1] = symbole[12][0];
-  //12
-  symbole[12][1] = symbole[11][0];
-  symbole[12][2] = symbole[13][0];
-  //13
-  symbole[13][1] = symbole[12][0];
-  symbole[13][2] = symbole[14][0];
-  //14
-  symbole[14][1] = symbole[13][0];
-  symbole[14][2] = symbole[15][0];
-  //15
-  symbole[15][1] = symbole[14][0];
-  symbole[15][2] = symbole[16][0];
-  symbole[15][3] = symbole[6][0];
-  //16
-  symbole[16][1] = symbole[15][0];
-  symbole[16][2] = symbole[17][0];
-  //17
-  symbole[17][1] = symbole[16][0];
-  symbole[17][2] = symbole[18][0];
-//18
-  symbole[18][1] = symbole[17][0];
 
-  graph = new Graph(besetztmelderAnzahl, &symbole);
+
+//........tests.................................................................................................................
+  graph = new Graph(besetztmelderAnzahl, knoten, nachbarn);
   Serial.println("Hello");
 
   Serial.println(graph->getKnoten(3)->getMarkierung());
   graph->getKnoten(3)->setMarkierung(true);
   Serial.println(graph->getKnoten(3)->getMarkierung());
-  Serial.println(graph->getNachbar(2,1)->getMarkierung());
-  //Serial.println(graph->getKnoten(18)->getBesetztmelder()->besetztmelderAuslesen(LOW,weichen));
+  Serial.println(graph->getNachbar(2,0)->getMarkierung());
+  
   Serial.println("Fertig");
+  
+
+//..........tests...............................................................................................................
 }
 
 void loop()
