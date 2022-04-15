@@ -32,7 +32,7 @@ class Graph
      * @param [in] nachbarn Die Verknüpfunge werden mit diesem Array übergeben. nachbarn[knotennr][maxTiefe(beim Gleisbild 3)], alle nicht belegten Plätze müssen mit z.B. -1 belegt sein (außerhalb des Wertebereichs)
     */
         Graph(int anzahlKnoten, Gleissymbol knoten[], int nachbarn[][3]);
-        boolean equals(Gleissymbol *symbol1, Gleissymbol *symbol2);
+        boolean equals(Gleissymbol *symbol1, Gleissymbol *symbol2);/**Gibt zurück, ob Zwei zeiger auf ein Gleissymbol auf das selbe zeigen.*/
         int nextWay(int knotenNr);/**<Die Methode gibt die Nr des nächsten nicht markierten Nachbarn der angegebenen Knotennummer zurück*/
         boolean wegSuchen(Gleissymbol *start, Gleissymbol *ziel);/**<Die Methode gibt zurück, ob es einen weg gibt und markiert Ihn, wenn möglich*/
         void resetMarkierungen();/**<Setzt alle Markierungen zurück auf False*/
