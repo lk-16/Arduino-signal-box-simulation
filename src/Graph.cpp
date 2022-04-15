@@ -45,9 +45,9 @@ int Graph::nextWay(int knotenNr)
     while (counter < _maxNachbarn && _nachbarn[knotenNr][counter] >= 0)
     // suche Solange nach Nachbarn, bis am Ende des Arrays oder bei Wert außerhalb des Werte bereichs oder
     {
-        if (_knoten[_nachbarn[knotenNr][counter]].getMarkierung() == false)
+        if (_knoten[_nachbarn[knotenNr][counter]].getMarkierung() == false && _knoten[_nachbarn[knotenNr][counter]].isFree())//wenn der Knoten nicht markiert ist und frei
         {
-            return _nachbarn[knotenNr][counter];
+            return _nachbarn[knotenNr][counter];//gib den Knoten zurück
         }
         counter++;
     }
@@ -59,23 +59,23 @@ int Graph::wegSuchen(Gleissymbol *start, Gleissymbol *ziel)
     start->setMarkierung(true);
     if (equals(start, ziel)) // wenn am Ziel
     {
-        start->setMarkierung(true);
+        start->setWeg(true);
         return 1;
     }
     else
     {
-        boolean found = false; // wenn rückgabe von weg suchen true weg gefunden
+        boolean found = false; // wenn rückgabe von weg suchen true, dann wurde ein Weg gefunden
         while (nextWay(start) >= 0 && !found)
         {
             int laenge = 0;
             laenge = wegSuchen(&_knoten[nextWay(start)], ziel);
             if(laenge > 0)
             {
+                start->setWeg(true);
                 found = true;
                 return laenge +1;
             }
         }
-
         return -1;
     }
 }
@@ -85,6 +85,7 @@ void Graph::resetMarkierungen()
     for (int i = 0; i < _anzahlKnoten; i++)
     {
         _knoten[i].setMarkierung(false);
+        _knoten[i].setWeg(false);
     }
 }
 
@@ -92,7 +93,7 @@ boolean Graph::isReset()
 {
     for (int i = 0; i < _anzahlKnoten; i++) // durchlauf jeden Knoten
     {
-        if (_knoten[i].getMarkierung() == true)
+        if (_knoten[i].getMarkierung() == true || _knoten[i].getWeg()== true)
             return false;
     }
     return true;

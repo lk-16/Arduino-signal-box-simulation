@@ -37,6 +37,12 @@ void Gleissymbol::update()
         _besetztmelder->besetztmelderAuslesen(LOW, *_weiche);
 }
 
+boolean Gleissymbol::isFree()
+{
+    if(!_besetztmelder->getFahrstrassenelement() && !_besetztmelder->besetztmelderAuslesen(LOW, *_weiche)) return true;//wenn das Gleissymbol kein Fahrstraßenelement ist und der Besetztmelder nicht besetzt
+    else return false;
+}
+
 void Gleissymbol::setMarkierung(boolean status)
 {
     _markiert = status;
@@ -45,4 +51,14 @@ void Gleissymbol::setMarkierung(boolean status)
 boolean Gleissymbol::getMarkierung()
 {
     return _markiert;
+}
+
+void Gleissymbol::setWeg(boolean status)
+{
+    _weg = status;
+}
+
+boolean Gleissymbol::getWeg()
+{
+    return _weg;
 }
