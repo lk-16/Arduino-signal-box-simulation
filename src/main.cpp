@@ -145,7 +145,7 @@ int besetztmelderzahl[fahrstrassenanzahl] = {0};                 // die anzahl d
 
 
 Graph *graph = nullptr;
-int nachbarn[besetztmelderAnzahl][3] = {//Nachbarn ders einzelnen Gleisymbole. Nach nummerierung in einem 2d Array gespeichert
+int nachbarn[besetztmelderAnzahl][3] = {//Nachbarn ders einzelnen Gleisymbole. Nach nummerierung in einem 2d Array gespeichert. Leere Felder müssen mit einem Wert außerhalb der Wertebereichs gefüllt werden z.B. -1, da dies kleiner als 0 ist.
       {1,8,-1},{0,-1,-1},{3,-1,-1},{2,4,-1},{3,5,-1},
       {4,6,-1},{5,7,15},{6,8,-1},{7,9,0},{8,10,-1},
       {9,-1,-1},{12,-1,-1},{11,13,-1},{12,14,-1},{13,15,-1},
@@ -215,7 +215,13 @@ void setup()
   Serial.println(graph->getNachbar(2,0)->getMarkierung());
   
   Serial.println("Fertig");
-  
+  Serial.println(graph->nextWay(8));
+  graph->getKnoten(graph->nextWay(8))->setMarkierung(true);
+  Serial.println(graph->nextWay(8));
+  graph->getKnoten(graph->nextWay(8))->setMarkierung(true);
+  Serial.println(graph->nextWay(8));
+  graph->getKnoten(graph->nextWay(8))->setMarkierung(true);
+  Serial.println(graph->nextWay(8));
 
 //..........tests...............................................................................................................
 }
