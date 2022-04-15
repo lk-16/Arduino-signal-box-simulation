@@ -20,7 +20,7 @@
 class Graph
 {
     private:
-        int maxNachbarn = 3;
+        int _maxNachbarn = 3;
         int _anzahlKnoten;
         class Gleissymbol *_knoten;
         int **_nachbarn;
@@ -29,10 +29,11 @@ class Graph
     /** Erstellt einen Graphen
      * @param [in] anzahlKnoten Die Anzahl der Knoten wird angegeben.
      * @param [in] knoten Array mit allen Knoten des Graphen.
+     * @param [in] nachbarn Die Verknüpfunge werden mit diesem Array übergeben. nachbarn[knotennr][maxTiefe(beim Gleisbild 3)], alle nicht belegten Plätze müssen mit z.B. -1 belegt sein (außerhalb des Wertebereichs)
     */
         Graph(int anzahlKnoten, Gleissymbol knoten[], int nachbarn[][3]);
         boolean equals(Gleissymbol *symbol1, Gleissymbol *symbol2);
-        boolean noWay(int knotenNr);
+        int nextWay(int knotenNr);/**<Die Methode gibt die Nr des nächsten nicht markierten Nachbarn der angegebenen Knotennummer zurück*/
         boolean wegSuchen(Gleissymbol *start, Gleissymbol *ziel);/**<Die Methode gibt zurück, ob es einen weg gibt und markiert Ihn, wenn möglich*/
         void resetMarkierungen();/**<Setzt alle Markierungen zurück auf False*/
         boolean isReset();/**<Methode zur Überprüfung des Resets derMarkierungen*/

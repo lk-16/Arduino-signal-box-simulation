@@ -20,12 +20,24 @@ Graph::Graph(int anzahlKnoten, Gleissymbol knoten[], int nachbarn[][3])
 
 boolean Graph::equals(Gleissymbol *symbol1, Gleissymbol *symbol2)
 {
-    return true;
+    if(symbol1 == symbol2)return true;
+    else return false;
 }
 
-boolean Graph::noWay(int KnotenNr)
+int Graph::nextWay(int knotenNr)
 {
-    return true;
+    int counter = 0;
+    while(counter<_maxNachbarn && _nachbarn[knotenNr][counter] >= 0)
+    //suche Solange nach Nachbarn, bis am Ende des Arrays oder bei Wert außerhalb des Werte bereichs oder 
+    {
+        if(_knoten[_nachbarn[knotenNr][counter]].getMarkierung() == false)
+        {
+            return _nachbarn[knotenNr][counter];
+        }
+        counter++;
+        
+    }
+    return -1;
 }
 
 boolean Graph::wegSuchen(Gleissymbol *start, Gleissymbol *ziel)
@@ -48,7 +60,7 @@ boolean Graph::wegSuchen(Gleissymbol *start, Gleissymbol *ziel)
         {
             knotenNr++;
         }
-        if (noWay(knotenNr)) // wenn kein weiterer weg
+        //if (noWay(knotenNr)) // wenn kein weiterer weg
         {
             return false;
         }
@@ -113,7 +125,7 @@ Gleissymbol *Graph::getKnoten(int knotenNr)
 
 Gleissymbol *Graph::getNachbar(int knotenNr, int nachbar)
 {
-    if (knotenNr < _anzahlKnoten && knotenNr >= 0 && nachbar < maxNachbarn && nachbar >= 0 && _nachbarn[knotenNr][nachbar] > -1)
+    if (knotenNr < _anzahlKnoten && knotenNr >= 0 && nachbar < _maxNachbarn && nachbar >= 0 && _nachbarn[knotenNr][nachbar] > -1)
         
         return &_knoten[_nachbarn[knotenNr][nachbar]];
     else
