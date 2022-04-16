@@ -29,7 +29,7 @@ class Graph
     public:
     /** Erstellt einen Graphen
      * @param [in] anzahlKnoten Die Anzahl der Knoten wird angegeben.
-     * @param [in] knoten Array mit allen Knoten des Graphen.
+     * @param [in] knoten Array mit allen Knoten des Graphen. Die Verbindungen, die über Kurvenstellung erreicht werden, müssen am Ende stehen!!
      * @param [in] nachbarn Die Verknüpfunge werden mit diesem Array übergeben. nachbarn[knotennr][maxTiefe(beim Gleisbild 3)], alle nicht belegten Plätze müssen mit z.B. -1 belegt sein (außerhalb des Wertebereichs)
     */
         Graph(int anzahlKnoten, Gleissymbol knoten[], int nachbarn[][3]);
@@ -41,5 +41,9 @@ class Graph
         boolean isReset();/**<Methode zur Überprüfung des Resets derMarkierungen*/
         Gleissymbol * getKnoten(int knotenNr);/**<Gibt den Knoten unter der KnotenNr zurück*/
         Gleissymbol * getNachbar(int knotenNr, int nachbar = 0);/**<Gibt den Nachbarn(nachbar) des Knoten (KnoteNr) zurück*/
+        int getKnotenNr(Gleissymbol * symbol);/**<Git die Knotennr zum übergebenen Objekt zurück. Wenn nicht im Graph zu finden return -1*/
+        boolean isKnotenNr(int knotenNr);
+        boolean richtungGerade(Gleissymbol * weichensymbol, Gleissymbol * nachbar);//gibt zurück, ob die Richtung zwischen zwei Nachbarn bei gerade oder bei einer Weiche als Kurve verläuft
+        boolean richtungGerade(int weichensymbolNr, int nachbarNr);
 };
 #endif

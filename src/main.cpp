@@ -215,6 +215,8 @@ void setup()
   Serial.println(graph->getNachbar(2,0)->getMarkierung());
   
   Serial.println("Fertig");
+  Serial.println(graph->richtungGerade(3,4));
+  Serial.println(graph->richtungGerade(15,6));
   graph->getKnoten(6)->getWeiche()->setWeichenfestlegung(true,100);
   graph->resetMarkierungen();
   Serial.println(graph->wegSuchen(graph->getKnoten(2),graph->getKnoten(18)));
