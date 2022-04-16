@@ -253,3 +253,8 @@ void Weiche::setWeichenLeds(boolean weichenlage)
     }
   }
 }
+
+int Weiche::getNr()
+{
+  return _wnr;
+}

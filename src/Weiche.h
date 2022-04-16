@@ -76,6 +76,7 @@ public:
   boolean getWeichenfestlegung();                                        /**<Es wird ausgegeben, ob die Weiche festgelegt ist, oder nicht*/
   boolean getWeichenposition();                                          /**<Gibt die Weichenposition aus, wenn die Weiche umgelaufen ist.*/
   void setWeichebesetzt(boolean besetztmelderstatus);/**<Ändert die Weichenausleuchtung auf die RotenLeds um die Besetztmeldung anzuzeigen. Da die Weichen mit WeichenControl erstellt werden, benötigt es keine Zugriffseinschränkung, diese findet sich in WeichenControl, nur Besetztmelder können von dort auf diese Methode von Weiche zugreifen.*/
+  int getNr();
 };
 
 #endif

@@ -105,3 +105,8 @@ boolean Besetztmelder::getFahrstrassenelement()
 {
     return _fahrstrassenelement;
 }
+
+int Besetztmelder::getGleisPin()
+{
+    return _gleisPin;
+}

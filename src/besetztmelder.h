@@ -51,6 +51,7 @@ public:
   void setBesetztmelderLicht(boolean newBesetztmelderStatus);               /**<Die Beleuchtung des Besetztmelder kann an und aus geschaltet werden.  Sie zeigen dennoch immer an, wenn ein Gleis besetzt ist. Die Freimeldung wird nicht mehr angezeigt.*/
   void setFahrstrassenelement(int fahrstrassennr, boolean Fahrstrassenelement);                 /**<Der Besetztmelder wird zu einem Fahrstraßenelement gemacht, somit verschwindet die Besetztmeldung auch bei frei sein des Gleises nicht. Der Besetztmelder zeigt auch frei o-der belegt sein an, wenn besetztmelderLicht ausgeschaltet ist. Die Festlegung und Bean-spruchung durch eine Fahrstraße kann nur durch die gleiche Fahrstraße wieder aufgeho-ben werden.*/
   boolean getFahrstrassenelement();                                                             /**<Die Methode gibt aus, ob der Besetztmelder durch eine Fahrstraße beansprucht ist.*/
+  int getGleisPin();
  };
 
 
