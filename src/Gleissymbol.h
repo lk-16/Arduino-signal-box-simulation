@@ -24,7 +24,7 @@ private:
     boolean _markiert = false;   //Markierungsstatus des Gleissymbols, true = markiert
     unsigned int _weg = 0;
     Hauptsignal * _signal = nullptr; //Pointer auf das Hauptsignal des Gleissymbols
-    Weiche * _weiche =nullptr;      //Pointer auf die Weiche des Gleissymbols
+    Weiche * _weiche = nullptr;      //Pointer auf die Weiche des Gleissymbols
     Besetztmelder * _besetztmelder = nullptr;   //Pointer auf den Besetztmelder des Gleissymbols
 
 public:
@@ -40,7 +40,7 @@ public:
     Gleissymbol(Besetztmelder * besetztmelder = nullptr, Weiche * weiche = nullptr, Hauptsignal  * signal = nullptr);//Konstruktor der Klasse Gleissymbol
     Besetztmelder * getBesetztmelder();             /**<Gibt einen Pointer auf den Besetztmelder zurück.*/
     Weiche * getWeiche();                           /**<Gibt einen Pointer auf den Weiche zurück, sonst null*/
-    Hauptsignal * getHausptsignal();                /**<Gibt einen Pointer auf das Hauptsignal zurück, sonst null.*/
+    Hauptsignal * getHauptsignal();                /**<Gibt einen Pointer auf das Hauptsignal zurück, sonst null.*/
     void update();                                  /**<Updatet, wenn vorhanden, die Weichenposition (weicheWechsel, weicheSchalten), signalsperren, besetztmelder*/
     boolean isFree();                               /**<Gibt aus, ob das Gleissymbol frei ist, keine Besetzmelder aktiv sind etc.*/
     void setMarkierung(boolean status);             /**<true = markiert, false = nicht markiert (bei der Suche besucht/nicht besucht*/

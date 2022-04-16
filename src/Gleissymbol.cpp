@@ -20,27 +20,39 @@ Weiche *Gleissymbol::getWeiche()
 {
     return _weiche;
 }
-Hauptsignal *Gleissymbol::getHausptsignal()
+Hauptsignal *Gleissymbol::getHauptsignal()
 {
     return _signal;
 }
 void Gleissymbol::update()
 {
-    if (_signal != nullptr)//wenn es ein signal gibt.
+    if (_signal != nullptr) // wenn es ein signal gibt.
         _signal->signalSperren();
-    if (_weiche != nullptr) //wenn es eine Weiche gibt
+    if (_weiche != nullptr) // wenn es eine Weiche gibt
     {
         _weiche->weicheWechsel();
         _weiche->weicheSchalten();
     }
-    if (_besetztmelder != nullptr)  //wenn es einen Besetztmelder gibt.
+    if (_besetztmelder != nullptr) // wenn es einen Besetztmelder gibt.
         _besetztmelder->besetztmelderAuslesen(LOW, *_weiche);
 }
 
 boolean Gleissymbol::isFree()
 {
-    if(!_besetztmelder->getFahrstrassenelement() && !_besetztmelder->besetztmelderAuslesen(LOW, *_weiche)) return true;//wenn das Gleissymbol kein Fahrstraßenelement ist und der Besetztmelder nicht besetzt
-    else return false;
+    boolean free = true;
+    if (_besetztmelder != nullptr && (_besetztmelder->getFahrstrassenelement() || _besetztmelder->besetztmelderAuslesen(LOW, *_weiche)))
+    {
+        free = false;
+    }
+    if (_signal != nullptr && _signal->getSignalsperre())
+    {
+        free = false;
+    }
+    if (_weiche != nullptr && _weiche->getWeichenfestlegung())
+    {
+        free = false;
+    }
+    return free;
 }
 
 void Gleissymbol::setMarkierung(boolean status)
