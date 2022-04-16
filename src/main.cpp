@@ -5,6 +5,7 @@
 #include "HauptsignalControl.h"
 #include "Melder.h"
 #include "Graph.h"
+#include "List.h"
 
 // Pinbelegung
 int schieberegisterPins[4] = {4, 8, 9, 10};
@@ -143,7 +144,7 @@ int besetztmelderposition[fahrstrassenanzahl + 1][/*Reihen(Bestztm.)*/ 9][5 /*Ti
 int besetztmelderzahl[fahrstrassenanzahl] = {0};                 // die anzahl der Besetztmelder die schon freigegeben wurde
 
 
-
+List list;
 Graph *graph = nullptr;
 int nachbarn[besetztmelderAnzahl][3] = {//Nachbarn ders einzelnen Gleisymbole. Nach nummerierung in einem 2d Array gespeichert. Leere Felder müssen mit einem Wert außerhalb der Wertebereichs gefüllt werden z.B. -1, da dies kleiner als 0 ist.
       {1,8,-1},{0,-1,-1},{3,-1,-1},{2,4,-1},{3,5,-1},
@@ -169,7 +170,6 @@ void setup()
   fahrstrassenspeicher[5][7] = 6;
   fahrstrassenspeicher[1][7] = 7;
   fahrstrassenspeicher[0][1] = 8; // wenn die Tasten auf feld 1 und feld 2 gedrückt werden, soll die Fahrstraße 8 einlaufen
-
 
 
 
@@ -209,11 +209,7 @@ void setup()
   graph = new Graph(besetztmelderAnzahl, knoten, nachbarn);
   Serial.println("Hello");
 
-  Serial.println(graph->getKnoten(3)->getMarkierung());
-  graph->getKnoten(3)->setMarkierung(true);
-  Serial.println(graph->getKnoten(3)->getMarkierung());
-  Serial.println(graph->getNachbar(2,0)->getMarkierung());
-  
+
   Serial.println("Fertig");
   Serial.println(graph->richtungGerade(graph->getKnoten(6),graph->getKnoten(15)));
   Serial.println(graph->richtungGerade(15,6));
