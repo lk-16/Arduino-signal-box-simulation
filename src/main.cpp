@@ -199,7 +199,7 @@ void setup()
     }
     else if(gleissymboltyp[i]== '<')//weiche
     {
-      knoten[i] = Gleissymbol(besetztmeldung.getBesetztmelder(i), weichen.getWeiche(i));
+      knoten[i] = Gleissymbol(besetztmeldung.getBesetztmelder(i), weichen.getWeiche(weiche));
       weiche++;
     }
   }
@@ -215,6 +215,7 @@ void setup()
   Serial.println(graph->getNachbar(2,0)->getMarkierung());
   
   Serial.println("Fertig");
+  graph->getKnoten(6)->getWeiche()->setWeichenfestlegung(true,100);
   graph->resetMarkierungen();
   Serial.println(graph->wegSuchen(graph->getKnoten(2),graph->getKnoten(18)));
   Serial.println(graph->getKnoten(17)->getWeg());
