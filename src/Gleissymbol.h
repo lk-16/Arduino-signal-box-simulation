@@ -22,7 +22,7 @@ class Gleissymbol
 {
 private:
     boolean _markiert = false;   //Markierungsstatus des Gleissymbols, true = markiert
-    boolean _weg = false;
+    unsigned int _weg = 0;
     Hauptsignal * _signal = nullptr; //Pointer auf das Hauptsignal des Gleissymbols
     Weiche * _weiche =nullptr;      //Pointer auf die Weiche des Gleissymbols
     Besetztmelder * _besetztmelder = nullptr;   //Pointer auf den Besetztmelder des Gleissymbols
@@ -45,7 +45,7 @@ public:
     boolean isFree();                               /**<Gibt aus, ob das Gleissymbol frei ist, keine Besetzmelder aktiv sind etc.*/
     void setMarkierung(boolean status);             /**<true = markiert, false = nicht markiert (bei der Suche besucht/nicht besucht*/
     boolean getMarkierung();                        /**<Gibt den Status der Markierung zurück (bei der Suche besucht/nicht besucht)*/
-    void setWeg(boolean status);                    /**<true = als Weg markiert, false = nicht als weg markiert*/
-    boolean getWeg();                               /**<gibt aus, ob der Knoten als Weg markiert ist oder nicht*/
+    void setWeg(int status);                    /**<true = als Weg markiert, false = nicht als weg markiert*/
+    int getWeg();                               /**<gibt aus, ob der Knoten als Weg markiert ist oder nicht*/
 };
 #endif

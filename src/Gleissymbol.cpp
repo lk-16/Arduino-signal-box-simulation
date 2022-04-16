@@ -53,12 +53,12 @@ boolean Gleissymbol::getMarkierung()
     return _markiert;
 }
 
-void Gleissymbol::setWeg(boolean status)
+void Gleissymbol::setWeg(int status)
 {
     _weg = status;
 }
 
-boolean Gleissymbol::getWeg()
+int Gleissymbol::getWeg()
 {
     return _weg;
 }

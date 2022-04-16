@@ -59,7 +59,8 @@ int Graph::wegSuchen(Gleissymbol *start, Gleissymbol *ziel)
     start->setMarkierung(true);
     if (equals(start, ziel)) // wenn am Ziel
     {
-        start->setWeg(true);
+        _fahrstrassenzaehler++;//erhöhe den Zähler für die Nummer um 1
+        start->setWeg(_fahrstrassenzaehler);
         return 1;
     }
     else
@@ -71,7 +72,7 @@ int Graph::wegSuchen(Gleissymbol *start, Gleissymbol *ziel)
             laenge = wegSuchen(&_knoten[nextWay(start)], ziel);
             if(laenge > 0)
             {
-                start->setWeg(true);
+                start->setWeg(_fahrstrassenzaehler);
                 found = true;
                 return laenge +1;
             }
@@ -80,12 +81,13 @@ int Graph::wegSuchen(Gleissymbol *start, Gleissymbol *ziel)
     }
 }
 
-void Graph::resetMarkierungen()
+void Graph::resetMarkierungen(int fahrstrassenNr)
 {
     for (int i = 0; i < _anzahlKnoten; i++)
     {
         _knoten[i].setMarkierung(false);
-        _knoten[i].setWeg(false);
+        if(_knoten[i].getWeg()== fahrstrassenNr)
+        _knoten[i].setWeg(0);
     }
 }
 

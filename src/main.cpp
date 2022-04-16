@@ -218,6 +218,12 @@ void setup()
   graph->resetMarkierungen();
   Serial.println(graph->wegSuchen(graph->getKnoten(2),graph->getKnoten(18)));
   Serial.println(graph->getKnoten(17)->getWeg());
+  graph->resetMarkierungen();
+  Serial.println(graph->wegSuchen(graph->getKnoten(7),graph->getKnoten(1)));
+  Serial.println(graph->getKnoten(1)->getWeg());
+  graph->resetMarkierungen(2);
+  Serial.println(graph->wegSuchen(graph->getKnoten(7),graph->getKnoten(1)));
+  Serial.println(graph->getKnoten(1)->getWeg());
   /*Serial.println(graph->nextWay(8));
   graph->getKnoten(graph->nextWay(8))->setMarkierung(true);
   Serial.println(graph->nextWay(8));

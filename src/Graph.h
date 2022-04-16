@@ -23,7 +23,8 @@ class Graph
         int _maxNachbarn = 3;
         int _anzahlKnoten;
         class Gleissymbol *_knoten;
-        int **_nachbarn;
+        int **_nachbarn;//2D Array wird im Konstruktor initialisiert Es enthält alle Nachbarnummern, des Knotens in der entsprechenden Zeile
+        unsigned int _fahrstrassenzaehler = 0;//die Fahrstraén werden mit steigender Markierung versehen, als Referenz für die nächste Zahl wird fahrstrassenzähler verwendet
 
     public:
     /** Erstellt einen Graphen
@@ -36,7 +37,7 @@ class Graph
         int nextWay(Gleissymbol *symbol);
         int nextWay(int knotenNr);/**<Die Methode gibt die Nr des nächsten nicht markierten Nachbarn der angegebenen Knotennummer zurück*/
         int wegSuchen(Gleissymbol *start, Gleissymbol *ziel);/**<Die Methode gibt die länge eines Weges zurück, ob es einen weg gibt und markiert Ihn, wenn möglich*/
-        void resetMarkierungen();/**<Setzt alle Markierungen zurück auf False*/
+        void resetMarkierungen(int fahrstrassenNr = 0);/**<Setzt alle Markierungen zurück auf False*/
         boolean isReset();/**<Methode zur Überprüfung des Resets derMarkierungen*/
         Gleissymbol * getKnoten(int knotenNr);/**<Gibt den Knoten unter der KnotenNr zurück*/
         Gleissymbol * getNachbar(int knotenNr, int nachbar = 0);/**<Gibt den Nachbarn(nachbar) des Knoten (KnoteNr) zurück*/
