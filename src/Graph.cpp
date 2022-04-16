@@ -36,7 +36,7 @@ int Graph::nextWay(Gleissymbol *symbol)
 
 int Graph::nextWay(int knotenNr)
 {
-    if (isKnotenNr(knotenNr))//wenn die angegebene KnotenNr eine KnotenNr ist
+    if (isKnotenNr(knotenNr)) // wenn die angegebene KnotenNr eine KnotenNr ist
     {
         int counter = 0;
         while (counter < _maxNachbarn && _nachbarn[knotenNr][counter] >= 0)
@@ -146,6 +146,8 @@ boolean Graph::richtungGerade(Gleissymbol *weichensymbol, Gleissymbol *nachbar)
 {
     if (getKnotenNr(weichensymbol) < 0 || getKnotenNr(nachbar) < 0)
         return -1;
+    else
+        return richtungGerade(getKnotenNr(weichensymbol), getKnotenNr(nachbar));
 }
 boolean Graph::richtungGerade(int weichensymbolNr, int nachbarNr)
 {
