@@ -47,7 +47,7 @@ public:
   int getSignalhaltgruppentaste();                        /**<Gibt den Pin der Signalhaltgruppentaste aus.*/
   int getSignalsperrmelder();                             /**<Gibt den Pin des Signalsperrmelders aus.*/
   int getSignalsperrtaste();                              /**<Gibt den Pin der Signalsperrtaste aus.*/
-  boolean getSignalsperre();                              /**<Gibt aus, ob das Signal gesperrt ist.*/
+  boolean getSignalsperre();                              /**<Gibt aus, ob das Signal gesperrt ist. (true = gesperrt*/
   void signalSperren();                                   /**<Überprüft ob ein Signal gesperrt (nur wenn Signal auf hp0 steht) oder eintsperrt werden kann und tut es wenn möglich.*/
 };
 
