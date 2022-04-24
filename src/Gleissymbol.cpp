@@ -40,15 +40,15 @@ void Gleissymbol::update()
 boolean Gleissymbol::isFree()
 {
     boolean free = true;
-    if (_besetztmelder != nullptr && (_besetztmelder->getFahrstrassenelement() || _besetztmelder->besetztmelderAuslesen(LOW, *_weiche)))
+    if (_besetztmelder != nullptr && (_besetztmelder->getFahrstrassenelement() || _besetztmelder->besetztmelderAuslesen(LOW, *_weiche)))//wenn besetztmelder kein Fahrstraßenelemnt und nicht besetzt
     {
         free = false;
     }
-    if (_signal != nullptr && _signal->getSignalsperre())
+    if (_signal != nullptr && _signal->getSignalsperre())//das signal nicht gesperrt, wenn vorhanden
     {
         free = false;
     }
-    if (_weiche != nullptr && _weiche->getWeichenfestlegung())
+    if (_weiche != nullptr && _weiche->getWeichenfestlegung())//die Weiche nicht festgelegt
     {
         free = false;
     }

@@ -46,6 +46,6 @@ public:
     void setMarkierung(boolean status);             /**<true = markiert, false = nicht markiert (bei der Suche besucht/nicht besucht*/
     boolean getMarkierung();                        /**<Gibt den Status der Markierung zurück (bei der Suche besucht/nicht besucht)*/
     void setWeg(int status);                    /**<true = als Weg markiert, false = nicht als weg markiert*/
-    int getWeg();                               /**<gibt aus, ob der Knoten als Weg markiert ist oder nicht*/
+    int getWeg();/**<gibt aus, ob der Knoten als Weg markiert ist oder nicht*/
 };
 #endif

@@ -208,8 +208,10 @@ void setup()
 //........tests.................................................................................................................
   graph = new Graph(besetztmelderAnzahl, knoten, nachbarn);
   Serial.println("Hello");
-
-
+  graph->resetMarkierungen();
+  Serial.println(graph->nextWay(graph->getKnoten(0)));
+  Serial.println(graph->wegSuchen(graph->getKnoten(0),graph->getKnoten(4)));
+  Serial.println(graph->nextWay(graph->getKnoten(0), 1));
   Serial.println("Fertig");
   Serial.println(graph->richtungGerade(graph->getKnoten(6),graph->getKnoten(15)));
   Serial.println(graph->richtungGerade(15,6));
