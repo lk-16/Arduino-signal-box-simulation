@@ -187,6 +187,12 @@ boolean Weiche::getWeichenposition()
 {
   return _weichenposition;
 }
+
+void Weiche::setWeichenposition(boolean position)
+{
+  if(position) weicheGerade();
+  else weicheKurve();
+}
 void Weiche::setWeichebesetzt(boolean besetztmelderstatus)
 {
   _besetzt = besetztmelderstatus;

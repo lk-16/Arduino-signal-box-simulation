@@ -75,6 +75,7 @@ public:
   void setWeichenfestlegung(boolean festlegestatus, int fahrstrassennr); /**<Kann die Festlegung der Weichen aktivieren. Die Weichenlage kann nicht mehr verändert werden, bis die Festlegung durch die Fahrstraße ausfgelöst wird.*/
   boolean getWeichenfestlegung();                                        /**<Es wird ausgegeben, ob die Weiche festgelegt ist, oder nicht*/
   boolean getWeichenposition();                                          /**<Gibt die Weichenposition aus, wenn die Weiche umgelaufen ist.*/
+  void setWeichenposition(boolean position);                             /**<veränderung der Weichenposition, weiche Kurve und WeicheGerade wird so aufgelöst*/
   void setWeichebesetzt(boolean besetztmelderstatus);/**<Ändert die Weichenausleuchtung auf die RotenLeds um die Besetztmeldung anzuzeigen. Da die Weichen mit WeichenControl erstellt werden, benötigt es keine Zugriffseinschränkung, diese findet sich in WeichenControl, nur Besetztmelder können von dort auf diese Methode von Weiche zugreifen.*/
   int getNr();
 };
