@@ -209,41 +209,30 @@ void setup()
   graph = new Graph(besetztmelderAnzahl, knoten, nachbarn);
   Serial.println("Hello");
   graph->resetMarkierungen();
-  Serial.println(graph->nextWay(graph->getKnoten(0)));
-  Serial.println(graph->wegSuchen(graph->getKnoten(0),graph->getKnoten(4)));
-  Serial.println(graph->nextWay(graph->getKnoten(0), 1));
+  //graph->getKnoten(6)->getWeiche()->setWeichenposition(1); // schlate Weiche in die richtige Position
+        
+  //Serial.println(graph->fahrstrasseEinstellen(graph->getKnoten(4),graph->getKnoten(0)));
+  
   Serial.println("Fertig");
-  Serial.println(graph->richtungGerade(graph->getKnoten(6),graph->getKnoten(15)));
-  Serial.println(graph->richtungGerade(15,6));
-  graph->getKnoten(6)->getWeiche()->setWeichenfestlegung(true,100);
-  graph->resetMarkierungen();
-  Serial.println(graph->wegSuchen(graph->getKnoten(2),graph->getKnoten(18)));
-  Serial.println(graph->getKnoten(17)->getWeg());
-  graph->resetMarkierungen();
-  Serial.println(graph->wegSuchen(graph->getKnoten(7),graph->getKnoten(1)));
-  Serial.println(graph->getKnoten(1)->getWeg());
-  graph->resetMarkierungen(2);
-  Serial.println(graph->wegSuchen(graph->getKnoten(7),graph->getKnoten(1)));
-  Serial.println(graph->getKnoten(1)->getWeg());
-  /*Serial.println(graph->nextWay(8));
-  graph->getKnoten(graph->nextWay(8))->setMarkierung(true);
-  Serial.println(graph->nextWay(8));
-  graph->getKnoten(graph->nextWay(8))->setMarkierung(true);
-  Serial.println(graph->nextWay(8));
-  graph->getKnoten(graph->nextWay(8))->setMarkierung(true);
-  Serial.println(graph->nextWay(8));*/
-
+  Serial.println(graph->wegSuchen(graph->getKnoten(4), graph->getKnoten(6)));
+  Serial.println(graph->nextWay(3));
+  Serial.println(graph->nextWay(3));
+  Serial.println(graph->nextWay(3));
+  //graph->fahrstrasseEinstellen(graph->getKnoten(3),graph->getKnoten(1));
+  //graph->getKnoten(9)->getHauptsignal()->hauptsignalSchalten(1);
+//graph->fahrstrasseEinstellen(graph->getKnoten(3),graph->getKnoten(1));
 //..........tests...............................................................................................................
 }
 
 void loop()
 {
-  /* int kai = 122;
+  // graph->getKnoten(6)->getWeiche()->setWeichenposition(1); // schlate Weiche in die richtige Position
+  graph->fahrstrasseEinstellen(graph->getKnoten(4),graph->getKnoten(0));  /* int kai = 122;
   ftueMelder.digitalSchalten(kai,HIGH);
   delay(100);
   ftueMelder.digitalSchalten(kai,LOW);
   delay(100);
-*/
+*//*
 
   // abfragen aller Zugtasten
   zugtastenspeicher[0] = 0;
@@ -350,11 +339,12 @@ void loop()
       // alle besetztmelder müssen in der Fahrstraße einmal rot gewesen sein und am ende wieder frei sein
     }
   }
-
+*/
   ftueMelder.tueMelder(zugtastenC);
+  graph->updateSymbole();
   // Signale................................................
   // hauptsignale.hauptsignaleHp0Manuell(); //über die Signalhaltgruppentaste und die Zugtaste auf dem Feld des Signals kann ein Signal auf hp0 gestellt werden
-  hauptsignale.hauptsignaleSperren(); //über weichen  und weichensperrtaste kann ein Signal gesperrt werden
+  /*hauptsignale.hauptsignaleSperren(); //über weichen  und weichensperrtaste kann ein Signal gesperrt werden
 
   // Weichen..................................................
   weichen.weichenWechseln(); // WGT und WT können zum Umschalten einer Weiche benutzt werden
@@ -365,7 +355,7 @@ void loop()
   for (int h = 0; h < 19; h++)
   {
     besetztmeldung.getBesetztmelderstatus(h, LOW, weichen);
-  }
+
   /*besetztmeldung.getBesetztmelderstatus(1, LOW, weichen);
 besetztmeldung.getBesetztmelderstatus(2, LOW, weichen);
 besetztmeldung.getBesetztmelderstatus(3, LOW, weichen);
