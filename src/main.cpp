@@ -157,9 +157,9 @@ char gleissymboltyp[besetztmelderAnzahl] = {'-', '+',//wird für die Zuweisung d
 
 void setup()
 {
-  weichen.weichenRelaisHIGH();       // alle möglichen Eingaben an den Relais werden gelöscht
-  weichen.weichenpositionenEEPROM(); // gespeicherte Weichenposition wird angezeigt und ausgeführt
-  Serial.begin(9600);
+  weichen.weichenRelaisHIGH();
+ // 
+ Serial.begin(9600);
 
   // Fahrstrassentastenkombinationen
   fahrstrassenspeicher[2][4] = 1; // minus 1 wegen array
@@ -204,7 +204,8 @@ void setup()
     }
   }
 
-
+ graph->prepare(); // alle möglichen Eingaben an den Relais werden gelöscht und gespeicherte Weichenposition wird angezeigt und ausgeführt
+  
 //........tests.................................................................................................................
   graph = new Graph(besetztmelderAnzahl, knoten, nachbarn);
   Serial.println("Hello");
@@ -214,10 +215,7 @@ void setup()
   //Serial.println(graph->fahrstrasseEinstellen(graph->getKnoten(4),graph->getKnoten(0)));
   
   Serial.println("Fertig");
-  Serial.println(graph->wegSuchen(graph->getKnoten(4), graph->getKnoten(6)));
-  Serial.println(graph->nextWay(3));
-  Serial.println(graph->nextWay(3));
-  Serial.println(graph->nextWay(3));
+  graph->getKnoten(6)->getWeiche()->weicheGerade();
   //graph->fahrstrasseEinstellen(graph->getKnoten(3),graph->getKnoten(1));
   //graph->getKnoten(9)->getHauptsignal()->hauptsignalSchalten(1);
 //graph->fahrstrasseEinstellen(graph->getKnoten(3),graph->getKnoten(1));
@@ -227,7 +225,7 @@ void setup()
 void loop()
 {
   // graph->getKnoten(6)->getWeiche()->setWeichenposition(1); // schlate Weiche in die richtige Position
-  graph->fahrstrasseEinstellen(graph->getKnoten(4),graph->getKnoten(0));  /* int kai = 122;
+  graph->fahrstrasseEinstellen(graph->getKnoten(2),graph->getKnoten(0));  /* int kai = 122;
   ftueMelder.digitalSchalten(kai,HIGH);
   delay(100);
   ftueMelder.digitalSchalten(kai,LOW);

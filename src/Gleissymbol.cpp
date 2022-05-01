@@ -24,6 +24,16 @@ Hauptsignal *Gleissymbol::getHauptsignal()
 {
     return _signal;
 }
+
+void Gleissymbol::prepare()
+{
+    if(_weiche !=nullptr)
+    {
+        _weiche->weicheRelaisHIGH();
+        _weiche->weichenpositionEEPROM();
+    }
+    
+}
 void Gleissymbol::update()
 {
     if (_signal != nullptr) // wenn es ein signal gibt.

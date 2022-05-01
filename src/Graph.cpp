@@ -18,6 +18,14 @@ Graph::Graph(int anzahlKnoten, Gleissymbol knoten[], int nachbarn[][3])
     }
 }
 
+void Graph::prepare()
+{
+    for(int i = 0; i < _anzahlKnoten; i++)
+    {
+        _knoten[i].prepare();
+    }
+}
+
 void Graph::updateSymbole()
 {
     for(int i = 0; i < _anzahlKnoten; i++)
@@ -111,6 +119,7 @@ void Graph::symbolZuFahrstrasse(Gleissymbol *symbol)
 
 void Graph::symbolZuFahrstrasse(int knotenNr)
 {
+    Serial.println(knotenNr);
     // stelle das Symbol als Fahrstrasse ein
     getKnoten(knotenNr)->setFahrstrassenelement(getKnoten(knotenNr)->getWeg(), true);
     if (getKnoten(knotenNr)->getWeiche() != nullptr) // wenn es eine Weiche gibt
@@ -131,7 +140,7 @@ void Graph::symbolZuFahrstrasse(int knotenNr)
     if (nextWay(knotenNr, getKnoten(knotenNr)->getWeg()) > -1)
         {
             getKnoten(knotenNr)->setMarkierung(true);
-            Serial.println(knotenNr);
+            
             symbolZuFahrstrasse(nextWay(knotenNr, getKnoten(knotenNr)->getWeg()));//rekrusiver Aufruf, weiteres Umsetzten der Fahrstraße
         }
 }

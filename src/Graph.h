@@ -35,7 +35,8 @@ class Graph
      * @param [in] nachbarn Die Verknüpfunge werden mit diesem Array übergeben. nachbarn[knotennr][maxTiefe(beim Gleisbild 3)], alle nicht belegten Plätze müssen mit z.B. -1 belegt sein (außerhalb des Wertebereichs)
     */
         Graph(int anzahlKnoten, Gleissymbol knoten[], int nachbarn[][3]);
-        void updateSymbole();
+        void prepare();/**<Die Weichenrelais werden auf HIGH gestellt und die Weichenposition wird aus dem EEPROM abgerufen und ausgeführt. Die Methode wird am Anfang benötigt, so wird sicher gestellt, das alle Weichen in der vom Stellpult ange-nommenen Lage sind*/
+        void updateSymbole();/**>Alle Symbole im Graphen werden aktualisiert, die Besetztmelder, Weichen, Signale. Funktionen wie Hp= manuell*/
         boolean equals(Gleissymbol *symbol1, Gleissymbol *symbol2);/**<Gibt zurück, ob Zwei zeiger auf ein Gleissymbol auf das selbe zeigen.*/
         int nextWay(Gleissymbol *symbol, int fahrstrassenNr = 0);/**<Die Methode gibt die Nr des nächsten nicht markierten Nachbarn der angegebenen Knotennummer zurück, wenn angegeben, den Knoten, der mit der FahrstrassenNr versehen ist.*/
         int nextWay(int knotenNr, int fahrstrassenNr = 0);/**<Die Methode gibt die Nr des nächsten nicht markierten Nachbarn der angegebenen Knotennummer zurück, wenn angegeben, den Knoten, der mit der FahrstrassenNr versehen ist.*/

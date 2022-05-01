@@ -42,6 +42,7 @@ public:
     Besetztmelder * getBesetztmelder();             /**<Gibt einen Pointer auf den Besetztmelder zurück.*/
     Weiche * getWeiche();                           /**<Gibt einen Pointer auf den Weiche zurück, sonst null*/
     Hauptsignal * getHauptsignal();                /**<Gibt einen Pointer auf das Hauptsignal zurück, sonst null.*/
+    void prepare();                                /**<Stellt die WEichenrelais auf HIGH und ruft die Weichenposition aus dem EEPROM ab und führt sie für eine WEichen, wenn möglich aus*/
     void update();                                  /**<Updatet, wenn vorhanden, die Weichenposition (weicheWechsel, weicheSchalten), signalsperren, besetztmelder*/
     boolean isFree();                               /**<Gibt aus, ob das Gleissymbol frei ist, keine Besetzmelder aktiv sind etc.*/
     void setMarkierung(boolean status);             /**<true = markiert, false = nicht markiert (bei der Suche besucht/nicht besucht*/
