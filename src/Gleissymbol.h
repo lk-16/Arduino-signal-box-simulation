@@ -21,8 +21,9 @@
 class Gleissymbol
 {
 private:
-    boolean _markiert = false;   //Markierungsstatus des Gleissymbols, true = markiert
-    unsigned int _weg = 0;
+    boolean _fahrstrassenelement = false; //true = Symbol ist Fahrstraßenelement
+    boolean _markiert = false;   //Markierungsstatus des Gleissymbols, true = markiert, zur kennzeichnung ob das Symbol schon besucht wurde
+    unsigned int _weg = 0;       //kennzeichnung als weg, kann nur geändert werden, wenn das Symbol nicht als Fahrstraßenelement eingebunden ist.
     Hauptsignal * _signal = nullptr; //Pointer auf das Hauptsignal des Gleissymbols
     Weiche * _weiche = nullptr;      //Pointer auf die Weiche des Gleissymbols
     Besetztmelder * _besetztmelder = nullptr;   //Pointer auf den Besetztmelder des Gleissymbols
@@ -47,5 +48,7 @@ public:
     boolean getMarkierung();                        /**<Gibt den Status der Markierung zurück (bei der Suche besucht/nicht besucht)*/
     void setWeg(int status);                    /**<true = als Weg markiert, false = nicht als weg markiert*/
     int getWeg();/**<gibt aus, ob der Knoten als Weg markiert ist oder nicht*/
+    void setFahrstrassenelement(int fahrstrassennr, boolean Fahrstrassenelement);                 /**<Das Gleissymbol wird zu einem Fahrstraßenelement gemacht, somit verschwindet die Besetztmeldung auch bei frei sein des Gleises nicht. Der Besetztmelder zeigt auch frei oder belegt sein an, wenn besetztmelderLicht ausgeschaltet ist. Die Festlegung und Bean-spruchung durch eine Fahrstraße kann nur durch die gleiche Fahrstraße wieder aufgeho-ben werden.*/
+    boolean getFahrstrassenelement();
 };
 #endif

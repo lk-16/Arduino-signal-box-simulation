@@ -40,15 +40,19 @@ void Gleissymbol::update()
 boolean Gleissymbol::isFree()
 {
     boolean free = true;
-    if (_besetztmelder != nullptr && (_besetztmelder->getFahrstrassenelement() || _besetztmelder->besetztmelderAuslesen(LOW, *_weiche)))//wenn besetztmelder kein Fahrstraßenelemnt und nicht besetzt
+    if(getFahrstrassenelement())
     {
         free = false;
     }
-    if (_signal != nullptr && _signal->getSignalsperre())//das signal nicht gesperrt, wenn vorhanden
+    else if (_besetztmelder != nullptr && (_besetztmelder->getFahrstrassenelement() || _besetztmelder->besetztmelderAuslesen(LOW, *_weiche)))//wenn besetztmelder kein Fahrstraßenelemnt und nicht besetzt
     {
         free = false;
     }
-    if (_weiche != nullptr && _weiche->getWeichenfestlegung())//die Weiche nicht festgelegt
+    else if (_signal != nullptr && _signal->getSignalsperre())//das signal nicht gesperrt, wenn vorhanden
+    {
+        free = false;
+    }
+    else if (_weiche != nullptr && _weiche->getWeichenfestlegung())//die Weiche nicht festgelegt
     {
         free = false;
     }
@@ -67,10 +71,27 @@ boolean Gleissymbol::getMarkierung()
 
 void Gleissymbol::setWeg(int status)
 {
+    if(!_fahrstrassenelement)
     _weg = status;
 }
 
 int Gleissymbol::getWeg()
 {
     return _weg;
+}
+
+void Gleissymbol::setFahrstrassenelement(int fahrstrassennr, boolean Fahrstrassenelement)
+{
+    if(!_fahrstrassenelement)
+    {
+        setWeg(fahrstrassennr);
+        _fahrstrassenelement = Fahrstrassenelement;
+        if(_besetztmelder != nullptr) _besetztmelder->setFahrstrassenelement(fahrstrassennr, Fahrstrassenelement);
+    }
+
+}
+
+boolean Gleissymbol::getFahrstrassenelement()
+{
+    return _fahrstrassenelement;
 }
