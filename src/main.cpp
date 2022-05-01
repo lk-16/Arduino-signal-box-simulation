@@ -86,7 +86,8 @@ int gelb[hauptsignalanzahl] = {gelb1, gelb2, gelb3, gelb4};
 int gruen[hauptsignalanzahl] = {gruen1, gruen2, gruen3, gruen4};
 int signaltasten[hauptsignalanzahl] = {signaltaste1, signaltaste2, signaltaste3, signaltaste4};
 int sperrmelder[hauptsignalanzahl] = {sperrmelder1, sperrmelder2, sperrmelder3, sperrmelder4};
-HauptsignalControl hauptsignale(hauptsignalanzahl, rot, gelb, gruen, signaltasten, sperrmelder, allgSignaltasten, schieberegisterPins);
+boolean richtung[hauptsignalanzahl] = {true,false,true,false};
+HauptsignalControl hauptsignale(hauptsignalanzahl, rot, gelb, gruen, signaltasten, sperrmelder, allgSignaltasten, schieberegisterPins, richtung);
 // int rotPin, int gelbPin, int gruenPin,  int signaltaste, int sperrmelder, int allgSignaltasten[3], int registerPin[4]
 
 // Gleisbesetztmelder

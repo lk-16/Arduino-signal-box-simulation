@@ -9,8 +9,8 @@
 #include "Signal.h"
 
 //Methoden der Klasse Hauptsignale, Unterklassen der Klasse actors und signale
-Hauptsignal::Hauptsignal(int rotPin, int gelbPin, int gruenPin, int signaltaste, int sperrmelder, int allgSignaltasten[3], int registerPin[4])
-    : Signal(signaltaste, sperrmelder, allgSignaltasten, registerPin)
+Hauptsignal::Hauptsignal(int rotPin, int gelbPin, int gruenPin, int signaltaste, int sperrmelder, int allgSignaltasten[3], int registerPin[4], boolean richtung)
+    : Signal(signaltaste, sperrmelder, allgSignaltasten, registerPin, richtung)
 {
   _rotPin = rotPin;     //Halt Pin(rot)................................................................................................
   _gelbPin = gelbPin;   //Fahrt Pin(grün)

@@ -9,7 +9,7 @@
 #include "Signal.h"
 
 //Methoden der Klasse signal, Unterklasse der Klasse actors
-Signal::Signal(int signaltastenPin, int sperrmelderPin, int allgSignaltasten[3], int registerPins[4])      //Konstuktor: allgemeine Signaltasten beinhalten die Signalsperr- und entsperrtaste und Signalhaltgruppentaste
+Signal::Signal(int signaltastenPin, int sperrmelderPin, int allgSignaltasten[3], int registerPins[4], boolean richtung)      //Konstuktor: allgemeine Signaltasten beinhalten die Signalsperr- und entsperrtaste und Signalhaltgruppentaste
     : Actor(registerPins[0], registerPins[1], registerPins[2], registerPins[3])
 {
   _signalsperrtaste = allgSignaltasten[0];
@@ -17,6 +17,7 @@ Signal::Signal(int signaltastenPin, int sperrmelderPin, int allgSignaltasten[3],
   _signalhaltgruppentaste = allgSignaltasten[2];
   _signaltaste = signaltastenPin;
   _signalSperrmelder = sperrmelderPin;
+  _richtung = richtung;
 
   pinMode(_signalsperrtaste, INPUT_PULLUP);
   pinMode(_signalentsperrtaste, INPUT_PULLUP);
@@ -59,6 +60,12 @@ boolean Signal::getSignalsperre()
 {
   return _signalsperre;
 }
+
+boolean Signal::getRichtung()
+{
+  return _richtung;
+}
+
 void Signal::signalSperren()
 {
   if (_signalsperre == true) //wenn das Signal gesperrt ist.

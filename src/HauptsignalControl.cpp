@@ -8,7 +8,7 @@
 #include "Hauptsignal.h"
 
 //Methoden der Klasse besetztmeldungControl
-HauptsignalControl::HauptsignalControl(int anzahlHauptsignale, int ledPinsRot[], int ledPinsGelb[], int ledPinsGruen[], int signaltasten[], int sperrmelder[], int allgSignaltasten[3], int registerPin[4])
+HauptsignalControl::HauptsignalControl(int anzahlHauptsignale, int ledPinsRot[], int ledPinsGelb[], int ledPinsGruen[], int signaltasten[], int sperrmelder[], int allgSignaltasten[3], int registerPin[4], boolean richtung[])
 {
     _anzahlHauptsignale = anzahlHauptsignale;
     //array wird definiert
@@ -16,7 +16,7 @@ HauptsignalControl::HauptsignalControl(int anzahlHauptsignale, int ledPinsRot[],
     //und initialisiert
     for (int hauptsignalNr = 0; hauptsignalNr < _anzahlHauptsignale; hauptsignalNr++)
     {
-        _pHauptsignale[hauptsignalNr] = new Hauptsignal(ledPinsRot[hauptsignalNr], ledPinsGruen[hauptsignalNr], ledPinsGelb[hauptsignalNr], signaltasten[hauptsignalNr], sperrmelder[hauptsignalNr], allgSignaltasten, registerPin);
+        _pHauptsignale[hauptsignalNr] = new Hauptsignal(ledPinsRot[hauptsignalNr], ledPinsGruen[hauptsignalNr], ledPinsGelb[hauptsignalNr], signaltasten[hauptsignalNr], sperrmelder[hauptsignalNr], allgSignaltasten, registerPin, richtung[hauptsignalNr]);
         _pHauptsignale[hauptsignalNr]->hauptsignalSchalten(0);
     }   
     
