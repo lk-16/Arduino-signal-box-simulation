@@ -18,6 +18,14 @@ Graph::Graph(int anzahlKnoten, Gleissymbol knoten[], int nachbarn[][3])
     }
 }
 
+void Graph::updateSymbole()
+{
+    for(int i = 0; i < _anzahlKnoten; i++)
+    {
+        _knoten[i].update();
+    }
+}
+
 boolean Graph::equals(Gleissymbol *symbol1, Gleissymbol *symbol2)
 {
     if (symbol1 == symbol2)
@@ -26,30 +34,36 @@ boolean Graph::equals(Gleissymbol *symbol1, Gleissymbol *symbol2)
         return false;
 }
 
-int Graph::nextWay(Gleissymbol *symbol)
+int Graph::nextWay(Gleissymbol *symbol, int fahrstrassenNr)
 {
     if (getKnotenNr(symbol) < 0)
         return -1; // wenn der Knoten nicht zu finden
     else
-        return nextWay(getKnotenNr(symbol));
+        return nextWay(getKnotenNr(symbol), fahrstrassenNr);
 }
 
-int Graph::nextWay(int knotenNr)
+int Graph::nextWay(int knotenNr, int fahrstrassenNr)
 {
     if (isKnotenNr(knotenNr)) // wenn die angegebene KnotenNr eine KnotenNr ist
     {
+        
+        boolean fahrstrasse = false;
+        if (fahrstrassenNr > 0)
+            fahrstrasse = true;
         int counter = 0;
         while (counter < _maxNachbarn && _nachbarn[knotenNr][counter] >= 0)
         // suche Solange nach Nachbarn, bis am Ende des Arrays oder bei Wert außerhalb des Werte bereichs oder
         {
-            if (_knoten[_nachbarn[knotenNr][counter]].getMarkierung() == false && _knoten[_nachbarn[knotenNr][counter]].isFree()) // wenn der Knoten nicht markiert ist und frei
+            if (_knoten[_nachbarn[knotenNr][counter]].getMarkierung() == false && ((_knoten[_nachbarn[knotenNr][counter]].isFree() && !fahrstrasse) || (fahrstrasse && _knoten[_nachbarn[knotenNr][counter]].getWeg() == fahrstrassenNr))) // wenn der Knoten nicht markiert ist und frei, oder er wenn gefragt einer Fahrstrasse entspricht
             {
+                //Serial.println(_nachbarn[knotenNr][counter]);
                 return _nachbarn[knotenNr][counter]; // gib den Knoten zurück
+
             }
             counter++;
         }
     }
-    return -1;
+    else return -1;
 }
 
 int Graph::wegSuchen(Gleissymbol *start, Gleissymbol *ziel)
@@ -63,15 +77,12 @@ int Graph::wegSuchen(Gleissymbol *start, Gleissymbol *ziel)
     }
     else
     {
-        boolean found = false; // wenn rückgabe von weg suchen true, dann wurde ein Weg gefunden
-        while (nextWay(start) >= 0 && !found)
+        while (nextWay(start) >= 0)
         {
-            int laenge = 0;
-            laenge = wegSuchen(&_knoten[nextWay(start)], ziel);
+            int laenge = wegSuchen(&_knoten[nextWay(start)], ziel);
             if (laenge > 0)
             {
                 start->setWeg(_fahrstrassenzaehler);
-                found = true;
                 return laenge + 1;
             }
         }
@@ -79,6 +90,51 @@ int Graph::wegSuchen(Gleissymbol *start, Gleissymbol *ziel)
     }
 }
 
+boolean Graph::fahrstrasseEinstellen(Gleissymbol *start, Gleissymbol *ziel)
+{
+    resetMarkierungen();
+    int laenge = wegSuchen(start, ziel);
+    resetMarkierungen();
+    if (laenge > -1) // wenn eine Fahrstraße gefunden
+    {
+        symbolZuFahrstrasse(start);
+        return true;
+    }
+    else
+        return false;
+
+}
+void Graph::symbolZuFahrstrasse(Gleissymbol *symbol)
+{
+    symbolZuFahrstrasse(getKnotenNr(symbol));
+}
+
+void Graph::symbolZuFahrstrasse(int knotenNr)
+{
+    // stelle das Symbol als Fahrstrasse ein
+    getKnoten(knotenNr)->setFahrstrassenelement(getKnoten(knotenNr)->getWeg(), true);
+    if (getKnoten(knotenNr)->getWeiche() != nullptr) // wenn es eine Weiche gibt
+    {
+        Serial.println("Weiche");
+        Serial.println(richtungGerade(knotenNr, nextWay(knotenNr, getKnoten(knotenNr)->getWeg())));
+        getKnoten(knotenNr)->getWeiche()->setWeichenposition(richtungGerade(knotenNr, nextWay(knotenNr, getKnoten(knotenNr)->getWeg()))); // schlate Weiche in die richtige Position
+        getKnoten(knotenNr)->getWeiche()->setWeichenfestlegung(true, getKnoten(knotenNr)->getWeg());
+    }
+    if (getKnoten(knotenNr)->getBesetztmelder() != nullptr)
+        getKnoten(knotenNr)->getBesetztmelder()->setFahrstrassenelement(getKnoten(knotenNr)->getWeg(), true); // binde den Besetztmelder in die Fahrstraße ein
+    if (getKnoten(knotenNr)->getHauptsignal() != nullptr)
+    {
+        Serial.println("Hauptsignal");
+        getKnoten(knotenNr)->getHauptsignal()->hauptsignalSchalten(1);//Schalte das Signal, wenn vorhanden auf Fahrt
+    }
+        
+    if (nextWay(knotenNr, getKnoten(knotenNr)->getWeg()) > -1)
+        {
+            getKnoten(knotenNr)->setMarkierung(true);
+            Serial.println(knotenNr);
+            symbolZuFahrstrasse(nextWay(knotenNr, getKnoten(knotenNr)->getWeg()));//rekrusiver Aufruf, weiteres Umsetzten der Fahrstraße
+        }
+}
 void Graph::resetMarkierungen(int fahrstrassenNr)
 {
     for (int i = 0; i < _anzahlKnoten; i++)

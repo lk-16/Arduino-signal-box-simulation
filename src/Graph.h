@@ -14,12 +14,14 @@
 #include <Arduino.h>
 #include <Actor.h>
 #include "Gleissymbol.h"
+#include "List.h"
 
 /**Die Klasse Graph speichert alle Gleissymbole in einem Graphen.
  */
 class Graph
 {
     private:
+        List _aktivFahrstrassen;
         int _maxNachbarn = 3;
         int _anzahlKnoten;
         class Gleissymbol *_knoten;
@@ -33,10 +35,14 @@ class Graph
      * @param [in] nachbarn Die Verknüpfunge werden mit diesem Array übergeben. nachbarn[knotennr][maxTiefe(beim Gleisbild 3)], alle nicht belegten Plätze müssen mit z.B. -1 belegt sein (außerhalb des Wertebereichs)
     */
         Graph(int anzahlKnoten, Gleissymbol knoten[], int nachbarn[][3]);
-        boolean equals(Gleissymbol *symbol1, Gleissymbol *symbol2);/**Gibt zurück, ob Zwei zeiger auf ein Gleissymbol auf das selbe zeigen.*/
-        int nextWay(Gleissymbol *symbol);
-        int nextWay(int knotenNr);/**<Die Methode gibt die Nr des nächsten nicht markierten Nachbarn der angegebenen Knotennummer zurück*/
-        int wegSuchen(Gleissymbol *start, Gleissymbol *ziel);/**<Die Methode gibt die länge eines Weges zurück, ob es einen weg gibt und markiert Ihn, wenn möglich*/
+        void updateSymbole();
+        boolean equals(Gleissymbol *symbol1, Gleissymbol *symbol2);/**<Gibt zurück, ob Zwei zeiger auf ein Gleissymbol auf das selbe zeigen.*/
+        int nextWay(Gleissymbol *symbol, int fahrstrassenNr = 0);/**<Die Methode gibt die Nr des nächsten nicht markierten Nachbarn der angegebenen Knotennummer zurück, wenn angegeben, den Knoten, der mit der FahrstrassenNr versehen ist.*/
+        int nextWay(int knotenNr, int fahrstrassenNr = 0);/**<Die Methode gibt die Nr des nächsten nicht markierten Nachbarn der angegebenen Knotennummer zurück, wenn angegeben, den Knoten, der mit der FahrstrassenNr versehen ist.*/
+        int wegSuchen(Gleissymbol *start, Gleissymbol *ziel);/**<Die Methode gibt die länge eines Weges zurück, ob es einen weg gibt und markiert Ihn, wenn möglich, zuvor müssen die Markierungen resetet (resetMarkierungen) werden*/
+        boolean fahrstrasseEinstellen(Gleissymbol *start, Gleissymbol *ziel);
+        void symbolZuFahrstrasse(Gleissymbol *symbol);/**<setzt die Fahrstraße beginnend mit dem Symbol um*/
+        void symbolZuFahrstrasse(int knotenNr);/**<setzt die Fahrstraße beginnend mit dem Symbol um*/
         void resetMarkierungen(int fahrstrassenNr = 0);/**<Setzt alle Markierungen zurück auf False*/
         boolean isReset();/**<Methode zur Überprüfung des Resets derMarkierungen*/
         Gleissymbol * getKnoten(int knotenNr);/**<Gibt den Knoten unter der KnotenNr zurück*/
@@ -45,5 +51,6 @@ class Graph
         boolean isKnotenNr(int knotenNr);
         boolean richtungGerade(Gleissymbol * weichensymbol, Gleissymbol * nachbar);//gibt zurück, ob die Richtung zwischen zwei Nachbarn bei gerade oder bei einer Weiche als Kurve verläuft
         boolean richtungGerade(int weichensymbolNr, int nachbarNr);
+
 };
 #endif
