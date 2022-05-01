@@ -60,7 +60,7 @@ void Hauptsignal::hauptsignalSchalten(int newStatus) //funktion stellt das Signa
 
 void Hauptsignal::hauptsignalHp0Manuell() //Funktion sorgt dafür, dass mit signalgruppensperrtaste und signaltaste ein signal in hp0 versetzt werden kann
 {
-  if (digitalRead(Signal::getSignalhaltgruppentaste()) == HIGH && digitalRead(Signal::getSignaltaste()) == HIGH)
+  if (digitalRead(Signal::getSignalhaltgruppentaste()) == LOW && digitalRead(Signal::getSignaltaste()) == LOW)
   {
     Hauptsignal::hauptsignalSchalten(0); //bei drücken von Signal und Signalhalttaste schalte signal auf hp0
   }

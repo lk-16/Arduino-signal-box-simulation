@@ -134,7 +134,7 @@ void Graph::symbolZuFahrstrasse(int knotenNr)
     if (getKnoten(knotenNr)->getHauptsignal() != nullptr)
     {
         Serial.println("Hauptsignal");
-        getKnoten(knotenNr)->getHauptsignal()->hauptsignalSchalten(1);//Schalte das Signal, wenn vorhanden auf Fahrt
+        getKnoten(knotenNr)->getHauptsignal()->hauptsignalSchalten(2);//Schalte das Signal, wenn vorhanden auf Fahrt
     }
         
     if (nextWay(knotenNr, getKnoten(knotenNr)->getWeg()) > -1)

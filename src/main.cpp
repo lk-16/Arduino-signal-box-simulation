@@ -215,17 +215,29 @@ void setup()
   //Serial.println(graph->fahrstrasseEinstellen(graph->getKnoten(4),graph->getKnoten(0)));
   
   Serial.println("Fertig");
-  graph->getKnoten(6)->getWeiche()->weicheGerade();
-  //graph->fahrstrasseEinstellen(graph->getKnoten(3),graph->getKnoten(1));
+  //graph->getKnoten(6)->getWeiche()->weicheGerade();
+  graph->fahrstrasseEinstellen(graph->getKnoten(12),graph->getKnoten(18));
   //graph->getKnoten(9)->getHauptsignal()->hauptsignalSchalten(1);
 //graph->fahrstrasseEinstellen(graph->getKnoten(3),graph->getKnoten(1));
 //..........tests...............................................................................................................
+
+
+//graph->fahrstrasseEinstellen(graph->getKnoten(2),graph->getKnoten(1));
 }
 
 void loop()
-{
+{/*
+  int number = 3;
+  graph->getKnoten(number)->getHauptsignal()->hauptsignalSchalten(0);
+delay(1000);
+graph->getKnoten(number)->getHauptsignal()->hauptsignalSchalten(1);
+delay(1000);
+graph->getKnoten(number)->getHauptsignal()->hauptsignalSchalten(2);
+delay(1000);
   // graph->getKnoten(6)->getWeiche()->setWeichenposition(1); // schlate Weiche in die richtige Position
-  graph->fahrstrasseEinstellen(graph->getKnoten(2),graph->getKnoten(0));  /* int kai = 122;
+    
+  //graph->getKnoten(12)->getHauptsignal()->hauptsignalSchalten(2);
+  /* int kai = 122;
   ftueMelder.digitalSchalten(kai,HIGH);
   delay(100);
   ftueMelder.digitalSchalten(kai,LOW);
