@@ -217,7 +217,8 @@ void setup()
   
   Serial.println("Fertig");
   //graph->getKnoten(6)->getWeiche()->weicheGerade();
-  graph->fahrstrasseEinstellen(graph->getKnoten(12),graph->getKnoten(18));
+  graph->fahrstrasseEinstellen(graph->getKnoten(3),graph->getKnoten(17));
+  Serial.println("Hier");
   //graph->getKnoten(9)->getHauptsignal()->hauptsignalSchalten(1);
 //graph->fahrstrasseEinstellen(graph->getKnoten(3),graph->getKnoten(1));
 //..........tests...............................................................................................................
