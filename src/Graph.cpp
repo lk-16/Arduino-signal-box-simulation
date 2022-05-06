@@ -42,30 +42,34 @@ boolean Graph::equals(Gleissymbol *symbol1, Gleissymbol *symbol2)
         return false;
 }
 
-int Graph::nextWay(Gleissymbol *symbol, int fahrstrassenNr)
+int Graph::nextWay(Gleissymbol *symbol, int fahrstrassenNr_vorgaenger, boolean vorgaengerAktiv)
 {
     if (getKnotenNr(symbol) < 0)
         return -1; // wenn der Knoten nicht zu finden
     else
-        return nextWay(getKnotenNr(symbol), fahrstrassenNr);
+        return nextWay(getKnotenNr(symbol), fahrstrassenNr_vorgaenger, vorgaengerAktiv);
 }
 
-int Graph::nextWay(int knotenNr, int fahrstrassenNr)
+int Graph::nextWay(int knotenNr, int fahrstrassenNr_vorgaenger, boolean vorgaengerAktiv)
 {
     if (isKnotenNr(knotenNr)) // wenn die angegebene KnotenNr eine KnotenNr ist
     {
         
         boolean fahrstrasse = false;
-        if (fahrstrassenNr > 0)
+        if (fahrstrassenNr_vorgaenger > 0 && !vorgaengerAktiv)
             fahrstrasse = true;
         int counter = 0;
         while (counter < _maxNachbarn && _nachbarn[knotenNr][counter] >= 0)
         // suche Solange nach Nachbarn, bis am Ende des Arrays oder bei Wert außerhalb des Werte bereichs oder
-        {
-            if (_knoten[_nachbarn[knotenNr][counter]].getMarkierung() == false && ((_knoten[_nachbarn[knotenNr][counter]].isFree() && !fahrstrasse) || (fahrstrasse && _knoten[_nachbarn[knotenNr][counter]].getWeg() == fahrstrassenNr))) // wenn der Knoten nicht markiert ist und frei, oder er wenn gefragt einer Fahrstrasse entspricht
+        {                                                                                                                                    
+            if (_knoten[_nachbarn[knotenNr][counter]].getMarkierung() == false && ((_knoten[_nachbarn[knotenNr][counter]].isFree() && !fahrstrasse && _knoten[_nachbarn[knotenNr][counter]].getWeiche() == nullptr) || (fahrstrasse && _knoten[_nachbarn[knotenNr][counter]].getWeg() == fahrstrassenNr_vorgaenger))) // wenn der Knoten nicht markiert ist und frei, oder er wenn gefragt einer Fahrstrasse entspricht
             {
                 //Serial.println(_nachbarn[knotenNr][counter]);
                 return _nachbarn[knotenNr][counter]; // gib den Knoten zurück
+
+            }
+            else if(_knoten[_nachbarn[knotenNr][counter]].getWeiche() != nullptr)// && )//wenn aktueller Knoten eine Weiche...................................................................................
+            {
 
             }
             counter++;
@@ -223,4 +227,13 @@ boolean Graph::richtungGerade(int weichensymbolNr, int nachbarNr)
         return false;
     else
         return true;
+}
+
+boolean Graph::weichenAusgang(int vorgaenger, int aktuellerKnoten)//gibt true wenn zwei wege möglich, false wenn nur einer
+{
+    int counter = 0;
+    while(_nachbarn[aktuellerKnoten][counter] == vorgaenger && counter < 3)
+    counter ++;
+    if(counter == 1) return true;
+    else return false;
 }

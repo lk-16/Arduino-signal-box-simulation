@@ -38,8 +38,8 @@ class Graph
         void prepare();/**<Die Weichenrelais werden auf HIGH gestellt und die Weichenposition wird aus dem EEPROM abgerufen und ausgeführt. Die Methode wird am Anfang benötigt, so wird sicher gestellt, das alle Weichen in der vom Stellpult ange-nommenen Lage sind*/
         void updateSymbole();/**>Alle Symbole im Graphen werden aktualisiert, die Besetztmelder, Weichen, Signale. Funktionen wie Hp= manuell*/
         boolean equals(Gleissymbol *symbol1, Gleissymbol *symbol2);/**<Gibt zurück, ob Zwei zeiger auf ein Gleissymbol auf das selbe zeigen.*/
-        int nextWay(Gleissymbol *symbol, int fahrstrassenNr = 0);/**<Die Methode gibt die Nr des nächsten nicht markierten Nachbarn der angegebenen Knotennummer zurück, wenn angegeben, den Knoten, der mit der FahrstrassenNr versehen ist.*/
-        int nextWay(int knotenNr, int fahrstrassenNr = 0);/**<Die Methode gibt die Nr des nächsten nicht markierten Nachbarn der angegebenen Knotennummer zurück, wenn angegeben, den Knoten, der mit der FahrstrassenNr versehen ist.*/
+        int nextWay(Gleissymbol *symbol, int fahrstrassenNr_vorgaenger = 0, boolean vorgaengerAktiv = false);/**<Die Methode gibt die Nr des nächsten nicht markierten Nachbarn der angegebenen Knotennummer zurück, wenn angegeben, den Knoten, der mit der FahrstrassenNr versehen ist. WEnn vorgaenger Aktiv, wird statt nach einer Fahrstraße, der Vorgänger des aktuellen Knotens übergeben, so kann ein logisch Sinnvoller WEg zum Beispiel bei WEichen bestimmt werden.*/
+        int nextWay(int knotenNr, int fahrstrassenNr_vorgeaenger = 0, boolean vorgaengerAktiv = false);/**<Die Methode gibt die Nr des nächsten nicht markierten Nachbarn der angegebenen Knotennummer zurück, wenn angegeben, den Knoten, der mit der FahrstrassenNr versehen ist. WEnn vorgaenger Aktiv, wird statt nach einer Fahrstraße, der Vorgänger des aktuellen Knotens übergeben, so kann ein logisch Sinnvoller WEg zum Beispiel bei WEichen bestimmt werden.*/
         int wegSuchen(Gleissymbol *start, Gleissymbol *ziel);/**<Die Methode gibt die länge eines Weges zurück, ob es einen weg gibt und markiert Ihn, wenn möglich, zuvor müssen die Markierungen resetet (resetMarkierungen) werden*/
         boolean fahrstrasseEinstellen(Gleissymbol *start, Gleissymbol *ziel);
         void symbolZuFahrstrasse(Gleissymbol *symbol);/**<setzt die Fahrstraße beginnend mit dem Symbol um*/
@@ -50,8 +50,9 @@ class Graph
         Gleissymbol * getNachbar(int knotenNr, int nachbar = 0);/**<Gibt den Nachbarn(nachbar) des Knoten (KnoteNr) zurück*/
         int getKnotenNr(Gleissymbol * symbol);/**<Git die Knotennr zum übergebenen Objekt zurück. Wenn nicht im Graph zu finden return -1*/
         boolean isKnotenNr(int knotenNr);
-        boolean richtungGerade(Gleissymbol * weichensymbol, Gleissymbol * nachbar);//gibt zurück, ob die Richtung zwischen zwei Nachbarn bei gerade oder bei einer Weiche als Kurve verläuft
-        boolean richtungGerade(int weichensymbolNr, int nachbarNr);
+        boolean richtungGerade(Gleissymbol * weichensymbol, Gleissymbol * nachbar);/**<Gibt zurück, ob die Richtung zwischen zwei Nachbarn bei gerade oder bei einer Weiche als Kurve verläuft.*/
+        boolean richtungGerade(int weichensymbolNr, int nachbarNr);/**<Gibt zurück, ob die Richtung zwischen zwei Nachbarn bei gerade oder bei einer Weiche als Kurve verläuft.*/
+        boolean weichenAusgang(int vorgaenger, int aktuellerKnoten);/**<Kommt die Fahrstraße über einen Weichenausgang auf die Weiche false, über den Eingang, also den Teil über den man zwei Abzweige nehmen kan, dann true*/
 
 };
 #endif

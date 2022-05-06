@@ -151,7 +151,7 @@ int nachbarn[besetztmelderAnzahl][3] = {//Nachbarn ders einzelnen Gleisymbole. N
       {1,8,-1},{0,-1,-1},{3,-1,-1},{2,4,-1},{3,5,-1},
       {4,6,-1},{5,7,15},{6,8,-1},{7,9,0},{8,10,-1},
       {9,-1,-1},{12,-1,-1},{11,13,-1},{12,14,-1},{13,15,-1},
-      {14,16,6},{15,17,-1},{16,18,-1},{17,-1,-1}};
+      {16,14,6},{15,17,-1},{16,18,-1},{17,-1,-1}};
 char gleissymboltyp[besetztmelderAnzahl] = {'-', '+',//wird für die Zuweisung der Aktoren zu den Gleisbildsymbolen benötigt, in Kombination mit Control
                                             '+', 's', '-', '-', '<', '-', '<', 's', '+',
                                             '+', 's', '-', '-', '<', '-', 's', '+'}; //- normales Gleis, + Zugtaste, < weiche, s signal und zugtaste (lesart wie die besetztmelder von links oben nach rechts unten)
@@ -217,8 +217,9 @@ void setup()
   
   Serial.println("Fertig");
   //graph->getKnoten(6)->getWeiche()->weicheGerade();
-  graph->fahrstrasseEinstellen(graph->getKnoten(3),graph->getKnoten(17));
+  graph->fahrstrasseEinstellen(graph->getKnoten(3),graph->getKnoten(11));
   Serial.println("Hier");
+  Serial.println(graph->weichenAusgang(0,8));
   //graph->getKnoten(9)->getHauptsignal()->hauptsignalSchalten(1);
 //graph->fahrstrasseEinstellen(graph->getKnoten(3),graph->getKnoten(1));
 //..........tests...............................................................................................................
