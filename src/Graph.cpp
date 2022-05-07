@@ -31,6 +31,25 @@ void Graph::updateSymbole()
     for (int i = 0; i < _anzahlKnoten; i++)
     {
         _knoten[i].update();
+        /*if (_knoten[i].isAnfang() && _knoten[i].getBesetztmelderstatus()) // wenn anfang und der Besetztmelder besetzt ist.
+        {
+            if (_knoten[i].getWeiche() != nullptr) // wenn es eine Weiche gibt
+            {
+                Serial.println("Weiche");
+                getKnoten(i)->getWeiche()->setWeichenfestlegung(false, getKnoten(i)->getWeg());
+            }
+            if (getKnoten(i)->getBesetztmelder() != nullptr)//wenn es einen Besetztmelder gibt
+                getKnoten(i)->getBesetztmelder()->setFahrstrassenelement(getKnoten(i)->getWeg(), false); // binde den Besetztmelder in die Fahrstraße ein
+            if (getKnoten(i)->getHauptsignal() != nullptr && (nextWay(i, getKnoten(i)->getWeg()) > i) == getKnoten(i)->getHauptsignal()->getRichtung())
+            {
+                getKnoten(i)->getHauptsignal()->hauptsignalSchalten(0); // Schalte das Signal, wenn vorhanden auf Halt
+            }
+            _knoten[i].setAnfang(false);
+            _knoten[i].setFahrstrassenelement(_knoten[i].getWeg(), false);
+            _knoten[i].setWeg(0);
+            _knoten[i].setMarkierung(true);
+            getKnoten(nextWay(i,getKnoten(i)->getWeg()))->setAnfang(true);
+        }*/
     }
 }
 
@@ -98,7 +117,7 @@ int Graph::wegSuchen(Gleissymbol *start, Gleissymbol *ziel, Gleissymbol *vorgaen
     }
     else
     {
-        if (vorgaenger == nullptr)// wenn es keinen Vorgänger gibt
+        //if (vorgaenger == nullptr) // wenn es keinen Vorgänger gibt
         {
             while (nextWay(start) >= 0)
             {
@@ -110,7 +129,7 @@ int Graph::wegSuchen(Gleissymbol *start, Gleissymbol *ziel, Gleissymbol *vorgaen
                 }
             }
         }
-        else //wenn es einen vorgänger gibt
+        /*else // wenn es einen vorgänger gibt
         {
             while (nextWay(start, getKnotenNr(vorgaenger), true) >= 0)
             {
@@ -121,7 +140,7 @@ int Graph::wegSuchen(Gleissymbol *start, Gleissymbol *ziel, Gleissymbol *vorgaen
                     return laenge + 1;
                 }
             }
-        }
+        }*/
         return -1;
     }
 }
@@ -134,7 +153,7 @@ boolean Graph::fahrstrasseEinstellen(Gleissymbol *start, Gleissymbol *ziel)
 
     if (laenge > -1) // wenn eine Fahrstraße gefunden
     {
-
+        start->setAnfang(true);
         symbolZuFahrstrasse(start);
         return true;
     }

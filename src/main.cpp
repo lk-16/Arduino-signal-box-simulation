@@ -219,8 +219,9 @@ void setup()
   //graph->getKnoten(6)->getWeiche()->weicheGerade();
   //Serial.println(graph->wegSuchen(graph->getKnoten(4), graph->getKnoten(13)));
   Serial.println(graph->fahrstrasseEinstellen(graph->getKnoten(12),graph->getKnoten(18)));
-  Serial.println(graph->fahrstrasseEinstellen(graph->getKnoten(2),graph->getKnoten(10)));
+  //Serial.println(graph->fahrstrasseEinstellen(graph->getKnoten(2),graph->getKnoten(10)));
   Serial.println("Hier");
+  //Serial.println(graph->getKnoten(3)->isAnfang());
   //int vorgaenger = 0;
   //int akt = 8;
   //Serial.println(graph->nextWay(akt,vorgaenger,true));
@@ -237,7 +238,11 @@ void setup()
 }
 
 void loop()
-{/*
+{
+  
+  //Serial.println(graph->getKnoten(3)->getBesetztmelderstatus());
+  //Serial.println(graph->getKnoten(3)->isAnfang());
+  /*
   int number = 3;
   graph->getKnoten(number)->getHauptsignal()->hauptsignalSchalten(0);
 delay(1000);

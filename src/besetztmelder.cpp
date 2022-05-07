@@ -15,7 +15,7 @@ Besetztmelder::Besetztmelder(int gleisPin, int ledGelb, int ledRot, int weichenb
     _ledGelb = ledGelb;
     _ledRot = ledRot;
     _weichenbesetztmelder = weichenbesetztmelder;
-    pinMode(_gleisPin, INPUT);
+    pinMode(_gleisPin, INPUT_PULLUP);
     pinMode(_ledGelb, OUTPUT);
     pinMode(_ledRot, OUTPUT);
 }
