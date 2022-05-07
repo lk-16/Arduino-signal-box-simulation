@@ -217,9 +217,17 @@ void setup()
   
   Serial.println("Fertig");
   //graph->getKnoten(6)->getWeiche()->weicheGerade();
-  graph->fahrstrasseEinstellen(graph->getKnoten(3),graph->getKnoten(11));
+  //Serial.println(graph->wegSuchen(graph->getKnoten(4), graph->getKnoten(13)));
+  Serial.println(graph->fahrstrasseEinstellen(graph->getKnoten(12),graph->getKnoten(18)));
+  Serial.println(graph->fahrstrasseEinstellen(graph->getKnoten(2),graph->getKnoten(10)));
   Serial.println("Hier");
-  Serial.println(graph->weichenAusgang(0,8));
+  //int vorgaenger = 0;
+  //int akt = 8;
+  //Serial.println(graph->nextWay(akt,vorgaenger,true));
+  //graph->getKnoten(graph->nextWay(akt,vorgaenger,true))->setMarkierung(true);
+  //Serial.println(graph->nextWay(akt,vorgaenger,true));
+  //graph->getKnoten(graph->nextWay(akt,vorgaenger,true))->setMarkierung(true);
+  //Serial.println(graph->nextWay(akt,vorgaenger,true));
   //graph->getKnoten(9)->getHauptsignal()->hauptsignalSchalten(1);
 //graph->fahrstrasseEinstellen(graph->getKnoten(3),graph->getKnoten(1));
 //..........tests...............................................................................................................
