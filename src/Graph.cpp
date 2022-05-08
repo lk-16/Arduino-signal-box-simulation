@@ -209,7 +209,6 @@ void Graph::symbolZuFahrstrasse(Gleissymbol *symbol)
 
 void Graph::symbolZuFahrstrasse(int knotenNr)
 {
-    Serial.println(knotenNr);
     // stelle das Symbol als Fahrstrasse ein
     getKnoten(knotenNr)->setFahrstrassenelement(getKnoten(knotenNr)->getWeg(), true);
     if (nextWay(knotenNr, getKnoten(knotenNr)->getWeg()) != -1 && getKnoten(nextWay(knotenNr, getKnoten(knotenNr)->getWeg()))->getWeiche() != nullptr) // wenn es eine Weiche gibt
@@ -218,7 +217,6 @@ void Graph::symbolZuFahrstrasse(int knotenNr)
         getKnoten(knotenNr)->setMarkierung(true);
 
         Serial.println("Weiche");
-        Serial.println(richtungGerade(knotenNr, nextN, nextWay(nextN, getKnoten(nextN)->getWeg())));
         getKnoten(nextN)->getWeiche()->setWeichenposition(richtungGerade(knotenNr, nextN, nextWay(nextN, getKnoten(nextN)->getWeg()))); // schlate Weiche in die richtige Position
         getKnoten(knotenNr)->getWeiche()->setWeichenfestlegung(true, getKnoten(knotenNr)->getWeg());
 
@@ -314,8 +312,8 @@ boolean Graph::richtungGerade(Gleissymbol* vorgaenger, Gleissymbol *weichensymbo
 }
 boolean Graph::richtungGerade(int vorgaenger, int weichensymbolNr, int nachfolger)
 {
-    Serial.println("Knoten:");Serial.println(vorgaenger);Serial.println(weichensymbolNr);Serial.println(nachfolger);
-    if (_nachbarn[weichensymbolNr][2] == vorgaenger || _nachbarn[weichensymbolNr][2] == nachfolger)
+    if(!isKnotenNr(weichensymbolNr))Serial.println("Error: Die angegebene Weichensymbolnummer gehört nicht zum Graphen. (Graph::richtungGerade)");
+    if (isKnotenNr(weichensymbolNr) && (_nachbarn[weichensymbolNr][2] == vorgaenger || _nachbarn[weichensymbolNr][2] == nachfolger))//an Position 2 und die Weichensymbolnummer ist nicht außerhalb des Arrays
         return false;
     else
         return true;
