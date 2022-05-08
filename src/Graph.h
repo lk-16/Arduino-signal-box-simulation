@@ -52,8 +52,8 @@ class Graph
         Gleissymbol * getNachbar(int knotenNr, int nachbar = 0);/**<Gibt den Nachbarn(nachbar) des Knoten (KnoteNr) zurück*/
         int getKnotenNr(Gleissymbol * symbol);/**<Git die Knotennr zum übergebenen Objekt zurück. Wenn nicht im Graph zu finden return -1*/
         boolean isKnotenNr(int knotenNr);
-        boolean richtungGerade(Gleissymbol * weichensymbol, Gleissymbol * nachbar);/**<Gibt zurück, ob die Richtung zwischen zwei Nachbarn bei gerade oder bei einer Weiche als Kurve verläuft.*/
-        boolean richtungGerade(int weichensymbolNr, int nachbarNr);/**<Gibt zurück, ob die Richtung zwischen zwei Nachbarn bei gerade oder bei einer Weiche als Kurve verläuft.*/
+        boolean richtungGerade(Gleissymbol* vorgaenger, Gleissymbol * weichensymbol, Gleissymbol * nachfolger);/**<Gibt zurück, ob die Richtung zwischen zwei Nachbarn bei gerade oder bei einer Weiche als Kurve verläuft.*/
+        boolean richtungGerade(int vorgaenger, int weichensymbolNr, int nachfolger);/**<Gibt zurück, ob die Richtung zwischen zwei Nachbarn bei gerade oder bei einer Weiche als Kurve verläuft.*/
         boolean weichenAusgang(int vorgaenger, int aktuellerKnoten);/**<Kommt die Fahrstraße über einen Weichenausgang auf die Weiche false, über den Eingang, also den Teil über den man zwei Abzweige nehmen kan, dann true*/
 };
 #endif

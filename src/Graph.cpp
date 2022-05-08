@@ -212,12 +212,17 @@ void Graph::symbolZuFahrstrasse(int knotenNr)
     Serial.println(knotenNr);
     // stelle das Symbol als Fahrstrasse ein
     getKnoten(knotenNr)->setFahrstrassenelement(getKnoten(knotenNr)->getWeg(), true);
-    if (getKnoten(knotenNr)->getWeiche() != nullptr) // wenn es eine Weiche gibt
+    if (getKnoten(nextWay(knotenNr, getKnoten(knotenNr)->getWeg()))->getWeiche() != nullptr) // wenn es eine Weiche gibt
     {
+        int nextN = nextWay(knotenNr, getKnoten(knotenNr)->getWeg());
+        getKnoten(knotenNr)->setMarkierung(true);
+
         Serial.println("Weiche");
-        Serial.println(richtungGerade(knotenNr, nextWay(knotenNr, getKnoten(knotenNr)->getWeg())));
-        getKnoten(knotenNr)->getWeiche()->setWeichenposition(richtungGerade(knotenNr, nextWay(knotenNr, getKnoten(knotenNr)->getWeg()))); // schlate Weiche in die richtige Position
+        Serial.println(richtungGerade(knotenNr, nextN, nextWay(nextN, getKnoten(nextN)->getWeg())));
+        getKnoten(nextN)->getWeiche()->setWeichenposition(richtungGerade(knotenNr, nextN, nextWay(nextN, getKnoten(nextN)->getWeg()))); // schlate Weiche in die richtige Position
         getKnoten(knotenNr)->getWeiche()->setWeichenfestlegung(true, getKnoten(knotenNr)->getWeg());
+
+        getKnoten(knotenNr)->setMarkierung(false);
     }
     if (getKnoten(knotenNr)->getBesetztmelder() != nullptr)
         getKnoten(knotenNr)->getBesetztmelder()->setFahrstrassenelement(getKnoten(knotenNr)->getWeg(), true); // binde den Besetztmelder in die Fahrstraße ein
@@ -297,16 +302,20 @@ boolean Graph::isKnotenNr(int knotenNr)
         return false;
 }
 
-boolean Graph::richtungGerade(Gleissymbol *weichensymbol, Gleissymbol *nachbar)
+boolean Graph::richtungGerade(Gleissymbol* vorgaenger, Gleissymbol *weichensymbol, Gleissymbol *nachfolger)
 {
-    if (getKnotenNr(weichensymbol) < 0 || getKnotenNr(nachbar) < 0)
-        return -1;
+    if (getKnotenNr(vorgaenger) < 0 || getKnotenNr(weichensymbol) < 0 || getKnotenNr(nachfolger) < 0)
+    {
+        Serial.println("Error: Die angegebenen Knoten sind keine Knoten (Graph::richtungGerade)");
+        return false;
+    }
     else
-        return richtungGerade(getKnotenNr(weichensymbol), getKnotenNr(nachbar));
+        return richtungGerade(getKnotenNr(vorgaenger), getKnotenNr(weichensymbol), getKnotenNr(nachfolger));
 }
-boolean Graph::richtungGerade(int weichensymbolNr, int nachbarNr)
+boolean Graph::richtungGerade(int vorgaenger, int weichensymbolNr, int nachfolger)
 {
-    if (_nachbarn[weichensymbolNr][2] == nachbarNr)
+    Serial.println("Knoten:");Serial.println(vorgaenger);Serial.println(weichensymbolNr);Serial.println(nachfolger);
+    if (_nachbarn[weichensymbolNr][2] == vorgaenger || _nachbarn[weichensymbolNr][2] == nachfolger)
         return false;
     else
         return true;
