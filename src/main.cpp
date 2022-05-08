@@ -86,7 +86,7 @@ int gelb[hauptsignalanzahl] = {gelb1, gelb2, gelb3, gelb4};
 int gruen[hauptsignalanzahl] = {gruen1, gruen2, gruen3, gruen4};
 int signaltasten[hauptsignalanzahl] = {signaltaste1, signaltaste2, signaltaste3, signaltaste4};
 int sperrmelder[hauptsignalanzahl] = {sperrmelder1, sperrmelder2, sperrmelder3, sperrmelder4};
-boolean richtung[hauptsignalanzahl] = {true,false,true,false};
+boolean richtung[hauptsignalanzahl] = {true, false, true, false};
 HauptsignalControl hauptsignale(hauptsignalanzahl, rot, gelb, gruen, signaltasten, sperrmelder, allgSignaltasten, schieberegisterPins, richtung);
 // int rotPin, int gelbPin, int gruenPin,  int signaltaste, int sperrmelder, int allgSignaltasten[3], int registerPin[4]
 
@@ -119,7 +119,7 @@ Melder ftueMelder(ftueMelderName, ftueMelderLed, weckerPin, ftueMelderWut, schie
 // Zugtasten
 const int zugtastenanzahl = 9;
 int zugtastenPins[zugtastenanzahl] = {zta1, zta2, zta3, zta4, zta5, zta6, zta7, zta8, zta9};
-boolean zugtastenRichtung[zugtastenanzahl] = {1,0,1,0,1,0,1,0,1};
+boolean zugtastenRichtung[zugtastenanzahl] = {1, 0, 1, 0, 1, 0, 1, 0, 1};
 ZugtastenControl zugtastenC(zugtastenanzahl, zugtastenPins, zugtastenRichtung);
 
 // Fahrstraßensteuerung
@@ -145,119 +145,73 @@ int besetztmelderposition[fahrstrassenanzahl + 1][/*Reihen(Bestztm.)*/ 9][5 /*Ti
 };                                                               // 0. ebene Besetztmelder anzahl(menge), in den nächsten ebenen sind die Besetztmelder in Reihenfolge gespeichert. Die nächste Dimeinsion speichert, ob das Feld auf dem Besetztmelder eine Weiche ist, und darunter steht in welche richtung die geschaltet werden muss. Folgend steht, ob es eine Falnkenschutz weiche gibt                                                                            //anhand dieser Zahl lässt sich der Wert von Freigabe berechnen, enthält bis zu welchem Besetztmelder die Fahrstrasse aufgelöst ist.
 int besetztmelderzahl[fahrstrassenanzahl] = {0};                 // die anzahl der Besetztmelder die schon freigegeben wurde
 
-
 List list;
 Graph *graph = nullptr;
-int nachbarn[besetztmelderAnzahl][3] = {//Nachbarn ders einzelnen Gleisymbole. Nach nummerierung in einem 2d Array gespeichert. Leere Felder müssen mit einem Wert außerhalb der Wertebereichs gefüllt werden z.B. -1, da dies kleiner als 0 ist.
-      {1,8,-1},{0,-1,-1},{3,-1,-1},{2,4,-1},{3,5,-1},
-      {4,6,-1},{5,7,15},{6,8,-1},{7,9,0},{8,10,-1},
-      {9,-1,-1},{12,-1,-1},{11,13,-1},{12,14,-1},{13,15,-1},
-      {16,14,6},{15,17,-1},{16,18,-1},{17,-1,-1}};
-char gleissymboltyp[besetztmelderAnzahl] = {'-', '+',//wird für die Zuweisung der Aktoren zu den Gleisbildsymbolen benötigt, in Kombination mit Control
+int nachbarn[besetztmelderAnzahl][3] = { // Nachbarn ders einzelnen Gleisymbole. Nach nummerierung in einem 2d Array gespeichert. Leere Felder müssen mit einem Wert außerhalb der Wertebereichs gefüllt werden z.B. -1, da dies kleiner als 0 ist.
+    {1, 8, -1},
+    {0, -1, -1},
+    {3, -1, -1},
+    {2, 4, -1},
+    {3, 5, -1},
+    {4, 6, -1},
+    {5, 7, 15},
+    {6, 8, -1},
+    {7, 9, 0},
+    {8, 10, -1},
+    {9, -1, -1},
+    {12, -1, -1},
+    {11, 13, -1},
+    {12, 14, -1},
+    {13, 15, -1},
+    {16, 14, 6},
+    {15, 17, -1},
+    {16, 18, -1},
+    {17, -1, -1}};
+char gleissymboltyp[besetztmelderAnzahl] = {'-', '+', // wird für die Zuweisung der Aktoren zu den Gleisbildsymbolen benötigt, in Kombination mit Control
                                             '+', 's', '-', '-', '<', '-', '<', 's', '+',
                                             '+', 's', '-', '-', '<', '-', 's', '+'}; //- normales Gleis, + Zugtaste, < weiche, s signal und zugtaste (lesart wie die besetztmelder von links oben nach rechts unten)
 
 void setup()
 {
-  weichen.weichenRelaisHIGH();
- // 
- Serial.begin(9600);
+  weichen.weichenRelaisHIGH();//wird benötigt, da der Graph erst später erstellt wird und die Relais sonst Schalten würden.
+  Serial.begin(9600);
 
-  // Fahrstrassentastenkombinationen
-  fahrstrassenspeicher[2][4] = 1; // minus 1 wegen array
-  fahrstrassenspeicher[0][2] = 2;
-  fahrstrassenspeicher[2][8] = 3;
-  fahrstrassenspeicher[6][8] = 4;
-  fahrstrassenspeicher[1][3] = 5;
-  fahrstrassenspeicher[5][7] = 6;
-  fahrstrassenspeicher[1][7] = 7;
-  fahrstrassenspeicher[0][1] = 8; // wenn die Tasten auf feld 1 und feld 2 gedrückt werden, soll die Fahrstraße 8 einlaufen
+  // Der folgende Algorithmus fügt den Knoten Attribute, wie Besetztmelder, Weichen, Signale hinzu.
+  Gleissymbol knoten[besetztmelderAnzahl]; // Speichert die Knoten, des Graphen
 
-
-
-//new:
-  
-  Gleissymbol knoten[besetztmelderAnzahl];//Speichert die Knoten, des Graphen
-  
-  int zta = 0;    // zugtastenzähler
-  int signal = 0; // signalzähler
-  int weiche = 0; // weichenzähler
-  for (int i = 0; i < besetztmelderAnzahl; i++)//erstellen der Gleissymbole bezüglich des Array gleissymboltyp
+  int zta = 0;                                  // zugtastenzähler
+  int signal = 0;                               // signalzähler
+  int weiche = 0;                               // weichenzähler
+  for (int i = 0; i < besetztmelderAnzahl; i++) // erstellen der Gleissymbole bezüglich des Array gleissymboltyp
   {
-    if (gleissymboltyp[i] == '-')//wenn normales Gleis
-      knoten[i] =  Gleissymbol(besetztmeldung.getBesetztmelder(i));
-    else if(gleissymboltyp[i] == '+')//zugtaste
+    if (gleissymboltyp[i] == '-') // wenn normales Gleis
+      knoten[i] = Gleissymbol(besetztmeldung.getBesetztmelder(i));
+    else if (gleissymboltyp[i] == '+') // zugtaste
     {
-      knoten[i] =  Gleissymbol(besetztmeldung.getBesetztmelder(i));//
-      zugtastenC.setGleissymbol(zta,&knoten[i]);//weise Gleissymbol einer Zugtaste zu
+      knoten[i] = Gleissymbol(besetztmeldung.getBesetztmelder(i)); //
+      zugtastenC.setGleissymbol(zta, &knoten[i]);                  // weise Gleissymbol einer Zugtaste zu
       zta++;
     }
-    else if(gleissymboltyp[i] == 's')//signal und zugtaste
+    else if (gleissymboltyp[i] == 's') // signal und zugtaste
     {
-      knoten[i] =  Gleissymbol(besetztmeldung.getBesetztmelder(i),nullptr,hauptsignale.getHauptsignal(signal));
-      zugtastenC.setGleissymbol(zta,&knoten[i]);
+      knoten[i] = Gleissymbol(besetztmeldung.getBesetztmelder(i), nullptr, hauptsignale.getHauptsignal(signal));
+      zugtastenC.setGleissymbol(zta, &knoten[i]);
       zta++;
       signal++;
     }
-    else if(gleissymboltyp[i]== '<')//weiche
+    else if (gleissymboltyp[i] == '<') // weiche
     {
       knoten[i] = Gleissymbol(besetztmeldung.getBesetztmelder(i), weichen.getWeiche(weiche));
       weiche++;
     }
   }
 
- graph->prepare(); // alle möglichen Eingaben an den Relais werden gelöscht und gespeicherte Weichenposition wird angezeigt und ausgeführt
-  
-//........tests.................................................................................................................
-  graph = new Graph(besetztmelderAnzahl, knoten, nachbarn);
-  Serial.println("Hello");
-  graph->resetMarkierungen();
-  //graph->getKnoten(6)->getWeiche()->setWeichenposition(1); // schlate Weiche in die richtige Position
-        
-  //Serial.println(graph->fahrstrasseEinstellen(graph->getKnoten(4),graph->getKnoten(0)));
-  
-  Serial.println("Fertig");
-  //graph->getKnoten(6)->getWeiche()->weicheGerade();
-  //Serial.println(graph->wegSuchen(graph->getKnoten(4), graph->getKnoten(13)));
-  //Serial.println(graph->fahrstrasseEinstellen(graph->getKnoten(3),graph->getKnoten(1)));
-  //Serial.println(graph->fahrstrasseEinstellen(graph->getKnoten(11),graph->getKnoten(18)));
-  Serial.println("Hier");
-  
-  //int vorgaenger = 0;
-  //int akt = 8;
-  //Serial.println(graph->nextWay(akt,vorgaenger,true));
-  //graph->getKnoten(graph->nextWay(akt,vorgaenger,true))->setMarkierung(true);
-  //Serial.println(graph->nextWay(akt,vorgaenger,true));
-  //graph->getKnoten(graph->nextWay(akt,vorgaenger,true))->setMarkierung(true);
-  //Serial.println(graph->nextWay(akt,vorgaenger,true));
-  //graph->getKnoten(9)->getHauptsignal()->hauptsignalSchalten(1);
-//graph->fahrstrasseEinstellen(graph->getKnoten(3),graph->getKnoten(1));
-//..........tests...............................................................................................................
-
-
-//graph->fahrstrasseEinstellen(graph->getKnoten(2),graph->getKnoten(1));
+  graph->prepare(); // alle Eingaben an den Relais werden gelöscht und gespeicherte Weichenposition wird angezeigt und ausgeführt
+  graph = new Graph(besetztmelderAnzahl, knoten, nachbarn);//erstelle den Graphen
 }
 
 void loop()
-{/*
-  int number = 3;
-  graph->getKnoten(number)->getHauptsignal()->hauptsignalSchalten(0);
-delay(1000);
-graph->getKnoten(number)->getHauptsignal()->hauptsignalSchalten(1);
-delay(1000);
-graph->getKnoten(number)->getHauptsignal()->hauptsignalSchalten(2);
-delay(1000);
-  // graph->getKnoten(6)->getWeiche()->setWeichenposition(1); // schlate Weiche in die richtige Position
-    
-  //graph->getKnoten(12)->getHauptsignal()->hauptsignalSchalten(2);
-  /* int kai = 122;
-  ftueMelder.digitalSchalten(kai,HIGH);
-  delay(100);
-  ftueMelder.digitalSchalten(kai,LOW);
-  delay(100);
-*/
-
-  // abfragen aller Zugtasten
+{
   zugtastenspeicher[0] = 0;
   zugtastenspeicher[1] = 0;
   anzahl = 0;
@@ -269,135 +223,11 @@ delay(1000);
       anzahl++;                                                  // erhöhe die anzahl der gedrückten anzahl an tasten um 1
     }
   }
-  if(anzahl > 1)
+  if (anzahl > 1)
   {
-    //Serial.print(zugtastenspeicher[0]);Serial.print(" : ");Serial.println(zugtastenspeicher[1]);
     graph->fahrstrasseEinstellen(zugtastenC.getZugtaste(zugtastenspeicher[0]), zugtastenC.getZugtaste(zugtastenspeicher[1]));
   }
-/*
-  // Kontrolle der Fahrstrasse und einstellen und Festlegen des Fahrwegs
-  fahrstrasse = fahrstrassenspeicher[zugtastenspeicher[0]][zugtastenspeicher[1]];
-  if (fahrstrasse != 0 && fahrstrassenstati[fahrstrasse - 1] == false)
-  {
-    int belegt = 0;
-    for (int j = 0; j < besetztmelderposition[fahrstrasse][0][0]; j++) // wiederhole bis du alle besetztmelder überprüft hast(menge an besetztmeldern werden über besetztmelder position eingebracht)
-    {
-      if (besetztmeldung.getBesetztmelderstatus(besetztmelderposition[fahrstrasse][j + 1][0], LOW, weichen) == HIGH || besetztmeldung.getFahrstrassenelement(besetztmelderposition[fahrstrasse][j + 1][0]) == true // wenn der Besetztmelder belegt oder festgelegt ist.
-          || (besetztmelderposition[fahrstrasse][j + 1][1] > 0 && weichen.getWeichenfestlegung(besetztmelderposition[fahrstrasse][j + 1][1] - 1) == true))                                                         // Kontrolle ob Weichen schon in eine Fahrstraße eingebunden sind(weichennr aus Weichenpostion muss -1 genommen werden, da sonst die Weiche null nicht von den anderen zu unterschreiden wäre.
-        belegt++;
-    }
-    if (hauptsignale.getHauptsignalSperren(besetztmelderposition[fahrstrasse][0][1] - 1) == true) // wenn das Signal gesperrt ist kann die Fahrstrasse nicht gestellt werden.
-    {
-      belegt++;
-    }
 
-    if (belegt == 0)
-    {
-      // Besetztmeldung
-      for (int j = 0; j < besetztmelderposition[fahrstrasse][0][0]; j++) // einbinden der Besetztmelder in die Fahrstrasse
-      {
-
-        besetztmeldung.setFahrstrassenelement(besetztmelderposition[fahrstrasse][j + 1][0], fahrstrasse, true);
-        if (besetztmelderposition[fahrstrasse][j + 1][1] > 0) // wenn der Besetztmelder auf einer Weiche liegt
-        {
-          weichen.weichenStellen(besetztmelderposition[fahrstrasse][j + 1][1] - 1, besetztmelderposition[fahrstrasse][j + 1][2]); // stelle die Weiche
-          weichen.setWeichenfestlegung(besetztmelderposition[fahrstrasse][j + 1][1] - 1, fahrstrasse, true);                      // lege die Weiche fest.
-        }
-      }
-      fahrstrassenkontolle[fahrstrasse - 1] = true;
-    }
-  }
-
-  // Fahrstrassenauflösung/Fahrtstellen des Hauptsignals
-  for (int kontrollen = 1; kontrollen < fahrstrassenanzahl + 1; kontrollen++) // kontrolliere alle Fahrstrassen.
-  {
-    int weichenstati = 0;
-    if (fahrstrassenkontolle[kontrollen - 1] == true) // wenn die untersuchte Fahrstrasse kontrolliert wurde und nur noch die Weichen einlaufen müssen,
-    {
-
-      for (int k = 0; k < besetztmelderposition[kontrollen][0][0]; k++) // wiederhole für jeden Besetztmelder dieser Fahrstraße,
-      {
-
-        if (besetztmelderposition[kontrollen][k + 1][1] > 0 && weichen.getWeichenposition(besetztmelderposition[kontrollen][k + 1][1] - 1) != besetztmelderposition[kontrollen][k + 1][2]) // wenn die Weichenposition der Weiche, die beim Besetztmelder hinterlegt ist, mit der realen Weichenposition nicht übereinstimmt,
-        {
-          weichenstati++; // erhöhe weichenstati um 1.
-        }
-      }
-      if (weichenstati == 0) // ist belegt gleich null, sind also alle Weichen in der richtigen Position.
-      {
-        hauptsignale.hauptsignalSchalten(besetztmelderposition[kontrollen][0][1] - 1, 2); // schalte das Hauptsignal
-        fahrstrassenkontolle[kontrollen - 1] = false;                                     // deaktiviere Fahrstraßenkontrolle
-        fahrstrassenstati[kontrollen - 1] = true;                                         // und aktiviere die Fahrstrasse, die Fahrstrasse ist somit komplett ausgeführt
-        Serial.print("Fahrstraße ");                                                      // schreibe den Namen der Fahrstrasse
-        Serial.println(kontrollen);
-      }
-    }
-
-    if (fahrstrassenstati[kontrollen - 1] == true)
-    {
-      // auf einen Besetztmelder sind immer zwei zahlen festgelegt, die erste Zahl wird beim besetztsein des melder eingespeichert, die zweite, wird erst dann eingespeichert, wenn die erste eingespeichert ist,
-      // der nächste besetztmelder kann erst freigegeben werden, wenn der erste freigegeben ist, also die Zahl eine bestimmte höhe hat.
-      if (besetztmeldung.getBesetztmelderstatus(besetztmelderposition[kontrollen][besetztmelderzahl[kontrollen - 1] + 1][0], LOW, weichen) == HIGH) // wenn der Besetztmelder besetzt ist und die freigabe der Besetztmelder Zahl plus eins entspricht
-      {
-        hauptsignale.hauptsignalSchalten(besetztmelderposition[kontrollen][0][1] - 1, 0); // immer wenn ein Besetztmelder innerhalb einer fahrstrasse belegt wird, soll das zugehörige signal rot werden
-        if (freigabe[kontrollen - 1] == besetztmelderzahl[kontrollen - 1] * 2 + 1)
-          freigabe[kontrollen - 1]++; // beim ersten mal ist die freigabe1 und wird auf 2 erhöht. wenn dies passiert ist, und der Besetztmelder wieder frei geworden ist, wird der Besetztmelder als Fahrstrassenelement aufgelöst
-      }
-
-      if (besetztmeldung.getBesetztmelderstatus(besetztmelderposition[kontrollen][besetztmelderzahl[kontrollen - 1] + 1][0], LOW, weichen) == LOW && freigabe[kontrollen - 1] == besetztmelderzahl[kontrollen - 1] * 2 + 2)
-      {
-        // Auflösung der Besetztmelderfestlegung
-        besetztmeldung.setFahrstrassenelement(besetztmelderposition[kontrollen][besetztmelderzahl[kontrollen - 1] + 1][0], kontrollen, false);
-        // Auflösung der Weichenfestlegung
-        if (besetztmelderposition[kontrollen][besetztmelderzahl[kontrollen - 1] + 1][1] > 0 && weichen.getWeichenfestlegung(besetztmelderposition[kontrollen][besetztmelderzahl[kontrollen - 1] + 1][1] - 1) == true) // besetztmelderZahl+1, weil die erste Position des arrays besetztmelderposition nur die Anzhal der Besetztmelder enthält und die namen der melder erst im nächsten feld erscheinen
-        {
-          weichen.setWeichenfestlegung((besetztmelderposition[kontrollen][besetztmelderzahl[kontrollen - 1] + 1][1]) - 1, kontrollen, false); // die Weichenzahl die Herauskommt muss um 1 verkleinert werden, sonst gäbe es keine WEiche 0
-        }
-
-        freigabe[kontrollen - 1]++;
-        besetztmelderzahl[kontrollen - 1]++; // es geht mit dem nächsten besetztmelder der Fahrstrasse weiter
-
-        if (besetztmelderzahl[kontrollen - 1] == besetztmelderposition[kontrollen][0][0]) // wenn die gesamte Fahrstrße wieder freigegeben ist
-        {
-          besetztmelderzahl[kontrollen - 1] = 0;
-          freigabe[kontrollen - 1] = 1;              // Der Freigabe Zähler wird wieder Zurückgesetzt.
-          fahrstrassenstati[kontrollen - 1] = false; // die Fahrstrasse wird wieder als inaktiv gemeldet.
-        }
-      }
-      // alle besetztmelder müssen in der Fahrstraße einmal rot gewesen sein und am ende wieder frei sein
-    }
-  }
-*/
   ftueMelder.tueMelder(zugtastenC);
   graph->updateSymbole();
-  // Signale................................................
-  // hauptsignale.hauptsignaleHp0Manuell(); //über die Signalhaltgruppentaste und die Zugtaste auf dem Feld des Signals kann ein Signal auf hp0 gestellt werden
-  /*hauptsignale.hauptsignaleSperren(); //über weichen  und weichensperrtaste kann ein Signal gesperrt werden
-
-  // Weichen..................................................
-  weichen.weichenWechseln(); // WGT und WT können zum Umschalten einer Weiche benutzt werden
-  weichen.weichenSchalten(); // lässt das Relais nach dem Schalten wieder zurückfallen
-
-  // Besetztmeldung.........................................
-  // besetztmelder sollen immer wenn sie belegt sind den Status anzeigen.
-  for (int h = 0; h < 19; h++)
-  {
-    besetztmeldung.getBesetztmelderstatus(h, LOW, weichen);
-
-  /*besetztmeldung.getBesetztmelderstatus(1, LOW, weichen);
-besetztmeldung.getBesetztmelderstatus(2, LOW, weichen);
-besetztmeldung.getBesetztmelderstatus(3, LOW, weichen);
-besetztmeldung.getBesetztmelderstatus(4, LOW, weichen);
-besetztmeldung.getBesetztmelderstatus(5, LOW, weichen);
-besetztmeldung.getBesetztmelderstatus(6, LOW, weichen);
-besetztmeldung.getBesetztmelderstatus(7, LOW, weichen);
-besetztmeldung.getBesetztmelderstatus(8, LOW, weichen);
-besetztmeldung.getBesetztmelderstatus(9, LOW, weichen);
-
-
-if(digitalRead(shgt)==LOW)
-{
-for(int o=0;o<9;o++)
-Zugtaste.setFahrstraßenelement
-}*/
 }
