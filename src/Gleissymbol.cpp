@@ -102,9 +102,30 @@ void Gleissymbol::setFahrstrassenelement(int fahrstrassennr, boolean Fahrstrasse
         if (_besetztmelder != nullptr)
             _besetztmelder->setFahrstrassenelement(fahrstrassennr, Fahrstrassenelement);
     }
+    else if(fahrstrassennr == _weg)
+    {
+        setWeg(fahrstrassennr);
+        if (_besetztmelder != nullptr)
+            _besetztmelder->setFahrstrassenelement(fahrstrassennr, Fahrstrassenelement);
+    }
 }
 
 boolean Gleissymbol::getFahrstrassenelement()
 {
     return _fahrstrassenelement;
+}
+
+boolean Gleissymbol::isAnfang()
+{
+    return _anfang;
+}
+
+void Gleissymbol::setAnfang(boolean status)
+{
+    _anfang = status;
+}
+
+boolean Gleissymbol::getBesetztmelderstatus()
+{
+    return _besetztmelder->besetztmelderAuslesen(LOW,*_weiche);
 }

@@ -221,6 +221,7 @@ void setup()
   Serial.println(graph->fahrstrasseEinstellen(graph->getKnoten(12),graph->getKnoten(18)));
   Serial.println(graph->fahrstrasseEinstellen(graph->getKnoten(2),graph->getKnoten(10)));
   Serial.println("Hier");
+  
   //int vorgaenger = 0;
   //int akt = 8;
   //Serial.println(graph->nextWay(akt,vorgaenger,true));

@@ -28,9 +28,37 @@ void Graph::prepare()
 
 void Graph::updateSymbole()
 {
+    int j = 0;
     for (int i = 0; i < _anzahlKnoten; i++)
     {
         _knoten[i].update();
+
+        if (_knoten[i].isAnfang() && _knoten[i].getBesetztmelderstatus())
+        {
+            if (getKnoten(i)->getHauptsignal() != nullptr) // wenn es ein Hauptsignal gibt
+            {
+                getKnoten(i)->getHauptsignal()->hauptsignalSchalten(0);
+            }
+            if (getKnoten(i)->getWeiche() != nullptr)
+            {
+                getKnoten(i)->getWeiche()->setWeichenfestlegung(false, getKnoten(i)->getWeg());
+            }
+            if (getKnoten(i)->getBesetztmelder() != nullptr)
+            {
+                getKnoten(i)->setFahrstrassenelement(getKnoten(i)->getWeg(), false);
+            }
+            
+            resetMarkierungen();
+            
+            int weg = getKnoten(i)->getWeg();
+            getKnoten(i)->setAnfang(false);
+            getKnoten(i)->setFahrstrassenelement(getKnoten(i)->getWeg(), false);
+            getKnoten(i)->setWeg(0);
+            getKnoten(nextWay(i,weg))->setAnfang(true);
+            
+            //verschiebe auf den nächsten
+            
+        }
     }
 }
 
@@ -98,11 +126,11 @@ int Graph::wegSuchen(Gleissymbol *start, Gleissymbol *ziel, Gleissymbol *vorgaen
     }
     else
     {
-        if (vorgaenger == nullptr)// wenn es keinen Vorgänger gibt
+        if (vorgaenger != nullptr) // wenn es einen Vorgänger gibt
         {
-            while (nextWay(start) >= 0)
+            while (nextWay(start, getKnotenNr(vorgaenger), true) >= 0)
             {
-                int laenge = wegSuchen(&_knoten[nextWay(start)], ziel, start);
+                int laenge = wegSuchen(&_knoten[nextWay(start, getKnotenNr(vorgaenger), true)], ziel, start);
                 if (laenge > 0)
                 {
                     start->setWeg(_fahrstrassenzaehler);
@@ -110,11 +138,11 @@ int Graph::wegSuchen(Gleissymbol *start, Gleissymbol *ziel, Gleissymbol *vorgaen
                 }
             }
         }
-        else //wenn es einen vorgänger gibt
+        else // wenn es keinen vorgänger gibt
         {
-            while (nextWay(start, getKnotenNr(vorgaenger), true) >= 0)
+            while (nextWay(start) >= 0)
             {
-                int laenge = wegSuchen(&_knoten[nextWay(start, getKnotenNr(vorgaenger), true)], ziel, start);
+                int laenge = wegSuchen(&_knoten[nextWay(start)], ziel, start);
                 if (laenge > 0)
                 {
                     start->setWeg(_fahrstrassenzaehler);
@@ -134,7 +162,7 @@ boolean Graph::fahrstrasseEinstellen(Gleissymbol *start, Gleissymbol *ziel)
 
     if (laenge > -1) // wenn eine Fahrstraße gefunden
     {
-
+        start->setAnfang(true);
         symbolZuFahrstrasse(start);
         return true;
     }
