@@ -13,10 +13,11 @@
 //Methoden der Klasse Weichen
 
 //definieren von für alle Methoden wichtige Informationen Pins etc.
-Zugtaste::Zugtaste(int zugtastenPin, Gleissymbol *symbol)
+Zugtaste::Zugtaste(int zugtastenPin, boolean richtung, Gleissymbol *symbol)
 {
   _zugtastenPin = zugtastenPin;
   _symbol = symbol;
+  _richtung = richtung;
   pinMode(_zugtastenPin, INPUT_PULLUP);
 }
 
@@ -31,7 +32,12 @@ void Zugtaste::setGleissymbol(Gleissymbol *symbol)
   _symbol=symbol;
 }
 
-Gleissymbol *Zugtaste::getGleissymbol()
+Gleissymbol* Zugtaste::getGleissymbol()
 {
   return _symbol;
+}
+
+boolean Zugtaste::getRichtung()
+{
+  return _richtung;
 }

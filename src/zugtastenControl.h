@@ -27,12 +27,14 @@ private:
     class Zugtaste **_pzugtasten;/**<Pointer auf ein Array von objekten der Klasse zugtasten.*/
 public:
     
-    ZugtastenControl(int anzahlZugtasten, int zugtastenPins[]);/**<Konstruktor, erstellt das Array von objekten nach der angegeben Anzahl.*/
+    ZugtastenControl(int anzahlZugtasten, int zugtastenPins[], boolean richtung[] = nullptr);/**<Konstruktor, erstellt das Array von objekten nach der angegeben Anzahl.*/
     int getZugtastenAnzahl();/**<gibt die Anzahl an erstellten Objekten der Klasse zugtasten an.*/
     boolean getZugtastenstatus(int zugtastenNr);/**<Gibt den den Status der angegeben Zugtaste aus.*/
     boolean zugtastenGedrueckt();
     void setGleissymbol(int zugtastenNr, Gleissymbol *symbol);
     Gleissymbol *getGleissymbol(int zugtastenNr);
+    Zugtaste* getZugtaste(int zugtastenNr);
+    boolean isZugtaste(int zugtastenNr);
 };
 
 #endif

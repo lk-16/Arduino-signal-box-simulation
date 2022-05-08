@@ -119,7 +119,8 @@ Melder ftueMelder(ftueMelderName, ftueMelderLed, weckerPin, ftueMelderWut, schie
 // Zugtasten
 const int zugtastenanzahl = 9;
 int zugtastenPins[zugtastenanzahl] = {zta1, zta2, zta3, zta4, zta5, zta6, zta7, zta8, zta9};
-ZugtastenControl zugtastenC(zugtastenanzahl, zugtastenPins);
+boolean zugtastenRichtung[zugtastenanzahl] = {1,0,1,0,1,0,1,0,1};
+ZugtastenControl zugtastenC(zugtastenanzahl, zugtastenPins, zugtastenRichtung);
 
 // Fahrstraßensteuerung
 const int fahrstrassenanzahl = 8;
@@ -218,8 +219,8 @@ void setup()
   Serial.println("Fertig");
   //graph->getKnoten(6)->getWeiche()->weicheGerade();
   //Serial.println(graph->wegSuchen(graph->getKnoten(4), graph->getKnoten(13)));
-  Serial.println(graph->fahrstrasseEinstellen(graph->getKnoten(1),graph->getKnoten(2)));
-  Serial.println(graph->fahrstrasseEinstellen(graph->getKnoten(11),graph->getKnoten(14)));
+  //Serial.println(graph->fahrstrasseEinstellen(graph->getKnoten(3),graph->getKnoten(1)));
+  //Serial.println(graph->fahrstrasseEinstellen(graph->getKnoten(11),graph->getKnoten(18)));
   Serial.println("Hier");
   
   //int vorgaenger = 0;
@@ -254,7 +255,7 @@ delay(1000);
   delay(100);
   ftueMelder.digitalSchalten(kai,LOW);
   delay(100);
-*//*
+*/
 
   // abfragen aller Zugtasten
   zugtastenspeicher[0] = 0;
@@ -268,7 +269,12 @@ delay(1000);
       anzahl++;                                                  // erhöhe die anzahl der gedrückten anzahl an tasten um 1
     }
   }
-
+  if(anzahl > 1)
+  {
+    //Serial.print(zugtastenspeicher[0]);Serial.print(" : ");Serial.println(zugtastenspeicher[1]);
+    graph->fahrstrasseEinstellen(zugtastenC.getZugtaste(zugtastenspeicher[0]), zugtastenC.getZugtaste(zugtastenspeicher[1]));
+  }
+/*
   // Kontrolle der Fahrstrasse und einstellen und Festlegen des Fahrwegs
   fahrstrasse = fahrstrassenspeicher[zugtastenspeicher[0]][zugtastenspeicher[1]];
   if (fahrstrasse != 0 && fahrstrassenstati[fahrstrasse - 1] == false)

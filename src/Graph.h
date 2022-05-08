@@ -15,6 +15,7 @@
 #include <Actor.h>
 #include "Gleissymbol.h"
 #include "List.h"
+#include "Zugtaste.h"
 
 /**Die Klasse Graph speichert alle Gleissymbole in einem Graphen.
  */
@@ -41,7 +42,8 @@ class Graph
         int nextWay(Gleissymbol *symbol, int fahrstrassenNr_vorgaenger = 0, boolean vorgaengerAktiv = false);/**<Die Methode gibt die Nr des nächsten nicht markierten Nachbarn der angegebenen Knotennummer zurück, wenn angegeben, den Knoten, der mit der FahrstrassenNr versehen ist. WEnn vorgaenger Aktiv, wird statt nach einer Fahrstraße, der Vorgänger des aktuellen Knotens übergeben, so kann ein logisch Sinnvoller WEg zum Beispiel bei WEichen bestimmt werden.*/
         int nextWay(int knotenNr, int fahrstrassenNr_vorgeaenger = 0, boolean vorgaengerAktiv = false);/**<Die Methode gibt die Nr des nächsten nicht markierten Nachbarn der angegebenen Knotennummer zurück, wenn angegeben, den Knoten, der mit der FahrstrassenNr versehen ist. WEnn vorgaenger Aktiv, wird statt nach einer Fahrstraße, der Vorgänger des aktuellen Knotens übergeben, so kann ein logisch Sinnvoller WEg zum Beispiel bei WEichen bestimmt werden.*/
         int wegSuchen(Gleissymbol *start, Gleissymbol *ziel, Gleissymbol *vorgaenger = nullptr);/**<Die Methode gibt die länge eines Weges zurück, ob es einen weg gibt und markiert Ihn, wenn möglich, zuvor müssen die Markierungen resetet (resetMarkierungen) werden. Der Vorgaenger wird nur für die korrekte Weichenposition bei Gleissymbolen mit WEichenbnötigt.*/
-        boolean fahrstrasseEinstellen(Gleissymbol *start, Gleissymbol *ziel);
+        boolean fahrstrasseEinstellen(Zugtaste *taste1, Zugtaste *taste2);/**<Stellt die Fahrstraße von der ersten zur zweiten Zugtaste ein. Die Reihenfolge der Zugtasten wird hierbei selbstständig bestimmt.*/
+        boolean fahrstrasseEinstellen(Gleissymbol *start, Gleissymbol *ziel);/**<Der Weg zwischen den beiden Gleissymbolen wird gesucht, Die Reihenfolge ist dabei festgelegt und wird nicht überprüft.*/
         void symbolZuFahrstrasse(Gleissymbol *symbol);/**<setzt die Fahrstraße beginnend mit dem Symbol um*/
         void symbolZuFahrstrasse(int knotenNr);/**<setzt die Fahrstraße beginnend mit dem Symbol um*/
         void resetMarkierungen(int fahrstrassenNr = 0);/**<Setzt alle Markierungen zurück auf False*/
@@ -53,6 +55,5 @@ class Graph
         boolean richtungGerade(Gleissymbol * weichensymbol, Gleissymbol * nachbar);/**<Gibt zurück, ob die Richtung zwischen zwei Nachbarn bei gerade oder bei einer Weiche als Kurve verläuft.*/
         boolean richtungGerade(int weichensymbolNr, int nachbarNr);/**<Gibt zurück, ob die Richtung zwischen zwei Nachbarn bei gerade oder bei einer Weiche als Kurve verläuft.*/
         boolean weichenAusgang(int vorgaenger, int aktuellerKnoten);/**<Kommt die Fahrstraße über einen Weichenausgang auf die Weiche false, über den Eingang, also den Teil über den man zwei Abzweige nehmen kan, dann true*/
-
 };
 #endif

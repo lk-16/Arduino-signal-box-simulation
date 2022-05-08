@@ -16,7 +16,8 @@
 #include "Besetztmelder.h"
 #include "Weiche.h"
 /**
- * Die Klasse actors enthält die Grundfunktionen jeder Klasse. Jede Klase nutzt diese Klasse, von hier wird der Quellcode für das Steuern des Schieberegisters abgerufen, auch die Funktion zum Blinken einer Led ist hier gespeichert.
+ * @brief Ist ein Knoten für den in Graph erstellten Graphen
+ * Speichert alle Objekte, die dem Entsprechenden Knoten/Gleissymbol angehören. 
  */
 class Gleissymbol
 {

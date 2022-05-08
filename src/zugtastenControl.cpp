@@ -7,14 +7,14 @@
 #include "ZugtastenControl.h"
 #include "Zugtaste.h"
 
-//Methoden der Klasse besetztmeldungControl
-ZugtastenControl::ZugtastenControl(int anzahlZugtasten, int zugtastenPins[])
+// Methoden der Klasse besetztmeldungControl
+ZugtastenControl::ZugtastenControl(int anzahlZugtasten, int zugtastenPins[], boolean richtung[])
 
 {
     _anzahlZugtasten = anzahlZugtasten;
     _pzugtasten = new Zugtaste *[_anzahlZugtasten];
     for (int zugtastenNr = 0; zugtastenNr < _anzahlZugtasten; zugtastenNr++)
-        _pzugtasten[zugtastenNr] = new Zugtaste(zugtastenPins[zugtastenNr]);
+        _pzugtasten[zugtastenNr] = new Zugtaste(zugtastenPins[zugtastenNr], richtung[zugtastenNr]);
 }
 
 int ZugtastenControl::getZugtastenAnzahl()
@@ -24,7 +24,9 @@ int ZugtastenControl::getZugtastenAnzahl()
 
 boolean ZugtastenControl::getZugtastenstatus(int zugtastenNr)
 {
+    if(isZugtaste(zugtastenNr))
     return _pzugtasten[zugtastenNr]->getzugtastenstatus();
+    else return false;
 }
 
 boolean ZugtastenControl::zugtastenGedrueckt()
@@ -40,10 +42,32 @@ boolean ZugtastenControl::zugtastenGedrueckt()
 
 void ZugtastenControl::setGleissymbol(int zugtastenNr, Gleissymbol *symbol)
 {
+    if(isZugtaste(zugtastenNr))
     _pzugtasten[zugtastenNr]->setGleissymbol(symbol);
 }
 
 Gleissymbol *ZugtastenControl::getGleissymbol(int zugtastenNr)
 {
-    return _pzugtasten[zugtastenNr]->getGleissymbol();
+    if (isZugtaste(zugtastenNr))
+        return _pzugtasten[zugtastenNr]->getGleissymbol();
+    else return nullptr;
+}
+
+Zugtaste *ZugtastenControl::getZugtaste(int zugtastenNr)
+{
+    if (isZugtaste(zugtastenNr))
+        return _pzugtasten[zugtastenNr];
+    else
+        return nullptr;
+}
+
+boolean ZugtastenControl::isZugtaste(int zugtastenNr)
+{
+    if (zugtastenNr < _anzahlZugtasten)
+        return true;
+    else
+    {
+        Serial.println("Error: ZugtastenNr existiert nicht. Source: ZugtastenControl::isZugtaste");
+        return false;
+    }
 }

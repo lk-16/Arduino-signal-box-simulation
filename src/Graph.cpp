@@ -28,7 +28,6 @@ void Graph::prepare()
 
 void Graph::updateSymbole()
 {
-    int j = 0;
     for (int i = 0; i < _anzahlKnoten; i++)
     {
         _knoten[i].update();
@@ -38,12 +37,8 @@ void Graph::updateSymbole()
             resetMarkierungen();
             getKnoten(i)->setMarkierung(true);
             getKnoten(i)->setAnfang(false);
-            Serial.print("k: ");Serial.println(i);
-            //Serial.print("n: ");Serial.println(nextWay(i, getKnoten(i)->getWeg()));
-            getKnoten(nextWay(i,getKnoten(i)->getWeg()))->setAnfang(true);//verschiebe den Anfang
-            
-            
-            if (getKnoten(i)->getHauptsignal() != nullptr) // wenn es ein Hauptsignal gibt
+            getKnoten(nextWay(i, getKnoten(i)->getWeg()))->setAnfang(true); // verschiebe den Anfang
+            if (getKnoten(i)->getHauptsignal() != nullptr)                  // wenn es ein Hauptsignal gibt
             {
                 getKnoten(i)->getHauptsignal()->hauptsignalSchalten(0);
             }
@@ -51,20 +46,7 @@ void Graph::updateSymbole()
             {
                 getKnoten(i)->getWeiche()->setWeichenfestlegung(false, getKnoten(i)->getWeg());
             }
-            getKnoten(i)->setFahrstrassenelement(getKnoten(i)->getWeg(), false);//setze das Fahrstrassenelement zurück
-
-            
-            
-            
-            /*int weg = getKnoten(i)->getWeg();
-            getKnoten(i)->setAnfang(false);
-            
-            Serial.print("n: ");Serial.println(nextWay(i,weg));
-            getKnoten(i)->setFahrstrassenelement(getKnoten(i)->getWeg(), false);
-            Serial.println(getKnoten(i)->getFahrstrassenelement());
-            */
-            //verschiebe auf den nächsten
-            
+            getKnoten(i)->setFahrstrassenelement(getKnoten(i)->getWeg(), false); // setze das Fahrstrassenelement zurück
         }
     }
 }
@@ -161,6 +143,50 @@ int Graph::wegSuchen(Gleissymbol *start, Gleissymbol *ziel, Gleissymbol *vorgaen
     }
 }
 
+boolean Graph::fahrstrasseEinstellen(Zugtaste *taste1, Zugtaste *taste2)
+{
+    if (taste1->getRichtung() == taste2->getRichtung())
+    {
+        resetMarkierungen();
+        int laenge = wegSuchen(taste1->getGleissymbol(), taste2->getGleissymbol());
+        resetMarkierungen();
+
+        if (laenge > -1) // wenn eine Fahrstraße gefunden
+        {
+            // Richtungsüberprüfung:
+            //Richtung von links nach rechts
+            if ((taste1->getRichtung() && nextWay(taste1->getGleissymbol(), taste1->getGleissymbol()->getWeg()) < getKnotenNr(taste1->getGleissymbol()) && 
+                nextWay(taste2->getGleissymbol(), taste2->getGleissymbol()->getWeg()) > getKnotenNr(taste2->getGleissymbol())) ||// wenn die Nummer der nächsten Taste kleiner ist als die Nummer des aktuellen Gleissymbols und die Richtung true ist
+                (!taste1->getRichtung() && nextWay(taste2->getGleissymbol(), taste2->getGleissymbol()->getWeg()) < getKnotenNr(taste2->getGleissymbol()) && 
+                nextWay(taste1->getGleissymbol(), taste1->getGleissymbol()->getWeg()) > getKnotenNr(taste1->getGleissymbol())))
+            {
+                taste2->getGleissymbol()->setAnfang(true);
+                symbolZuFahrstrasse(taste2->getGleissymbol());
+                return true;
+            }
+            else if((taste1->getRichtung() && nextWay(taste1->getGleissymbol(), taste1->getGleissymbol()->getWeg()) > getKnotenNr(taste1->getGleissymbol()) && 
+                nextWay(taste2->getGleissymbol(), taste2->getGleissymbol()->getWeg()) < getKnotenNr(taste2->getGleissymbol())) ||
+                (!taste1->getRichtung() && nextWay(taste2->getGleissymbol(), taste2->getGleissymbol()->getWeg()) > getKnotenNr(taste2->getGleissymbol()) && 
+                nextWay(taste1->getGleissymbol(), taste1->getGleissymbol()->getWeg()) < getKnotenNr(taste1->getGleissymbol())))
+            {
+                taste1->getGleissymbol()->setAnfang(true);
+                symbolZuFahrstrasse(taste1->getGleissymbol());
+                return true;
+            }
+            else
+            {
+                Serial.println("INFO: Die Richtung der Fahrstraße ist anhand der angegebenen Zugtasten nicht validierbar. Sie wurde nicht eingestellt. (Graph::fahrstrasseEinstellen(Zugtaste, Zugtaste)");
+                return false;
+            }
+            
+        }
+        else
+            return false;
+    }
+    else
+        return false;
+}
+
 boolean Graph::fahrstrasseEinstellen(Gleissymbol *start, Gleissymbol *ziel)
 {
     resetMarkierungen();
@@ -203,7 +229,7 @@ void Graph::symbolZuFahrstrasse(int knotenNr)
 
     if (nextWay(knotenNr, getKnoten(knotenNr)->getWeg()) > -1)
     {
-        getKnoten(knotenNr)->setMarkierung(true);//setze aktuellen auf Markiert
+        getKnoten(knotenNr)->setMarkierung(true); // setze aktuellen auf Markiert
 
         symbolZuFahrstrasse(nextWay(knotenNr, getKnoten(knotenNr)->getWeg())); // rekrusiver Aufruf, weiteres Umsetzten der Fahrstraße
     }
