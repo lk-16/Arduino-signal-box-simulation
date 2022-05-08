@@ -212,7 +212,7 @@ void Graph::symbolZuFahrstrasse(int knotenNr)
     Serial.println(knotenNr);
     // stelle das Symbol als Fahrstrasse ein
     getKnoten(knotenNr)->setFahrstrassenelement(getKnoten(knotenNr)->getWeg(), true);
-    if (getKnoten(nextWay(knotenNr, getKnoten(knotenNr)->getWeg()))->getWeiche() != nullptr) // wenn es eine Weiche gibt
+    if (nextWay(knotenNr, getKnoten(knotenNr)->getWeg()) != -1 && getKnoten(nextWay(knotenNr, getKnoten(knotenNr)->getWeg()))->getWeiche() != nullptr) // wenn es eine Weiche gibt
     {
         int nextN = nextWay(knotenNr, getKnoten(knotenNr)->getWeg());
         getKnoten(knotenNr)->setMarkierung(true);
