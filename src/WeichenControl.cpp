@@ -7,13 +7,13 @@
 #include "WeichenControl.h"
 #include "Weiche.h"
 
-//Methoden der Klasse besetztmeldungControl
+// Methoden der Klasse besetztmeldungControl
 WeichenControl::WeichenControl(int anzahlWeichen, int weichenPinGerade[], int weichenPinKurve[], int weichenLedGerade[], int weichenLedGeradeRot[], int weichenLedKurve[], int weichenLedKurveRot[], int adressWeichenposition[], int weichentimeout, int wt[], int wgt, int registerPins[4])
 {
     _anzahlWeichen = anzahlWeichen;
-    //array wird definiert
+    // array wird definiert
     _pWeiche = new Weiche *[_anzahlWeichen];
-    //und initialisiert
+    // und initialisiert
     for (int weichenNr = 0; weichenNr < _anzahlWeichen; weichenNr++)
         _pWeiche[weichenNr] = new Weiche(weichenNr, weichenPinGerade[weichenNr], weichenPinKurve[weichenNr], weichenLedGerade[weichenNr], weichenLedGeradeRot[weichenNr], weichenLedKurve[weichenNr], weichenLedKurveRot[weichenNr], adressWeichenposition[weichenNr], weichentimeout, wt[weichenNr], wgt, registerPins);
 }

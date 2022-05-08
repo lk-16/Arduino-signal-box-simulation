@@ -24,9 +24,10 @@ int ZugtastenControl::getZugtastenAnzahl()
 
 boolean ZugtastenControl::getZugtastenstatus(int zugtastenNr)
 {
-    if(isZugtaste(zugtastenNr))
-    return _pzugtasten[zugtastenNr]->getzugtastenstatus();
-    else return false;
+    if (isZugtaste(zugtastenNr))
+        return _pzugtasten[zugtastenNr]->getzugtastenstatus();
+    else
+        return false;
 }
 
 boolean ZugtastenControl::zugtastenGedrueckt()
@@ -42,15 +43,16 @@ boolean ZugtastenControl::zugtastenGedrueckt()
 
 void ZugtastenControl::setGleissymbol(int zugtastenNr, Gleissymbol *symbol)
 {
-    if(isZugtaste(zugtastenNr))
-    _pzugtasten[zugtastenNr]->setGleissymbol(symbol);
+    if (isZugtaste(zugtastenNr))
+        _pzugtasten[zugtastenNr]->setGleissymbol(symbol);
 }
 
 Gleissymbol *ZugtastenControl::getGleissymbol(int zugtastenNr)
 {
     if (isZugtaste(zugtastenNr))
         return _pzugtasten[zugtastenNr]->getGleissymbol();
-    else return nullptr;
+    else
+        return nullptr;
 }
 
 Zugtaste *ZugtastenControl::getZugtaste(int zugtastenNr)

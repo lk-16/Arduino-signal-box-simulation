@@ -7,19 +7,18 @@
 #include "HauptsignalControl.h"
 #include "Hauptsignal.h"
 
-//Methoden der Klasse besetztmeldungControl
+// Methoden der Klasse besetztmeldungControl
 HauptsignalControl::HauptsignalControl(int anzahlHauptsignale, int ledPinsRot[], int ledPinsGelb[], int ledPinsGruen[], int signaltasten[], int sperrmelder[], int allgSignaltasten[3], int registerPin[4], boolean richtung[])
 {
     _anzahlHauptsignale = anzahlHauptsignale;
-    //array wird definiert
+    // array wird definiert
     _pHauptsignale = new Hauptsignal *[_anzahlHauptsignale];
-    //und initialisiert
+    // und initialisiert
     for (int hauptsignalNr = 0; hauptsignalNr < _anzahlHauptsignale; hauptsignalNr++)
     {
         _pHauptsignale[hauptsignalNr] = new Hauptsignal(ledPinsRot[hauptsignalNr], ledPinsGruen[hauptsignalNr], ledPinsGelb[hauptsignalNr], signaltasten[hauptsignalNr], sperrmelder[hauptsignalNr], allgSignaltasten, registerPin, richtung[hauptsignalNr]);
         _pHauptsignale[hauptsignalNr]->hauptsignalSchalten(0);
-    }   
-    
+    }
 }
 
 Hauptsignal *HauptsignalControl::getHauptsignal(int hauptsignalNr)

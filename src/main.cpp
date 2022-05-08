@@ -173,7 +173,7 @@ char gleissymboltyp[besetztmelderAnzahl] = {'-', '+', // wird für die Zuweisung
 
 void setup()
 {
-  weichen.weichenRelaisHIGH();//wird benötigt, da der Graph erst später erstellt wird und die Relais sonst Schalten würden.
+  weichen.weichenRelaisHIGH(); // wird benötigt, da der Graph erst später erstellt wird und die Relais sonst Schalten würden.
   Serial.begin(9600);
 
   // Der folgende Algorithmus fügt den Knoten Attribute, wie Besetztmelder, Weichen, Signale hinzu.
@@ -206,8 +206,8 @@ void setup()
     }
   }
 
-  graph->prepare(); // alle Eingaben an den Relais werden gelöscht und gespeicherte Weichenposition wird angezeigt und ausgeführt
-  graph = new Graph(besetztmelderAnzahl, knoten, nachbarn);//erstelle den Graphen
+  graph->prepare();                                         // alle Eingaben an den Relais werden gelöscht und gespeicherte Weichenposition wird angezeigt und ausgeführt
+  graph = new Graph(besetztmelderAnzahl, knoten, nachbarn); // erstelle den Graphen
 }
 
 void loop()

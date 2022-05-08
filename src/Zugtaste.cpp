@@ -9,10 +9,9 @@
 #include "Schieberegister.h"
 #include "Zugtaste.h"
 
+// Methoden der Klasse Weichen
 
-//Methoden der Klasse Weichen
-
-//definieren von für alle Methoden wichtige Informationen Pins etc.
+// definieren von für alle Methoden wichtige Informationen Pins etc.
 Zugtaste::Zugtaste(int zugtastenPin, boolean richtung, Gleissymbol *symbol)
 {
   _zugtastenPin = zugtastenPin;
@@ -21,18 +20,18 @@ Zugtaste::Zugtaste(int zugtastenPin, boolean richtung, Gleissymbol *symbol)
   pinMode(_zugtastenPin, INPUT_PULLUP);
 }
 
-boolean Zugtaste::getzugtastenstatus()                          //boolean um den Zugtastenstatus zu erfahren.
+boolean Zugtaste::getzugtastenstatus() // boolean um den Zugtastenstatus zu erfahren.
 {
-  boolean _zugtastenstatus = digitalRead(_zugtastenPin);//invertiert, damit das ganz noch mit der Zugtastensteuerung funktioniert. da interne Pullups verwendet werden
+  boolean _zugtastenstatus = digitalRead(_zugtastenPin); // invertiert, damit das ganz noch mit der Zugtastensteuerung funktioniert. da interne Pullups verwendet werden
   return _zugtastenstatus;
 }
 
 void Zugtaste::setGleissymbol(Gleissymbol *symbol)
 {
-  _symbol=symbol;
+  _symbol = symbol;
 }
 
-Gleissymbol* Zugtaste::getGleissymbol()
+Gleissymbol *Zugtaste::getGleissymbol()
 {
   return _symbol;
 }

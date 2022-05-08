@@ -8,8 +8,8 @@
 #include "Actor.h"
 #include "Signal.h"
 
-//Methoden der Klasse signal, Unterklasse der Klasse actors
-Signal::Signal(int signaltastenPin, int sperrmelderPin, int allgSignaltasten[3], int registerPins[4], boolean richtung)      //Konstuktor: allgemeine Signaltasten beinhalten die Signalsperr- und entsperrtaste und Signalhaltgruppentaste
+// Methoden der Klasse signal, Unterklasse der Klasse actors
+Signal::Signal(int signaltastenPin, int sperrmelderPin, int allgSignaltasten[3], int registerPins[4], boolean richtung) // Konstuktor: allgemeine Signaltasten beinhalten die Signalsperr- und entsperrtaste und Signalhaltgruppentaste
     : Actor(registerPins[0], registerPins[1], registerPins[2], registerPins[3])
 {
   _signalsperrtaste = allgSignaltasten[0];
@@ -68,33 +68,32 @@ boolean Signal::getRichtung()
 
 void Signal::signalSperren()
 {
-  if (_signalsperre == true) //wenn das Signal gesperrt ist.
+  if (_signalsperre == true) // wenn das Signal gesperrt ist.
   {
-    //Serial.println("gesperrt");
-    if (digitalRead(_signalentsperrtaste) == LOW && digitalRead(_signaltaste) == LOW) //wenn die Signalsperr- und Signaltaste gedrückt, das Signal ist ja Rot
+    // Serial.println("gesperrt");
+    if (digitalRead(_signalentsperrtaste) == LOW && digitalRead(_signaltaste) == LOW) // wenn die Signalsperr- und Signaltaste gedrückt, das Signal ist ja Rot
     {
-      _signalsperre = false;                                //Signalsperrre ist Inaktiv
+      _signalsperre = false; // Signalsperrre ist Inaktiv
       Serial.println("entsperrt");
-      Actor::digitalSchalten(_signalSperrmelder, LOW); //stelle den Sperrmelder aus
+      Actor::digitalSchalten(_signalSperrmelder, LOW); // stelle den Sperrmelder aus
     }
     else
-    {                               
+    {
       Actor::digitalSchalten(_signalSperrmelder, HIGH);
     }
   }
-  else                                                    //wenn das Signal nicht gesperrt ist
+  else // wenn das Signal nicht gesperrt ist
   {
-    //Serial.println("entsperrt");
-    if (digitalRead(_signalsperrtaste) == LOW && digitalRead(_signaltaste) == LOW && _signalstatus == 0) //wenn die Signalsperr- und Signaltaste gedrückt und das Signal Rot ist
+    // Serial.println("entsperrt");
+    if (digitalRead(_signalsperrtaste) == LOW && digitalRead(_signaltaste) == LOW && _signalstatus == 0) // wenn die Signalsperr- und Signaltaste gedrückt und das Signal Rot ist
     {
-      _signalsperre = true;                                //Signalsperrre ist Akitv
+      _signalsperre = true; // Signalsperrre ist Akitv
       Serial.println("gesperrt");
-      Actor::digitalSchalten(_signalSperrmelder, HIGH); //stelle den Sperrmelder an
+      Actor::digitalSchalten(_signalSperrmelder, HIGH); // stelle den Sperrmelder an
     }
     else
-    {                               
+    {
       digitalSchalten(_signalSperrmelder, LOW);
     }
   }
-  
 }

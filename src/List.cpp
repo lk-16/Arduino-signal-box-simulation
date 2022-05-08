@@ -14,20 +14,19 @@ void List::append(Gleissymbol *symbol)
         end = end->next;            // setzte next auf ende
         if (isEmpty())
         {
-            
+
             head = end;
         }
     }
-    
 }
 
 void List::next()
 {
-    if(hasAccess()){
+    if (hasAccess())
+    {
         preCurrent = current;
         current = current->next;
     }
-        
 }
 
 void List::toFirst()
@@ -54,7 +53,7 @@ Gleissymbol *List::getContent()
 void List::remove()
 {
     ListNode *p = head;
-    if(current == head)//wenn am beginn
+    if (current == head) // wenn am beginn
     {
         p = head;
         head = head->next;
@@ -62,7 +61,7 @@ void List::remove()
         preCurrent = head;
         delete p;
     }
-    else //sonst
+    else // sonst
     {
         preCurrent->next = current->next;
         p = current;
