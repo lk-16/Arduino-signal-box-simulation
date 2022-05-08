@@ -51,7 +51,7 @@ public:
     boolean getMarkierung();                        /**<Gibt den Status der Markierung zurück (bei der Suche besucht/nicht besucht)*/
     void setWeg(int status);                    /**<true = als Weg markiert, false = nicht als weg markiert*/
     int getWeg();/**<gibt aus, ob der Knoten als Weg markiert ist oder nicht*/
-    void setFahrstrassenelement(int fahrstrassennr, boolean Fahrstrassenelement);                 /**<Das Gleissymbol wird zu einem Fahrstraßenelement gemacht, somit verschwindet die Besetztmeldung auch bei frei sein des Gleises nicht. Der Besetztmelder zeigt auch frei oder belegt sein an, wenn besetztmelderLicht ausgeschaltet ist. Die Festlegung und Bean-spruchung durch eine Fahrstraße kann nur durch die gleiche Fahrstraße wieder aufgeho-ben werden.*/
+    void setFahrstrassenelement(unsigned int fahrstrassennr, boolean Fahrstrassenelement);                 /**<Das Gleissymbol wird zu einem Fahrstraßenelement gemacht, somit verschwindet die Besetztmeldung auch bei frei sein des Gleises nicht. Der Besetztmelder zeigt auch frei oder belegt sein an, wenn besetztmelderLicht ausgeschaltet ist. Die Festlegung und Bean-spruchung durch eine Fahrstraße kann nur durch die gleiche Fahrstraße wieder aufgeho-ben werden.*/
     boolean getFahrstrassenelement();
     boolean isAnfang();                             /**<Gibt aus, ob das Gleissymbol den Anfang einer Fahrstraße bildet.*/
     void setAnfang(boolean status);

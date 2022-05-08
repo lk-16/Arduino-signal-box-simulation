@@ -27,12 +27,11 @@ Hauptsignal *Gleissymbol::getHauptsignal()
 
 void Gleissymbol::prepare()
 {
-    if(_weiche !=nullptr)
+    if (_weiche != nullptr)
     {
         _weiche->weicheRelaisHIGH();
         _weiche->weichenpositionEEPROM();
     }
-    
 }
 void Gleissymbol::update()
 {
@@ -93,7 +92,7 @@ int Gleissymbol::getWeg()
     return _weg;
 }
 
-void Gleissymbol::setFahrstrassenelement(int fahrstrassennr, boolean Fahrstrassenelement)
+void Gleissymbol::setFahrstrassenelement(unsigned int fahrstrassennr, boolean Fahrstrassenelement)
 {
     if (!_fahrstrassenelement)
     {
@@ -102,11 +101,15 @@ void Gleissymbol::setFahrstrassenelement(int fahrstrassennr, boolean Fahrstrasse
         if (_besetztmelder != nullptr)
             _besetztmelder->setFahrstrassenelement(fahrstrassennr, Fahrstrassenelement);
     }
-    else if(fahrstrassennr == _weg)
+    else if (fahrstrassennr == _weg)
     {
-        setWeg(fahrstrassennr);
-        if (_besetztmelder != nullptr)
-            _besetztmelder->setFahrstrassenelement(fahrstrassennr, Fahrstrassenelement);
+        if (!Fahrstrassenelement)
+        {
+            _fahrstrassenelement = Fahrstrassenelement;
+            setWeg(0);
+            if (_besetztmelder != nullptr)
+                _besetztmelder->setFahrstrassenelement(fahrstrassennr, Fahrstrassenelement);
+        }
     }
 }
 
@@ -127,5 +130,5 @@ void Gleissymbol::setAnfang(boolean status)
 
 boolean Gleissymbol::getBesetztmelderstatus()
 {
-    return _besetztmelder->besetztmelderAuslesen(LOW,*_weiche);
+    return _besetztmelder->besetztmelderAuslesen(LOW, *_weiche);
 }

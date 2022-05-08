@@ -35,6 +35,14 @@ void Graph::updateSymbole()
 
         if (_knoten[i].isAnfang() && _knoten[i].getBesetztmelderstatus())
         {
+            resetMarkierungen();
+            getKnoten(i)->setMarkierung(true);
+            getKnoten(i)->setAnfang(false);
+            Serial.print("k: ");Serial.println(i);
+            //Serial.print("n: ");Serial.println(nextWay(i, getKnoten(i)->getWeg()));
+            getKnoten(nextWay(i,getKnoten(i)->getWeg()))->setAnfang(true);//verschiebe den Anfang
+            
+            
             if (getKnoten(i)->getHauptsignal() != nullptr) // wenn es ein Hauptsignal gibt
             {
                 getKnoten(i)->getHauptsignal()->hauptsignalSchalten(0);
@@ -43,19 +51,18 @@ void Graph::updateSymbole()
             {
                 getKnoten(i)->getWeiche()->setWeichenfestlegung(false, getKnoten(i)->getWeg());
             }
-            if (getKnoten(i)->getBesetztmelder() != nullptr)
-            {
-                getKnoten(i)->setFahrstrassenelement(getKnoten(i)->getWeg(), false);
-            }
+            getKnoten(i)->setFahrstrassenelement(getKnoten(i)->getWeg(), false);//setze das Fahrstrassenelement zurück
+
             
-            resetMarkierungen();
             
-            int weg = getKnoten(i)->getWeg();
+            
+            /*int weg = getKnoten(i)->getWeg();
             getKnoten(i)->setAnfang(false);
-            getKnoten(i)->setFahrstrassenelement(getKnoten(i)->getWeg(), false);
-            getKnoten(i)->setWeg(0);
-            getKnoten(nextWay(i,weg))->setAnfang(true);
             
+            Serial.print("n: ");Serial.println(nextWay(i,weg));
+            getKnoten(i)->setFahrstrassenelement(getKnoten(i)->getWeg(), false);
+            Serial.println(getKnoten(i)->getFahrstrassenelement());
+            */
             //verschiebe auf den nächsten
             
         }
@@ -196,7 +203,7 @@ void Graph::symbolZuFahrstrasse(int knotenNr)
 
     if (nextWay(knotenNr, getKnoten(knotenNr)->getWeg()) > -1)
     {
-        getKnoten(knotenNr)->setMarkierung(true);
+        getKnoten(knotenNr)->setMarkierung(true);//setze aktuellen auf Markiert
 
         symbolZuFahrstrasse(nextWay(knotenNr, getKnoten(knotenNr)->getWeg())); // rekrusiver Aufruf, weiteres Umsetzten der Fahrstraße
     }
