@@ -312,7 +312,7 @@ boolean Graph::richtungGerade(Gleissymbol* vorgaenger, Gleissymbol *weichensymbo
 }
 boolean Graph::richtungGerade(int vorgaenger, int weichensymbolNr, int nachfolger)
 {
-    if(!isKnotenNr(weichensymbolNr))Serial.println("Error: Die angegebene Weichensymbolnummer gehört nicht zum Graphen. (Graph::richtungGerade)");
+    if(!isKnotenNr(weichensymbolNr) || !isKnotenNr(vorgaenger) || !isKnotenNr(nachfolger))Serial.println("Error: Die angegebene Weichensymbolnummer gehört nicht zum Graphen. (Graph::richtungGerade)");
     if (isKnotenNr(weichensymbolNr) && (_nachbarn[weichensymbolNr][2] == vorgaenger || _nachbarn[weichensymbolNr][2] == nachfolger))//an Position 2 und die Weichensymbolnummer ist nicht außerhalb des Arrays
         return false;
     else
