@@ -1,11 +1,6 @@
-/*Libary zum testen:
- *  Ich möchte Weichen über diese Libary schalten und
- *  vielleicht auch Signale für die Modelleisenbahn
+/*Library für die Steuerung eines SpDrS60-Gleisbildstellpults
+ *  mit dieser Library können Weichen, Signale etc. gesteuert werden
  *  Lennart Klüner 05.09.2020
- *  gesamt: ca. 12.000 Zeichen
- *  ca.  1.600 Worte
- *
- * Auto-Layout: Strg k, Strg f
  */
 
 /**

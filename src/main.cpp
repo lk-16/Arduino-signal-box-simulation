@@ -1,3 +1,16 @@
+/*Libary für die Steuerung eines SpDrS60 Gleisbildstellpults
+ *  mit dieser Library können weichen Signale etc. gesteuert werden
+ *
+ * Implemetiert ist ein Stellwerk mit drei Weichen und entsprechenden Signalen
+ * Schema des Stellpults:
+ *         /-----
+ * ------><------
+ * -----<--------
+ * 
+ *  Lennart Klüner 10.04.2022
+ */
+
+
 #include <Arduino.h>
 #include "WeichenControl.h"
 #include "ZugtastenControl.h"
@@ -20,12 +33,21 @@ int wt1 = 11; // Pinbelegung Weichentasten
 int wt2 = 20;
 int wt3 = 2;
 
-int ledw1g = 109; // Pinbelegung der WeichenLEDs
+// Pinbelegung der WeichenLEDs
+int ledw1g = 109; 
 int ledw1k = 108;
 int ledw2g = 50;
 int ledw2k = 39;
 int ledw3g = 106;
 int ledw3k = 104;
+
+int ledw1gRot = 110; 
+int ledw1kRot = 51;
+int ledw2gRot = 101;
+int ledw2kRot = 38;
+int ledw3gRot = 107;
+int ledw3kRot = 105;
+
 
 int weichentimeout = 500; // dauer des Schaltvorgangs bei den Weichen
 int wgt = 18;             // Weichengruppentaste
@@ -106,9 +128,9 @@ const int anzahlWeichen = 3;
 int weichenPinsGerade[anzahlWeichen] = {w1g, w2g, w3g};
 int weichenPinsKurve[anzahlWeichen] = {w1k, w2k, w3k};
 int weichenLedPinsGerade[anzahlWeichen] = {ledw1g, ledw2g, ledw3g};
-int weichenLedPinsGeradeRot[anzahlWeichen] = {110, 101, 107};
+int weichenLedPinsGeradeRot[anzahlWeichen] = {ledw1gRot, ledw2gRot, ledw3gRot};
 int weichenLedPinsKurve[anzahlWeichen] = {ledw1k, ledw2k, ledw3k};
-int weichenLedPinsKurveRot[anzahlWeichen] = {51, 38, 105};
+int weichenLedPinsKurveRot[anzahlWeichen] = {ledw1kRot, ledw2kRot, ledw3kRot};
 int adressWeichenpositionen[anzahlWeichen] = {1, 5, 9};
 int weichentasten[anzahlWeichen] = {wt1, wt2, wt3};
 WeichenControl weichen(anzahlWeichen, weichenPinsGerade, weichenPinsKurve, weichenLedPinsGerade, weichenLedPinsGeradeRot, weichenLedPinsKurve, weichenLedPinsKurveRot, adressWeichenpositionen, weichentimeout, weichentasten, wgt, schieberegisterPins);

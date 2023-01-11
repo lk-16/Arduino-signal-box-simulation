@@ -1,6 +1,6 @@
-/*Libary für die Steuerung einews Gleisbildstellpults
- *  mit dieser Library können weichen Signale etc. gesteuert werden
- *  Lennart Klüner 05.09.2020
+/*Library für die Steuerung einews Gleisbildstellpults
+ *  mit dieser Library können Weichen, Signale etc. gesteuert werden
+ *  Lennart Klüner 10.04.2022
  */
 
 /**
