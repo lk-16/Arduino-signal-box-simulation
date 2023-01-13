@@ -1,6 +1,6 @@
 /*Library für die Steuerung eines SpDrS60-Gleisbildstellpults
  *  mit dieser Library können Weichen, Signale etc. gesteuert werden
- *  Lennart Klüner 05.09.2020
+ *  Lennart Klüner erstellt am 05.09.2020
  */
 
 /**

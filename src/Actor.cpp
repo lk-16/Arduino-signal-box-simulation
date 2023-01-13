@@ -10,7 +10,6 @@
 // Methoden der Klasse actors
 Actor::Actor(int anzahl, int sh, int st, int ds)
 {
-  // pinMode(actors::getWecker(), OUTPUT); //wird nicht übergeben
   _registerAnzahl = anzahl;
   _shPin = sh;
   _stPin = st;
