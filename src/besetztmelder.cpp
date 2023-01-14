@@ -91,7 +91,7 @@ void Besetztmelder::setFahrstrassenelement(int fahrstrassennr, boolean fahrstras
         _fahrstrassenelement = fahrstrassenelement; // kann sie von einer anderen Fahrstraße festgelgt werden, diese wird gespeichert
         _fahrstrasse = fahrstrassennr;              // und die Fahrstraße entsprechend festgelegen
     }
-    else if (fahrstrassennr == _fahrstrasse) //|| _fahrstrassenfestlegung == 0)
+    else if (fahrstrassennr == _fahrstrasse)
     {
         _fahrstrassenelement = fahrstrassenelement; // der Status, ob die weiche festgelegt wurde wird geänder
         if (_fahrstrassenelement == 0)

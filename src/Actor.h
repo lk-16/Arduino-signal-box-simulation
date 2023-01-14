@@ -34,7 +34,7 @@ public:
    * @param[in] ds Der Pin an dem DS_CP angeschlossen ist.
    */
   Actor(int anzahl, int sh, int st, int ds);
-  void blinken(int LedPin); /**<Standard-Operator, lässt die angegebene Led blinken. Geschwindigkeit ist nicht einstellbar*/
+  void blinken(int LedPin); /**<Standard-Operator, lässt die angegebene Led blinken. Geschwindigkeit (500 ms aufleuchten/500 ms dunkel) ist nicht einstellbar*/
 
   /**
    * Digitale Ausgänge können geschaltet werden. Differenzierung zwischen Verbrauchern am Controller und am Schiebregister.
