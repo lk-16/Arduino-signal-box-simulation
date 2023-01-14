@@ -91,37 +91,18 @@ int Gleissymbol::getWeg()
     return _weg;
 }
 
-boolean Gleissymbol::betterWayFound(int newDistance){
-    if(_wegLaenge > newDistance){
-        _wegLaenge = newDistance;
-        return true;
-    }
-    else return false;
-}
-
-boolean Gleissymbol::testbetterWay(int distance){
-    if(_wegLaenge > distance){
-        return true;
-    }
-    else return false;
-}
-
-void Gleissymbol::resetDistance(){
-    _wegLaenge = 1000;
-}
-
 void Gleissymbol::setFahrstrassenelement(unsigned int fahrstrassennr, boolean Fahrstrassenelement)
 {
-    if (!_fahrstrassenelement)//wenn das Symbol kein Fahrstraßenelement ist
+    if (!_fahrstrassenelement)
     {
-        setWeg(fahrstrassennr);//mache es zum fahrstraßenelement
+        setWeg(fahrstrassennr);
         _fahrstrassenelement = Fahrstrassenelement;
         if (_besetztmelder != nullptr)
             _besetztmelder->setFahrstrassenelement(fahrstrassennr, Fahrstrassenelement);
     }
-    else if (fahrstrassennr == _weg)//wenn Nr und wegnummer übereinstimmen
+    else if (fahrstrassennr == _weg)
     {
-        if (!Fahrstrassenelement)//löse Fahrstraßenelement auf
+        if (!Fahrstrassenelement)
         {
             _fahrstrassenelement = Fahrstrassenelement;
             setWeg(0);
