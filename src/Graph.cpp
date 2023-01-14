@@ -1,8 +1,7 @@
-/* Libary zum testen:
-    ich möchte Weichen über diese Libary schalten und
-    vielleicht auch Signale für die Modelleisenbahn
-    Lennart Klüner 10.04.2022
-*/
+/*Library für die Steuerung eines SpDrS60-Gleisbildstellpults
+ *  mit dieser Library können Weichen, Signale etc. gesteuert werden
+ *  Lennart Klüner 10.04.2022
+ */
 
 #include "Graph.h"
 

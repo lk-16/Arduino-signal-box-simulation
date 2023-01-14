@@ -1,4 +1,7 @@
-
+/*Library für die Steuerung eines SpDrS60-Gleisbildstellpults
+ *  mit dieser Library können Weichen, Signale etc. gesteuert werden
+ *  Lennart Klüner 20.04.2022
+ */
 
 #ifndef List_h
 #define List_h

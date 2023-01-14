@@ -1,5 +1,5 @@
-/*Libary für die Steuerung einews Gleisbildstellpults
- *  mit dieser Library können weichen Signale etc. gesteuert werden
+/*Library für die Steuerung eines SpDrS60-Gleisbildstellpults
+ *  mit dieser Library können Weichen, Signale etc. gesteuert werden
  *  Lennart Klüner 05.09.2020
  */
 

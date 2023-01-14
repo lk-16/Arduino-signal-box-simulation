@@ -1,8 +1,7 @@
-/* Libary zum testen:
-    ich möchte Weicehn über diese Libary schalten und
-    vielleicht auch Signale für die Modelleisenbahn
-    Lennart Klüner 05.09.2020
-*/
+/*Library für die Steuerung eines SpDrS60-Gleisbildstellpults
+ *  mit dieser Library können Weichen, Signale etc. gesteuert werden
+ *  Lennart Klüner 05.09.2020
+ */
 
 #include <Arduino.h>
 #include <EEPROM.h>
