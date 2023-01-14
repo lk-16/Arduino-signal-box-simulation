@@ -301,7 +301,8 @@ void Graph::symbolZuFahrstrasse(int knotenNr)
 
         Serial.println("Weiche");
         getKnoten(nextN)->getWeiche()->setWeichenposition(richtungGerade(knotenNr, nextN, nextWay(nextN, getKnoten(nextN)->getWeg()))); // schlate Weiche in die richtige Position
-        getKnoten(knotenNr)->getWeiche()->setWeichenfestlegung(true, getKnoten(knotenNr)->getWeg());
+        getKnoten(nextN)->getWeiche()->setWeichenfestlegung(true, getKnoten(knotenNr)->getWeg());
+        //Flankenschutzweichen
 
         getKnoten(knotenNr)->setMarkierung(false);
     }
