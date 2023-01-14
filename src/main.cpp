@@ -123,27 +123,8 @@ boolean zugtastenRichtung[zugtastenanzahl] = {1, 0, 1, 0, 1, 0, 1, 0, 1};
 ZugtastenControl zugtastenC(zugtastenanzahl, zugtastenPins, zugtastenRichtung);
 
 // Fahrstraßensteuerung
-const int fahrstrassenanzahl = 8;
 int zugtastenspeicher[2];                                    // es werden die Zugtasten gespeichert, die gedrückt wurden.
 int anzahl = 0;                                              // zählt wie viele zugtasten gedrückt wurden
-boolean fahrstrassenstati[fahrstrassenanzahl];               // Beinhaltet, welche Fahrstrassen aktiv sind.
-boolean fahrstrassenkontolle[fahrstrassenanzahl];            // wenn auf true, dann sind alle Besetztmelder frei und für die Fahrstrasse festgelegt und die Stellaufträge für die Weichen sind gegeben.
-int const felderAnzahl = 9;                                  // Anzahl der Felder auf dem Feld
-int fahrstrasse;                                             // zeigt an welche Fahrstrasse kurzzeitig aktiv ist.
-int fahrstrassenspeicher[felderAnzahl][felderAnzahl];        // 1 variable = nummer des Tischfeldes, 2. variable = nummer des Zweiten Tischfeldes ergibt die zu betätigende Fahrstrasse
-int freigabe[fahrstrassenanzahl] = {1, 1, 1, 1, 1, 1, 1, 1}; // zählt wie viele halbe Besetztmelder schon freigegeben wurden
-int besetztmelderposition[fahrstrassenanzahl + 1][/*Reihen(Bestztm.)*/ 9][5 /*Tiefe*/] = {
-    {{}},
-    {{7, 1}, {4}, {5}, {6, 1, 1}, {7}, {8, 2, 1}, {9}, {10}},    // 3-5 ->
-    {{7, 1}, {4}, {5}, {6, 1, 1}, {7}, {8, 2, 0}, {0}, {1}},     // 3-1 ->
-    {{7, 1}, {4}, {5}, {6, 1, 0}, {15, 3, 0}, {16}, {17}, {18}}, // 3-9 ->
-    {{6, 3}, {13}, {14}, {15, 3, 1}, {16}, {17}, {18}},          // 7-9 ->
-    {{7, 2}, {8, 2, 1}, {7}, {6, 1, 1}, {5}, {4}, {3}, {2}},     // 4-2 <-
-    {{6, 4}, {16}, {15, 3, 1}, {14}, {13}, {12}, {11}},          // 8-6 <-
-    {{7, 4}, {16}, {15, 3, 0}, {6, 1, 0}, {5}, {4}, {3}, {2}},   // 8-2 <-
-    {{7, 0}, {8, 2, 0}, {7}, {6, 1, 1}, {5}, {4}, {3}, {2}}      // 1-2 <-
-};                                                               // 0. ebene Besetztmelder anzahl(menge), in den nächsten ebenen sind die Besetztmelder in Reihenfolge gespeichert. Die nächste Dimeinsion speichert, ob das Feld auf dem Besetztmelder eine Weiche ist, und darunter steht in welche richtung die geschaltet werden muss. Folgend steht, ob es eine Falnkenschutz weiche gibt                                                                            //anhand dieser Zahl lässt sich der Wert von Freigabe berechnen, enthält bis zu welchem Besetztmelder die Fahrstrasse aufgelöst ist.
-int besetztmelderzahl[fahrstrassenanzahl] = {0};                 // die anzahl der Besetztmelder die schon freigegeben wurde
 
 List list;
 Graph *graph = nullptr;
