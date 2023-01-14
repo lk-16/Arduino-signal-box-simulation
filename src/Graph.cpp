@@ -222,8 +222,9 @@ int Graph::wegSuchenOpt(Gleissymbol *start, Gleissymbol *ziel, Gleissymbol *vorg
                     return -1; // es wurde keiner oder kein besserer Weg gefunden
             }
         }
-        return -1;
+        
     }
+    return -1;
 }
 
 boolean Graph::fahrstrasseEinstellen(Zugtaste *taste1, Zugtaste *taste2)
