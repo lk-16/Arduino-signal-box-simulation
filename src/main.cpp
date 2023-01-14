@@ -52,9 +52,9 @@ int ledw3kRot = 105;
 int weichentimeout = 500; // dauer des Schaltvorgangs bei den Weichen
 int wgt = 18;             // Weichengruppentaste
 
-int zta1 = 5;  // Zugstraßentaste 1 an Pin 2
-int zta2 = 21; // Zugstraßentaste 2 an Pin 3
-int zta3 = 12; // Zugstraßentaste 3 an Pin 4
+int zta1 = 5;  // Zugstraßentaste 1 an Pin 5
+int zta2 = 21; // Zugstraßentaste 2 an Pin 21
+int zta3 = 12; // Zugstraßentaste 3 an Pin 12
 int zta4 = 3;
 int zta5 = 6;
 int zta6;
