@@ -10,7 +10,4 @@ Beim SpDrS60-Stellwerk handelt es sich um ein Spurplanstellwerk von Siemens. Wei
 [stellwerke.de](http://www.stellwerke.de/formen/seite2_m.html). Das Stellwerk wurde unteranderem nach der Vorschrift auf der Website von 
 [joguts-eisenbahnwelt.de](https://joguts-eisenbahnwelt.de/archiv/vorschriften/ds-vorschriften/deutsche-bundesbahn/) entwickelt.
 
-
-*Hinweis:* Im Branch Flankenschutz findet sich die aktuell stabil funktionierende Variante.
-
 Kontakt: spdrs60.stellwerkssimulation@gmail.com
