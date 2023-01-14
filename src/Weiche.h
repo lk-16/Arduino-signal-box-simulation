@@ -42,6 +42,8 @@ private:                 // private Variablen für die Klasse Weichen
   boolean _weichenausleuchtung = true;      // true an, die Stellungsmelder der Weiche sind angeschaltet, false die Stellungsmelder der Weiche sind ausgeschaltet
   boolean _weichenfestlegung = false;       // wenn aus true, kann die Weiche nicht mehr gestellt werden
   int _fahrstrassefestgelegt = 0;           // speichert von welcher Fahrstraße die Weiche festgelegt wurde, und nur diese kann die Festlegung auch wieder lösen
+  boolean _flankenschutzWeiche = false;     //true, wenn eine Weiche eine Flankenschutzweiche wird
+  int _flankenschutzfestgelegt = 0;         //Speichert die Nummer der Fahrstraße, zu der der Flankenschutz gehört
   void setWeichenLeds(boolean weichenlage); /**<kurve oder gerade und Pinstatus, schaltet je nach Besetztmelderstatus und beleuchtungsstatus die passenden Weichenspitzenmelder*/
   void weichenBlinken();                    /**<Die Weichen-Leds blinken je nach Lage der Weiche. Dies funktioniert nur, wenn die Weiche auch schaltet.*/
 
@@ -73,6 +75,8 @@ public:
 
   void setWeichenfestlegung(boolean festlegestatus, int fahrstrassennr); /**<Kann die Festlegung der Weichen aktivieren. Die Weichenlage kann nicht mehr verändert werden, bis die Festlegung durch die Fahrstraße ausfgelöst wird.*/
   boolean getWeichenfestlegung();                                        /**<Es wird ausgegeben, ob die Weiche festgelegt ist, oder nicht*/
+  void setFlankenschutz(boolean flankenschutzstatus, int fahrstrassennr); /**<Weichen werden zu Flankenschutzweichen und können bis zur auslösung der Fahrstraße nicht mehr geschaltet werden.*/
+  boolean getFlankenschutz();                                        /**<Es wird ausgegeben, ob die Weiche eine Flankenschutzweiche ist, oder nicht*/
   boolean getWeichenposition();                                          /**<Gibt die Weichenposition aus, wenn die Weiche umgelaufen ist.*/
   void setWeichenposition(boolean position);                             /**<veränderung der Weichenposition, weiche Kurve und WeicheGerade wird so aufgelöst*/
   void setWeichebesetzt(boolean besetztmelderstatus);                    /**<Ändert die Weichenausleuchtung auf die RotenLeds um die Besetztmeldung anzuzeigen. Da die Weichen mit WeichenControl erstellt werden, benötigt es keine Zugriffseinschränkung, diese findet sich in WeichenControl, nur Besetztmelder können von dort auf diese Methode von Weiche zugreifen.*/

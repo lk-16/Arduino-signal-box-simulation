@@ -59,7 +59,7 @@ void Weiche::weicheWechsel()
 void Weiche::weicheGerade() // die Weiche wird in gerade Lage vesetzt
 {
 
-  if (_weichenposition == false && weichenstatus == 0 && _weichenfestlegung == false) // wenn die Weiche nicht schaltet und in der Kurve steht
+  if (_weichenposition == false && weichenstatus == 0 && _weichenfestlegung == false && !_flankenschutzWeiche) // wenn die Weiche nicht schaltet und in der Kurve steht
   {
     _wStartzeit = millis();
     Actor::digitalSchalten(_weichenPinKurve, HIGH); // Relais werden geschaltet
@@ -72,7 +72,7 @@ void Weiche::weicheGerade() // die Weiche wird in gerade Lage vesetzt
 
 void Weiche::weicheKurve() // die Weiche wird in Kurvenlage versetzt
 {
-  if (_weichenposition == true && weichenstatus == 0 && _weichenfestlegung == false)
+  if (_weichenposition == true && weichenstatus == 0 && _weichenfestlegung == false && !_flankenschutzWeiche)
   {
     _wStartzeit = millis();
     Actor::digitalSchalten(_weichenPinGerade, HIGH); // Relais werden geschaltet
@@ -180,6 +180,25 @@ void Weiche::setWeichenfestlegung(boolean festlegestatus, int fahrstrassennr) //
 boolean Weiche::getWeichenfestlegung()
 {
   return _weichenfestlegung;
+}
+
+void Weiche::setFlankenschutz(boolean flankenschutzstatus, int fahrstrassennr)
+{
+  if (_flankenschutzfestgelegt == 0) // wenn die Weiche nicht festgelgt ist
+  {
+    _flankenschutzWeiche = flankenschutzstatus;     // kann sie von einer anderen Fahrstraße festgelgt werden, diese wird gespeichert
+    _flankenschutzfestgelegt = fahrstrassennr; // und ide Fahrstraße entsprechend festgelegt
+  }
+  else if (fahrstrassennr == _flankenschutzfestgelegt && _flankenschutzfestgelegt != 0) //|| _fahrstrassenfestlegung == 0)
+  {
+    _flankenschutzWeiche = flankenschutzstatus;
+    _flankenschutzfestgelegt = 0;
+  }
+}
+
+boolean Weiche::getFlankenschutz()
+{
+  return _flankenschutzWeiche;
 }
 
 boolean Weiche::getWeichenposition()
