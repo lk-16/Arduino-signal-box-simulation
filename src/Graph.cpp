@@ -36,8 +36,11 @@ void Graph::updateSymbole()
             resetMarkierungen();
             getKnoten(i)->setMarkierung(true);
             getKnoten(i)->setAnfang(false);
-            getKnoten(nextWay(i, getKnoten(i)->getWeg()))->setAnfang(true); // verschiebe den Anfang
-            if (getKnoten(i)->getHauptsignal() != nullptr)                  // wenn es ein Hauptsignal gibt
+            if (isKnotenNr(nextWay(i, getKnoten(i)->getWeg())))
+            {
+                getKnoten(nextWay(i, getKnoten(i)->getWeg()))->setAnfang(true); // verschiebe den Anfang
+            }
+            if (getKnoten(i)->getHauptsignal() != nullptr) // wenn es ein Hauptsignal gibt
             {
                 getKnoten(i)->getHauptsignal()->hauptsignalSchalten(0);
             }
@@ -153,20 +156,20 @@ boolean Graph::fahrstrasseEinstellen(Zugtaste *taste1, Zugtaste *taste2)
         if (laenge > -1) // wenn eine Fahrstraße gefunden
         {
             // Richtungsüberprüfung:
-            //Richtung von links nach rechts
-            if ((taste1->getRichtung() && nextWay(taste1->getGleissymbol(), taste1->getGleissymbol()->getWeg()) < getKnotenNr(taste1->getGleissymbol()) && 
-                nextWay(taste2->getGleissymbol(), taste2->getGleissymbol()->getWeg()) > getKnotenNr(taste2->getGleissymbol())) ||// wenn die Nummer der nächsten Taste kleiner ist als die Nummer des aktuellen Gleissymbols und die Richtung true ist
-                (!taste1->getRichtung() && nextWay(taste2->getGleissymbol(), taste2->getGleissymbol()->getWeg()) < getKnotenNr(taste2->getGleissymbol()) && 
-                nextWay(taste1->getGleissymbol(), taste1->getGleissymbol()->getWeg()) > getKnotenNr(taste1->getGleissymbol())))
+            // Richtung von links nach rechts
+            if ((taste1->getRichtung() && nextWay(taste1->getGleissymbol(), taste1->getGleissymbol()->getWeg()) < getKnotenNr(taste1->getGleissymbol()) &&
+                 nextWay(taste2->getGleissymbol(), taste2->getGleissymbol()->getWeg()) > getKnotenNr(taste2->getGleissymbol())) || // wenn die Nummer der nächsten Taste kleiner ist als die Nummer des aktuellen Gleissymbols und die Richtung true ist
+                (!taste1->getRichtung() && nextWay(taste2->getGleissymbol(), taste2->getGleissymbol()->getWeg()) < getKnotenNr(taste2->getGleissymbol()) &&
+                 nextWay(taste1->getGleissymbol(), taste1->getGleissymbol()->getWeg()) > getKnotenNr(taste1->getGleissymbol())))
             {
                 taste2->getGleissymbol()->setAnfang(true);
                 symbolZuFahrstrasse(taste2->getGleissymbol());
                 return true;
             }
-            else if((taste1->getRichtung() && nextWay(taste1->getGleissymbol(), taste1->getGleissymbol()->getWeg()) > getKnotenNr(taste1->getGleissymbol()) && 
-                nextWay(taste2->getGleissymbol(), taste2->getGleissymbol()->getWeg()) < getKnotenNr(taste2->getGleissymbol())) ||
-                (!taste1->getRichtung() && nextWay(taste2->getGleissymbol(), taste2->getGleissymbol()->getWeg()) > getKnotenNr(taste2->getGleissymbol()) && 
-                nextWay(taste1->getGleissymbol(), taste1->getGleissymbol()->getWeg()) < getKnotenNr(taste1->getGleissymbol())))
+            else if ((taste1->getRichtung() && nextWay(taste1->getGleissymbol(), taste1->getGleissymbol()->getWeg()) > getKnotenNr(taste1->getGleissymbol()) &&
+                      nextWay(taste2->getGleissymbol(), taste2->getGleissymbol()->getWeg()) < getKnotenNr(taste2->getGleissymbol())) ||
+                     (!taste1->getRichtung() && nextWay(taste2->getGleissymbol(), taste2->getGleissymbol()->getWeg()) > getKnotenNr(taste2->getGleissymbol()) &&
+                      nextWay(taste1->getGleissymbol(), taste1->getGleissymbol()->getWeg()) < getKnotenNr(taste1->getGleissymbol())))
             {
                 taste1->getGleissymbol()->setAnfang(true);
                 symbolZuFahrstrasse(taste1->getGleissymbol());
@@ -177,7 +180,6 @@ boolean Graph::fahrstrasseEinstellen(Zugtaste *taste1, Zugtaste *taste2)
                 Serial.println("INFO: Die Richtung der Fahrstraße ist anhand der angegebenen Zugtasten nicht validierbar. Sie wurde nicht eingestellt. (Graph::fahrstrasseEinstellen(Zugtaste, Zugtaste)");
                 return false;
             }
-            
         }
         else
             return false;
@@ -218,7 +220,7 @@ void Graph::symbolZuFahrstrasse(int knotenNr)
         Serial.println("Weiche");
         getKnoten(nextN)->getWeiche()->setWeichenposition(richtungGerade(knotenNr, nextN, nextWay(nextN, getKnoten(nextN)->getWeg()))); // schlate Weiche in die richtige Position
         getKnoten(nextN)->getWeiche()->setWeichenfestlegung(true, getKnoten(knotenNr)->getWeg());
-        //Flankenschutzweichen
+        // Flankenschutzweichen
 
         getKnoten(knotenNr)->setMarkierung(false);
     }
@@ -264,6 +266,8 @@ Gleissymbol *Graph::getKnoten(int knotenNr)
     else
     {
         Serial.println("Error: Der Gesuchte Knoten existiert nicht. (Graph.cpp, getKnoten())");
+        Serial.print("gesuchter Knoten: ");
+        Serial.println(knotenNr);
         return nullptr;
     }
 }
@@ -275,6 +279,8 @@ Gleissymbol *Graph::getNachbar(int knotenNr, int nachbar)
     else
     {
         Serial.println("Error: Der gesuchte Nachbar der Knotens existiert nicht. (Graph.cpp, getNachbar())");
+        Serial.print("gesuchter Nachbar: ");
+        Serial.println(nachbar);
         return nullptr;
     }
 }
@@ -300,7 +306,7 @@ boolean Graph::isKnotenNr(int knotenNr)
         return false;
 }
 
-boolean Graph::richtungGerade(Gleissymbol* vorgaenger, Gleissymbol *weichensymbol, Gleissymbol *nachfolger)
+boolean Graph::richtungGerade(Gleissymbol *vorgaenger, Gleissymbol *weichensymbol, Gleissymbol *nachfolger)
 {
     if (getKnotenNr(vorgaenger) < 0 || getKnotenNr(weichensymbol) < 0 || getKnotenNr(nachfolger) < 0)
     {
@@ -312,8 +318,9 @@ boolean Graph::richtungGerade(Gleissymbol* vorgaenger, Gleissymbol *weichensymbo
 }
 boolean Graph::richtungGerade(int vorgaenger, int weichensymbolNr, int nachfolger)
 {
-    if(!isKnotenNr(weichensymbolNr) || !isKnotenNr(vorgaenger) || !isKnotenNr(nachfolger))Serial.println("Error: Die angegebene Weichensymbolnummer gehört nicht zum Graphen. (Graph::richtungGerade)");
-    if (isKnotenNr(weichensymbolNr) && (_nachbarn[weichensymbolNr][2] == vorgaenger || _nachbarn[weichensymbolNr][2] == nachfolger))//an Position 2 und die Weichensymbolnummer ist nicht außerhalb des Arrays
+    if (!isKnotenNr(weichensymbolNr) || !isKnotenNr(vorgaenger) || !isKnotenNr(nachfolger))
+        Serial.println("Error: Die angegebene Weichensymbolnummer gehört nicht zum Graphen. (Graph::richtungGerade)");
+    if (isKnotenNr(weichensymbolNr) && (_nachbarn[weichensymbolNr][2] == vorgaenger || _nachbarn[weichensymbolNr][2] == nachfolger)) // an Position 2 und die Weichensymbolnummer ist nicht außerhalb des Arrays
         return false;
     else
         return true;
