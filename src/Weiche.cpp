@@ -40,10 +40,7 @@ Weiche::Weiche(int wnr, int weichenPinGerade, int weichenPinKurve, int weichenLe
 // die Weiche wechselt ihre Position
 void Weiche::weicheWechsel()
 {
-  boolean _wtstatus = digitalRead(_wt);
-  boolean _wgtstatus = digitalRead(_wgt);
-
-  if (_wtstatus == LOW && _wgtstatus == LOW) // wenn die wt und wgt gedrückt werden
+  if (digitalRead(_wt) == LOW && digitalRead(_wgt) == LOW) // wenn die wt und wgt gedrückt werden
   {
     if (_weichenposition == true) // wenn die Weiche auf gerade steht schalte auf gerade
     {
@@ -58,7 +55,6 @@ void Weiche::weicheWechsel()
 
 void Weiche::weicheGerade() // die Weiche wird in gerade Lage vesetzt
 {
-
   if (_weichenposition == false && weichenstatus == 0 && _weichenfestlegung == false && !_flankenschutzWeiche) // wenn die Weiche nicht schaltet und in der Kurve steht
   {
     _wStartzeit = millis();

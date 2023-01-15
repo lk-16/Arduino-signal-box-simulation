@@ -29,6 +29,7 @@ private:
     Hauptsignal *_signal = nullptr;          // Pointer auf das Hauptsignal des Gleissymbols
     Weiche *_weiche = nullptr;               // Pointer auf die Weiche des Gleissymbols
     Besetztmelder *_besetztmelder = nullptr; // Pointer auf den Besetztmelder des Gleissymbols
+    int _wegLaenge = 1000;                    // Länge vom Start zu diesem Knoten --> Länge ist z.B. die anzahl der WEichen, je nachdem was gezählt wird.
 
 public:
     /**
@@ -52,6 +53,9 @@ public:
     boolean getMarkierung();                                                                                      /**<Gibt den Status der Markierung zurück (bei der Suche besucht/nicht besucht)*/
     void setWeg(int status);                                                                                      /**<true = als Weg markiert, false = nicht als weg markiert*/
     int getWeg();                                                                                                 /**<gibt aus, ob der Knoten als Weg markiert ist oder nicht*/
+    boolean betterWayFound(int newDistance);                                                                      /**<Gibt true zurück wenn ein besserer Weg gefunden wurde und ändert diesen*/
+    boolean testbetterWay(int distance);                                                                          /**<Gibt true zurück, wenn ein besserer Weg gefunden wurde und änder diesen NICHT*/
+    void resetDistance();                                                                                         /**<Setzt die Distanz zu diesem Knoten nach dem Suchen zurück.*/
     void setFahrstrassenelement(unsigned int fahrstrassennr, boolean Fahrstrassenelement);                        /**<Das Gleissymbol wird zu einem Fahrstraßenelement gemacht, somit verschwindet die Besetztmeldung auch bei frei sein des Gleises nicht. Der Besetztmelder zeigt auch frei oder belegt sein an, wenn besetztmelderLicht ausgeschaltet ist. Die Festlegung und Bean-spruchung durch eine Fahrstraße kann nur durch die gleiche Fahrstraße wieder aufgeho-ben werden.*/
     boolean getFahrstrassenelement();                                                                             /**<Gibt aus, ob das Gleissymbol ein Fahrstraßenelement ist.*/
     boolean isAnfang();                                                                                           /**<Gibt aus, ob das Gleissymbol den Anfang einer Fahrstraße bildet.*/

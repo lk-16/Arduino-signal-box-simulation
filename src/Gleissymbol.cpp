@@ -41,6 +41,7 @@ void Gleissymbol::update()
     }
     if (_weiche != nullptr) // wenn es eine Weiche gibt
     {
+        
         _weiche->weicheWechsel();
         _weiche->weicheSchalten();
     }
@@ -89,6 +90,25 @@ void Gleissymbol::setWeg(int status)
 int Gleissymbol::getWeg()
 {
     return _weg;
+}
+
+boolean Gleissymbol::betterWayFound(int newDistance){
+    if(_wegLaenge > newDistance){
+        _wegLaenge = newDistance;
+        return true;
+    }
+    else return false;
+}
+
+boolean Gleissymbol::testbetterWay(int distance){
+    if(_wegLaenge > distance){
+        return true;
+    }
+    else return false;
+}
+
+void Gleissymbol::resetDistance(){
+    _wegLaenge = 1000;
 }
 
 void Gleissymbol::setFahrstrassenelement(unsigned int fahrstrassennr, boolean Fahrstrassenelement)

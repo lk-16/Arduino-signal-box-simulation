@@ -81,7 +81,7 @@ int Graph::nextWay(int knotenNr, int fahrstrassenNr_vorgaenger, boolean vorgaeng
         while (counter < _maxNachbarn && _nachbarn[knotenNr][counter] >= 0)
         // suche Solange nach Nachbarn, bis am Ende des Arrays oder bei Wert außerhalb des Werte bereichs oder
         {
-            if (_knoten[_nachbarn[knotenNr][counter]].getMarkierung() == false && ((_knoten[_nachbarn[knotenNr][counter]].isFree() && !fahrstrasse) || (fahrstrasse && _knoten[_nachbarn[knotenNr][counter]].getWeg() == fahrstrassenNr_vorgaenger))) // wenn der Knoten nicht markiert ist und frei, oder er wenn gefragt einer Fahrstrasse entspricht
+            if ((_knoten[_nachbarn[knotenNr][counter]].getMarkierung() == false || (_knoten[_nachbarn[knotenNr][counter]].getWeg() != _fahrstrassenzaehler && _knoten[_nachbarn[knotenNr][counter]].getWeg() != 0)) && ((_knoten[_nachbarn[knotenNr][counter]].isFree() && !fahrstrasse) || (fahrstrasse && _knoten[_nachbarn[knotenNr][counter]].getWeg() == fahrstrassenNr_vorgaenger))) // wenn der Knoten nicht markiert ist und frei, oder er wenn gefragt einer Fahrstrasse entspricht
             {
                 if (_knoten[knotenNr].getWeiche() != nullptr && vorgaengerAktiv) // wenn aktueller Knoten eine Weiche und vorgaänger aktiv
                 {
@@ -145,6 +145,93 @@ int Graph::wegSuchen(Gleissymbol *start, Gleissymbol *ziel, Gleissymbol *vorgaen
     }
 }
 
+
+int Graph::wegSuchenOpt(Gleissymbol *start, Gleissymbol *ziel, Gleissymbol *vorgaenger, int laengeWeg)
+{
+
+    start->setMarkierung(true);
+    if (start->betterWayFound(laengeWeg)) // wenn ein besserer WEg gefunden wurde mach weiter
+    {
+        if (equals(start, ziel)) // wenn am Ziel
+        {
+            _fahrstrassenzaehler++; // erhöhe den Zähler für die Nummer um 1
+            start->setWeg(_fahrstrassenzaehler);
+            return 1;
+        }
+        else
+        {
+            if (vorgaenger != nullptr) // wenn es einen Vorgänger gibt
+            {
+                int besteLaenge = 0; // Länge des besten Weges wird gespeichert
+
+                while (nextWay(start, getKnotenNr(vorgaenger), true) >= 0) // solange es Nachbarn gibt
+                {
+                    int nextVertexNr = nextWay(start);                                                 // der nächste Knoten der als alternative berachtet wird.
+                    if (_knoten[nextWay(start, getKnotenNr(vorgaenger), true)].getWeiche() != nullptr) // wenn es eine Weiche gibt
+                    {
+                        laengeWeg++; // erhöhe den Weg um 1
+                    }
+
+                    if (_knoten[nextWay(start, getKnotenNr(vorgaenger), true)].testbetterWay(laengeWeg)) // wenn der Weg besser ist als der bisherige besser ist, suche weiter
+                    {
+                        int laenge = wegSuchenOpt(&_knoten[nextWay(start, getKnotenNr(vorgaenger), true)], ziel, start, laengeWeg);
+                        if (laenge > 0)
+                        {
+                            besteLaenge = laenge;
+                            start->setWeg(getKnoten(nextVertexNr)->getWeg()); // merke dir die länge des Weges, der beste Weg wird automatisch gespeichert, da nur bessere Wege einen guten überschreiben, da andere nicht zur ausführung kommen
+                        }
+                    }
+                    else
+                        ; // Der weg ist schlechter, damit nicht wichtig
+                }
+
+                if (besteLaenge != 0) // wenn Weg mit besserer Länge gefunden wurde gib den Weg zurück
+                {
+                    return besteLaenge++;
+                }
+                else
+                    return -1; // es wurde keiner oder kein besserer Weg gefunden
+            }
+            else // wenn es keinen vorgänger gibt
+            {
+                int besteLaenge = 0; // länge des besten Weges wird gespeichert
+
+                while (nextWay(start) >= 0)
+                {
+                    int nextVertexNr = nextWay(start); // der nächste Knoten der als alternative berachtet wird.
+
+                    if (_knoten[nextWay(start)].getWeiche() != nullptr) // wenn es eine Weiche gibt
+                    {
+                        laengeWeg++; // erhöhe den Weg um 1
+                    }
+
+                    if (_knoten[nextWay(start, getKnotenNr(vorgaenger), true)].testbetterWay(laengeWeg)) // wenn der Weg besser ist als der bisherige besser ist, suche weiter
+                    {
+                        int laenge = wegSuchenOpt(&_knoten[nextWay(start, getKnotenNr(vorgaenger), true)], ziel, start, laengeWeg);
+                        if (laenge > 0)
+                        {
+                            besteLaenge = laenge;
+                            start->setWeg(getKnoten(nextVertexNr)->getWeg()); // merke dir die länge des Weges, der beste Weg wird automatisch gespeichert, da nur bessere Wege einen guten überschreiben, da andere nicht zur ausführung kommen
+                                                                              // die WEgnummer ist die nummer des vorgängers. Dieser wird gespeichert.
+                        }
+                    }
+                    else
+                        ; // Der weg ist schlechter, damit nicht wichtig
+                }
+                if (besteLaenge != 0) // wenn Weg mit besserer Länge gefunden wurde gib den Weg zurück
+                {
+                    return besteLaenge++;
+                }
+                else
+                    return -1; // es wurde keiner oder kein besserer Weg gefunden
+            }
+        }
+        
+    }
+    return -1;
+}
+
+
 boolean Graph::fahrstrasseEinstellen(Zugtaste *taste1, Zugtaste *taste2)
 {
     if (taste1->getRichtung() == taste2->getRichtung())
@@ -203,6 +290,22 @@ boolean Graph::fahrstrasseEinstellen(Gleissymbol *start, Gleissymbol *ziel)
     else
         return false;
 }
+
+boolean Graph::fahrstrasseEinstellenOpt(Gleissymbol *start, Gleissymbol *ziel)
+{
+    resetMarkierungen();
+    int laenge = wegSuchenOpt(start, ziel);
+    resetMarkierungen();
+
+    if (laenge > -1) // wenn eine Fahrstraße gefunden
+    {
+        start->setAnfang(true);
+        symbolZuFahrstrasse(start);
+        return true;
+    }
+    else
+        return false;
+}
 void Graph::symbolZuFahrstrasse(Gleissymbol *symbol)
 {
     symbolZuFahrstrasse(getKnotenNr(symbol));
@@ -218,7 +321,7 @@ void Graph::symbolZuFahrstrasse(int knotenNr)
         getKnoten(knotenNr)->setMarkierung(true);
 
         Serial.println("Weiche");
-        getKnoten(nextN)->getWeiche()->setWeichenposition(richtungGerade(knotenNr, nextN, nextWay(nextN, getKnoten(nextN)->getWeg()))); // schlate Weiche in die richtige Position
+        getKnoten(nextN)->getWeiche()->setWeichenposition(richtungGerade(knotenNr, nextN, nextWay(nextN, getKnoten(nextN)->getWeg()))); // schalte Weiche in die richtige Position
         getKnoten(nextN)->getWeiche()->setWeichenfestlegung(true, getKnoten(knotenNr)->getWeg());
         // Flankenschutzweichen
 
@@ -246,6 +349,7 @@ void Graph::resetMarkierungen(int fahrstrassenNr)
         _knoten[i].setMarkierung(false);
         if (_knoten[i].getWeg() == fahrstrassenNr)
             _knoten[i].setWeg(0);
+            _knoten[i].resetDistance();
     }
 }
 

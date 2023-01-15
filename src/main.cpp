@@ -74,28 +74,28 @@ int zta6;
 // Signal1
 #define rot1 52    // Hp0 (rot) vom Signal 1
 #define gruen1 125 // Hp1 (grün)  vom Signal 1
-int gelb1; // Hp2 (langsamfahrt) vom Signal 1
+int gelb1;         // Hp2 (langsamfahrt) vom Signal 1
 #define sperrmelder1 126
 #define signaltaste1 zta3 // Signaltaste, zu tastzwecken weichentaste 1
 
 // Signal2
 #define rot2 123  // Hp0 (rot) vom Signal 1
 #define gruen2 46 // Hp1 (grün)  vom Signal 1
-int gelb2; // Hp2 (langsamfahrt) vom Signal 1
+int gelb2;        // Hp2 (langsamfahrt) vom Signal 1
 #define sperrmelder2 49
 #define signaltaste2 zta4 // Signaltaste, zu tastzwecken weichentaste 1
 
 // Signal3
 #define rot3 121   // Hp0 (rot) vom Signal 1
 #define gruen3 122 // Hp1 (grün)  vom Signal 1
-int gelb3;  // Hp2 (langsamfahrt) vom Signal 1
+int gelb3;         // Hp2 (langsamfahrt) vom Signal 1
 #define sperrmelder3 127
 #define signaltaste3 zta7 // Signaltaste, zu tastzwecken weichentaste 1
 
 // Signal4
 #define rot4 47    // Hp0 (rot) vom Signal 1
 #define gruen4 111 // Hp1 (grün)  vom Signal 1
-int gelb4;  // Hp2 (langsamfahrt) vom Signal 1
+int gelb4;         // Hp2 (langsamfahrt) vom Signal 1
 #define sperrmelder4 48
 #define signaltaste4 zta8 // Signaltaste, zu tastzwecken weichentaste 1
 
@@ -123,7 +123,7 @@ Graph *graph = nullptr;
 void setup()
 {
 
-  //Initialisieren der Hauptsignale
+  // Initialisieren der Hauptsignale
   int allgSignaltasten[3] = {signalsperrtaste, Signalentsperrtaste, shgt}; // Signalsperrtaste, Signalentsperrtaste, Signalhaltgruppentaste, Array speichert für jedes Signal wichtige informationen, hält den schreibaufwand geringer
   int rot[hauptsignalanzahl] = {rot1, rot2, rot3, rot4};
   int gelb[hauptsignalanzahl] = {gelb1, gelb2, gelb3, gelb4};
@@ -219,6 +219,24 @@ void setup()
 
 void loop()
 {
+
+  // Serial.println(graph->fahrstrasseEinstellenOpt(graph->getKnoten(3), graph->getKnoten(13)));
+  graph->fahrstrasseEinstellenOpt(graph->getKnoten(3), graph->getKnoten(16));
+  Serial.println(graph->getKnoten(2)->getWeg());
+  Serial.println(graph->getKnoten(3)->getWeg());
+  Serial.println(graph->getKnoten(4)->getWeg());
+  Serial.println(graph->getKnoten(5)->getWeg());
+  Serial.println(graph->getKnoten(6)->getWeg());
+  Serial.println(graph->getKnoten(7)->getWeg());
+  Serial.println(graph->getKnoten(9)->getWeg());
+  Serial.println(graph->getKnoten(10)->getWeg());
+  Serial.println(graph->getKnoten(14)->getWeg());
+  Serial.println(graph->getKnoten(15)->getWeg());
+  Serial.println(graph->getKnoten(16)->getWeg());
+
+
+
+  delay(1000);
   zugtastenspeicher[0] = 0;
   zugtastenspeicher[1] = 0;
   anzahl = 0;
@@ -226,7 +244,6 @@ void loop()
   {
     if (zugtastenC.getZugtastenstatus(j) == false && anzahl < 2) // Wenn die Zugstrassentaste gedrückt wurde...
     {                                                            //...und noch nicht zwei Tasten gedrückt wurden
-    Serial.println(j);
       zugtastenspeicher[anzahl] = j;                             // speichere das Feld auf dem die taste gedrückt wurde
       anzahl++;                                                  // erhöhe die anzahl der gedrückten anzahl an tasten um 1
     }
@@ -239,3 +256,19 @@ void loop()
   ftueMelder.tueMelder(zugtastenC);
   graph->updateSymbole();
 }
+/*
+Hauptsignal
+0  2
+1  3
+1  4
+1  5
+
+
+0  2
+1  3
+1  4
+1  5
+1  6
+1  7
+1  8
+*/
