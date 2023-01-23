@@ -219,24 +219,6 @@ void setup()
 
 void loop()
 {
-
-  // Serial.println(graph->fahrstrasseEinstellenOpt(graph->getKnoten(3), graph->getKnoten(13)));
-  graph->fahrstrasseEinstellenOpt(graph->getKnoten(3), graph->getKnoten(16));
-  Serial.println(graph->getKnoten(2)->getWeg());
-  Serial.println(graph->getKnoten(3)->getWeg());
-  Serial.println(graph->getKnoten(4)->getWeg());
-  Serial.println(graph->getKnoten(5)->getWeg());
-  Serial.println(graph->getKnoten(6)->getWeg());
-  Serial.println(graph->getKnoten(7)->getWeg());
-  Serial.println(graph->getKnoten(9)->getWeg());
-  Serial.println(graph->getKnoten(10)->getWeg());
-  Serial.println(graph->getKnoten(14)->getWeg());
-  Serial.println(graph->getKnoten(15)->getWeg());
-  Serial.println(graph->getKnoten(16)->getWeg());
-
-
-
-  delay(1000);
   zugtastenspeicher[0] = 0;
   zugtastenspeicher[1] = 0;
   anzahl = 0;
@@ -256,19 +238,3 @@ void loop()
   ftueMelder.tueMelder(zugtastenC);
   graph->updateSymbole();
 }
-/*
-Hauptsignal
-0  2
-1  3
-1  4
-1  5
-
-
-0  2
-1  3
-1  4
-1  5
-1  6
-1  7
-1  8
-*/
