@@ -1,0 +1,4 @@
+schieberegister	KEYWORD1
+setPin	KEYWORD2
+printPinStatus	KEYWORD2
+getPinStatus	KEYWORD2
