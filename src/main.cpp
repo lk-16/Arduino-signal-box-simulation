@@ -122,6 +122,7 @@ Graph *graph = nullptr;
 
 void setup()
 {
+  Serial.begin(9600);
   // Initialisieren der Hauptsignale
   int allgSignaltasten[3] = {signalsperrtaste, Signalentsperrtaste, shgt}; // Signalsperrtaste, Signalentsperrtaste, Signalhaltgruppentaste, Array speichert für jedes Signal wichtige informationen, hält den schreibaufwand geringer
   int rot[hauptsignalanzahl] = {rot1, rot2, rot3, rot4};
@@ -179,7 +180,7 @@ void setup()
                                               '+', 's', '-', '-', '<', '-', 's', '+'}; //- normales Gleis, + Zugtaste, < weiche, s signal und zugtaste (lesart wie die besetztmelder von links oben nach rechts unten)
 
   weichen.weichenRelaisHIGH(); // wird benötigt, da der Graph erst später erstellt wird und die Relais sonst Schalten würden.
-  Serial.begin(9600);
+  
 
   // Der folgende Algorithmus fügt den Knoten Attribute, wie Besetztmelder, Weichen, Signale hinzu.
   Gleissymbol knoten[besetztmelderAnzahl]; // Speichert die Knoten, des Graphen

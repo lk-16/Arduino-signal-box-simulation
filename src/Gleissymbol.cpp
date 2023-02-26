@@ -43,9 +43,13 @@ void Gleissymbol::update()
     {
         _weiche->weicheWechsel();
         _weiche->weicheSchalten();
+        /*if(_besetztmelder != nullptr)
+        {
+            _weiche->setWeichebesetzt(_besetztmelder->besetztmelderAuslesen(LOW, *_weiche));
+        }*/
     }
     if (_besetztmelder != nullptr) // wenn es einen Besetztmelder gibt.
-        _besetztmelder->besetztmelderAuslesen(LOW, *_weiche);
+        _besetztmelder->besetztmelderAuslesen(LOW, _weiche);
 }
 
 boolean Gleissymbol::isFree()
@@ -55,7 +59,7 @@ boolean Gleissymbol::isFree()
     {
         free = false;
     }
-    else if (_besetztmelder != nullptr && (_besetztmelder->getFahrstrassenelement() || _besetztmelder->besetztmelderAuslesen(LOW, *_weiche))) // wenn besetztmelder kein Fahrstraßenelemnt und nicht besetzt
+    else if (_besetztmelder != nullptr && (_besetztmelder->getFahrstrassenelement() || _besetztmelder->besetztmelderAuslesen(LOW, _weiche))) // wenn besetztmelder kein Fahrstraßenelemnt und nicht besetzt
     {
         free = false;
     }
@@ -129,5 +133,5 @@ void Gleissymbol::setAnfang(boolean status)
 
 boolean Gleissymbol::getBesetztmelderstatus()
 {
-    return _besetztmelder->besetztmelderAuslesen(LOW, *_weiche);
+    return _besetztmelder->besetztmelderAuslesen(LOW, _weiche);
 }

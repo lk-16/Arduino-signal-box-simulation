@@ -217,8 +217,6 @@ void Weiche::setWeichebesetzt(boolean besetztmelderstatus)
 {
   _besetzt = besetztmelderstatus;
 }
-
-// private
 void Weiche::setWeichenLeds(boolean weichenlage)
 {
   if (_weichenausleuchtung == true)

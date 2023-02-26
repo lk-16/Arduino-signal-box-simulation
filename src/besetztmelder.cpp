@@ -49,14 +49,16 @@ boolean Besetztmelder::besetztmelderAuslesen(boolean besetztmelderBeleuchtung, W
     return _besetztmelderstatus; //_besetztmelderstatus; //gibt am ende den Status des Besetztmelder zurück
 }
 
-boolean Besetztmelder::besetztmelderAuslesen(boolean besetztmelderBeleuchtung, Weiche weiche)
+boolean Besetztmelder::besetztmelderAuslesen(boolean besetztmelderBeleuchtung, Weiche *weiche = nullptr)
 {
     // der Status des Besetztmelders wird eingelesen
     _besetztmelderLicht = besetztmelderBeleuchtung;
     _besetztmelderstatus = digitalRead(_gleisPin);
-    if (_weichenbesetztmelder != 0)
+    //Serial.println(_weichenbesetztmelder);
+    //if (_weichenbesetztmelder > 0)
+    if(weiche != nullptr)
     {
-        weiche.setWeichebesetzt(_besetztmelderstatus);
+        weiche->setWeichebesetzt(_besetztmelderstatus);
     }
     else
     {
