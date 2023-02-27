@@ -121,6 +121,16 @@ boolean Gleissymbol::getFahrstrassenelement()
     return _fahrstrassenelement;
 }
 
+void Gleissymbol::setFlankenschutzweiche(Gleissymbol *flankenschutzweiche){
+    if(_weiche != nullptr){
+        _flankenschutzweiche = flankenschutzweiche;
+    }
+}
+
+Gleissymbol *Gleissymbol::getFlankenschutzweiche(){
+    return _flankenschutzweiche;
+}
+
 boolean Gleissymbol::isAnfang()
 {
     return _anfang;
