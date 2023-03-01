@@ -52,7 +52,7 @@ void Gleissymbol::update()
         _besetztmelder->besetztmelderAuslesen(LOW, _weiche);
 }
 
-boolean Gleissymbol::isFree()
+boolean Gleissymbol::isFree(boolean ignoreFlankenschutz)
 {
     boolean free = true;
     if (getFahrstrassenelement())
@@ -67,12 +67,14 @@ boolean Gleissymbol::isFree()
     {
         free = false;
     }
-    else if (_weiche != nullptr && _weiche->getWeichenfestlegung()) // die Weiche nicht festgelegt
+    else if (_weiche != nullptr && ignoreFlankenschutz && !_weiche->getFlankenschutz() && _weiche->getWeichenfestlegung()) // die Weiche nicht festgelegt
     {
         free = false;
     }
     return free;
 }
+
+boolean isOnlyFlankenschutz();
 
 void Gleissymbol::setMarkierung(boolean status)
 {
@@ -121,9 +123,11 @@ boolean Gleissymbol::getFahrstrassenelement()
     return _fahrstrassenelement;
 }
 
-void Gleissymbol::setFlankenschutzweiche(Gleissymbol *flankenschutzweiche){
-    if(_weiche != nullptr){
+void Gleissymbol::setFlankenschutzweiche(Gleissymbol *flankenschutzweiche, int fahrstrassennummer, boolean weichenposition){
+    if(_weiche != nullptr && flankenschutzweiche != nullptr){
         _flankenschutzweiche = flankenschutzweiche;
+        flankenschutzweiche->getWeiche()->setWeichenposition(weichenposition);
+        flankenschutzweiche->getWeiche()->setFlankenschutz(true, fahrstrassennummer);
     }
 }
 

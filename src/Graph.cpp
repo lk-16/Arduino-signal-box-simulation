@@ -66,7 +66,7 @@ int Graph::nextWay(Gleissymbol *symbol, int fahrstrassenNr_vorgaenger, boolean v
         return nextWay(getKnotenNr(symbol), fahrstrassenNr_vorgaenger, vorgaengerAktiv);
 }
 
-Gleissymbol *Graph::sucheFlankenschutzweiche(int vorgaenger, int weiche, int nachfolger, int tiefe)
+int *Graph::sucheFlankenschutzweiche(int vorgaenger, int weiche, int nachfolger)
 {
     // Flankenfahrtrichtung ermitteln
     int counter = 0;
@@ -96,7 +96,8 @@ Gleissymbol *Graph::sucheFlankenschutzweiche(int vorgaenger, int weiche, int nac
     int aktuellerKnoten = moeglFlankenfahrt;
     while (getKnoten(aktuellerKnoten)->getWeiche() == nullptr)
     {
-        if (_nachbarn[aktuellerKnoten][1] < 0){//Dieser Teil kann/muss nicht abgesichert zu werden, da er eine Sackgasse auf dem Stellpult ist.
+        if (_nachbarn[aktuellerKnoten][1] < 0)
+        { // Dieser Teil kann/muss nicht abgesichert zu werden, da er eine Sackgasse auf dem Stellpult ist.
             return nullptr;
         }
         if (_nachbarn[aktuellerKnoten][0] == vorgaengerKnoten)
@@ -112,12 +113,16 @@ Gleissymbol *Graph::sucheFlankenschutzweiche(int vorgaenger, int weiche, int nac
     }
     if (!weichenAusgang(vorgaengerKnoten, aktuellerKnoten))
     {
-        return getKnoten(aktuellerKnoten);
+        int *ergebnis = (int *)calloc(3, sizeof(int)); // Achtung mit free, den Speicher abschließend wieder freigeben
+        ergebnis[0] = vorgaengerKnoten;
+        ergebnis[1] = aktuellerKnoten;
+        ergebnis[2] = _nachbarn[aktuellerKnoten][0];
+        return ergebnis;
     }
     else
     {
-        //Serial.print("Error in sucheFlankenschutzweiche(): Der Flankenschutz eines Weichenknotens konnte nicht bestimmt werden. KnotenNr.:");
-        //Serial.println(weiche);
+        // Serial.print("Error in sucheFlankenschutzweiche(): Der Flankenschutz eines Weichenknotens konnte nicht bestimmt werden. KnotenNr.:");
+        // Serial.println(weiche);
         return nullptr;
     }
 }
@@ -273,9 +278,20 @@ void Graph::symbolZuFahrstrasse(int knotenNr)
         Serial.println("Weiche");
         getKnoten(nextN)->getWeiche()->setWeichenposition(richtungGerade(knotenNr, nextN, nextWay(nextN, getKnoten(nextN)->getWeg()))); // schlate Weiche in die richtige Position
         getKnoten(nextN)->getWeiche()->setWeichenfestlegung(true, getKnoten(knotenNr)->getWeg());
-        // Flankenschutzweichen
-        Serial.println(getKnotenNr(sucheFlankenschutzweiche(knotenNr, nextN, nextWay(nextN, getKnoten(nextN)->getWeg()), 2)));
 
+        // Flankenschutzweichen
+        int *ergebnis = sucheFlankenschutzweiche(knotenNr, nextN, nextWay(nextN, getKnoten(nextN)->getWeg()));
+        if (ergebnis != nullptr)// wenn null zurückgegeben wird, gibt es keine Flankenschutzweichen
+        {
+            Serial.println(ergebnis[0]);
+            Serial.println(ergebnis[1]);
+            Serial.println(ergebnis[2]);
+            if (_nachbarn[ergebnis[1]][2] == ergebnis[0])
+                getKnoten(nextN)->setFlankenschutzweiche(getKnoten(ergebnis[1]), getKnoten(knotenNr)->getWeg(), true); // wenn der Vorgänger über eine kurve Verbunden ist, Schalte die Flankenschutzweiche gerade
+            else
+                getKnoten(nextN)->setFlankenschutzweiche(getKnoten(ergebnis[1]), getKnoten(knotenNr)->getWeg(), false);
+        }
+        free(ergebnis);
         getKnoten(knotenNr)->setMarkierung(false);
     }
     if (getKnoten(knotenNr)->getBesetztmelder() != nullptr)
