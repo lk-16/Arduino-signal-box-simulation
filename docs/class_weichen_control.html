@@ -9,6 +9,9 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -27,16 +30,36 @@
 </div>
 <!-- end header part -->
 <!-- Erzeugt von Doxygen 1.9.3 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'Suchen','.html');
+/* @license-end */
+</script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 $(function() {
-  initMenu('',false,false,'search.php','Suchen');
+  initMenu('',true,false,'search.php','Suchen');
+  $(document).ready(function() { init_search(); });
 });
 /* @license-end */
 </script>
 <div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
 </div><!-- top -->
 <div class="header">
   <div class="summary">
@@ -236,10 +259,6 @@ Freundbeziehungen</h2></td></tr>
 Hier ist ein Graph, der zeigt, was diese Funktion aufruft:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_weichen_control_aee8676305d6dcd4d59bbfbd7f5bb1287_cgraph.png" border="0" usemap="#aclass_weichen_control_aee8676305d6dcd4d59bbfbd7f5bb1287_cgraph" alt=""/></div>
-<map name="aclass_weichen_control_aee8676305d6dcd4d59bbfbd7f5bb1287_cgraph" id="aclass_weichen_control_aee8676305d6dcd4d59bbfbd7f5bb1287_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,256,32"/>
-<area shape="rect" href="class_weiche.html#a261fcac93ffd076c1731fd6bbd76a9e3" title=" " alt="" coords="304,5,507,32"/>
-</map>
 </div>
 
 </div>
@@ -266,10 +285,6 @@ Hier ist ein Graph, der zeigt, was diese Funktion aufruft:</div>
 Hier ist ein Graph, der zeigt, was diese Funktion aufruft:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_weichen_control_ac07ce1f2da3cc53d4b6b54cc845c0f8a_cgraph.png" border="0" usemap="#aclass_weichen_control_ac07ce1f2da3cc53d4b6b54cc845c0f8a_cgraph" alt=""/></div>
-<map name="aclass_weichen_control_ac07ce1f2da3cc53d4b6b54cc845c0f8a_cgraph" id="aclass_weichen_control_ac07ce1f2da3cc53d4b6b54cc845c0f8a_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,241,32"/>
-<area shape="rect" href="class_weiche.html#a232c42114dc504937dac9dc441fc4948" title=" " alt="" coords="289,5,477,32"/>
-</map>
 </div>
 
 </div>
@@ -312,10 +327,6 @@ Hier ist ein Graph, der zeigt, was diese Funktion aufruft:</div>
 Hier ist ein Graph, der zeigt, was diese Funktion aufruft:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_weichen_control_aa41f259234b638371b424eacb36738fc_cgraph.png" border="0" usemap="#aclass_weichen_control_aa41f259234b638371b424eacb36738fc_cgraph" alt=""/></div>
-<map name="aclass_weichen_control_aa41f259234b638371b424eacb36738fc_cgraph" id="aclass_weichen_control_aa41f259234b638371b424eacb36738fc_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,256,32"/>
-<area shape="rect" href="class_weiche.html#a6356af53d6287fba7f8e200367adf9cc" title=" " alt="" coords="304,5,507,32"/>
-</map>
 </div>
 
 </div>
@@ -342,11 +353,6 @@ Hier ist ein Graph, der zeigt, was diese Funktion aufruft:</div>
 Hier ist ein Graph, der zeigt, was diese Funktion aufruft:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_weichen_control_a8fc3c3b47a983ac574361e4a6894f59d_cgraph.png" border="0" usemap="#aclass_weichen_control_a8fc3c3b47a983ac574361e4a6894f59d_cgraph" alt=""/></div>
-<map name="aclass_weichen_control_a8fc3c3b47a983ac574361e4a6894f59d_cgraph" id="aclass_weichen_control_a8fc3c3b47a983ac574361e4a6894f59d_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,216,32"/>
-<area shape="rect" href="class_weiche.html#a21c1167f5dfc77d74f1acc79e1498fb0" title=" " alt="" coords="264,5,420,32"/>
-<area shape="rect" href="class_actor.html#a0fa071a76d36b9d864e4235028e17198" title=" " alt="" coords="468,5,615,32"/>
-</map>
 </div>
 
 </div>
@@ -373,11 +379,6 @@ Hier ist ein Graph, der zeigt, was diese Funktion aufruft:</div>
 Hier ist ein Graph, der zeigt, was diese Funktion aufruft:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_weichen_control_a72ec13dc561f2bfbcf48ecea537adbbb_cgraph.png" border="0" usemap="#aclass_weichen_control_a72ec13dc561f2bfbcf48ecea537adbbb_cgraph" alt=""/></div>
-<map name="aclass_weichen_control_a72ec13dc561f2bfbcf48ecea537adbbb_cgraph" id="aclass_weichen_control_a72ec13dc561f2bfbcf48ecea537adbbb_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,207,32"/>
-<area shape="rect" href="class_weiche.html#a92360342b602200d6cb344dd7cf9fc7d" title=" " alt="" coords="255,5,401,32"/>
-<area shape="rect" href="class_actor.html#a0fa071a76d36b9d864e4235028e17198" title=" " alt="" coords="449,5,596,32"/>
-</map>
 </div>
 
 </div>
@@ -494,12 +495,6 @@ Hier ist ein Graph, der zeigt, was diese Funktion aufruft:</div>
 Hier ist ein Graph, der zeigt, was diese Funktion aufruft:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_weichen_control_a167a851af0e17ec87355ec903b4dfcb7_cgraph.png" border="0" usemap="#aclass_weichen_control_a167a851af0e17ec87355ec903b4dfcb7_cgraph" alt=""/></div>
-<map name="aclass_weichen_control_a167a851af0e17ec87355ec903b4dfcb7_cgraph" id="aclass_weichen_control_a167a851af0e17ec87355ec903b4dfcb7_cgraph">
-<area shape="rect" title=" " alt="" coords="5,31,215,57"/>
-<area shape="rect" href="class_weiche.html#a21c1167f5dfc77d74f1acc79e1498fb0" title=" " alt="" coords="263,5,419,32"/>
-<area shape="rect" href="class_weiche.html#a92360342b602200d6cb344dd7cf9fc7d" title=" " alt="" coords="267,56,414,83"/>
-<area shape="rect" href="class_actor.html#a0fa071a76d36b9d864e4235028e17198" title=" " alt="" coords="467,31,613,57"/>
-</map>
 </div>
 
 </div>
@@ -551,8 +546,8 @@ Hier ist ein Graph, der zeigt, was diese Funktion aufruft:</div>
 </div>
 </div>
 <hr/>Die Dokumentation für dieseKlasse wurde erzeugt aufgrund der Dateien:<ul>
-<li><a class="el" href="_weichen_control_8h_source.html">WeichenControl.h</a></li>
-<li><a class="el" href="_weichen_control_8cpp_source.html">WeichenControl.cpp</a></li>
+<li>src/<a class="el" href="_weichen_control_8h_source.html">WeichenControl.h</a></li>
+<li>src/<a class="el" href="_weichen_control_8cpp_source.html">WeichenControl.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

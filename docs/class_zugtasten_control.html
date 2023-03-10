@@ -9,6 +9,9 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -27,16 +30,36 @@
 </div>
 <!-- end header part -->
 <!-- Erzeugt von Doxygen 1.9.3 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'Suchen','.html');
+/* @license-end */
+</script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 $(function() {
-  initMenu('',false,false,'search.php','Suchen');
+  initMenu('',true,false,'search.php','Suchen');
+  $(document).ready(function() { init_search(); });
 });
 /* @license-end */
 </script>
 <div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
 </div><!-- top -->
 <div class="header">
   <div class="summary">
@@ -130,11 +153,6 @@ $(function() {
 Hier ist ein Graph, der zeigt, was diese Funktion aufruft:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_zugtasten_control_a2e37640e8d9b4a6850c3f62c203a5e7a_cgraph.png" border="0" usemap="#aclass_zugtasten_control_a2e37640e8d9b4a6850c3f62c203a5e7a_cgraph" alt=""/></div>
-<map name="aclass_zugtasten_control_a2e37640e8d9b4a6850c3f62c203a5e7a_cgraph" id="aclass_zugtasten_control_a2e37640e8d9b4a6850c3f62c203a5e7a_cgraph">
-<area shape="rect" title=" " alt="" coords="5,31,224,57"/>
-<area shape="rect" href="class_zugtaste.html#ae6a56e8928fb6cfdd0d3a3465e2d4180" title=" " alt="" coords="281,5,451,32"/>
-<area shape="rect" href="class_zugtasten_control.html#a9375a8fd26c7c677375048cca8a90fb5" title=" " alt="" coords="272,56,460,83"/>
-</map>
 </div>
 
 </div>
@@ -160,10 +178,6 @@ Hier ist ein Graph, der zeigt, was diese Funktion aufruft:</div>
 Hier ist ein Graph, der zeigt, was diese Funktion aufruft:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_zugtasten_control_ac19a33669e0580b5eb9c57dcc610ef3b_cgraph.png" border="0" usemap="#aclass_zugtasten_control_ac19a33669e0580b5eb9c57dcc610ef3b_cgraph" alt=""/></div>
-<map name="aclass_zugtasten_control_ac19a33669e0580b5eb9c57dcc610ef3b_cgraph" id="aclass_zugtasten_control_ac19a33669e0580b5eb9c57dcc610ef3b_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,201,32"/>
-<area shape="rect" href="class_zugtasten_control.html#a9375a8fd26c7c677375048cca8a90fb5" title=" " alt="" coords="249,5,437,32"/>
-</map>
 </div>
 
 </div>
@@ -210,11 +224,6 @@ Hier ist ein Graph, der zeigt, was diese Funktion aufruft:</div>
 Hier ist ein Graph, der zeigt, was diese Funktion aufruft:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_zugtasten_control_aea3770a6d082a213b3588863f1473743_cgraph.png" border="0" usemap="#aclass_zugtasten_control_aea3770a6d082a213b3588863f1473743_cgraph" alt=""/></div>
-<map name="aclass_zugtasten_control_aea3770a6d082a213b3588863f1473743_cgraph" id="aclass_zugtasten_control_aea3770a6d082a213b3588863f1473743_cgraph">
-<area shape="rect" title=" " alt="" coords="5,31,244,57"/>
-<area shape="rect" href="class_zugtaste.html#a072eb9ebcfde171bcbc02bc5e51d7b03" title=" " alt="" coords="292,5,483,32"/>
-<area shape="rect" href="class_zugtasten_control.html#a9375a8fd26c7c677375048cca8a90fb5" title=" " alt="" coords="293,56,481,83"/>
-</map>
 </div>
 
 </div>
@@ -270,11 +279,6 @@ Hier ist ein Graph, der zeigt, was diese Funktion aufruft:</div>
 Hier ist ein Graph, der zeigt, was diese Funktion aufruft:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_zugtasten_control_abbfa192a397aa0703f403789c3cce708_cgraph.png" border="0" usemap="#aclass_zugtasten_control_abbfa192a397aa0703f403789c3cce708_cgraph" alt=""/></div>
-<map name="aclass_zugtasten_control_abbfa192a397aa0703f403789c3cce708_cgraph" id="aclass_zugtasten_control_abbfa192a397aa0703f403789c3cce708_cgraph">
-<area shape="rect" title=" " alt="" coords="5,31,224,57"/>
-<area shape="rect" href="class_zugtasten_control.html#a9375a8fd26c7c677375048cca8a90fb5" title=" " alt="" coords="272,5,460,32"/>
-<area shape="rect" href="class_zugtaste.html#aa3876ff3dea3ca22ea67e3650a833f58" title=" " alt="" coords="281,56,451,83"/>
-</map>
 </div>
 
 </div>
@@ -299,19 +303,13 @@ Hier ist ein Graph, der zeigt, was diese Funktion aufruft:</div>
 Hier ist ein Graph, der zeigt, was diese Funktion aufruft:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_zugtasten_control_a345bd760dd6796f263bf568a5e81c08e_cgraph.png" border="0" usemap="#aclass_zugtasten_control_a345bd760dd6796f263bf568a5e81c08e_cgraph" alt=""/></div>
-<map name="aclass_zugtasten_control_a345bd760dd6796f263bf568a5e81c08e_cgraph" id="aclass_zugtasten_control_a345bd760dd6796f263bf568a5e81c08e_cgraph">
-<area shape="rect" title=" " alt="" coords="5,23,191,65"/>
-<area shape="rect" href="class_zugtasten_control.html#aea3770a6d082a213b3588863f1473743" title=" " alt="" coords="239,31,477,57"/>
-<area shape="rect" href="class_zugtaste.html#a072eb9ebcfde171bcbc02bc5e51d7b03" title=" " alt="" coords="525,5,716,32"/>
-<area shape="rect" href="class_zugtasten_control.html#a9375a8fd26c7c677375048cca8a90fb5" title=" " alt="" coords="527,56,715,83"/>
-</map>
 </div>
 
 </div>
 </div>
 <hr/>Die Dokumentation für dieseKlasse wurde erzeugt aufgrund der Dateien:<ul>
-<li><a class="el" href="zugtasten_control_8h_source.html">zugtastenControl.h</a></li>
-<li><a class="el" href="zugtasten_control_8cpp_source.html">zugtastenControl.cpp</a></li>
+<li>src/<a class="el" href="zugtasten_control_8h_source.html">zugtastenControl.h</a></li>
+<li>src/<a class="el" href="zugtasten_control_8cpp_source.html">zugtastenControl.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

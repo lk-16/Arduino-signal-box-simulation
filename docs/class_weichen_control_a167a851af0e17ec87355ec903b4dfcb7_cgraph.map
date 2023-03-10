@@ -1,6 +1,0 @@
-<map id="WeichenControl::weichenStellen" name="WeichenControl::weichenStellen">
-<area shape="rect" id="node1" title=" " alt="" coords="5,31,215,57"/>
-<area shape="rect" id="node2" href="$class_weiche.html#a21c1167f5dfc77d74f1acc79e1498fb0" title=" " alt="" coords="263,5,419,32"/>
-<area shape="rect" id="node4" href="$class_weiche.html#a92360342b602200d6cb344dd7cf9fc7d" title=" " alt="" coords="267,56,414,83"/>
-<area shape="rect" id="node3" href="$class_actor.html#a0fa071a76d36b9d864e4235028e17198" title=" " alt="" coords="467,31,613,57"/>
-</map>

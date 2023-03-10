@@ -1,8 +1,0 @@
-<map id="Actor" name="Actor">
-<area shape="rect" id="node1" title=" " alt="" coords="181,5,235,32"/>
-<area shape="rect" id="node2" href="$class_besetztmelder.html" title=" " alt="" coords="5,80,112,107"/>
-<area shape="rect" id="node3" href="$class_melder.html" title=" " alt="" coords="136,80,197,107"/>
-<area shape="rect" id="node4" href="$class_signal.html" title=" " alt="" coords="221,80,280,107"/>
-<area shape="rect" id="node6" href="$class_weiche.html" title=" " alt="" coords="304,80,371,107"/>
-<area shape="rect" id="node5" href="$class_hauptsignal.html" title=" " alt="" coords="205,155,296,181"/>
-</map>

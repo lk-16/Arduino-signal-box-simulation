@@ -9,6 +9,9 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -27,16 +30,36 @@
 </div>
 <!-- end header part -->
 <!-- Erzeugt von Doxygen 1.9.3 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'Suchen','.html');
+/* @license-end */
+</script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 $(function() {
-  initMenu('',false,false,'search.php','Suchen');
+  initMenu('',true,false,'search.php','Suchen');
+  $(document).ready(function() { init_search(); });
 });
 /* @license-end */
 </script>
 <div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
 </div><!-- top -->
 <div class="header">
   <div class="summary">
@@ -51,21 +74,11 @@ $(function() {
 Klassendiagramm für Hauptsignal:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_hauptsignal__inherit__graph.png" border="0" usemap="#a_hauptsignal_inherit__map" alt="Inheritance graph"/></div>
-<map name="a_hauptsignal_inherit__map" id="a_hauptsignal_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,155,96,181"/>
-<area shape="rect" href="class_signal.html" title=" " alt="" coords="21,80,80,107"/>
-<area shape="rect" href="class_actor.html" title=" " alt="" coords="24,5,77,32"/>
-</map>
 <center><span class="legend">[<a href="graph_legend.html">Legende</a>]</span></center></div>
 <div class="dynheader">
 Zusammengehörigkeiten von Hauptsignal:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_hauptsignal__coll__graph.png" border="0" usemap="#a_hauptsignal_coll__map" alt="Collaboration graph"/></div>
-<map name="a_hauptsignal_coll__map" id="a_hauptsignal_coll__map">
-<area shape="rect" title=" " alt="" coords="5,155,96,181"/>
-<area shape="rect" href="class_signal.html" title=" " alt="" coords="21,80,80,107"/>
-<area shape="rect" href="class_actor.html" title=" " alt="" coords="24,5,77,32"/>
-</map>
 <center><span class="legend">[<a href="graph_legend.html">Legende</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -219,15 +232,6 @@ signale(int signaltastenPin, int sperrmelderPin, int allgSignaltasten[3], int re
 Hier ist ein Graph, der zeigt, was diese Funktion aufruft:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_hauptsignal_a22f999547e0550acd83d2f7daffb5f7d_cgraph.png" border="0" usemap="#aclass_hauptsignal_a22f999547e0550acd83d2f7daffb5f7d_cgraph" alt=""/></div>
-<map name="aclass_hauptsignal_a22f999547e0550acd83d2f7daffb5f7d_cgraph" id="aclass_hauptsignal_a22f999547e0550acd83d2f7daffb5f7d_cgraph">
-<area shape="rect" title=" " alt="" coords="5,49,169,90"/>
-<area shape="rect" href="class_signal.html#a739e36755ab8a74a98e52b039b93b537" title=" " alt="" coords="217,5,433,32"/>
-<area shape="rect" href="class_signal.html#a0eb2bd8ba8785c4a30ccf3a0427f8bc4" title=" " alt="" coords="251,56,400,83"/>
-<area shape="rect" href="class_hauptsignal.html#a3bced16c632f995ff8bb650011689de2" title=" " alt="" coords="243,107,407,149"/>
-<area shape="rect" href="class_signal.html#a8fb4bb651c8066da2cacde46d2cb2f88" title=" " alt="" coords="481,64,637,91"/>
-<area shape="rect" href="class_signal.html#ab1ed323ddcec01c04c8f27e0da6134ef" title=" " alt="" coords="481,115,637,141"/>
-<area shape="rect" href="class_signal.html#a8ab8b7dcac64ee12f4c2459fed8a46d0" title=" " alt="" coords="481,165,637,192"/>
-</map>
 </div>
 
 </div>
@@ -254,19 +258,13 @@ Hier ist ein Graph, der zeigt, was diese Funktion aufruft:</div>
 Hier ist ein Graph, der zeigt, was diese Funktion aufruft:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_hauptsignal_a3bced16c632f995ff8bb650011689de2_cgraph.png" border="0" usemap="#aclass_hauptsignal_a3bced16c632f995ff8bb650011689de2_cgraph" alt=""/></div>
-<map name="aclass_hauptsignal_a3bced16c632f995ff8bb650011689de2_cgraph" id="aclass_hauptsignal_a3bced16c632f995ff8bb650011689de2_cgraph">
-<area shape="rect" title=" " alt="" coords="5,49,169,90"/>
-<area shape="rect" href="class_signal.html#a8fb4bb651c8066da2cacde46d2cb2f88" title=" " alt="" coords="217,5,373,32"/>
-<area shape="rect" href="class_signal.html#ab1ed323ddcec01c04c8f27e0da6134ef" title=" " alt="" coords="217,56,373,83"/>
-<area shape="rect" href="class_signal.html#a8ab8b7dcac64ee12f4c2459fed8a46d0" title=" " alt="" coords="217,107,373,133"/>
-</map>
 </div>
 
 </div>
 </div>
 <hr/>Die Dokumentation für dieseKlasse wurde erzeugt aufgrund der Dateien:<ul>
-<li><a class="el" href="_hauptsignal_8h_source.html">Hauptsignal.h</a></li>
-<li><a class="el" href="_hauptsignal_8cpp_source.html">Hauptsignal.cpp</a></li>
+<li>src/<a class="el" href="_hauptsignal_8h_source.html">Hauptsignal.h</a></li>
+<li>src/<a class="el" href="_hauptsignal_8cpp_source.html">Hauptsignal.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

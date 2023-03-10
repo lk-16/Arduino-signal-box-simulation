@@ -1,0 +1,20 @@
+digraph "Hauptsignal::hauptsignalHp0Manuell"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="Hauptsignal::hauptsignal\lHp0Manuell",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Signal::getSignalhaltgruppentaste",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_signal.html#a739e36755ab8a74a98e52b039b93b537",tooltip=" "];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="Signal::getSignaltaste",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_signal.html#a0eb2bd8ba8785c4a30ccf3a0427f8bc4",tooltip=" "];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="Hauptsignal::hauptsignal\lSchalten",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_hauptsignal.html#a3bced16c632f995ff8bb650011689de2",tooltip=" "];
+  Node4 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="Signal::getSignalsperre",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_signal.html#a8fb4bb651c8066da2cacde46d2cb2f88",tooltip=" "];
+  Node4 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="Signal::getSignalstatus",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_signal.html#ab1ed323ddcec01c04c8f27e0da6134ef",tooltip=" "];
+  Node4 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="Signal::setSignalstatus",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_signal.html#a8ab8b7dcac64ee12f4c2459fed8a46d0",tooltip=" "];
+}

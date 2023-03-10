@@ -1,9 +1,0 @@
-<map id="Gleissymbol::setFlankenschutzweiche" name="Gleissymbol::setFlankenschutzweiche">
-<area shape="rect" id="node1" title=" " alt="" coords="5,56,251,83"/>
-<area shape="rect" id="node2" href="$class_gleissymbol.html#a633734154734ce040d12dcdde5578ae7" title=" " alt="" coords="311,5,475,32"/>
-<area shape="rect" id="node3" href="$class_weiche.html#ab8b5bbf655f21c21017878f0dd03a3e1" title=" " alt="" coords="304,56,481,83"/>
-<area shape="rect" id="node4" href="$class_weiche.html#a38cb96d7b2ee59fec2a4e8bc809f81c8" title=" " alt="" coords="299,107,487,133"/>
-<area shape="rect" id="node5" href="$class_weiche.html#a21c1167f5dfc77d74f1acc79e1498fb0" title=" " alt="" coords="535,81,691,108"/>
-<area shape="rect" id="node7" href="$class_weiche.html#a92360342b602200d6cb344dd7cf9fc7d" title=" " alt="" coords="539,132,686,159"/>
-<area shape="rect" id="node6" href="$class_actor.html#a0fa071a76d36b9d864e4235028e17198" title=" " alt="" coords="739,107,885,133"/>
-</map>

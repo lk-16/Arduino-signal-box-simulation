@@ -1,7 +1,0 @@
-<map id="HauptsignalControl::HauptsignalControl" name="HauptsignalControl::HauptsignalControl">
-<area shape="rect" id="node1" title=" " alt="" coords="5,49,144,90"/>
-<area shape="rect" id="node2" href="$class_hauptsignal.html#a3bced16c632f995ff8bb650011689de2" title=" " alt="" coords="192,49,356,90"/>
-<area shape="rect" id="node3" href="$class_signal.html#a8fb4bb651c8066da2cacde46d2cb2f88" title=" " alt="" coords="404,5,560,32"/>
-<area shape="rect" id="node4" href="$class_signal.html#ab1ed323ddcec01c04c8f27e0da6134ef" title=" " alt="" coords="404,56,560,83"/>
-<area shape="rect" id="node5" href="$class_signal.html#a8ab8b7dcac64ee12f4c2459fed8a46d0" title=" " alt="" coords="404,107,560,133"/>
-</map>

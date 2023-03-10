@@ -1,0 +1,21 @@
+digraph "Melder::tueMelder"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="Melder::tueMelder",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Actor::blinken",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_actor.html#ad0595d335c3f070ac8bbbbe91b35494a",tooltip=" "];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="Actor::digitalSchalten",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_actor.html#a0fa071a76d36b9d864e4235028e17198",tooltip=" "];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="ZugtastenControl::zugtasten\lGedrueckt",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_zugtasten_control.html#a345bd760dd6796f263bf568a5e81c08e",tooltip=" "];
+  Node4 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="ZugtastenControl::getZugtastenstatus",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_zugtasten_control.html#aea3770a6d082a213b3588863f1473743",tooltip=" "];
+  Node5 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="Zugtaste::getzugtastenstatus",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_zugtaste.html#a072eb9ebcfde171bcbc02bc5e51d7b03",tooltip=" "];
+  Node5 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="ZugtastenControl::isZugtaste",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_zugtasten_control.html#a9375a8fd26c7c677375048cca8a90fb5",tooltip=" "];
+}

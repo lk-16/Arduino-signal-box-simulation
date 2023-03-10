@@ -1,6 +1,0 @@
-<map id="Hauptsignal::hauptsignalSchalten" name="Hauptsignal::hauptsignalSchalten">
-<area shape="rect" id="node1" title=" " alt="" coords="5,49,169,90"/>
-<area shape="rect" id="node2" href="$class_signal.html#a8fb4bb651c8066da2cacde46d2cb2f88" title=" " alt="" coords="217,5,373,32"/>
-<area shape="rect" id="node3" href="$class_signal.html#ab1ed323ddcec01c04c8f27e0da6134ef" title=" " alt="" coords="217,56,373,83"/>
-<area shape="rect" id="node4" href="$class_signal.html#a8ab8b7dcac64ee12f4c2459fed8a46d0" title=" " alt="" coords="217,107,373,133"/>
-</map>

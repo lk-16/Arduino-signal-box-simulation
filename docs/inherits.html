@@ -9,6 +9,9 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -27,17 +30,37 @@
 </div>
 <!-- end header part -->
 <!-- Erzeugt von Doxygen 1.9.3 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'Suchen','.html');
+/* @license-end */
+</script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 $(function() {
-  initMenu('',false,false,'search.php','Suchen');
+  initMenu('',true,false,'search.php','Suchen');
+  $(document).ready(function() { init_search(); });
 });
 /* @license-end */
 </script>
 <div id="main-nav"></div>
 </div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
 <div class="header">
   <div class="headertitle"><div class="title">Klassenhierarchie</div></div>
 </div><!--header-->
@@ -46,49 +69,20 @@ $(function() {
 <p><a href="hierarchy.html">gehe zur textbasierten Darstellung der Klassenhierarchie</a></p>
 </div><table border="0" cellspacing="10" cellpadding="0">
 <tr><td><img src="inherit_graph_0.png" border="0" usemap="#a_actor" alt=""/>
-<map name="a_actor" id="a_actor">
-<area shape="rect" href="class_actor.html" title=" " alt="" coords="5,81,59,108"/>
-<area shape="rect" href="class_besetztmelder.html" title=" " alt="" coords="107,5,213,32"/>
-<area shape="rect" href="class_melder.html" title=" " alt="" coords="129,56,191,83"/>
-<area shape="rect" href="class_signal.html" title=" " alt="" coords="131,107,189,133"/>
-<area shape="rect" href="class_weiche.html" title=" " alt="" coords="127,157,193,184"/>
-<area shape="rect" href="class_hauptsignal.html" title=" " alt="" coords="261,107,352,133"/>
-</map>
 </td></tr>
 <tr><td><img src="inherit_graph_1.png" border="0" usemap="#a_besetztmeldung_control" alt=""/>
-<map name="a_besetztmeldung_control" id="a_besetztmeldung_control">
-<area shape="rect" href="class_besetztmeldung_control.html" title=" " alt="" coords="5,5,163,32"/>
-</map>
 </td></tr>
 <tr><td><img src="inherit_graph_2.png" border="0" usemap="#a_gleissymbol" alt=""/>
-<map name="a_gleissymbol" id="a_gleissymbol">
-<area shape="rect" href="class_gleissymbol.html" title="Ist ein Knoten für den in Graph erstellten Graphen Speichert alle Objekte, die dem Entsprechenden Kno..." alt="" coords="5,5,100,32"/>
-</map>
 </td></tr>
 <tr><td><img src="inherit_graph_3.png" border="0" usemap="#a_graph" alt=""/>
-<map name="a_graph" id="a_graph">
-<area shape="rect" href="class_graph.html" title=" " alt="" coords="5,5,63,32"/>
-</map>
 </td></tr>
 <tr><td><img src="inherit_graph_4.png" border="0" usemap="#a_hauptsignal_control" alt=""/>
-<map name="a_hauptsignal_control" id="a_hauptsignal_control">
-<area shape="rect" href="class_hauptsignal_control.html" title=" " alt="" coords="5,5,136,32"/>
-</map>
 </td></tr>
 <tr><td><img src="inherit_graph_5.png" border="0" usemap="#a_weichen_control" alt=""/>
-<map name="a_weichen_control" id="a_weichen_control">
-<area shape="rect" href="class_weichen_control.html" title=" " alt="" coords="5,5,120,32"/>
-</map>
 </td></tr>
 <tr><td><img src="inherit_graph_6.png" border="0" usemap="#a_zugtaste" alt=""/>
-<map name="a_zugtaste" id="a_zugtaste">
-<area shape="rect" href="class_zugtaste.html" title=" " alt="" coords="5,5,77,32"/>
-</map>
 </td></tr>
 <tr><td><img src="inherit_graph_7.png" border="0" usemap="#a_zugtasten_control" alt=""/>
-<map name="a_zugtasten_control" id="a_zugtasten_control">
-<area shape="rect" href="class_zugtasten_control.html" title=" " alt="" coords="5,5,125,32"/>
-</map>
 </td></tr>
 </table>
 </div><!-- contents -->
