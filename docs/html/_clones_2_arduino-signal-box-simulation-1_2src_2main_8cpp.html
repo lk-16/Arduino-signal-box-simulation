@@ -1,0 +1,1506 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.3"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SpDrS60 Stellwerkssimulation: C:/Users/Lennart/Documents/GBS/Clones/Arduino-signal-box-simulation-1/src/main.cpp-Dateireferenz</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">SpDrS60 Stellwerkssimulation<span id="projectnumber">&#160;Stellwerkssimulation zu Verwendung in bliebigen Schienensystemen</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Erzeugt von Doxygen 1.9.3 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Suchen');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_a7ed65b776829eef26ef09d4fe9a87e5.html">Clones</a></li><li class="navelem"><a class="el" href="dir_fede80bbb25889f6a04e6f747cc36014.html">Arduino-signal-box-simulation-1</a></li><li class="navelem"><a class="el" href="dir_47b7058e12cbc92b125bd931e28e15cf.html">src</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#define-members">Makrodefinitionen</a> &#124;
+<a href="#func-members">Funktionen</a> &#124;
+<a href="#var-members">Variablen</a>  </div>
+  <div class="headertitle"><div class="title">main.cpp-Dateireferenz</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;Arduino.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="_weichen_control_8h_source.html">WeichenControl.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="zugtasten_control_8h_source.html">ZugtastenControl.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="besetztmeldung_control_8h_source.html">BesetztmeldungControl.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_hauptsignal_control_8h_source.html">HauptsignalControl.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="melder_8h_source.html">Melder.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2_graph_8h_source.html">Graph.h</a>&quot;</code><br />
+</div>
+<p><a href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">gehe zum Quellcode dieser Datei</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Makrodefinitionen</h2></td></tr>
+<tr class="memitem:a5524445889074baa5049863cc6844dfe"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a5524445889074baa5049863cc6844dfe">anzahlWeichen</a>&#160;&#160;&#160;3</td></tr>
+<tr class="separator:a5524445889074baa5049863cc6844dfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97c0b562c7d96055d8e0e93c60680dd7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a97c0b562c7d96055d8e0e93c60680dd7">w1g</a>&#160;&#160;&#160;24</td></tr>
+<tr class="separator:a97c0b562c7d96055d8e0e93c60680dd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c9cc2a94f302333f97d2a1496e21986"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a7c9cc2a94f302333f97d2a1496e21986">w1k</a>&#160;&#160;&#160;25</td></tr>
+<tr class="separator:a7c9cc2a94f302333f97d2a1496e21986"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae813c1c62a71ec33ec226580a9ccab95"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#ae813c1c62a71ec33ec226580a9ccab95">w2g</a>&#160;&#160;&#160;22</td></tr>
+<tr class="separator:ae813c1c62a71ec33ec226580a9ccab95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a2b500c3d017717cca7d2c47fe8c288"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a2a2b500c3d017717cca7d2c47fe8c288">w2k</a>&#160;&#160;&#160;23</td></tr>
+<tr class="separator:a2a2b500c3d017717cca7d2c47fe8c288"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a923b61ac829021bdd036dc2e97fda3df"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a923b61ac829021bdd036dc2e97fda3df">w3g</a>&#160;&#160;&#160;26</td></tr>
+<tr class="separator:a923b61ac829021bdd036dc2e97fda3df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8d029b3d536c252bede8d87f511e410"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#af8d029b3d536c252bede8d87f511e410">w3k</a>&#160;&#160;&#160;27</td></tr>
+<tr class="separator:af8d029b3d536c252bede8d87f511e410"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ed2d818fd669cbd31abbccc93e399a2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a2ed2d818fd669cbd31abbccc93e399a2">wt1</a>&#160;&#160;&#160;11</td></tr>
+<tr class="separator:a2ed2d818fd669cbd31abbccc93e399a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5508bb1151bfe73f97290379eecaa205"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a5508bb1151bfe73f97290379eecaa205">wt2</a>&#160;&#160;&#160;20</td></tr>
+<tr class="separator:a5508bb1151bfe73f97290379eecaa205"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48bac1b80861cb1b7f5c980af9bd5407"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a48bac1b80861cb1b7f5c980af9bd5407">wt3</a>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:a48bac1b80861cb1b7f5c980af9bd5407"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abda36bb787875a5888b03f7de836d453"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#abda36bb787875a5888b03f7de836d453">ledw1g</a>&#160;&#160;&#160;109</td></tr>
+<tr class="separator:abda36bb787875a5888b03f7de836d453"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f9531d44edc1e717b8b0d6e5d14b3f9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a2f9531d44edc1e717b8b0d6e5d14b3f9">ledw1k</a>&#160;&#160;&#160;108</td></tr>
+<tr class="separator:a2f9531d44edc1e717b8b0d6e5d14b3f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66fe6791f4cc4b26b45b2a13bd8be61e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a66fe6791f4cc4b26b45b2a13bd8be61e">ledw2g</a>&#160;&#160;&#160;50</td></tr>
+<tr class="separator:a66fe6791f4cc4b26b45b2a13bd8be61e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26630c04ddfa0de21a759fb1a1444e9e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a26630c04ddfa0de21a759fb1a1444e9e">ledw2k</a>&#160;&#160;&#160;39</td></tr>
+<tr class="separator:a26630c04ddfa0de21a759fb1a1444e9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d500830c5c2f97e4441421b22a6897e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a1d500830c5c2f97e4441421b22a6897e">ledw3g</a>&#160;&#160;&#160;106</td></tr>
+<tr class="separator:a1d500830c5c2f97e4441421b22a6897e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af64a466f8c348571df351bb9892558fa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#af64a466f8c348571df351bb9892558fa">ledw3k</a>&#160;&#160;&#160;104</td></tr>
+<tr class="separator:af64a466f8c348571df351bb9892558fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7649f585423ba51ee6187f5dd5be4147"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a7649f585423ba51ee6187f5dd5be4147">ledw1gRot</a>&#160;&#160;&#160;110</td></tr>
+<tr class="separator:a7649f585423ba51ee6187f5dd5be4147"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a314d798bf80710596a5def030b620ddb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a314d798bf80710596a5def030b620ddb">ledw1kRot</a>&#160;&#160;&#160;51</td></tr>
+<tr class="separator:a314d798bf80710596a5def030b620ddb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e8f25dcba7ab46257a9db6ce412ee37"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a7e8f25dcba7ab46257a9db6ce412ee37">ledw2gRot</a>&#160;&#160;&#160;101</td></tr>
+<tr class="separator:a7e8f25dcba7ab46257a9db6ce412ee37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab99dc5fd831d63b6f7bc153a5ce8fb9b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#ab99dc5fd831d63b6f7bc153a5ce8fb9b">ledw2kRot</a>&#160;&#160;&#160;38</td></tr>
+<tr class="separator:ab99dc5fd831d63b6f7bc153a5ce8fb9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af31706ca412c7e884e7f4ca5b6d1dbad"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#af31706ca412c7e884e7f4ca5b6d1dbad">ledw3gRot</a>&#160;&#160;&#160;107</td></tr>
+<tr class="separator:af31706ca412c7e884e7f4ca5b6d1dbad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55a746b89808955fd2d37fb03901df40"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a55a746b89808955fd2d37fb03901df40">ledw3kRot</a>&#160;&#160;&#160;105</td></tr>
+<tr class="separator:a55a746b89808955fd2d37fb03901df40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a29e46b4f567ec905a74d69207cabdf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a1a29e46b4f567ec905a74d69207cabdf">weichentimeout</a>&#160;&#160;&#160;500</td></tr>
+<tr class="separator:a1a29e46b4f567ec905a74d69207cabdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97afe9b51bfdb410c9296bceeb30c2ca"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a97afe9b51bfdb410c9296bceeb30c2ca">wgt</a>&#160;&#160;&#160;18</td></tr>
+<tr class="separator:a97afe9b51bfdb410c9296bceeb30c2ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36b5f50ad687697ab78a9879efb0253d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a36b5f50ad687697ab78a9879efb0253d">zta1</a>&#160;&#160;&#160;5</td></tr>
+<tr class="separator:a36b5f50ad687697ab78a9879efb0253d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24b2664afbc40235d64100f43e8a75d4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a24b2664afbc40235d64100f43e8a75d4">zta2</a>&#160;&#160;&#160;21</td></tr>
+<tr class="separator:a24b2664afbc40235d64100f43e8a75d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa574ada971ebbc69c792ffcbdfb67665"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#aa574ada971ebbc69c792ffcbdfb67665">zta3</a>&#160;&#160;&#160;12</td></tr>
+<tr class="separator:aa574ada971ebbc69c792ffcbdfb67665"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac312128d4a68cf2b9a12e3d8a5a065ef"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#ac312128d4a68cf2b9a12e3d8a5a065ef">zta4</a>&#160;&#160;&#160;3</td></tr>
+<tr class="separator:ac312128d4a68cf2b9a12e3d8a5a065ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a4f07f340327a3347c5516a92b19c0d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a5a4f07f340327a3347c5516a92b19c0d">zta5</a>&#160;&#160;&#160;6</td></tr>
+<tr class="separator:a5a4f07f340327a3347c5516a92b19c0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9507ecd8fad5e8ba6f4c453d2d855c0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#ad9507ecd8fad5e8ba6f4c453d2d855c0">zta7</a>&#160;&#160;&#160;13</td></tr>
+<tr class="separator:ad9507ecd8fad5e8ba6f4c453d2d855c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a0d96148108ddbc3b3c209a5c235970"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a3a0d96148108ddbc3b3c209a5c235970">zta8</a>&#160;&#160;&#160;4</td></tr>
+<tr class="separator:a3a0d96148108ddbc3b3c209a5c235970"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa14da5d275f7fd1cb30edda29c052e0e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#aa14da5d275f7fd1cb30edda29c052e0e">zta9</a>&#160;&#160;&#160;7</td></tr>
+<tr class="separator:aa14da5d275f7fd1cb30edda29c052e0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb2306738af458e260403f433684414e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#aeb2306738af458e260403f433684414e">ftueMelderLed</a>&#160;&#160;&#160;124</td></tr>
+<tr class="separator:aeb2306738af458e260403f433684414e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08f39f1921b9c3945c1fbf413ab1d0e0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a08f39f1921b9c3945c1fbf413ab1d0e0">ftueMelderWut</a>&#160;&#160;&#160;19</td></tr>
+<tr class="separator:a08f39f1921b9c3945c1fbf413ab1d0e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0090ac7395fc2e6a38f08807af501b6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#ad0090ac7395fc2e6a38f08807af501b6">weckerPin</a>&#160;&#160;&#160;28</td></tr>
+<tr class="separator:ad0090ac7395fc2e6a38f08807af501b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76f987869324fe6ebe4dc81b1a25fa6c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a76f987869324fe6ebe4dc81b1a25fa6c">hauptsignalanzahl</a>&#160;&#160;&#160;4</td></tr>
+<tr class="separator:a76f987869324fe6ebe4dc81b1a25fa6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f5b15848fafacbcda0530a5a1a78329"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a6f5b15848fafacbcda0530a5a1a78329">signalsperrtaste</a>&#160;&#160;&#160;16</td></tr>
+<tr class="separator:a6f5b15848fafacbcda0530a5a1a78329"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c2576db3893de0407c9481a4658d97b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a9c2576db3893de0407c9481a4658d97b">Signalentsperrtaste</a>&#160;&#160;&#160;17</td></tr>
+<tr class="separator:a9c2576db3893de0407c9481a4658d97b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0be2fa12c81053c256486fa0e27c424d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a0be2fa12c81053c256486fa0e27c424d">shgt</a>&#160;&#160;&#160;15</td></tr>
+<tr class="separator:a0be2fa12c81053c256486fa0e27c424d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7d6f070c45e3b1216fefa9f763ad903"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#ad7d6f070c45e3b1216fefa9f763ad903">rot1</a>&#160;&#160;&#160;52</td></tr>
+<tr class="separator:ad7d6f070c45e3b1216fefa9f763ad903"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca1cf510cf92c7f0079aba928267c979"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#aca1cf510cf92c7f0079aba928267c979">gruen1</a>&#160;&#160;&#160;125</td></tr>
+<tr class="separator:aca1cf510cf92c7f0079aba928267c979"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a283387ef47b69d95b9bd93a28758c7ad"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a283387ef47b69d95b9bd93a28758c7ad">sperrmelder1</a>&#160;&#160;&#160;126</td></tr>
+<tr class="separator:a283387ef47b69d95b9bd93a28758c7ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5c84392e30d9e9ff3081fb6d079ecc0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#ae5c84392e30d9e9ff3081fb6d079ecc0">signaltaste1</a>&#160;&#160;&#160;<a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#a97574ecc7f29c8ff7d263fe7939191f8">zta3</a></td></tr>
+<tr class="separator:ae5c84392e30d9e9ff3081fb6d079ecc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72a2cead9bc35ba10f15ee697f951ea4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a72a2cead9bc35ba10f15ee697f951ea4">rot2</a>&#160;&#160;&#160;123</td></tr>
+<tr class="separator:a72a2cead9bc35ba10f15ee697f951ea4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57a3a3e348b90012c503c76513aeeb4c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a57a3a3e348b90012c503c76513aeeb4c">gruen2</a>&#160;&#160;&#160;46</td></tr>
+<tr class="separator:a57a3a3e348b90012c503c76513aeeb4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a095d737a034082af81a9283415605c25"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a095d737a034082af81a9283415605c25">sperrmelder2</a>&#160;&#160;&#160;49</td></tr>
+<tr class="separator:a095d737a034082af81a9283415605c25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a113ba44c0f72ff63d0270fbbc61925dc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a113ba44c0f72ff63d0270fbbc61925dc">signaltaste2</a>&#160;&#160;&#160;<a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#a85eefd5a45f2016a0f5943d9b5055a3a">zta4</a></td></tr>
+<tr class="separator:a113ba44c0f72ff63d0270fbbc61925dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1442bb947b1c2ffdb8c92bcdebd06313"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a1442bb947b1c2ffdb8c92bcdebd06313">rot3</a>&#160;&#160;&#160;121</td></tr>
+<tr class="separator:a1442bb947b1c2ffdb8c92bcdebd06313"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31d8fa53d1a835cd431c6782e65df736"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a31d8fa53d1a835cd431c6782e65df736">gruen3</a>&#160;&#160;&#160;122</td></tr>
+<tr class="separator:a31d8fa53d1a835cd431c6782e65df736"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b466a270cbe8db5c13e355b9e779cb6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a1b466a270cbe8db5c13e355b9e779cb6">sperrmelder3</a>&#160;&#160;&#160;127</td></tr>
+<tr class="separator:a1b466a270cbe8db5c13e355b9e779cb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cf87ab14733c27accd22a19dec1fb41"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a6cf87ab14733c27accd22a19dec1fb41">signaltaste3</a>&#160;&#160;&#160;<a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#a1f3c08b6733be8f5a27055d389720808">zta7</a></td></tr>
+<tr class="separator:a6cf87ab14733c27accd22a19dec1fb41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adaecb8aef199f846f45469b79e5c5380"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#adaecb8aef199f846f45469b79e5c5380">rot4</a>&#160;&#160;&#160;47</td></tr>
+<tr class="separator:adaecb8aef199f846f45469b79e5c5380"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05f21fcc446156c6837297cc29bc9a1e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a05f21fcc446156c6837297cc29bc9a1e">gruen4</a>&#160;&#160;&#160;111</td></tr>
+<tr class="separator:a05f21fcc446156c6837297cc29bc9a1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b93952c14ed7386629fa45ef681bdbe"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a0b93952c14ed7386629fa45ef681bdbe">sperrmelder4</a>&#160;&#160;&#160;48</td></tr>
+<tr class="separator:a0b93952c14ed7386629fa45ef681bdbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34625b376fef2dcab5c8d85e28480e0c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a34625b376fef2dcab5c8d85e28480e0c">signaltaste4</a>&#160;&#160;&#160;<a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#af7e979f16fe9f15702f6a9dfa0613d9b">zta8</a></td></tr>
+<tr class="separator:a34625b376fef2dcab5c8d85e28480e0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f183c7e6fe4ef3221e8a5e692a8e8fd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a2f183c7e6fe4ef3221e8a5e692a8e8fd">besetztmelderAnzahl</a>&#160;&#160;&#160;19</td></tr>
+<tr class="separator:a2f183c7e6fe4ef3221e8a5e692a8e8fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43e27eb840d1e7c3f73e226f3cad21d6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a43e27eb840d1e7c3f73e226f3cad21d6">zugtastenanzahl</a>&#160;&#160;&#160;9</td></tr>
+<tr class="separator:a43e27eb840d1e7c3f73e226f3cad21d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Funktionen</h2></td></tr>
+<tr class="memitem:a4fc01d736fe50cf5b977f755b675f11d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a4fc01d736fe50cf5b977f755b675f11d">setup</a> ()</td></tr>
+<tr class="separator:a4fc01d736fe50cf5b977f755b675f11d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe461d27b9c48d5921c00d521181f12f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#afe461d27b9c48d5921c00d521181f12f">loop</a> ()</td></tr>
+<tr class="separator:afe461d27b9c48d5921c00d521181f12f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variablen</h2></td></tr>
+<tr class="memitem:abf938e82932712ac48c38ac0a5525875"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#abf938e82932712ac48c38ac0a5525875">zta6</a></td></tr>
+<tr class="separator:abf938e82932712ac48c38ac0a5525875"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c72503491a9320e022b0c8323238319"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a9c72503491a9320e022b0c8323238319">gelb1</a></td></tr>
+<tr class="separator:a9c72503491a9320e022b0c8323238319"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16003deb29b46523c7afccaf11ac9eb4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a16003deb29b46523c7afccaf11ac9eb4">gelb2</a></td></tr>
+<tr class="separator:a16003deb29b46523c7afccaf11ac9eb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa6f8ea1cd9b3a4331f0db3376355846"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#aaa6f8ea1cd9b3a4331f0db3376355846">gelb3</a></td></tr>
+<tr class="separator:aaa6f8ea1cd9b3a4331f0db3376355846"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa93566bd1e42486b20fd21d23aacf4f8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#aa93566bd1e42486b20fd21d23aacf4f8">gelb4</a></td></tr>
+<tr class="separator:aa93566bd1e42486b20fd21d23aacf4f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02bb06e7ee3ca03f638f7876b6308dce"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a02bb06e7ee3ca03f638f7876b6308dce">schieberegisterPins</a> [4] = {4, 8, 9, 10}</td></tr>
+<tr class="separator:a02bb06e7ee3ca03f638f7876b6308dce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9440f22d3b565870bba5b00ebf76c71"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_melder.html">Melder</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#ac9440f22d3b565870bba5b00ebf76c71">ftueMelder</a> (&quot;FTÜ-<a class="el" href="class_melder.html">Melder</a>&quot;, ftueMelderLed, <a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#a79f90717565677d016fb11178f7a2eb2">weckerPin</a>, <a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#abf7b6246cc7ff2d2f30b4d5a27d6a7f8">ftueMelderWut</a>, <a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#a02bb06e7ee3ca03f638f7876b6308dce">schieberegisterPins</a>)</td></tr>
+<tr class="separator:ac9440f22d3b565870bba5b00ebf76c71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a030658e8b4be6b1969002aad9f192ede"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a030658e8b4be6b1969002aad9f192ede">zugtastenPins</a> [<a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#a92e3a0900129e2e77a18d02f97623d3b">zugtastenanzahl</a>] = {<a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#a5a4c1b9c75e57fc482cb89dbefcdfcc3">zta1</a>, <a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#ac30642a695d2b53165c74f1c14958307">zta2</a>, <a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#a97574ecc7f29c8ff7d263fe7939191f8">zta3</a>, <a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#a85eefd5a45f2016a0f5943d9b5055a3a">zta4</a>, <a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#a6b0aba9fecd479219290def49fac4b80">zta5</a>, <a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#abf938e82932712ac48c38ac0a5525875">zta6</a>, <a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#a1f3c08b6733be8f5a27055d389720808">zta7</a>, <a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#af7e979f16fe9f15702f6a9dfa0613d9b">zta8</a>, <a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#af100c13c358a3525d4fe581649fc29c5">zta9</a>}</td></tr>
+<tr class="separator:a030658e8b4be6b1969002aad9f192ede"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c259ef7f0e3a72e0dbbb7eeaa05f961"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a8c259ef7f0e3a72e0dbbb7eeaa05f961">zugtastenRichtung</a> [<a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#a92e3a0900129e2e77a18d02f97623d3b">zugtastenanzahl</a>] = {1, 0, 1, 0, 1, 0, 1, 0, 1}</td></tr>
+<tr class="separator:a8c259ef7f0e3a72e0dbbb7eeaa05f961"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1aad5b6c75afc1150d6dbdd5dc63cbf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_zugtasten_control.html">ZugtastenControl</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#aa1aad5b6c75afc1150d6dbdd5dc63cbf">zugtastenC</a> (<a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#a92e3a0900129e2e77a18d02f97623d3b">zugtastenanzahl</a>, <a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#a030658e8b4be6b1969002aad9f192ede">zugtastenPins</a>, <a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#a8c259ef7f0e3a72e0dbbb7eeaa05f961">zugtastenRichtung</a>)</td></tr>
+<tr class="separator:aa1aad5b6c75afc1150d6dbdd5dc63cbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae77cf873dffa0087464b2d9b1371fa24"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#ae77cf873dffa0087464b2d9b1371fa24">zugtastenspeicher</a> [2]</td></tr>
+<tr class="separator:ae77cf873dffa0087464b2d9b1371fa24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10ae75d19930ec38568c12a9bbe78b57"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a10ae75d19930ec38568c12a9bbe78b57">anzahl</a> = 0</td></tr>
+<tr class="separator:a10ae75d19930ec38568c12a9bbe78b57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2360aba01fa93c8493ba96683c4fb89c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_graph.html">Graph</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp.html#a2360aba01fa93c8493ba96683c4fb89c">graph</a> = nullptr</td></tr>
+<tr class="separator:a2360aba01fa93c8493ba96683c4fb89c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Makro-Dokumentation</h2>
+<a id="a5524445889074baa5049863cc6844dfe" name="a5524445889074baa5049863cc6844dfe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5524445889074baa5049863cc6844dfe">&#9670;&nbsp;</a></span>anzahlWeichen</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define anzahlWeichen&#160;&#160;&#160;3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00022">22</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a2f183c7e6fe4ef3221e8a5e692a8e8fd" name="a2f183c7e6fe4ef3221e8a5e692a8e8fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f183c7e6fe4ef3221e8a5e692a8e8fd">&#9670;&nbsp;</a></span>besetztmelderAnzahl</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define besetztmelderAnzahl&#160;&#160;&#160;19</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00106">106</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aeb2306738af458e260403f433684414e" name="aeb2306738af458e260403f433684414e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb2306738af458e260403f433684414e">&#9670;&nbsp;</a></span>ftueMelderLed</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ftueMelderLed&#160;&#160;&#160;124</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00064">64</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a08f39f1921b9c3945c1fbf413ab1d0e0" name="a08f39f1921b9c3945c1fbf413ab1d0e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08f39f1921b9c3945c1fbf413ab1d0e0">&#9670;&nbsp;</a></span>ftueMelderWut</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ftueMelderWut&#160;&#160;&#160;19</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00065">65</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aca1cf510cf92c7f0079aba928267c979" name="aca1cf510cf92c7f0079aba928267c979"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca1cf510cf92c7f0079aba928267c979">&#9670;&nbsp;</a></span>gruen1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define gruen1&#160;&#160;&#160;125</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00076">76</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a57a3a3e348b90012c503c76513aeeb4c" name="a57a3a3e348b90012c503c76513aeeb4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57a3a3e348b90012c503c76513aeeb4c">&#9670;&nbsp;</a></span>gruen2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define gruen2&#160;&#160;&#160;46</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00083">83</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a31d8fa53d1a835cd431c6782e65df736" name="a31d8fa53d1a835cd431c6782e65df736"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31d8fa53d1a835cd431c6782e65df736">&#9670;&nbsp;</a></span>gruen3</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define gruen3&#160;&#160;&#160;122</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00090">90</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a05f21fcc446156c6837297cc29bc9a1e" name="a05f21fcc446156c6837297cc29bc9a1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05f21fcc446156c6837297cc29bc9a1e">&#9670;&nbsp;</a></span>gruen4</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define gruen4&#160;&#160;&#160;111</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00097">97</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a76f987869324fe6ebe4dc81b1a25fa6c" name="a76f987869324fe6ebe4dc81b1a25fa6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76f987869324fe6ebe4dc81b1a25fa6c">&#9670;&nbsp;</a></span>hauptsignalanzahl</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define hauptsignalanzahl&#160;&#160;&#160;4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00069">69</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="abda36bb787875a5888b03f7de836d453" name="abda36bb787875a5888b03f7de836d453"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abda36bb787875a5888b03f7de836d453">&#9670;&nbsp;</a></span>ledw1g</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ledw1g&#160;&#160;&#160;109</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00036">36</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a7649f585423ba51ee6187f5dd5be4147" name="a7649f585423ba51ee6187f5dd5be4147"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7649f585423ba51ee6187f5dd5be4147">&#9670;&nbsp;</a></span>ledw1gRot</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ledw1gRot&#160;&#160;&#160;110</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00043">43</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a2f9531d44edc1e717b8b0d6e5d14b3f9" name="a2f9531d44edc1e717b8b0d6e5d14b3f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f9531d44edc1e717b8b0d6e5d14b3f9">&#9670;&nbsp;</a></span>ledw1k</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ledw1k&#160;&#160;&#160;108</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00037">37</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a314d798bf80710596a5def030b620ddb" name="a314d798bf80710596a5def030b620ddb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a314d798bf80710596a5def030b620ddb">&#9670;&nbsp;</a></span>ledw1kRot</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ledw1kRot&#160;&#160;&#160;51</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00044">44</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a66fe6791f4cc4b26b45b2a13bd8be61e" name="a66fe6791f4cc4b26b45b2a13bd8be61e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66fe6791f4cc4b26b45b2a13bd8be61e">&#9670;&nbsp;</a></span>ledw2g</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ledw2g&#160;&#160;&#160;50</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00038">38</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a7e8f25dcba7ab46257a9db6ce412ee37" name="a7e8f25dcba7ab46257a9db6ce412ee37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e8f25dcba7ab46257a9db6ce412ee37">&#9670;&nbsp;</a></span>ledw2gRot</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ledw2gRot&#160;&#160;&#160;101</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00045">45</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a26630c04ddfa0de21a759fb1a1444e9e" name="a26630c04ddfa0de21a759fb1a1444e9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26630c04ddfa0de21a759fb1a1444e9e">&#9670;&nbsp;</a></span>ledw2k</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ledw2k&#160;&#160;&#160;39</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00039">39</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ab99dc5fd831d63b6f7bc153a5ce8fb9b" name="ab99dc5fd831d63b6f7bc153a5ce8fb9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab99dc5fd831d63b6f7bc153a5ce8fb9b">&#9670;&nbsp;</a></span>ledw2kRot</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ledw2kRot&#160;&#160;&#160;38</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00046">46</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a1d500830c5c2f97e4441421b22a6897e" name="a1d500830c5c2f97e4441421b22a6897e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d500830c5c2f97e4441421b22a6897e">&#9670;&nbsp;</a></span>ledw3g</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ledw3g&#160;&#160;&#160;106</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00040">40</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="af31706ca412c7e884e7f4ca5b6d1dbad" name="af31706ca412c7e884e7f4ca5b6d1dbad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af31706ca412c7e884e7f4ca5b6d1dbad">&#9670;&nbsp;</a></span>ledw3gRot</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ledw3gRot&#160;&#160;&#160;107</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00047">47</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="af64a466f8c348571df351bb9892558fa" name="af64a466f8c348571df351bb9892558fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af64a466f8c348571df351bb9892558fa">&#9670;&nbsp;</a></span>ledw3k</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ledw3k&#160;&#160;&#160;104</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00041">41</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a55a746b89808955fd2d37fb03901df40" name="a55a746b89808955fd2d37fb03901df40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55a746b89808955fd2d37fb03901df40">&#9670;&nbsp;</a></span>ledw3kRot</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ledw3kRot&#160;&#160;&#160;105</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00048">48</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ad7d6f070c45e3b1216fefa9f763ad903" name="ad7d6f070c45e3b1216fefa9f763ad903"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7d6f070c45e3b1216fefa9f763ad903">&#9670;&nbsp;</a></span>rot1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define rot1&#160;&#160;&#160;52</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00075">75</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a72a2cead9bc35ba10f15ee697f951ea4" name="a72a2cead9bc35ba10f15ee697f951ea4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72a2cead9bc35ba10f15ee697f951ea4">&#9670;&nbsp;</a></span>rot2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define rot2&#160;&#160;&#160;123</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00082">82</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a1442bb947b1c2ffdb8c92bcdebd06313" name="a1442bb947b1c2ffdb8c92bcdebd06313"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1442bb947b1c2ffdb8c92bcdebd06313">&#9670;&nbsp;</a></span>rot3</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define rot3&#160;&#160;&#160;121</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00089">89</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="adaecb8aef199f846f45469b79e5c5380" name="adaecb8aef199f846f45469b79e5c5380"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adaecb8aef199f846f45469b79e5c5380">&#9670;&nbsp;</a></span>rot4</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define rot4&#160;&#160;&#160;47</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00096">96</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a0be2fa12c81053c256486fa0e27c424d" name="a0be2fa12c81053c256486fa0e27c424d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0be2fa12c81053c256486fa0e27c424d">&#9670;&nbsp;</a></span>shgt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define shgt&#160;&#160;&#160;15</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00072">72</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a9c2576db3893de0407c9481a4658d97b" name="a9c2576db3893de0407c9481a4658d97b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c2576db3893de0407c9481a4658d97b">&#9670;&nbsp;</a></span>Signalentsperrtaste</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define Signalentsperrtaste&#160;&#160;&#160;17</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00071">71</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a6f5b15848fafacbcda0530a5a1a78329" name="a6f5b15848fafacbcda0530a5a1a78329"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f5b15848fafacbcda0530a5a1a78329">&#9670;&nbsp;</a></span>signalsperrtaste</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define signalsperrtaste&#160;&#160;&#160;16</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00070">70</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ae5c84392e30d9e9ff3081fb6d079ecc0" name="ae5c84392e30d9e9ff3081fb6d079ecc0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5c84392e30d9e9ff3081fb6d079ecc0">&#9670;&nbsp;</a></span>signaltaste1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define signaltaste1&#160;&#160;&#160;<a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#a97574ecc7f29c8ff7d263fe7939191f8">zta3</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00079">79</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a113ba44c0f72ff63d0270fbbc61925dc" name="a113ba44c0f72ff63d0270fbbc61925dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a113ba44c0f72ff63d0270fbbc61925dc">&#9670;&nbsp;</a></span>signaltaste2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define signaltaste2&#160;&#160;&#160;<a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#a85eefd5a45f2016a0f5943d9b5055a3a">zta4</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00086">86</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a6cf87ab14733c27accd22a19dec1fb41" name="a6cf87ab14733c27accd22a19dec1fb41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6cf87ab14733c27accd22a19dec1fb41">&#9670;&nbsp;</a></span>signaltaste3</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define signaltaste3&#160;&#160;&#160;<a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#a1f3c08b6733be8f5a27055d389720808">zta7</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00093">93</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a34625b376fef2dcab5c8d85e28480e0c" name="a34625b376fef2dcab5c8d85e28480e0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34625b376fef2dcab5c8d85e28480e0c">&#9670;&nbsp;</a></span>signaltaste4</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define signaltaste4&#160;&#160;&#160;<a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#af7e979f16fe9f15702f6a9dfa0613d9b">zta8</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00100">100</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a283387ef47b69d95b9bd93a28758c7ad" name="a283387ef47b69d95b9bd93a28758c7ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a283387ef47b69d95b9bd93a28758c7ad">&#9670;&nbsp;</a></span>sperrmelder1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define sperrmelder1&#160;&#160;&#160;126</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00078">78</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a095d737a034082af81a9283415605c25" name="a095d737a034082af81a9283415605c25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a095d737a034082af81a9283415605c25">&#9670;&nbsp;</a></span>sperrmelder2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define sperrmelder2&#160;&#160;&#160;49</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00085">85</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a1b466a270cbe8db5c13e355b9e779cb6" name="a1b466a270cbe8db5c13e355b9e779cb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b466a270cbe8db5c13e355b9e779cb6">&#9670;&nbsp;</a></span>sperrmelder3</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define sperrmelder3&#160;&#160;&#160;127</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00092">92</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a0b93952c14ed7386629fa45ef681bdbe" name="a0b93952c14ed7386629fa45ef681bdbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b93952c14ed7386629fa45ef681bdbe">&#9670;&nbsp;</a></span>sperrmelder4</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define sperrmelder4&#160;&#160;&#160;48</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00099">99</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a97c0b562c7d96055d8e0e93c60680dd7" name="a97c0b562c7d96055d8e0e93c60680dd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97c0b562c7d96055d8e0e93c60680dd7">&#9670;&nbsp;</a></span>w1g</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define w1g&#160;&#160;&#160;24</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00024">24</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a7c9cc2a94f302333f97d2a1496e21986" name="a7c9cc2a94f302333f97d2a1496e21986"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c9cc2a94f302333f97d2a1496e21986">&#9670;&nbsp;</a></span>w1k</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define w1k&#160;&#160;&#160;25</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00025">25</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ae813c1c62a71ec33ec226580a9ccab95" name="ae813c1c62a71ec33ec226580a9ccab95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae813c1c62a71ec33ec226580a9ccab95">&#9670;&nbsp;</a></span>w2g</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define w2g&#160;&#160;&#160;22</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00026">26</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a2a2b500c3d017717cca7d2c47fe8c288" name="a2a2b500c3d017717cca7d2c47fe8c288"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a2b500c3d017717cca7d2c47fe8c288">&#9670;&nbsp;</a></span>w2k</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define w2k&#160;&#160;&#160;23</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00027">27</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a923b61ac829021bdd036dc2e97fda3df" name="a923b61ac829021bdd036dc2e97fda3df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a923b61ac829021bdd036dc2e97fda3df">&#9670;&nbsp;</a></span>w3g</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define w3g&#160;&#160;&#160;26</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00028">28</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="af8d029b3d536c252bede8d87f511e410" name="af8d029b3d536c252bede8d87f511e410"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8d029b3d536c252bede8d87f511e410">&#9670;&nbsp;</a></span>w3k</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define w3k&#160;&#160;&#160;27</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00029">29</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ad0090ac7395fc2e6a38f08807af501b6" name="ad0090ac7395fc2e6a38f08807af501b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0090ac7395fc2e6a38f08807af501b6">&#9670;&nbsp;</a></span>weckerPin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define weckerPin&#160;&#160;&#160;28</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00066">66</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a1a29e46b4f567ec905a74d69207cabdf" name="a1a29e46b4f567ec905a74d69207cabdf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a29e46b4f567ec905a74d69207cabdf">&#9670;&nbsp;</a></span>weichentimeout</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define weichentimeout&#160;&#160;&#160;500</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00050">50</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a97afe9b51bfdb410c9296bceeb30c2ca" name="a97afe9b51bfdb410c9296bceeb30c2ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97afe9b51bfdb410c9296bceeb30c2ca">&#9670;&nbsp;</a></span>wgt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define wgt&#160;&#160;&#160;18</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00051">51</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a2ed2d818fd669cbd31abbccc93e399a2" name="a2ed2d818fd669cbd31abbccc93e399a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ed2d818fd669cbd31abbccc93e399a2">&#9670;&nbsp;</a></span>wt1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define wt1&#160;&#160;&#160;11</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00031">31</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a5508bb1151bfe73f97290379eecaa205" name="a5508bb1151bfe73f97290379eecaa205"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5508bb1151bfe73f97290379eecaa205">&#9670;&nbsp;</a></span>wt2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define wt2&#160;&#160;&#160;20</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00032">32</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a48bac1b80861cb1b7f5c980af9bd5407" name="a48bac1b80861cb1b7f5c980af9bd5407"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48bac1b80861cb1b7f5c980af9bd5407">&#9670;&nbsp;</a></span>wt3</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define wt3&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00033">33</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a36b5f50ad687697ab78a9879efb0253d" name="a36b5f50ad687697ab78a9879efb0253d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36b5f50ad687697ab78a9879efb0253d">&#9670;&nbsp;</a></span>zta1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define zta1&#160;&#160;&#160;5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00053">53</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a24b2664afbc40235d64100f43e8a75d4" name="a24b2664afbc40235d64100f43e8a75d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24b2664afbc40235d64100f43e8a75d4">&#9670;&nbsp;</a></span>zta2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define zta2&#160;&#160;&#160;21</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00054">54</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aa574ada971ebbc69c792ffcbdfb67665" name="aa574ada971ebbc69c792ffcbdfb67665"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa574ada971ebbc69c792ffcbdfb67665">&#9670;&nbsp;</a></span>zta3</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define zta3&#160;&#160;&#160;12</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00055">55</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ac312128d4a68cf2b9a12e3d8a5a065ef" name="ac312128d4a68cf2b9a12e3d8a5a065ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac312128d4a68cf2b9a12e3d8a5a065ef">&#9670;&nbsp;</a></span>zta4</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define zta4&#160;&#160;&#160;3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00056">56</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a5a4f07f340327a3347c5516a92b19c0d" name="a5a4f07f340327a3347c5516a92b19c0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a4f07f340327a3347c5516a92b19c0d">&#9670;&nbsp;</a></span>zta5</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define zta5&#160;&#160;&#160;6</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00057">57</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ad9507ecd8fad5e8ba6f4c453d2d855c0" name="ad9507ecd8fad5e8ba6f4c453d2d855c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9507ecd8fad5e8ba6f4c453d2d855c0">&#9670;&nbsp;</a></span>zta7</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define zta7&#160;&#160;&#160;13</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00059">59</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a3a0d96148108ddbc3b3c209a5c235970" name="a3a0d96148108ddbc3b3c209a5c235970"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a0d96148108ddbc3b3c209a5c235970">&#9670;&nbsp;</a></span>zta8</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define zta8&#160;&#160;&#160;4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00060">60</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aa14da5d275f7fd1cb30edda29c052e0e" name="aa14da5d275f7fd1cb30edda29c052e0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa14da5d275f7fd1cb30edda29c052e0e">&#9670;&nbsp;</a></span>zta9</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define zta9&#160;&#160;&#160;7</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00061">61</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a43e27eb840d1e7c3f73e226f3cad21d6" name="a43e27eb840d1e7c3f73e226f3cad21d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43e27eb840d1e7c3f73e226f3cad21d6">&#9670;&nbsp;</a></span>zugtastenanzahl</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define zugtastenanzahl&#160;&#160;&#160;9</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00111">111</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Dokumentation der Funktionen</h2>
+<a id="afe461d27b9c48d5921c00d521181f12f" name="afe461d27b9c48d5921c00d521181f12f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe461d27b9c48d5921c00d521181f12f">&#9670;&nbsp;</a></span>loop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void loop </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00218">218</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+<div class="dynheader">
+Hier ist ein Graph, der zeigt, was diese Funktion aufruft:</div>
+<div class="dyncontent">
+<div class="center"><img src="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_afe461d27b9c48d5921c00d521181f12f_cgraph.png" border="0" usemap="#a_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_afe461d27b9c48d5921c00d521181f12f_cgraph" alt=""/></div>
+<map name="a_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_afe461d27b9c48d5921c00d521181f12f_cgraph" id="a_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_afe461d27b9c48d5921c00d521181f12f_cgraph">
+<area shape="rect" title=" " alt="" coords="5,963,52,989"/>
+<area shape="rect" href="class_graph.html#ae6f90be5ed4682f127d5cdc3bf43c125" title=" " alt="" coords="108,233,295,260"/>
+<area shape="rect" href="class_zugtasten_control.html#ac19a33669e0580b5eb9c57dcc610ef3b" title=" " alt="" coords="103,1160,299,1187"/>
+<area shape="rect" href="class_zugtasten_control.html#afaac7e125805fc5bf048a092b7b4363b" title=" " alt="" coords="100,926,303,967"/>
+<area shape="rect" href="class_zugtasten_control.html#aea3770a6d082a213b3588863f1473743" title=" " alt="" coords="649,1109,888,1136"/>
+<area shape="rect" href="class_melder.html#ab3c5e6c4655c1e6df0eeb480aa63de5a" title=" " alt="" coords="138,992,265,1019"/>
+<area shape="rect" href="class_graph.html#acb00a6777bcd356d3a41ded66fdaf91e" title=" " alt="" coords="124,663,279,689"/>
+<area shape="rect" href="class_zugtaste.html#ae6a56e8928fb6cfdd0d3a3465e2d4180" title=" " alt="" coords="387,157,557,184"/>
+<area shape="rect" href="class_graph.html#a6a8d2658474632c9396e1cd0bb54f7df" title=" " alt="" coords="983,252,1121,279"/>
+<area shape="rect" href="class_zugtaste.html#a085f8467776ffa32287cff3b976c7df4" title=" " alt="" coords="397,259,547,285"/>
+<area shape="rect" href="class_gleissymbol.html#a87c2fca0eacd12941fa162813fc91942" title=" " alt="" coords="399,5,545,32"/>
+<area shape="rect" href="class_graph.html#ac1bcc2af29fe0171521fc9b89a7424f8" title=" " alt="" coords="710,252,827,279"/>
+<area shape="rect" href="class_graph.html#af5d721b12df2bc9f8184efb3635017f1" title=" " alt="" coords="386,536,558,563"/>
+<area shape="rect" href="class_gleissymbol.html#a8f3db56879b7bb4f151c72966d4769c2" title=" " alt="" coords="392,435,552,461"/>
+<area shape="rect" href="class_graph.html#a8536235cdee21737d42b1705ee1d2c58" title=" " alt="" coords="673,56,864,83"/>
+<area shape="rect" href="class_graph.html#a93b9ad8849dc8e1dfcf85dcf5b522d37" title=" " alt="" coords="406,384,538,411"/>
+<area shape="rect" href="class_graph.html#a139545e90bd834be2bb08c440115a6c8" title=" " alt="" coords="1235,303,1337,329"/>
+<area shape="rect" href="class_gleissymbol.html#a4c8703c8c64ea115dd8e7df888268476" title=" " alt="" coords="677,404,861,431"/>
+<area shape="rect" href="class_gleissymbol.html#a0ab83b470047c86fafd50cab87fe23c0" title=" " alt="" coords="695,455,842,481"/>
+<area shape="rect" href="class_zugtasten_control.html#a9375a8fd26c7c677375048cca8a90fb5" title=" " alt="" coords="958,1160,1146,1187"/>
+<area shape="rect" href="class_zugtaste.html#a072eb9ebcfde171bcbc02bc5e51d7b03" title=" " alt="" coords="957,1109,1147,1136"/>
+<area shape="rect" href="class_actor.html#ad0595d335c3f070ac8bbbbe91b35494a" title=" " alt="" coords="1001,992,1103,1019"/>
+<area shape="rect" href="class_actor.html#a0fa071a76d36b9d864e4235028e17198" title=" " alt="" coords="1213,865,1359,892"/>
+<area shape="rect" href="class_zugtasten_control.html#a345bd760dd6796f263bf568a5e81c08e" title=" " alt="" coords="379,1043,565,1085"/>
+<area shape="rect" href="class_gleissymbol.html#ab7e868780de23e1efe94101c4127b5a4" title=" " alt="" coords="378,587,566,613"/>
+<area shape="rect" href="class_graph.html#ac9f1c7013ce4a4ba449046bf83cee6d2" title=" " alt="" coords="410,891,534,917"/>
+<area shape="rect" href="class_gleissymbol.html#a633734154734ce040d12dcdde5578ae7" title=" " alt="" coords="390,789,554,816"/>
+<area shape="rect" href="class_hauptsignal.html#a3bced16c632f995ff8bb650011689de2" title=" " alt="" coords="970,673,1134,714"/>
+<area shape="rect" href="class_gleissymbol.html#a3da02b30786bb6c4ca4fa1b196e7b8af" title=" " alt="" coords="351,637,593,664"/>
+<area shape="rect" href="class_weiche.html#a6356af53d6287fba7f8e200367adf9cc" title=" " alt="" coords="371,840,573,867"/>
+<area shape="rect" href="class_gleissymbol.html#a287cb04e0a8a3ac317cbba754a51b204" title=" " alt="" coords="401,739,543,765"/>
+<area shape="rect" href="class_graph.html#aa0f7d444897eb2bf3c90de17031e4325" title=" " alt="" coords="704,891,833,917"/>
+<area shape="rect" href="class_signal.html#a8fb4bb651c8066da2cacde46d2cb2f88" title=" " alt="" coords="1208,731,1364,757"/>
+<area shape="rect" href="class_signal.html#ab1ed323ddcec01c04c8f27e0da6134ef" title=" " alt="" coords="1208,629,1364,656"/>
+<area shape="rect" href="class_signal.html#a8ab8b7dcac64ee12f4c2459fed8a46d0" title=" " alt="" coords="1208,680,1364,707"/>
+<area shape="rect" href="class_besetztmelder.html#ac9cf6e776fe5be24d8a38d016be804a6" title=" " alt="" coords="641,505,896,532"/>
+<area shape="rect" href="class_besetztmelder.html#aed831a3667f3cceb29287aa871fc3087" title=" " alt="" coords="671,557,867,598"/>
+<area shape="rect" href="class_hauptsignal.html#a22f999547e0550acd83d2f7daffb5f7d" title=" " alt="" coords="687,622,851,663"/>
+<area shape="rect" href="class_signal.html#a670cc2306902784ce3e4d80cc82ad2fa" title=" " alt="" coords="979,739,1125,765"/>
+<area shape="rect" href="class_weiche.html#a7eba962700ca4a5d465630833551c4c7" title=" " alt="" coords="686,789,851,816"/>
+<area shape="rect" href="class_weiche.html#ac5686598569f5d798c4e92af51c01aa7" title=" " alt="" coords="686,840,851,867"/>
+<area shape="rect" href="class_signal.html#a739e36755ab8a74a98e52b039b93b537" title=" " alt="" coords="944,621,1160,648"/>
+<area shape="rect" href="class_signal.html#a0eb2bd8ba8785c4a30ccf3a0427f8bc4" title=" " alt="" coords="977,571,1127,597"/>
+<area shape="rect" href="class_weiche.html#a69c934c32eb4e91adea8a3dfc7615269" title=" " alt="" coords="961,789,1143,816"/>
+<area shape="rect" href="class_weiche.html#a21c1167f5dfc77d74f1acc79e1498fb0" title=" " alt="" coords="974,891,1130,917"/>
+<area shape="rect" href="class_weiche.html#a92360342b602200d6cb344dd7cf9fc7d" title=" " alt="" coords="979,840,1125,867"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a4fc01d736fe50cf5b977f755b675f11d" name="a4fc01d736fe50cf5b977f755b675f11d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4fc01d736fe50cf5b977f755b675f11d">&#9670;&nbsp;</a></span>setup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setup </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00122">122</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+<div class="dynheader">
+Hier ist ein Graph, der zeigt, was diese Funktion aufruft:</div>
+<div class="dyncontent">
+<div class="center"><img src="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_a4fc01d736fe50cf5b977f755b675f11d_cgraph.png" border="0" usemap="#a_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_a4fc01d736fe50cf5b977f755b675f11d_cgraph" alt=""/></div>
+<map name="a_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_a4fc01d736fe50cf5b977f755b675f11d_cgraph" id="a_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_a4fc01d736fe50cf5b977f755b675f11d_cgraph">
+<area shape="rect" title=" " alt="" coords="5,162,60,189"/>
+<area shape="rect" href="class_besetztmeldung_control.html#ae36bb9a3eb2e97ad7a45096eb9caf4e6" title=" " alt="" coords="147,5,305,47"/>
+<area shape="rect" href="class_hauptsignal_control.html#adaa51bb87ab82ffcb9014a6b43513049" title=" " alt="" coords="161,71,291,112"/>
+<area shape="rect" href="class_weichen_control.html#ab0b4c95cf5c2157cb06c15d350235f5a" title=" " alt="" coords="134,137,318,163"/>
+<area shape="rect" href="class_graph.html#af7e91b2de4038f27190682ef88ee0cb4" title=" " alt="" coords="172,187,280,214"/>
+<area shape="rect" href="class_zugtasten_control.html#abbfa192a397aa0703f403789c3cce708" title=" " alt="" coords="117,238,335,265"/>
+<area shape="rect" href="class_weichen_control.html#afe50e7992d8c15beacc88247b6c1f101" title=" " alt="" coords="108,289,344,315"/>
+<area shape="rect" href="class_gleissymbol.html#a5d3c89c9247b50dc88a7d77e6d1b381e" title=" " alt="" coords="413,187,559,214"/>
+<area shape="rect" href="class_weiche.html#ae1c89107fe1cf9b56888bb3f6dd4c603" title=" " alt="" coords="628,162,851,189"/>
+<area shape="rect" href="class_weiche.html#a69c934c32eb4e91adea8a3dfc7615269" title=" " alt="" coords="649,213,830,239"/>
+<area shape="rect" href="class_weiche.html#a21c1167f5dfc77d74f1acc79e1498fb0" title=" " alt="" coords="899,111,1055,138"/>
+<area shape="rect" href="class_weiche.html#a92360342b602200d6cb344dd7cf9fc7d" title=" " alt="" coords="903,162,1050,189"/>
+<area shape="rect" href="class_actor.html#a0fa071a76d36b9d864e4235028e17198" title=" " alt="" coords="1103,162,1249,189"/>
+<area shape="rect" href="class_zugtasten_control.html#a9375a8fd26c7c677375048cca8a90fb5" title=" " alt="" coords="392,238,580,265"/>
+<area shape="rect" href="class_zugtaste.html#aa3876ff3dea3ca22ea67e3650a833f58" title=" " alt="" coords="401,289,571,315"/>
+</map>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">Variablen-Dokumentation</h2>
+<a id="a10ae75d19930ec38568c12a9bbe78b57" name="a10ae75d19930ec38568c12a9bbe78b57"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10ae75d19930ec38568c12a9bbe78b57">&#9670;&nbsp;</a></span>anzahl</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int anzahl = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00118">118</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ac9440f22d3b565870bba5b00ebf76c71" name="ac9440f22d3b565870bba5b00ebf76c71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9440f22d3b565870bba5b00ebf76c71">&#9670;&nbsp;</a></span>ftueMelder</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_melder.html">Melder</a> ftueMelder(&quot;FTÜ-<a class="el" href="class_melder.html">Melder</a>&quot;, ftueMelderLed, <a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#a79f90717565677d016fb11178f7a2eb2">weckerPin</a>, <a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#abf7b6246cc7ff2d2f30b4d5a27d6a7f8">ftueMelderWut</a>, <a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#a02bb06e7ee3ca03f638f7876b6308dce">schieberegisterPins</a>) </td>
+          <td>(</td>
+          <td class="paramtype">&quot;FTÜ-<a class="el" href="class_melder.html">Melder</a>&quot;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#aa411f118c7a72d91291fd5058dacbf8f">ftueMelderLed</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#a79f90717565677d016fb11178f7a2eb2">weckerPin</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#abf7b6246cc7ff2d2f30b4d5a27d6a7f8">ftueMelderWut</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#a02bb06e7ee3ca03f638f7876b6308dce">schieberegisterPins</a>&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9c72503491a9320e022b0c8323238319" name="a9c72503491a9320e022b0c8323238319"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c72503491a9320e022b0c8323238319">&#9670;&nbsp;</a></span>gelb1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int gelb1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00077">77</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a16003deb29b46523c7afccaf11ac9eb4" name="a16003deb29b46523c7afccaf11ac9eb4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16003deb29b46523c7afccaf11ac9eb4">&#9670;&nbsp;</a></span>gelb2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int gelb2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00084">84</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aaa6f8ea1cd9b3a4331f0db3376355846" name="aaa6f8ea1cd9b3a4331f0db3376355846"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa6f8ea1cd9b3a4331f0db3376355846">&#9670;&nbsp;</a></span>gelb3</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int gelb3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00091">91</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aa93566bd1e42486b20fd21d23aacf4f8" name="aa93566bd1e42486b20fd21d23aacf4f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa93566bd1e42486b20fd21d23aacf4f8">&#9670;&nbsp;</a></span>gelb4</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int gelb4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00098">98</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a2360aba01fa93c8493ba96683c4fb89c" name="a2360aba01fa93c8493ba96683c4fb89c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2360aba01fa93c8493ba96683c4fb89c">&#9670;&nbsp;</a></span>graph</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_graph.html">Graph</a>* graph = nullptr</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00120">120</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a02bb06e7ee3ca03f638f7876b6308dce" name="a02bb06e7ee3ca03f638f7876b6308dce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02bb06e7ee3ca03f638f7876b6308dce">&#9670;&nbsp;</a></span>schieberegisterPins</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int schieberegisterPins[4] = {4, 8, 9, 10}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00103">103</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="abf938e82932712ac48c38ac0a5525875" name="abf938e82932712ac48c38ac0a5525875"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf938e82932712ac48c38ac0a5525875">&#9670;&nbsp;</a></span>zta6</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int zta6</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00058">58</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aa1aad5b6c75afc1150d6dbdd5dc63cbf" name="aa1aad5b6c75afc1150d6dbdd5dc63cbf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1aad5b6c75afc1150d6dbdd5dc63cbf">&#9670;&nbsp;</a></span>zugtastenC</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_zugtasten_control.html">ZugtastenControl</a> zugtastenC(<a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#a92e3a0900129e2e77a18d02f97623d3b">zugtastenanzahl</a>, <a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#a030658e8b4be6b1969002aad9f192ede">zugtastenPins</a>, <a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#a8c259ef7f0e3a72e0dbbb7eeaa05f961">zugtastenRichtung</a>) </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#a92e3a0900129e2e77a18d02f97623d3b">zugtastenanzahl</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#a030658e8b4be6b1969002aad9f192ede">zugtastenPins</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#a8c259ef7f0e3a72e0dbbb7eeaa05f961">zugtastenRichtung</a>&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a030658e8b4be6b1969002aad9f192ede" name="a030658e8b4be6b1969002aad9f192ede"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a030658e8b4be6b1969002aad9f192ede">&#9670;&nbsp;</a></span>zugtastenPins</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int zugtastenPins[<a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#a92e3a0900129e2e77a18d02f97623d3b">zugtastenanzahl</a>] = {<a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#a5a4c1b9c75e57fc482cb89dbefcdfcc3">zta1</a>, <a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#ac30642a695d2b53165c74f1c14958307">zta2</a>, <a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#a97574ecc7f29c8ff7d263fe7939191f8">zta3</a>, <a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#a85eefd5a45f2016a0f5943d9b5055a3a">zta4</a>, <a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#a6b0aba9fecd479219290def49fac4b80">zta5</a>, <a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#abf938e82932712ac48c38ac0a5525875">zta6</a>, <a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#a1f3c08b6733be8f5a27055d389720808">zta7</a>, <a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#af7e979f16fe9f15702f6a9dfa0613d9b">zta8</a>, <a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#af100c13c358a3525d4fe581649fc29c5">zta9</a>}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00112">112</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a8c259ef7f0e3a72e0dbbb7eeaa05f961" name="a8c259ef7f0e3a72e0dbbb7eeaa05f961"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c259ef7f0e3a72e0dbbb7eeaa05f961">&#9670;&nbsp;</a></span>zugtastenRichtung</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean zugtastenRichtung[<a class="el" href="_g_b_s___facharbeit_2gbs__libary__tst_2gbs__libary__tst_2src_2main_8cpp.html#a92e3a0900129e2e77a18d02f97623d3b">zugtastenanzahl</a>] = {1, 0, 1, 0, 1, 0, 1, 0, 1}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00113">113</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ae77cf873dffa0087464b2d9b1371fa24" name="ae77cf873dffa0087464b2d9b1371fa24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae77cf873dffa0087464b2d9b1371fa24">&#9670;&nbsp;</a></span>zugtastenspeicher</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int zugtastenspeicher[2]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html#l00117">117</a> der Datei <a class="el" href="_clones_2_arduino-signal-box-simulation-1_2src_2main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Erzeugt von&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
+</small></address>
+</body>
+</html>

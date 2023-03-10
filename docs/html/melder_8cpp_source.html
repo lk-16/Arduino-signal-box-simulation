@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.3"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SpDrS60 Stellwerkssimulation: C:/Users/Lennart/Documents/GBS/Clones/Arduino-signal-box-simulation-1/src/melder.cpp Quellcode</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">SpDrS60 Stellwerkssimulation<span id="projectnumber">&#160;Stellwerkssimulation zu Verwendung in bliebigen Schienensystemen</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Erzeugt von Doxygen 1.9.3 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Suchen');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_e6bb53534ac0e427887cf7a94c0c004e.html">C:</a></li><li class="navelem"><a class="el" href="dir_8ceffd4ee35c3518d4e8bdc7e638efe8.html">Users</a></li><li class="navelem"><a class="el" href="dir_49371fcb29fb46a4a3a4a7c8cf7b346b.html">Lennart</a></li><li class="navelem"><a class="el" href="dir_87f9d64dad6e7a63ec30d5f84a9196d0.html">Documents</a></li><li class="navelem"><a class="el" href="dir_1c14a6bc62181bc3f28a841c8873dce4.html">GBS</a></li><li class="navelem"><a class="el" href="dir_4e19fd4008181c7e3dac19572d1e4a6c.html">Clones</a></li><li class="navelem"><a class="el" href="dir_f9a613b3120118873d6303f1e6ac305a.html">Arduino-signal-box-simulation-1</a></li><li class="navelem"><a class="el" href="dir_eeaccaa08b43c27d6adacfd922b202c0.html">src</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">melder.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="melder_8cpp.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*Library für die Steuerung eines SpDrS60-Gleisbildstellpults</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> *  mit dieser Library können Weichen, Signale etc. gesteuert werden</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> *  Lennart Klüner 05.09.2020</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;Arduino.h&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="melder_8h.html">Melder.h</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="_actor_8h.html">Actor.h</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">// Methoden der Klasse Melder</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="class_melder.html#ab20b6736d3de02fa0bc85a9925c800b3">   11</a></span><a class="code hl_function" href="class_melder.html#ab20b6736d3de02fa0bc85a9925c800b3">Melder::Melder</a>(String melderName, <span class="keywordtype">int</span> tueMelderLed, <span class="keywordtype">int</span> <a class="code hl_define" href="main_8cpp.html#ad0090ac7395fc2e6a38f08807af501b6">weckerPin</a>, <span class="keywordtype">int</span> wutPin, <span class="keywordtype">int</span> registerPins[4])</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    : <a class="code hl_class" href="class_actor.html">Actor</a>(registerPins[0], registerPins[1], registerPins[2], registerPins[3]) <span class="comment">// Led des Melders, Name des Melders(für Serielle Kommunitation z.B. FTÜ,GTÜ)</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>{</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>  Serial.begin(9600); <span class="comment">// Die Serielle Kommunikation wird gestartet</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  <span class="comment">// Anschlussdefinition</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  _melderName = melderName;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  _tueMelderLed = tueMelderLed; <span class="comment">//übernehmen der Variablen in die Klasse</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  _wutPin = wutPin;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  _weckerPin = <a class="code hl_define" href="main_8cpp.html#ad0090ac7395fc2e6a38f08807af501b6">weckerPin</a>;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  <span class="comment">// definieren ob Anschlüsse Aus- oder Eingang sind</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  pinMode(_tueMelderLed, OUTPUT); <span class="comment">// Tastenüberwachung led Melder</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  pinMode(_wutPin, INPUT_PULLUP); <span class="comment">// Tastenüberwachung Weckerunterbrechertaste</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  pinMode(_weckerPin, OUTPUT);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  <a class="code hl_function" href="class_actor.html#a0fa071a76d36b9d864e4235028e17198">digitalSchalten</a>(_weckerPin, HIGH);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>}</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="class_melder.html#ab3c5e6c4655c1e6df0eeb480aa63de5a">   29</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_melder.html#ab3c5e6c4655c1e6df0eeb480aa63de5a">Melder::tueMelder</a>(<a class="code hl_class" href="class_zugtasten_control.html">ZugtastenControl</a> <a class="code hl_class" href="class_zugtasten_control.html">ZugtastenControl</a>) <span class="comment">// tastenüberwachung</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>{</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  <span class="keywordflow">if</span> (<a class="code hl_class" href="class_zugtasten_control.html">ZugtastenControl</a>.<a class="code hl_function" href="class_zugtasten_control.html#a345bd760dd6796f263bf568a5e81c08e">zugtastenGedrueckt</a>()) <span class="comment">// wenn eine Zugtaste gedrückt ist</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  {</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keywordflow">if</span> ((millis() - _melderStartzeit &gt;= _melderTimeout))</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    {</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>      _tueMelderStatus = <span class="keyword">true</span>; <span class="comment">// FTÜ-Melder ist false keine Warnung, true melder und ggf. wecker schlägt an</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>      <a class="code hl_function" href="class_actor.html#ad0595d335c3f070ac8bbbbe91b35494a">Melder::blinken</a>(_tueMelderLed);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>      <span class="keywordflow">if</span> (millis() - _melderStartzeit &gt;= (_melderTimeout * 2) &amp;&amp; _wutAktivierung == LOW) <span class="comment">// Wenn 10 s lang eine Taste gedrückt wurde und nicht die Wut gedrückt wurde</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>      {</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <a class="code hl_function" href="class_actor.html#a0fa071a76d36b9d864e4235028e17198">Actor::digitalSchalten</a>(_weckerPin, LOW); <span class="comment">// Relais schaltet --&gt; Wecker klingelt</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>      }</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>      <span class="keywordflow">if</span> (digitalRead(_wutPin) == LOW) <span class="comment">// wenn Weckerunterbrechertaste gedrückt</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>      {</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        _wutAktivierung = HIGH;                   <span class="comment">// die Weckerunterbrechertaste wurde gedrückt</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <a class="code hl_function" href="class_actor.html#a0fa071a76d36b9d864e4235028e17198">Actor::digitalSchalten</a>(_weckerPin, HIGH); <span class="comment">// Relais fällt zurück --&gt; Wecker wird gestoppt</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>      }</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>      Serial.println(_melderName); <span class="comment">// Meldername und Status wird über den seriellen Monitor angezeigt............................... Ausgabe der Meldernamen funktioniert noch nicht</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    }</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  }</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  <span class="keywordflow">else</span> <span class="comment">// wenn keine Mehr gedrückt wird,</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  {</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    _melderStartzeit = millis();                 <span class="comment">// setze den Timer zurück</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    _tueMelderStatus = <span class="keyword">false</span>;                    <span class="comment">// den Status auf 0</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <a class="code hl_function" href="class_actor.html#a0fa071a76d36b9d864e4235028e17198">Melder::digitalSchalten</a>(_tueMelderLed, LOW); <span class="comment">// Schalte die Led aus</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <a class="code hl_function" href="class_actor.html#a0fa071a76d36b9d864e4235028e17198">Melder::digitalSchalten</a>(_weckerPin, HIGH);   <span class="comment">// Mache den Wecker aus</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    _wutAktivierung = <span class="keyword">false</span>;                     <span class="comment">// beim Beenden der Störung wird die Unterbrechung wieder aufgehoben</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  }</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>}</div>
+<div class="ttc" id="a_actor_8h_html"><div class="ttname"><a href="_actor_8h.html">Actor.h</a></div></div>
+<div class="ttc" id="aclass_actor_html"><div class="ttname"><a href="class_actor.html">Actor</a></div><div class="ttdef"><b>Definition:</b> <a href="_actor_8h_source.html#l00020">Actor.h:21</a></div></div>
+<div class="ttc" id="aclass_actor_html_a0fa071a76d36b9d864e4235028e17198"><div class="ttname"><a href="class_actor.html#a0fa071a76d36b9d864e4235028e17198">Actor::digitalSchalten</a></div><div class="ttdeci">void digitalSchalten(int PinNr, boolean newPinStatus)</div><div class="ttdef"><b>Definition:</b> <a href="_actor_8cpp_source.html#l00031">Actor.cpp:31</a></div></div>
+<div class="ttc" id="aclass_actor_html_ad0595d335c3f070ac8bbbbe91b35494a"><div class="ttname"><a href="class_actor.html#ad0595d335c3f070ac8bbbbe91b35494a">Actor::blinken</a></div><div class="ttdeci">void blinken(int LedPin)</div><div class="ttdef"><b>Definition:</b> <a href="_actor_8cpp_source.html#l00019">Actor.cpp:19</a></div></div>
+<div class="ttc" id="aclass_melder_html_ab20b6736d3de02fa0bc85a9925c800b3"><div class="ttname"><a href="class_melder.html#ab20b6736d3de02fa0bc85a9925c800b3">Melder::Melder</a></div><div class="ttdeci">Melder(String melderName, int tueMelderLed, int weckerPin, int wutPin, int registerPins[4])</div><div class="ttdef"><b>Definition:</b> <a href="melder_8cpp_source.html#l00011">melder.cpp:11</a></div></div>
+<div class="ttc" id="aclass_melder_html_ab3c5e6c4655c1e6df0eeb480aa63de5a"><div class="ttname"><a href="class_melder.html#ab3c5e6c4655c1e6df0eeb480aa63de5a">Melder::tueMelder</a></div><div class="ttdeci">void tueMelder(ZugtastenControl ZugtastenControl)</div><div class="ttdef"><b>Definition:</b> <a href="melder_8cpp_source.html#l00029">melder.cpp:29</a></div></div>
+<div class="ttc" id="aclass_zugtasten_control_html"><div class="ttname"><a href="class_zugtasten_control.html">ZugtastenControl</a></div><div class="ttdef"><b>Definition:</b> <a href="zugtasten_control_8h_source.html#l00018">zugtastenControl.h:19</a></div></div>
+<div class="ttc" id="aclass_zugtasten_control_html_a345bd760dd6796f263bf568a5e81c08e"><div class="ttname"><a href="class_zugtasten_control.html#a345bd760dd6796f263bf568a5e81c08e">ZugtastenControl::zugtastenGedrueckt</a></div><div class="ttdeci">boolean zugtastenGedrueckt()</div><div class="ttdef"><b>Definition:</b> <a href="zugtasten_control_8cpp_source.html#l00032">zugtastenControl.cpp:32</a></div></div>
+<div class="ttc" id="amain_8cpp_html_ad0090ac7395fc2e6a38f08807af501b6"><div class="ttname"><a href="main_8cpp.html#ad0090ac7395fc2e6a38f08807af501b6">weckerPin</a></div><div class="ttdeci">#define weckerPin</div><div class="ttdef"><b>Definition:</b> <a href="main_8cpp_source.html#l00066">main.cpp:66</a></div></div>
+<div class="ttc" id="amelder_8h_html"><div class="ttname"><a href="melder_8h.html">melder.h</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Erzeugt von&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
+</small></address>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.3"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SpDrS60 Stellwerkssimulation: C:/Users/Lennart/Documents/GBS/Clones/Arduino-signal-box-simulation-1/lib/Schieberegister/examples/Led_blinken/Led_blinken.cpp Quellcode</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">SpDrS60 Stellwerkssimulation<span id="projectnumber">&#160;Stellwerkssimulation zu Verwendung in bliebigen Schienensystemen</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Erzeugt von Doxygen 1.9.3 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Suchen');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_a7ed65b776829eef26ef09d4fe9a87e5.html">Clones</a></li><li class="navelem"><a class="el" href="dir_fede80bbb25889f6a04e6f747cc36014.html">Arduino-signal-box-simulation-1</a></li><li class="navelem"><a class="el" href="dir_17e49a0029ec63e71207b188fd0e1fcf.html">lib</a></li><li class="navelem"><a class="el" href="dir_d96ba5a18ed0acebfab9465a91a7ee93.html">Schieberegister</a></li><li class="navelem"><a class="el" href="dir_b569e2ce5ca870ba1ccec175cb07fa58.html">examples</a></li><li class="navelem"><a class="el" href="dir_5413523b28ac9b17e7941c5c0319c160.html">Led_blinken</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">Led_blinken.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_led__blinken_8cpp.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/* Libary: Schieberegisters</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"></span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">    Die Funktionen eines Schieberegisters sollen einfacher genutzt werden können.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">    - einfaches erstellen von Schieberegistern</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">    - einfaches Abrufen aller Daten</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">    - wenig sichtbarer Programmieraufwand --&gt; weniger Fehler</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"></span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">    Lennart Klüner 14.10.2020</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">*/</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;Arduino.h&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;<a class="code" href="_schieberegister_8h.html">Schieberegister.h</a>&gt;</span>                         <span class="comment">//einbeziehen der Bibliothek</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="_led__blinken_8cpp.html#a4876c0517a359b6e702c6fc2647586e7">   14</a></span><a class="code hl_class" href="classschieberegister.html">schieberegister</a> <a class="code hl_variable" href="_led__blinken_8cpp.html#a4876c0517a359b6e702c6fc2647586e7">schieberegister1</a>(1, 8, 9, 10);      <span class="comment">//definieren eines Objekts innerhalb der Klasse Schieberegister:</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>                                                    <span class="comment">// Name(Anzahl der Register innerhalb eines Verbundes, SH_CP, ST_CP, DS-Pin)</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="_led__blinken_8cpp.html#a4fc01d736fe50cf5b977f755b675f11d">   17</a></span><span class="keywordtype">void</span>  <a class="code hl_function" href="_led__blinken_8cpp.html#a4fc01d736fe50cf5b977f755b675f11d">setup</a>()</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>{</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  Serial.begin(9600);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>}</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="_led__blinken_8cpp.html#afe461d27b9c48d5921c00d521181f12f">   22</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="_led__blinken_8cpp.html#afe461d27b9c48d5921c00d521181f12f">loop</a>()</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>{</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  <a class="code hl_variable" href="_led__blinken_8cpp.html#a4876c0517a359b6e702c6fc2647586e7">schieberegister1</a>.<a class="code hl_function" href="classschieberegister.html#a358c51953064bd5fdec7cdd2026d4716">setPin</a>(1, HIGH);                   <span class="comment">//Methode um einen Pin an- bzw. auszuschalten</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  delay(250);</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  <a class="code hl_variable" href="_led__blinken_8cpp.html#a4876c0517a359b6e702c6fc2647586e7">schieberegister1</a>.<a class="code hl_function" href="classschieberegister.html#ad28e56eb0a7d52363dec1fd9780be134">printPinStatus</a>();                  <span class="comment">//Methode um alle Werte eines Schieberegisterverbunds anzuzeigen</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  <a class="code hl_variable" href="_led__blinken_8cpp.html#a4876c0517a359b6e702c6fc2647586e7">schieberegister1</a>.<a class="code hl_function" href="classschieberegister.html#a358c51953064bd5fdec7cdd2026d4716">setPin</a>(1, LOW);                    <span class="comment">//....setPin(PinNr. , neuerWert)</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  delay(250);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  <a class="code hl_variable" href="_led__blinken_8cpp.html#a4876c0517a359b6e702c6fc2647586e7">schieberegister1</a>.<a class="code hl_function" href="classschieberegister.html#ad28e56eb0a7d52363dec1fd9780be134">printPinStatus</a>();                  <span class="comment">//Methode um alle Werte eines Schieberegisterverbunds anzuzeigen</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  Serial.println(<a class="code hl_variable" href="_led__blinken_8cpp.html#a4876c0517a359b6e702c6fc2647586e7">schieberegister1</a>.<a class="code hl_function" href="classschieberegister.html#a8517bbd6444627f7e82c48826a037ea0">getPinStatus</a>(2));   <span class="comment">//Methode um Pins auszulesen</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>}</div>
+<div class="ttc" id="a_led__blinken_8cpp_html_a4876c0517a359b6e702c6fc2647586e7"><div class="ttname"><a href="_led__blinken_8cpp.html#a4876c0517a359b6e702c6fc2647586e7">schieberegister1</a></div><div class="ttdeci">schieberegister schieberegister1(1, 8, 9, 10)</div></div>
+<div class="ttc" id="a_led__blinken_8cpp_html_a4fc01d736fe50cf5b977f755b675f11d"><div class="ttname"><a href="_led__blinken_8cpp.html#a4fc01d736fe50cf5b977f755b675f11d">setup</a></div><div class="ttdeci">void setup()</div><div class="ttdef"><b>Definition:</b> <a href="_led__blinken_8cpp_source.html#l00017">Led_blinken.cpp:17</a></div></div>
+<div class="ttc" id="a_led__blinken_8cpp_html_afe461d27b9c48d5921c00d521181f12f"><div class="ttname"><a href="_led__blinken_8cpp.html#afe461d27b9c48d5921c00d521181f12f">loop</a></div><div class="ttdeci">void loop()</div><div class="ttdef"><b>Definition:</b> <a href="_led__blinken_8cpp_source.html#l00022">Led_blinken.cpp:22</a></div></div>
+<div class="ttc" id="a_schieberegister_8h_html"><div class="ttname"><a href="_schieberegister_8h.html">Schieberegister.h</a></div></div>
+<div class="ttc" id="aclassschieberegister_html"><div class="ttname"><a href="classschieberegister.html">schieberegister</a></div><div class="ttdef"><b>Definition:</b> <a href="_schieberegister_8h_source.html#l00013">Schieberegister.h:14</a></div></div>
+<div class="ttc" id="aclassschieberegister_html_a358c51953064bd5fdec7cdd2026d4716"><div class="ttname"><a href="classschieberegister.html#a358c51953064bd5fdec7cdd2026d4716">schieberegister::setPin</a></div><div class="ttdeci">void setPin(int pinNr, boolean pinStatus)</div><div class="ttdef"><b>Definition:</b> <a href="_schieberegister_8cpp_source.html#l00038">Schieberegister.cpp:38</a></div></div>
+<div class="ttc" id="aclassschieberegister_html_a8517bbd6444627f7e82c48826a037ea0"><div class="ttname"><a href="classschieberegister.html#a8517bbd6444627f7e82c48826a037ea0">schieberegister::getPinStatus</a></div><div class="ttdeci">boolean getPinStatus(int pinNr)</div><div class="ttdef"><b>Definition:</b> <a href="_schieberegister_8cpp_source.html#l00069">Schieberegister.cpp:69</a></div></div>
+<div class="ttc" id="aclassschieberegister_html_ad28e56eb0a7d52363dec1fd9780be134"><div class="ttname"><a href="classschieberegister.html#ad28e56eb0a7d52363dec1fd9780be134">schieberegister::printPinStatus</a></div><div class="ttdeci">void printPinStatus()</div><div class="ttdef"><b>Definition:</b> <a href="_schieberegister_8cpp_source.html#l00054">Schieberegister.cpp:54</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Erzeugt von&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
+</small></address>
+</body>
+</html>

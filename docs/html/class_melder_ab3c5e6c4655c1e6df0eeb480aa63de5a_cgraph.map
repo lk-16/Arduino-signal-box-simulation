@@ -1,0 +1,9 @@
+<map id="Melder::tueMelder" name="Melder::tueMelder">
+<area shape="rect" id="node1" title=" " alt="" coords="5,56,132,83"/>
+<area shape="rect" id="node2" href="$class_actor.html#ad0595d335c3f070ac8bbbbe91b35494a" title=" " alt="" coords="221,5,324,32"/>
+<area shape="rect" id="node3" href="$class_actor.html#a0fa071a76d36b9d864e4235028e17198" title=" " alt="" coords="459,31,606,57"/>
+<area shape="rect" id="node4" href="$class_zugtasten_control.html#a345bd760dd6796f263bf568a5e81c08e" title=" " alt="" coords="180,107,365,149"/>
+<area shape="rect" id="node5" href="$class_zugtasten_control.html#aea3770a6d082a213b3588863f1473743" title=" " alt="" coords="413,115,652,141"/>
+<area shape="rect" id="node6" href="$class_zugtaste.html#a072eb9ebcfde171bcbc02bc5e51d7b03" title=" " alt="" coords="700,89,891,116"/>
+<area shape="rect" id="node7" href="$class_zugtasten_control.html#a9375a8fd26c7c677375048cca8a90fb5" title=" " alt="" coords="701,140,889,167"/>
+</map>

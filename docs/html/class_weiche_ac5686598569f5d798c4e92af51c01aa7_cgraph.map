@@ -1,0 +1,6 @@
+<map id="Weiche::weicheWechsel" name="Weiche::weicheWechsel">
+<area shape="rect" id="node1" title=" " alt="" coords="5,31,171,57"/>
+<area shape="rect" id="node2" href="$class_weiche.html#a21c1167f5dfc77d74f1acc79e1498fb0" title=" " alt="" coords="219,5,375,32"/>
+<area shape="rect" id="node4" href="$class_weiche.html#a92360342b602200d6cb344dd7cf9fc7d" title=" " alt="" coords="223,56,370,83"/>
+<area shape="rect" id="node3" href="$class_actor.html#a0fa071a76d36b9d864e4235028e17198" title=" " alt="" coords="423,31,569,57"/>
+</map>

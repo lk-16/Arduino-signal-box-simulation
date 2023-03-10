@@ -1,0 +1,5 @@
+<map id="Weiche::weicheSchalten" name="Weiche::weicheSchalten">
+<area shape="rect" id="node1" title=" " alt="" coords="5,5,171,32"/>
+<area shape="rect" id="node2" href="$class_weiche.html#a69c934c32eb4e91adea8a3dfc7615269" title=" " alt="" coords="219,5,400,32"/>
+<area shape="rect" id="node3" href="$class_actor.html#a0fa071a76d36b9d864e4235028e17198" title=" " alt="" coords="448,5,595,32"/>
+</map>
