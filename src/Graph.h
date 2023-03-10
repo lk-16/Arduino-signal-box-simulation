@@ -14,7 +14,6 @@
 #include <Arduino.h>
 #include <Actor.h>
 #include "Gleissymbol.h"
-#include "List.h"
 #include "Zugtaste.h"
 
 /**Die Klasse Graph speichert alle Gleissymbole in einem Graphen.
@@ -22,7 +21,7 @@
 class Graph
 {
 private:
-    List _aktivFahrstrassen;
+    //List _aktivFahrstrassen;
     int _maxNachbarn = 3;
     int _anzahlKnoten;
     class Gleissymbol *_knoten;

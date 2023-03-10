@@ -17,7 +17,6 @@
 #include "HauptsignalControl.h"
 #include "Melder.h"
 #include "Graph.h"
-#include "List.h"
 
 // Weichen
 #define anzahlWeichen 3
