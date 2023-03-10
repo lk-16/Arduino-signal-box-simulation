@@ -1,4 +1,0 @@
-<map id="List::append" name="List::append">
-<area shape="rect" id="node1" title="Hängt symbol an das Ende der Liste an." alt="" coords="5,5,99,32"/>
-<area shape="rect" id="node2" href="$class_list.html#a20b9b23bc5da992ce8b74a731e765f0f" title="true, wenn die Liste keine Objekte enthält, sonst false" alt="" coords="147,5,245,32"/>
-</map>
