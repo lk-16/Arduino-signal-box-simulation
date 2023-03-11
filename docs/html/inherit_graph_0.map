@@ -1,0 +1,8 @@
+<map id="Grafische Darstellung der Klassenhierarchie" name="Grafische Darstellung der Klassenhierarchie">
+<area shape="rect" id="node1" href="$class_actor.html" title=" " alt="" coords="5,81,59,108"/>
+<area shape="rect" id="node2" href="$class_besetztmelder.html" title=" " alt="" coords="107,5,213,32"/>
+<area shape="rect" id="node3" href="$class_melder.html" title=" " alt="" coords="129,56,191,83"/>
+<area shape="rect" id="node4" href="$class_signal.html" title=" " alt="" coords="131,107,189,133"/>
+<area shape="rect" id="node6" href="$class_weiche.html" title=" " alt="" coords="127,157,193,184"/>
+<area shape="rect" id="node5" href="$class_hauptsignal.html" title=" " alt="" coords="261,107,352,133"/>
+</map>

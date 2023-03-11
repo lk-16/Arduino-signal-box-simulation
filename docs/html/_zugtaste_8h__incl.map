@@ -1,0 +1,12 @@
+<map id="src/Zugtaste.h" name="src/Zugtaste.h">
+<area shape="rect" id="node1" title=" " alt="" coords="114,5,219,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="383,453,460,480"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,453,128,480"/>
+<area shape="rect" id="node4" href="$_actor_8h.html" title=" " alt="" coords="113,379,177,405"/>
+<area shape="rect" id="node5" href="$_gleissymbol_8h.html" title=" " alt="" coords="215,80,321,107"/>
+<area shape="rect" id="node6" href="$_hauptsignal_8h.html" title=" " alt="" coords="405,229,507,256"/>
+<area shape="rect" id="node8" href="$besetztmelder_8h.html" title=" " alt="" coords="209,155,327,181"/>
+<area shape="rect" id="node10" href="$_weiche_8h.html" title=" " alt="" coords="192,304,269,331"/>
+<area shape="rect" id="node7" href="$_signal_8h.html" title=" " alt="" coords="387,304,456,331"/>
+<area shape="rect" id="node9" href="$_weichen_control_8h.html" title=" " alt="" coords="205,229,331,256"/>
+</map>

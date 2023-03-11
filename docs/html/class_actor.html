@@ -1,0 +1,243 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.3"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SpDrS60 Stellwerkssimulation: Actor Klassenreferenz</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">SpDrS60 Stellwerkssimulation<span id="projectnumber">&#160;Stellwerkssimulation zu Verwendung in bliebigen Schienensystemen</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Erzeugt von Doxygen 1.9.3 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Suchen');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Öffentliche Methoden</a> &#124;
+<a href="class_actor-members.html">Aufstellung aller Elemente</a>  </div>
+  <div class="headertitle"><div class="title">Actor Klassenreferenz</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_actor_8h_source.html">Actor.h</a>&gt;</code></p>
+<div class="dynheader">
+Klassendiagramm für Actor:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_actor__inherit__graph.png" border="0" usemap="#a_actor_inherit__map" alt="Inheritance graph"/></div>
+<map name="a_actor_inherit__map" id="a_actor_inherit__map">
+<area shape="rect" title=" " alt="" coords="181,5,235,32"/>
+<area shape="rect" href="class_besetztmelder.html" title=" " alt="" coords="5,80,112,107"/>
+<area shape="rect" href="class_melder.html" title=" " alt="" coords="136,80,197,107"/>
+<area shape="rect" href="class_signal.html" title=" " alt="" coords="221,80,280,107"/>
+<area shape="rect" href="class_weiche.html" title=" " alt="" coords="304,80,371,107"/>
+<area shape="rect" href="class_hauptsignal.html" title=" " alt="" coords="205,155,296,181"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">Legende</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Öffentliche Methoden</h2></td></tr>
+<tr class="memitem:ae7deab7318add38f52e32a5a4fefaabc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_actor.html#ae7deab7318add38f52e32a5a4fefaabc">Actor</a> (int <a class="el" href="main_8cpp.html#a10ae75d19930ec38568c12a9bbe78b57">anzahl</a>, int sh, int st, int ds)</td></tr>
+<tr class="separator:ae7deab7318add38f52e32a5a4fefaabc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0595d335c3f070ac8bbbbe91b35494a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_actor.html#ad0595d335c3f070ac8bbbbe91b35494a">blinken</a> (int LedPin)</td></tr>
+<tr class="separator:ad0595d335c3f070ac8bbbbe91b35494a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fa071a76d36b9d864e4235028e17198"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_actor.html#a0fa071a76d36b9d864e4235028e17198">digitalSchalten</a> (int PinNr, boolean newPinStatus)</td></tr>
+<tr class="separator:a0fa071a76d36b9d864e4235028e17198"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a710ddb71e5b877a263a28dd05b630be9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_actor.html#a710ddb71e5b877a263a28dd05b630be9">setRegisterPins</a> (int <a class="el" href="main_8cpp.html#a10ae75d19930ec38568c12a9bbe78b57">anzahl</a>, int sh, int st, int ds)</td></tr>
+<tr class="separator:a710ddb71e5b877a263a28dd05b630be9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Ausführliche Beschreibung</h2>
+<div class="textblock"><p >Die Klasse actors enthält die Grundfunktionen jeder Klasse. Jede Klase nutzt diese Klasse, von hier wird der Quellcode für das Steuern des Schieberegisters abgerufen, auch die Funktion zum Blinken einer Led ist hier gespeichert. </p>
+
+<p class="definition">Definiert in Zeile <a class="el" href="_actor_8h_source.html#l00020">20</a> der Datei <a class="el" href="_actor_8h_source.html">Actor.h</a>.</p>
+</div><h2 class="groupheader">Beschreibung der Konstruktoren und Destruktoren</h2>
+<a id="ae7deab7318add38f52e32a5a4fefaabc" name="ae7deab7318add38f52e32a5a4fefaabc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7deab7318add38f52e32a5a4fefaabc">&#9670;&nbsp;</a></span>Actor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Actor::Actor </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>anzahl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>sh</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>st</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ds</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Erstellt die Menge an Schieberegistern die angeschlossen sind, die im konstruktor vermerkt wurden. </p><dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">anzahl</td><td>Die Anzahl der angeschlossenen Register </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">sh</td><td>Der Pin an dem SH_CP angeschlossen ist. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">st</td><td>Der Pin an dem ST_CP angeschlossen ist. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ds</td><td>Der Pin an dem DS_CP angeschlossen ist. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definiert in Zeile <a class="el" href="_actor_8cpp_source.html#l00011">11</a> der Datei <a class="el" href="_actor_8cpp_source.html">Actor.cpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Dokumentation der Elementfunktionen</h2>
+<a id="ad0595d335c3f070ac8bbbbe91b35494a" name="ad0595d335c3f070ac8bbbbe91b35494a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0595d335c3f070ac8bbbbe91b35494a">&#9670;&nbsp;</a></span>blinken()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Actor::blinken </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>LedPin</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Standard-Operator, lässt die angegebene Led blinken. Geschwindigkeit (500 ms aufleuchten/500 ms dunkel) ist nicht einstellbar </p>
+
+<p class="definition">Definiert in Zeile <a class="el" href="_actor_8cpp_source.html#l00019">19</a> der Datei <a class="el" href="_actor_8cpp_source.html">Actor.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a0fa071a76d36b9d864e4235028e17198" name="a0fa071a76d36b9d864e4235028e17198"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fa071a76d36b9d864e4235028e17198">&#9670;&nbsp;</a></span>digitalSchalten()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Actor::digitalSchalten </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>PinNr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">boolean&#160;</td>
+          <td class="paramname"><em>newPinStatus</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Digitale Ausgänge können geschaltet werden. Differenzierung zwischen Verbrauchern am Controller und am Schiebregister. </p><dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">PinNr</td><td>Pin der geschaltet werden soll. Schiebregister Pins = PinNr. 1,2,... +100 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">newPinStatus</td><td>Der neue Status des Pins. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definiert in Zeile <a class="el" href="_actor_8cpp_source.html#l00031">31</a> der Datei <a class="el" href="_actor_8cpp_source.html">Actor.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a710ddb71e5b877a263a28dd05b630be9" name="a710ddb71e5b877a263a28dd05b630be9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a710ddb71e5b877a263a28dd05b630be9">&#9670;&nbsp;</a></span>setRegisterPins()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Actor::setRegisterPins </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>anzahl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>sh</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>st</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ds</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >die Pins des Registers lassen sich verändern (Pinvergabe genau wie beim Kontruktor der Methode actors) </p>
+
+<p class="definition">Definiert in Zeile <a class="el" href="_actor_8cpp_source.html#l00042">42</a> der Datei <a class="el" href="_actor_8cpp_source.html">Actor.cpp</a>.</p>
+
+</div>
+</div>
+<hr/>Die Dokumentation für dieseKlasse wurde erzeugt aufgrund der Dateien:<ul>
+<li>src/<a class="el" href="_actor_8h_source.html">Actor.h</a></li>
+<li>src/<a class="el" href="_actor_8cpp_source.html">Actor.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Erzeugt von&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
+</small></address>
+</body>
+</html>

@@ -1,0 +1,717 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.3"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SpDrS60 Stellwerkssimulation: Graph Klassenreferenz</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">SpDrS60 Stellwerkssimulation<span id="projectnumber">&#160;Stellwerkssimulation zu Verwendung in bliebigen Schienensystemen</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Erzeugt von Doxygen 1.9.3 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Suchen');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Öffentliche Methoden</a> &#124;
+<a href="class_graph-members.html">Aufstellung aller Elemente</a>  </div>
+  <div class="headertitle"><div class="title">Graph Klassenreferenz</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_graph_8h_source.html">Graph.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Öffentliche Methoden</h2></td></tr>
+<tr class="memitem:aeb643db1b1293fa31aff6716e648a60a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#aeb643db1b1293fa31aff6716e648a60a">Graph</a> (int anzahlKnoten, <a class="el" href="class_gleissymbol.html">Gleissymbol</a> knoten[], int nachbarn[][3])</td></tr>
+<tr class="separator:aeb643db1b1293fa31aff6716e648a60a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7e91b2de4038f27190682ef88ee0cb4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#af7e91b2de4038f27190682ef88ee0cb4">prepare</a> ()</td></tr>
+<tr class="separator:af7e91b2de4038f27190682ef88ee0cb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb00a6777bcd356d3a41ded66fdaf91e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#acb00a6777bcd356d3a41ded66fdaf91e">updateSymbole</a> ()</td></tr>
+<tr class="separator:acb00a6777bcd356d3a41ded66fdaf91e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a139545e90bd834be2bb08c440115a6c8"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a139545e90bd834be2bb08c440115a6c8">equals</a> (<a class="el" href="class_gleissymbol.html">Gleissymbol</a> *symbol1, <a class="el" href="class_gleissymbol.html">Gleissymbol</a> *symbol2)</td></tr>
+<tr class="separator:a139545e90bd834be2bb08c440115a6c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1bcc2af29fe0171521fc9b89a7424f8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#ac1bcc2af29fe0171521fc9b89a7424f8">nextWay</a> (<a class="el" href="class_gleissymbol.html">Gleissymbol</a> *symbol, int fahrstrassenNr_vorgaenger=0, boolean vorgaengerAktiv=false)</td></tr>
+<tr class="separator:ac1bcc2af29fe0171521fc9b89a7424f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fcbdeeb48e88d8cb632458d3a8d4a42"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a2fcbdeeb48e88d8cb632458d3a8d4a42">nextWay</a> (int knotenNr, int fahrstrassenNr_vorgeaenger=0, boolean vorgaengerAktiv=false)</td></tr>
+<tr class="separator:a2fcbdeeb48e88d8cb632458d3a8d4a42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93b9ad8849dc8e1dfcf85dcf5b522d37"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a93b9ad8849dc8e1dfcf85dcf5b522d37">wegSuchen</a> (<a class="el" href="class_gleissymbol.html">Gleissymbol</a> *start, <a class="el" href="class_gleissymbol.html">Gleissymbol</a> *ziel, <a class="el" href="class_gleissymbol.html">Gleissymbol</a> *vorgaenger=nullptr)</td></tr>
+<tr class="separator:a93b9ad8849dc8e1dfcf85dcf5b522d37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac27dcabc3453eaa9753d2d8d213f9d70"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#ac27dcabc3453eaa9753d2d8d213f9d70">sucheFlankenschutzweiche</a> (int vorgaenger, int weiche, int nachfolger)</td></tr>
+<tr class="separator:ac27dcabc3453eaa9753d2d8d213f9d70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6f90be5ed4682f127d5cdc3bf43c125"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#ae6f90be5ed4682f127d5cdc3bf43c125">fahrstrasseEinstellen</a> (<a class="el" href="class_zugtaste.html">Zugtaste</a> *taste1, <a class="el" href="class_zugtaste.html">Zugtaste</a> *taste2)</td></tr>
+<tr class="separator:ae6f90be5ed4682f127d5cdc3bf43c125"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0231ba1e908c162768ccc5aed30239a"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#ac0231ba1e908c162768ccc5aed30239a">fahrstrasseEinstellen</a> (<a class="el" href="class_gleissymbol.html">Gleissymbol</a> *start, <a class="el" href="class_gleissymbol.html">Gleissymbol</a> *ziel)</td></tr>
+<tr class="separator:ac0231ba1e908c162768ccc5aed30239a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8536235cdee21737d42b1705ee1d2c58"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a8536235cdee21737d42b1705ee1d2c58">symbolZuFahrstrasse</a> (<a class="el" href="class_gleissymbol.html">Gleissymbol</a> *symbol)</td></tr>
+<tr class="separator:a8536235cdee21737d42b1705ee1d2c58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04f90d846a7e544ea9e6ff3cf6061dda"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a04f90d846a7e544ea9e6ff3cf6061dda">symbolZuFahrstrasse</a> (int knotenNr)</td></tr>
+<tr class="separator:a04f90d846a7e544ea9e6ff3cf6061dda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5d721b12df2bc9f8184efb3635017f1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#af5d721b12df2bc9f8184efb3635017f1">resetMarkierungen</a> (int fahrstrassenNr=0)</td></tr>
+<tr class="separator:af5d721b12df2bc9f8184efb3635017f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad93a44f5c60d99db71518ee1330acce7"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#ad93a44f5c60d99db71518ee1330acce7">isReset</a> ()</td></tr>
+<tr class="separator:ad93a44f5c60d99db71518ee1330acce7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9f1c7013ce4a4ba449046bf83cee6d2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_gleissymbol.html">Gleissymbol</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#ac9f1c7013ce4a4ba449046bf83cee6d2">getKnoten</a> (int knotenNr)</td></tr>
+<tr class="separator:ac9f1c7013ce4a4ba449046bf83cee6d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4db711ec2e164f1383a3a36fd6f3685"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_gleissymbol.html">Gleissymbol</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#af4db711ec2e164f1383a3a36fd6f3685">getNachbar</a> (int knotenNr, int nachbar=0)</td></tr>
+<tr class="separator:af4db711ec2e164f1383a3a36fd6f3685"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a8d2658474632c9396e1cd0bb54f7df"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a6a8d2658474632c9396e1cd0bb54f7df">getKnotenNr</a> (<a class="el" href="class_gleissymbol.html">Gleissymbol</a> *symbol)</td></tr>
+<tr class="separator:a6a8d2658474632c9396e1cd0bb54f7df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0f7d444897eb2bf3c90de17031e4325"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#aa0f7d444897eb2bf3c90de17031e4325">isKnotenNr</a> (int knotenNr)</td></tr>
+<tr class="separator:aa0f7d444897eb2bf3c90de17031e4325"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91a6330405bf3904508a9af139911c9e"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a91a6330405bf3904508a9af139911c9e">richtungGerade</a> (<a class="el" href="class_gleissymbol.html">Gleissymbol</a> *vorgaenger, <a class="el" href="class_gleissymbol.html">Gleissymbol</a> *weichensymbol, <a class="el" href="class_gleissymbol.html">Gleissymbol</a> *nachfolger)</td></tr>
+<tr class="separator:a91a6330405bf3904508a9af139911c9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ab8efcd48777297ab0ba3ad4861b5da"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a6ab8efcd48777297ab0ba3ad4861b5da">richtungGerade</a> (int vorgaenger, int weichensymbolNr, int nachfolger)</td></tr>
+<tr class="separator:a6ab8efcd48777297ab0ba3ad4861b5da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4842b26fb4f76f2d229f16d1a925e547"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a4842b26fb4f76f2d229f16d1a925e547">weichenAusgang</a> (int vorgaenger, int aktuellerKnoten)</td></tr>
+<tr class="separator:a4842b26fb4f76f2d229f16d1a925e547"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Ausführliche Beschreibung</h2>
+<div class="textblock"><p >Die Klasse <a class="el" href="class_graph.html">Graph</a> speichert alle Gleissymbole in einem Graphen. </p>
+
+<p class="definition">Definiert in Zeile <a class="el" href="_graph_8h_source.html#l00021">21</a> der Datei <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
+</div><h2 class="groupheader">Beschreibung der Konstruktoren und Destruktoren</h2>
+<a id="aeb643db1b1293fa31aff6716e648a60a" name="aeb643db1b1293fa31aff6716e648a60a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb643db1b1293fa31aff6716e648a60a">&#9670;&nbsp;</a></span>Graph()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Graph::Graph </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>anzahlKnoten</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_gleissymbol.html">Gleissymbol</a>&#160;</td>
+          <td class="paramname"><em>knoten</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nachbarn</em>[][3]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Erstellt einen Graphen </p><dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">anzahlKnoten</td><td>Die Anzahl der Knoten wird angegeben. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">knoten</td><td>Array mit allen Knoten des Graphen. Die Verbindungen, die über Kurvenstellung erreicht werden, müssen am Ende stehen!! </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nachbarn</td><td>Die Verknüpfunge werden mit diesem Array übergeben. nachbarn[knotennr][maxTiefe(beim Gleisbild 3)], alle nicht belegten Plätze müssen mit z.B. -1 belegt sein (außerhalb des Wertebereichs) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definiert in Zeile <a class="el" href="_graph_8cpp_source.html#l00008">8</a> der Datei <a class="el" href="_graph_8cpp_source.html">Graph.cpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Dokumentation der Elementfunktionen</h2>
+<a id="a139545e90bd834be2bb08c440115a6c8" name="a139545e90bd834be2bb08c440115a6c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a139545e90bd834be2bb08c440115a6c8">&#9670;&nbsp;</a></span>equals()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean Graph::equals </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_gleissymbol.html">Gleissymbol</a> *&#160;</td>
+          <td class="paramname"><em>symbol1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_gleissymbol.html">Gleissymbol</a> *&#160;</td>
+          <td class="paramname"><em>symbol2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >&gt;Alle Symbole im Graphen werden aktualisiert, die <a class="el" href="class_besetztmelder.html">Besetztmelder</a>, Weichen, Signale. Funktionen wie Hp= manuell Gibt zurück, ob Zwei zeiger auf ein <a class="el" href="class_gleissymbol.html" title="Ist ein Knoten für den in Graph erstellten Graphen Speichert alle Objekte, die dem Entsprechenden Kno...">Gleissymbol</a> auf das selbe zeigen. </p>
+
+<p class="definition">Definiert in Zeile <a class="el" href="_graph_8cpp_source.html#l00053">53</a> der Datei <a class="el" href="_graph_8cpp_source.html">Graph.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ac0231ba1e908c162768ccc5aed30239a" name="ac0231ba1e908c162768ccc5aed30239a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0231ba1e908c162768ccc5aed30239a">&#9670;&nbsp;</a></span>fahrstrasseEinstellen() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean Graph::fahrstrasseEinstellen </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_gleissymbol.html">Gleissymbol</a> *&#160;</td>
+          <td class="paramname"><em>start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_gleissymbol.html">Gleissymbol</a> *&#160;</td>
+          <td class="paramname"><em>ziel</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Der Weg zwischen den beiden Gleissymbolen wird gesucht, Die Reihenfolge ist dabei festgelegt und wird nicht überprüft. </p>
+
+<p class="definition">Definiert in Zeile <a class="el" href="_graph_8cpp_source.html#l00249">249</a> der Datei <a class="el" href="_graph_8cpp_source.html">Graph.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ae6f90be5ed4682f127d5cdc3bf43c125" name="ae6f90be5ed4682f127d5cdc3bf43c125"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6f90be5ed4682f127d5cdc3bf43c125">&#9670;&nbsp;</a></span>fahrstrasseEinstellen() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean Graph::fahrstrasseEinstellen </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_zugtaste.html">Zugtaste</a> *&#160;</td>
+          <td class="paramname"><em>taste1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_zugtaste.html">Zugtaste</a> *&#160;</td>
+          <td class="paramname"><em>taste2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Stellt die Fahrstraße von der ersten zur zweiten <a class="el" href="class_zugtaste.html">Zugtaste</a> ein. Die Reihenfolge der Zugtasten wird hierbei selbstständig bestimmt. </p>
+
+<p class="definition">Definiert in Zeile <a class="el" href="_graph_8cpp_source.html#l00206">206</a> der Datei <a class="el" href="_graph_8cpp_source.html">Graph.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ac9f1c7013ce4a4ba449046bf83cee6d2" name="ac9f1c7013ce4a4ba449046bf83cee6d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9f1c7013ce4a4ba449046bf83cee6d2">&#9670;&nbsp;</a></span>getKnoten()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_gleissymbol.html">Gleissymbol</a> * Graph::getKnoten </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>knotenNr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Gibt den Knoten unter der KnotenNr zurück </p>
+
+<p class="definition">Definiert in Zeile <a class="el" href="_graph_8cpp_source.html#l00332">332</a> der Datei <a class="el" href="_graph_8cpp_source.html">Graph.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a6a8d2658474632c9396e1cd0bb54f7df" name="a6a8d2658474632c9396e1cd0bb54f7df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a8d2658474632c9396e1cd0bb54f7df">&#9670;&nbsp;</a></span>getKnotenNr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Graph::getKnotenNr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_gleissymbol.html">Gleissymbol</a> *&#160;</td>
+          <td class="paramname"><em>symbol</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Git die Knotennr zum übergebenen Objekt zurück. Wenn nicht im <a class="el" href="class_graph.html">Graph</a> zu finden return -1 </p>
+
+<p class="definition">Definiert in Zeile <a class="el" href="_graph_8cpp_source.html#l00354">354</a> der Datei <a class="el" href="_graph_8cpp_source.html">Graph.cpp</a>.</p>
+
+</div>
+</div>
+<a id="af4db711ec2e164f1383a3a36fd6f3685" name="af4db711ec2e164f1383a3a36fd6f3685"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4db711ec2e164f1383a3a36fd6f3685">&#9670;&nbsp;</a></span>getNachbar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_gleissymbol.html">Gleissymbol</a> * Graph::getNachbar </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>knotenNr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nachbar</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Gibt den Nachbarn(nachbar) des Knoten (KnoteNr) zurück </p>
+
+<p class="definition">Definiert in Zeile <a class="el" href="_graph_8cpp_source.html#l00343">343</a> der Datei <a class="el" href="_graph_8cpp_source.html">Graph.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aa0f7d444897eb2bf3c90de17031e4325" name="aa0f7d444897eb2bf3c90de17031e4325"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0f7d444897eb2bf3c90de17031e4325">&#9670;&nbsp;</a></span>isKnotenNr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean Graph::isKnotenNr </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>knotenNr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >validiert, ob die übergebene Knoten Nummer existiert </p>
+
+<p class="definition">Definiert in Zeile <a class="el" href="_graph_8cpp_source.html#l00367">367</a> der Datei <a class="el" href="_graph_8cpp_source.html">Graph.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ad93a44f5c60d99db71518ee1330acce7" name="ad93a44f5c60d99db71518ee1330acce7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad93a44f5c60d99db71518ee1330acce7">&#9670;&nbsp;</a></span>isReset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean Graph::isReset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Methode zur Überprüfung des Resets derMarkierungen </p>
+
+<p class="definition">Definiert in Zeile <a class="el" href="_graph_8cpp_source.html#l00322">322</a> der Datei <a class="el" href="_graph_8cpp_source.html">Graph.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ac1bcc2af29fe0171521fc9b89a7424f8" name="ac1bcc2af29fe0171521fc9b89a7424f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1bcc2af29fe0171521fc9b89a7424f8">&#9670;&nbsp;</a></span>nextWay() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Graph::nextWay </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_gleissymbol.html">Gleissymbol</a> *&#160;</td>
+          <td class="paramname"><em>symbol</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fahrstrassenNr_vorgaenger</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">boolean&#160;</td>
+          <td class="paramname"><em>vorgaengerAktiv</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Die Methode gibt die Nr des nächsten nicht markierten Nachbarn der angegebenen Knotennummer zurück, wenn angegeben, den Knoten, der mit der FahrstrassenNr versehen ist. WEnn vorgaenger Aktiv, wird statt nach einer Fahrstraße, der Vorgänger des aktuellen Knotens übergeben, so kann ein logisch Sinnvoller WEg zum Beispiel bei WEichen bestimmt werden. </p>
+
+<p class="definition">Definiert in Zeile <a class="el" href="_graph_8cpp_source.html#l00061">61</a> der Datei <a class="el" href="_graph_8cpp_source.html">Graph.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a2fcbdeeb48e88d8cb632458d3a8d4a42" name="a2fcbdeeb48e88d8cb632458d3a8d4a42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fcbdeeb48e88d8cb632458d3a8d4a42">&#9670;&nbsp;</a></span>nextWay() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Graph::nextWay </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>knotenNr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fahrstrassenNr_vorgeaenger</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">boolean&#160;</td>
+          <td class="paramname"><em>vorgaengerAktiv</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Die Methode gibt die Nr des nächsten nicht markierten Nachbarn der angegebenen Knotennummer zurück, wenn angegeben, den Knoten, der mit der FahrstrassenNr versehen ist. WEnn vorgaenger Aktiv, wird statt nach einer Fahrstraße, der Vorgänger des aktuellen Knotens übergeben, so kann ein logisch Sinnvoller WEg zum Beispiel bei WEichen bestimmt werden. </p>
+
+<p class="definition">Definiert in Zeile <a class="el" href="_graph_8cpp_source.html#l00130">130</a> der Datei <a class="el" href="_graph_8cpp_source.html">Graph.cpp</a>.</p>
+
+</div>
+</div>
+<a id="af7e91b2de4038f27190682ef88ee0cb4" name="af7e91b2de4038f27190682ef88ee0cb4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7e91b2de4038f27190682ef88ee0cb4">&#9670;&nbsp;</a></span>prepare()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Graph::prepare </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Die Weichenrelais werden auf HIGH gestellt und die Weichenposition wird aus dem EEPROM abgerufen und ausgeführt. Die Methode wird am Anfang benötigt, so wird sicher gestellt, das alle Weichen in der vom Stellpult ange-nommenen Lage sind </p>
+
+<p class="definition">Definiert in Zeile <a class="el" href="_graph_8cpp_source.html#l00020">20</a> der Datei <a class="el" href="_graph_8cpp_source.html">Graph.cpp</a>.</p>
+
+</div>
+</div>
+<a id="af5d721b12df2bc9f8184efb3635017f1" name="af5d721b12df2bc9f8184efb3635017f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5d721b12df2bc9f8184efb3635017f1">&#9670;&nbsp;</a></span>resetMarkierungen()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Graph::resetMarkierungen </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fahrstrassenNr</em> = <code>0</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Setzt alle Markierungen zurück auf False </p>
+
+<p class="definition">Definiert in Zeile <a class="el" href="_graph_8cpp_source.html#l00312">312</a> der Datei <a class="el" href="_graph_8cpp_source.html">Graph.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a91a6330405bf3904508a9af139911c9e" name="a91a6330405bf3904508a9af139911c9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91a6330405bf3904508a9af139911c9e">&#9670;&nbsp;</a></span>richtungGerade() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean Graph::richtungGerade </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_gleissymbol.html">Gleissymbol</a> *&#160;</td>
+          <td class="paramname"><em>vorgaenger</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_gleissymbol.html">Gleissymbol</a> *&#160;</td>
+          <td class="paramname"><em>weichensymbol</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_gleissymbol.html">Gleissymbol</a> *&#160;</td>
+          <td class="paramname"><em>nachfolger</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Gibt zurück, ob die Richtung zwischen zwei Nachbarn bei gerade oder bei einer <a class="el" href="class_weiche.html">Weiche</a> als Kurve verläuft. </p>
+
+<p class="definition">Definiert in Zeile <a class="el" href="_graph_8cpp_source.html#l00375">375</a> der Datei <a class="el" href="_graph_8cpp_source.html">Graph.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a6ab8efcd48777297ab0ba3ad4861b5da" name="a6ab8efcd48777297ab0ba3ad4861b5da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ab8efcd48777297ab0ba3ad4861b5da">&#9670;&nbsp;</a></span>richtungGerade() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean Graph::richtungGerade </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>vorgaenger</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>weichensymbolNr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nachfolger</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Gibt zurück, ob die Richtung zwischen zwei Nachbarn bei gerade oder bei einer <a class="el" href="class_weiche.html">Weiche</a> als Kurve verläuft. </p>
+
+<p class="definition">Definiert in Zeile <a class="el" href="_graph_8cpp_source.html#l00385">385</a> der Datei <a class="el" href="_graph_8cpp_source.html">Graph.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ac27dcabc3453eaa9753d2d8d213f9d70" name="ac27dcabc3453eaa9753d2d8d213f9d70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac27dcabc3453eaa9753d2d8d213f9d70">&#9670;&nbsp;</a></span>sucheFlankenschutzweiche()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int * Graph::sucheFlankenschutzweiche </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>vorgaenger</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>weiche</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nachfolger</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_graph_8cpp_source.html#l00069">69</a> der Datei <a class="el" href="_graph_8cpp_source.html">Graph.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a8536235cdee21737d42b1705ee1d2c58" name="a8536235cdee21737d42b1705ee1d2c58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8536235cdee21737d42b1705ee1d2c58">&#9670;&nbsp;</a></span>symbolZuFahrstrasse() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Graph::symbolZuFahrstrasse </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_gleissymbol.html">Gleissymbol</a> *&#160;</td>
+          <td class="paramname"><em>symbol</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >setzt die Fahrstraße beginnend mit dem Symbol um </p>
+
+<p class="definition">Definiert in Zeile <a class="el" href="_graph_8cpp_source.html#l00264">264</a> der Datei <a class="el" href="_graph_8cpp_source.html">Graph.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a04f90d846a7e544ea9e6ff3cf6061dda" name="a04f90d846a7e544ea9e6ff3cf6061dda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04f90d846a7e544ea9e6ff3cf6061dda">&#9670;&nbsp;</a></span>symbolZuFahrstrasse() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Graph::symbolZuFahrstrasse </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>knotenNr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >setzt die Fahrstraße beginnend mit dem Symbol um </p>
+
+<p class="definition">Definiert in Zeile <a class="el" href="_graph_8cpp_source.html#l00269">269</a> der Datei <a class="el" href="_graph_8cpp_source.html">Graph.cpp</a>.</p>
+
+</div>
+</div>
+<a id="acb00a6777bcd356d3a41ded66fdaf91e" name="acb00a6777bcd356d3a41ded66fdaf91e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb00a6777bcd356d3a41ded66fdaf91e">&#9670;&nbsp;</a></span>updateSymbole()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Graph::updateSymbole </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_graph_8cpp_source.html#l00028">28</a> der Datei <a class="el" href="_graph_8cpp_source.html">Graph.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a93b9ad8849dc8e1dfcf85dcf5b522d37" name="a93b9ad8849dc8e1dfcf85dcf5b522d37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93b9ad8849dc8e1dfcf85dcf5b522d37">&#9670;&nbsp;</a></span>wegSuchen()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Graph::wegSuchen </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_gleissymbol.html">Gleissymbol</a> *&#160;</td>
+          <td class="paramname"><em>start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_gleissymbol.html">Gleissymbol</a> *&#160;</td>
+          <td class="paramname"><em>ziel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_gleissymbol.html">Gleissymbol</a> *&#160;</td>
+          <td class="paramname"><em>vorgaenger</em> = <code>nullptr</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Die Methode gibt die länge eines Weges zurück, ob es einen weg gibt und markiert Ihn, wenn möglich, zuvor müssen die Markierungen resetet (resetMarkierungen) werden. Der Vorgaenger wird nur für die korrekte Weichenposition bei Gleissymbolen mit WEichenbnötigt. </p>
+
+<p class="definition">Definiert in Zeile <a class="el" href="_graph_8cpp_source.html#l00166">166</a> der Datei <a class="el" href="_graph_8cpp_source.html">Graph.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a4842b26fb4f76f2d229f16d1a925e547" name="a4842b26fb4f76f2d229f16d1a925e547"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4842b26fb4f76f2d229f16d1a925e547">&#9670;&nbsp;</a></span>weichenAusgang()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean Graph::weichenAusgang </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>vorgaenger</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>aktuellerKnoten</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Kommt die Fahrstraße über einen Weichenausgang auf die <a class="el" href="class_weiche.html">Weiche</a> false, über den Eingang, also den Teil über den man zwei Abzweige weiter fahren kann, dann true </p>
+
+<p class="definition">Definiert in Zeile <a class="el" href="_graph_8cpp_source.html#l00395">395</a> der Datei <a class="el" href="_graph_8cpp_source.html">Graph.cpp</a>.</p>
+
+</div>
+</div>
+<hr/>Die Dokumentation für dieseKlasse wurde erzeugt aufgrund der Dateien:<ul>
+<li>src/<a class="el" href="_graph_8h_source.html">Graph.h</a></li>
+<li>src/<a class="el" href="_graph_8cpp_source.html">Graph.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Erzeugt von&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
+</small></address>
+</body>
+</html>
