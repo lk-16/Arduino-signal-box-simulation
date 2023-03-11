@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.3"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>SpDrS60 Stellwerkssimulation: src/zugtastenControl.cpp Quellcode</title>
+<title>SpDrS60 Stellwerkssimulation: C:/Users/Lennart/Documents/GBS/Clones/Arduino-signal-box-simulation-1/src/zugtastenControl.cpp Quellcode</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -46,22 +46,22 @@ $(function() {
   <div class="headertitle"><div class="title">zugtastenControl.cpp</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="zugtasten_control_8cpp.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*Library für die Steuerung eines SpDrS60-Gleisbildstellpults</span></div>
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*Library für die Steuerung eines SpDrS60-Gleisbildstellpults</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> *  mit dieser Library können Weichen, Signale etc. gesteuert werden</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> *  Lennart Klüner 05.09.2020</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> */</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="zugtasten_control_8h.html">ZugtastenControl.h</a>&quot;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="_zugtaste_8h.html">Zugtaste.h</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;ZugtastenControl.h&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;Zugtaste.h&quot;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">// Methoden der Klasse besetztmeldungControl</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="class_zugtasten_control.html#a513aea6a92f035b75c11d0efcdc28593">   10</a></span><a class="code hl_function" href="class_zugtasten_control.html#a513aea6a92f035b75c11d0efcdc28593">ZugtastenControl::ZugtastenControl</a>(<span class="keywordtype">int</span> anzahlZugtasten, <span class="keywordtype">int</span> <a class="code hl_variable" href="main_8cpp.html#a030658e8b4be6b1969002aad9f192ede">zugtastenPins</a>[], <span class="keywordtype">boolean</span> richtung[])</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="class_zugtasten_control.html#a513aea6a92f035b75c11d0efcdc28593">   10</a></span><a class="code hl_function" href="class_zugtasten_control.html#a513aea6a92f035b75c11d0efcdc28593">ZugtastenControl::ZugtastenControl</a>(<span class="keywordtype">int</span> anzahlZugtasten, <span class="keywordtype">int</span> zugtastenPins[], <span class="keywordtype">boolean</span> richtung[])</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>{</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    _anzahlZugtasten = anzahlZugtasten;</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    _pzugtasten = <span class="keyword">new</span> <a class="code hl_class" href="class_zugtaste.html">Zugtaste</a> *[_anzahlZugtasten];</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> zugtastenNr = 0; zugtastenNr &lt; _anzahlZugtasten; zugtastenNr++)</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        _pzugtasten[zugtastenNr] = <span class="keyword">new</span> <a class="code hl_class" href="class_zugtaste.html">Zugtaste</a>(<a class="code hl_variable" href="main_8cpp.html#a030658e8b4be6b1969002aad9f192ede">zugtastenPins</a>[zugtastenNr], richtung[zugtastenNr]);</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        _pzugtasten[zugtastenNr] = <span class="keyword">new</span> <a class="code hl_class" href="class_zugtaste.html">Zugtaste</a>(zugtastenPins[zugtastenNr], richtung[zugtastenNr]);</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>}</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="class_zugtasten_control.html#afaac7e125805fc5bf048a092b7b4363b">   19</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="class_zugtasten_control.html#afaac7e125805fc5bf048a092b7b4363b">ZugtastenControl::getZugtastenAnzahl</a>()</div>
@@ -120,7 +120,6 @@ $(function() {
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    }</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>}</div>
-<div class="ttc" id="a_zugtaste_8h_html"><div class="ttname"><a href="_zugtaste_8h.html">Zugtaste.h</a></div></div>
 <div class="ttc" id="aclass_gleissymbol_html"><div class="ttname"><a href="class_gleissymbol.html">Gleissymbol</a></div><div class="ttdoc">Ist ein Knoten für den in Graph erstellten Graphen Speichert alle Objekte, die dem Entsprechenden Kno...</div><div class="ttdef"><b>Definition:</b> <a href="_gleissymbol_8h_source.html#l00022">Gleissymbol.h:23</a></div></div>
 <div class="ttc" id="aclass_zugtaste_html"><div class="ttname"><a href="class_zugtaste.html">Zugtaste</a></div><div class="ttdef"><b>Definition:</b> <a href="_zugtaste_8h_source.html#l00022">Zugtaste.h:23</a></div></div>
 <div class="ttc" id="aclass_zugtaste_html_a072eb9ebcfde171bcbc02bc5e51d7b03"><div class="ttname"><a href="class_zugtaste.html#a072eb9ebcfde171bcbc02bc5e51d7b03">Zugtaste::getzugtastenstatus</a></div><div class="ttdeci">boolean getzugtastenstatus()</div><div class="ttdef"><b>Definition:</b> <a href="_zugtaste_8cpp_source.html#l00022">Zugtaste.cpp:22</a></div></div>
@@ -134,8 +133,6 @@ $(function() {
 <div class="ttc" id="aclass_zugtasten_control_html_ac19a33669e0580b5eb9c57dcc610ef3b"><div class="ttname"><a href="class_zugtasten_control.html#ac19a33669e0580b5eb9c57dcc610ef3b">ZugtastenControl::getZugtaste</a></div><div class="ttdeci">Zugtaste * getZugtaste(int zugtastenNr)</div><div class="ttdef"><b>Definition:</b> <a href="zugtasten_control_8cpp_source.html#l00057">zugtastenControl.cpp:57</a></div></div>
 <div class="ttc" id="aclass_zugtasten_control_html_aea3770a6d082a213b3588863f1473743"><div class="ttname"><a href="class_zugtasten_control.html#aea3770a6d082a213b3588863f1473743">ZugtastenControl::getZugtastenstatus</a></div><div class="ttdeci">boolean getZugtastenstatus(int zugtastenNr)</div><div class="ttdef"><b>Definition:</b> <a href="zugtasten_control_8cpp_source.html#l00024">zugtastenControl.cpp:24</a></div></div>
 <div class="ttc" id="aclass_zugtasten_control_html_afaac7e125805fc5bf048a092b7b4363b"><div class="ttname"><a href="class_zugtasten_control.html#afaac7e125805fc5bf048a092b7b4363b">ZugtastenControl::getZugtastenAnzahl</a></div><div class="ttdeci">int getZugtastenAnzahl()</div><div class="ttdef"><b>Definition:</b> <a href="zugtasten_control_8cpp_source.html#l00019">zugtastenControl.cpp:19</a></div></div>
-<div class="ttc" id="amain_8cpp_html_a030658e8b4be6b1969002aad9f192ede"><div class="ttname"><a href="main_8cpp.html#a030658e8b4be6b1969002aad9f192ede">zugtastenPins</a></div><div class="ttdeci">int zugtastenPins[zugtastenanzahl]</div><div class="ttdef"><b>Definition:</b> <a href="main_8cpp_source.html#l00112">main.cpp:112</a></div></div>
-<div class="ttc" id="azugtasten_control_8h_html"><div class="ttname"><a href="zugtasten_control_8h.html">zugtastenControl.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

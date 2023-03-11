@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.3"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>SpDrS60 Stellwerkssimulation: src/Actor.cpp Quellcode</title>
+<title>SpDrS60 Stellwerkssimulation: C:/Users/Lennart/Documents/GBS/Clones/Arduino-signal-box-simulation-1/src/Actor.cpp Quellcode</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -46,19 +46,19 @@ $(function() {
   <div class="headertitle"><div class="title">Actor.cpp</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="_actor_8cpp.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*Library für die Steuerung eines SpDrS60-Gleisbildstellpults</span></div>
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*Library für die Steuerung eines SpDrS60-Gleisbildstellpults</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> *  mit dieser Library können Weichen, Signale etc. gesteuert werden</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> *  Lennart Klüner 05.09.2020</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> */</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;Arduino.h&gt;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;EEPROM.h&gt;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="_actor_8h.html">Actor.h</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;Actor.h&quot;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">// Methoden der Klasse actors</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="class_actor.html#ae7deab7318add38f52e32a5a4fefaabc">   11</a></span><a class="code hl_function" href="class_actor.html#ae7deab7318add38f52e32a5a4fefaabc">Actor::Actor</a>(<span class="keywordtype">int</span> <a class="code hl_variable" href="main_8cpp.html#a10ae75d19930ec38568c12a9bbe78b57">anzahl</a>, <span class="keywordtype">int</span> sh, <span class="keywordtype">int</span> st, <span class="keywordtype">int</span> ds)</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="class_actor.html#ae7deab7318add38f52e32a5a4fefaabc">   11</a></span><a class="code hl_function" href="class_actor.html#ae7deab7318add38f52e32a5a4fefaabc">Actor::Actor</a>(<span class="keywordtype">int</span> anzahl, <span class="keywordtype">int</span> sh, <span class="keywordtype">int</span> st, <span class="keywordtype">int</span> ds)</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>{</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>  _registerAnzahl = <a class="code hl_variable" href="main_8cpp.html#a10ae75d19930ec38568c12a9bbe78b57">anzahl</a>;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>  _registerAnzahl = anzahl;</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>  _shPin = sh;</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>  _stPin = st;</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  _dsPin = ds;</div>
@@ -87,19 +87,17 @@ $(function() {
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    register1-&gt;setPin(PinNr - 100, newPinStatus); <span class="comment">// wenn die Nummer zwischen 100 und 200 liegt, nutze das erste Schieberegister in kombination mit der Bibliothek</span></div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>}</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="class_actor.html#a710ddb71e5b877a263a28dd05b630be9">   42</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_actor.html#a710ddb71e5b877a263a28dd05b630be9">Actor::setRegisterPins</a>(<span class="keywordtype">int</span> <a class="code hl_variable" href="main_8cpp.html#a10ae75d19930ec38568c12a9bbe78b57">anzahl</a>, <span class="keywordtype">int</span> sh, <span class="keywordtype">int</span> st, <span class="keywordtype">int</span> ds)</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="class_actor.html#a710ddb71e5b877a263a28dd05b630be9">   42</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="class_actor.html#a710ddb71e5b877a263a28dd05b630be9">Actor::setRegisterPins</a>(<span class="keywordtype">int</span> anzahl, <span class="keywordtype">int</span> sh, <span class="keywordtype">int</span> st, <span class="keywordtype">int</span> ds)</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>{</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  _registerAnzahl = <a class="code hl_variable" href="main_8cpp.html#a10ae75d19930ec38568c12a9bbe78b57">anzahl</a>;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  _registerAnzahl = anzahl;</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  _shPin = sh;</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  _stPin = st;</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  _dsPin = ds;</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>}</div>
-<div class="ttc" id="a_actor_8h_html"><div class="ttname"><a href="_actor_8h.html">Actor.h</a></div></div>
 <div class="ttc" id="aclass_actor_html_a0fa071a76d36b9d864e4235028e17198"><div class="ttname"><a href="class_actor.html#a0fa071a76d36b9d864e4235028e17198">Actor::digitalSchalten</a></div><div class="ttdeci">void digitalSchalten(int PinNr, boolean newPinStatus)</div><div class="ttdef"><b>Definition:</b> <a href="_actor_8cpp_source.html#l00031">Actor.cpp:31</a></div></div>
 <div class="ttc" id="aclass_actor_html_a710ddb71e5b877a263a28dd05b630be9"><div class="ttname"><a href="class_actor.html#a710ddb71e5b877a263a28dd05b630be9">Actor::setRegisterPins</a></div><div class="ttdeci">void setRegisterPins(int anzahl, int sh, int st, int ds)</div><div class="ttdef"><b>Definition:</b> <a href="_actor_8cpp_source.html#l00042">Actor.cpp:42</a></div></div>
 <div class="ttc" id="aclass_actor_html_ad0595d335c3f070ac8bbbbe91b35494a"><div class="ttname"><a href="class_actor.html#ad0595d335c3f070ac8bbbbe91b35494a">Actor::blinken</a></div><div class="ttdeci">void blinken(int LedPin)</div><div class="ttdef"><b>Definition:</b> <a href="_actor_8cpp_source.html#l00019">Actor.cpp:19</a></div></div>
 <div class="ttc" id="aclass_actor_html_ae7deab7318add38f52e32a5a4fefaabc"><div class="ttname"><a href="class_actor.html#ae7deab7318add38f52e32a5a4fefaabc">Actor::Actor</a></div><div class="ttdeci">Actor(int anzahl, int sh, int st, int ds)</div><div class="ttdef"><b>Definition:</b> <a href="_actor_8cpp_source.html#l00011">Actor.cpp:11</a></div></div>
-<div class="ttc" id="amain_8cpp_html_a10ae75d19930ec38568c12a9bbe78b57"><div class="ttname"><a href="main_8cpp.html#a10ae75d19930ec38568c12a9bbe78b57">anzahl</a></div><div class="ttdeci">int anzahl</div><div class="ttdef"><b>Definition:</b> <a href="main_8cpp_source.html#l00118">main.cpp:118</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

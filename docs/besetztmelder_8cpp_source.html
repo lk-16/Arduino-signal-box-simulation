@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.3"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>SpDrS60 Stellwerkssimulation: src/besetztmelder.cpp Quellcode</title>
+<title>SpDrS60 Stellwerkssimulation: C:/Users/Lennart/Documents/GBS/Clones/Arduino-signal-box-simulation-1/src/besetztmelder.cpp Quellcode</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -46,14 +46,14 @@ $(function() {
   <div class="headertitle"><div class="title">besetztmelder.cpp</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="besetztmelder_8cpp.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*Library für die Steuerung eines SpDrS60-Gleisbildstellpults</span></div>
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*Library für die Steuerung eines SpDrS60-Gleisbildstellpults</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> *  mit dieser Library können Weichen, Signale etc. gesteuert werden</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> *  Lennart Klüner 05.09.2020</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> */</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;Arduino.h&quot;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="besetztmelder_8h.html">Besetztmelder.h</a>&quot;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="_weichen_control_8h.html">WeichenControl.h</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;Besetztmelder.h&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;WeichenControl.h&quot;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">// Methoden der Klasse besetztmelder</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="class_besetztmelder.html#a6832ce1c7d62df2193e49f8dd3d709cf">   11</a></span><a class="code hl_function" href="class_besetztmelder.html#a6832ce1c7d62df2193e49f8dd3d709cf">Besetztmelder::Besetztmelder</a>(<span class="keywordtype">int</span> gleisPin, <span class="keywordtype">int</span> ledGelb, <span class="keywordtype">int</span> ledRot, <span class="keywordtype">int</span> weichenbesetztmelder, <span class="keywordtype">int</span> registerPin[4])</div>
@@ -158,8 +158,6 @@ $(function() {
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>{</div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <span class="keywordflow">return</span> _gleisPin;</div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>}</div>
-<div class="ttc" id="a_weichen_control_8h_html"><div class="ttname"><a href="_weichen_control_8h.html">WeichenControl.h</a></div></div>
-<div class="ttc" id="abesetztmelder_8h_html"><div class="ttname"><a href="besetztmelder_8h.html">besetztmelder.h</a></div></div>
 <div class="ttc" id="aclass_actor_html"><div class="ttname"><a href="class_actor.html">Actor</a></div><div class="ttdef"><b>Definition:</b> <a href="_actor_8h_source.html#l00020">Actor.h:21</a></div></div>
 <div class="ttc" id="aclass_actor_html_a0fa071a76d36b9d864e4235028e17198"><div class="ttname"><a href="class_actor.html#a0fa071a76d36b9d864e4235028e17198">Actor::digitalSchalten</a></div><div class="ttdeci">void digitalSchalten(int PinNr, boolean newPinStatus)</div><div class="ttdef"><b>Definition:</b> <a href="_actor_8cpp_source.html#l00031">Actor.cpp:31</a></div></div>
 <div class="ttc" id="aclass_besetztmelder_html_a562bbe1d2b300dff28f92cedff281ad0"><div class="ttname"><a href="class_besetztmelder.html#a562bbe1d2b300dff28f92cedff281ad0">Besetztmelder::setBesetztmelderLicht</a></div><div class="ttdeci">void setBesetztmelderLicht(boolean newBesetztmelderStatus)</div><div class="ttdef"><b>Definition:</b> <a href="besetztmelder_8cpp_source.html#l00084">besetztmelder.cpp:84</a></div></div>

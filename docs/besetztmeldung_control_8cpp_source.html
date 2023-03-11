@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.3"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>SpDrS60 Stellwerkssimulation: src/besetztmeldungControl.cpp Quellcode</title>
+<title>SpDrS60 Stellwerkssimulation: C:/Users/Lennart/Documents/GBS/Clones/Arduino-signal-box-simulation-1/src/besetztmeldungControl.cpp Quellcode</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -46,13 +46,13 @@ $(function() {
   <div class="headertitle"><div class="title">besetztmeldungControl.cpp</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="besetztmeldung_control_8cpp.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*Library für die Steuerung eines SpDrS60-Gleisbildstellpults</span></div>
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*Library für die Steuerung eines SpDrS60-Gleisbildstellpults</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> *  mit dieser Library können Weichen, Signale etc. gesteuert werden</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> *  Lennart Klüner 05.09.2020</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> */</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;Arduino.h&quot;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="besetztmeldung_control_8h.html">BesetztmeldungControl.h</a>&quot;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="besetztmelder_8h.html">Besetztmelder.h</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;BesetztmeldungControl.h&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;Besetztmelder.h&quot;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">//Methoden der Klasse besetztmeldungControl</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="class_besetztmeldung_control.html#ad6c74a27eb7b3837a09e7ee82fb6591a">   10</a></span><a class="code hl_function" href="class_besetztmeldung_control.html#ad6c74a27eb7b3837a09e7ee82fb6591a">BesetztmeldungControl::BesetztmeldungControl</a>(<span class="keywordtype">int</span> gleisPins[], <span class="keywordtype">int</span> ledsGelb[], <span class="keywordtype">int</span> ledsRot[], <span class="keywordtype">int</span> weichenbesetztmelder[], <span class="keywordtype">int</span> anzahlMelder, <span class="keywordtype">int</span> registerPins[4])</div>
@@ -93,8 +93,6 @@ $(function() {
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> besetztmelderNr = 0; besetztmelderNr &lt; _anzahlMelder; besetztmelderNr++)</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        _pbesetztmelder[besetztmelderNr]-&gt;besetztmelderAuslesen(LOW, <a class="code hl_class" href="class_weichen_control.html">WeichenControl</a>);</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>}</div>
-<div class="ttc" id="abesetztmelder_8h_html"><div class="ttname"><a href="besetztmelder_8h.html">besetztmelder.h</a></div></div>
-<div class="ttc" id="abesetztmeldung_control_8h_html"><div class="ttname"><a href="besetztmeldung_control_8h.html">besetztmeldungControl.h</a></div></div>
 <div class="ttc" id="aclass_besetztmelder_html"><div class="ttname"><a href="class_besetztmelder.html">Besetztmelder</a></div><div class="ttdef"><b>Definition:</b> <a href="besetztmelder_8h_source.html#l00024">besetztmelder.h:25</a></div></div>
 <div class="ttc" id="aclass_besetztmelder_html_a562bbe1d2b300dff28f92cedff281ad0"><div class="ttname"><a href="class_besetztmelder.html#a562bbe1d2b300dff28f92cedff281ad0">Besetztmelder::setBesetztmelderLicht</a></div><div class="ttdeci">void setBesetztmelderLicht(boolean newBesetztmelderStatus)</div><div class="ttdef"><b>Definition:</b> <a href="besetztmelder_8cpp_source.html#l00084">besetztmelder.cpp:84</a></div></div>
 <div class="ttc" id="aclass_besetztmelder_html_aaba66641504b0315ffd7e920c1b1c24f"><div class="ttname"><a href="class_besetztmelder.html#aaba66641504b0315ffd7e920c1b1c24f">Besetztmelder::getFahrstrassenelement</a></div><div class="ttdeci">boolean getFahrstrassenelement()</div><div class="ttdef"><b>Definition:</b> <a href="besetztmelder_8cpp_source.html#l00104">besetztmelder.cpp:104</a></div></div>

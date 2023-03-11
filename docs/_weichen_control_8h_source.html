@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.3"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>SpDrS60 Stellwerkssimulation: src/WeichenControl.h Quellcode</title>
+<title>SpDrS60 Stellwerkssimulation: C:/Users/Lennart/Documents/GBS/Clones/Arduino-signal-box-simulation-1/src/WeichenControl.h Quellcode</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -46,15 +46,15 @@ $(function() {
   <div class="headertitle"><div class="title">WeichenControl.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="_weichen_control_8h.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*Library für die Steuerung eines SpDrS60-Gleisbildstellpults</span></div>
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*Library für die Steuerung eines SpDrS60-Gleisbildstellpults</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> *  mit dieser Library können Weichen, Signale etc. gesteuert werden</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> *  Lennart Klüner 05.09.2020</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> */</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#ifndef WeichenControl_h</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#define WeichenControl_h</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="_weiche_8h.html">Weiche.h</a>&quot;</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="besetztmelder_8h.html">Besetztmelder.h</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;Weiche.h&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;Besetztmelder.h&quot;</span></div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="class_weichen_control.html">   21</a></span><span class="keyword">class </span><a class="code hl_class" href="class_weichen_control.html">WeichenControl</a></div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>{</div>
@@ -64,7 +64,7 @@ $(function() {
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  <span class="keywordtype">void</span> setWeicheBesetzt(<span class="keywordtype">int</span> WeichenNr, <span class="keywordtype">boolean</span> besetztmelderstatus);</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  <a class="code hl_function" href="class_weichen_control.html#a19f1d6238e89b88a569ef1c670079fd7">WeichenControl</a>(<span class="keywordtype">int</span> anzahlweichen, <span class="keywordtype">int</span> weichenPinGerade[], <span class="keywordtype">int</span> weichenPinKurve[], <span class="keywordtype">int</span> weichenLedGerade[], <span class="keywordtype">int</span> weichenLedGeradeRot[], <span class="keywordtype">int</span> weichenLedKurve[], <span class="keywordtype">int</span> weichenLedKurveRot[], <span class="keywordtype">int</span> adressWeichenposition[], <span class="keywordtype">int</span> <a class="code hl_define" href="main_8cpp.html#a1a29e46b4f567ec905a74d69207cabdf">weichentimeout</a>, <span class="keywordtype">int</span> wt[], <span class="keywordtype">int</span> <a class="code hl_define" href="main_8cpp.html#a97afe9b51bfdb410c9296bceeb30c2ca">wgt</a>, <span class="keywordtype">int</span> registerPins[4]); <span class="comment">// Im Konstruktor wird ein Array von Objekten der Klasse Weichen erstellt und initialisiert</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  <a class="code hl_function" href="class_weichen_control.html#a19f1d6238e89b88a569ef1c670079fd7">WeichenControl</a>(<span class="keywordtype">int</span> anzahlweichen, <span class="keywordtype">int</span> weichenPinGerade[], <span class="keywordtype">int</span> weichenPinKurve[], <span class="keywordtype">int</span> weichenLedGerade[], <span class="keywordtype">int</span> weichenLedGeradeRot[], <span class="keywordtype">int</span> weichenLedKurve[], <span class="keywordtype">int</span> weichenLedKurveRot[], <span class="keywordtype">int</span> adressWeichenposition[], <span class="keywordtype">int</span> weichentimeout, <span class="keywordtype">int</span> wt[], <span class="keywordtype">int</span> wgt, <span class="keywordtype">int</span> registerPins[4]); <span class="comment">// Im Konstruktor wird ein Array von Objekten der Klasse Weichen erstellt und initialisiert</span></div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  <a class="code hl_class" href="class_weiche.html">Weiche</a> *<a class="code hl_function" href="class_weichen_control.html#ab0b4c95cf5c2157cb06c15d350235f5a">getWeiche</a>(<span class="keywordtype">int</span> weichenNr);</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="class_weichen_control.html#a884ab4683c236c0bb076f0e15b7dfdde">weichenWechseln</a>();                                                               </div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="class_weichen_control.html#a167a851af0e17ec87355ec903b4dfcb7">weichenStellen</a>(<span class="keywordtype">int</span> weichenNr, <span class="keywordtype">boolean</span> weichenlage);                              </div>
@@ -81,8 +81,6 @@ $(function() {
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>};</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="a_weiche_8h_html"><div class="ttname"><a href="_weiche_8h.html">Weiche.h</a></div></div>
-<div class="ttc" id="abesetztmelder_8h_html"><div class="ttname"><a href="besetztmelder_8h.html">besetztmelder.h</a></div></div>
 <div class="ttc" id="aclass_besetztmelder_html"><div class="ttname"><a href="class_besetztmelder.html">Besetztmelder</a></div><div class="ttdef"><b>Definition:</b> <a href="besetztmelder_8h_source.html#l00024">besetztmelder.h:25</a></div></div>
 <div class="ttc" id="aclass_weiche_html"><div class="ttname"><a href="class_weiche.html">Weiche</a></div><div class="ttdef"><b>Definition:</b> <a href="_weiche_8h_source.html#l00022">Weiche.h:23</a></div></div>
 <div class="ttc" id="aclass_weichen_control_html"><div class="ttname"><a href="class_weichen_control.html">WeichenControl</a></div><div class="ttdef"><b>Definition:</b> <a href="_weichen_control_8h_source.html#l00021">WeichenControl.h:22</a></div></div>
@@ -99,8 +97,6 @@ $(function() {
 <div class="ttc" id="aclass_weichen_control_html_ac07ce1f2da3cc53d4b6b54cc845c0f8a"><div class="ttname"><a href="class_weichen_control.html#ac07ce1f2da3cc53d4b6b54cc845c0f8a">WeichenControl::getWeichenposition</a></div><div class="ttdeci">boolean getWeichenposition(int weichenNr)</div><div class="ttdef"><b>Definition:</b> <a href="_weichen_control_8cpp_source.html#l00082">WeichenControl.cpp:82</a></div></div>
 <div class="ttc" id="aclass_weichen_control_html_aee8676305d6dcd4d59bbfbd7f5bb1287"><div class="ttname"><a href="class_weichen_control.html#aee8676305d6dcd4d59bbfbd7f5bb1287">WeichenControl::getWeichenfestlegung</a></div><div class="ttdeci">boolean getWeichenfestlegung(int weichenNr)</div><div class="ttdef"><b>Definition:</b> <a href="_weichen_control_8cpp_source.html#l00077">WeichenControl.cpp:77</a></div></div>
 <div class="ttc" id="aclass_weichen_control_html_afe50e7992d8c15beacc88247b6c1f101"><div class="ttname"><a href="class_weichen_control.html#afe50e7992d8c15beacc88247b6c1f101">WeichenControl::weichenRelaisHIGH</a></div><div class="ttdeci">void weichenRelaisHIGH()</div><div class="ttdef"><b>Definition:</b> <a href="_weichen_control_8cpp_source.html#l00048">WeichenControl.cpp:48</a></div></div>
-<div class="ttc" id="amain_8cpp_html_a1a29e46b4f567ec905a74d69207cabdf"><div class="ttname"><a href="main_8cpp.html#a1a29e46b4f567ec905a74d69207cabdf">weichentimeout</a></div><div class="ttdeci">#define weichentimeout</div><div class="ttdef"><b>Definition:</b> <a href="main_8cpp_source.html#l00050">main.cpp:50</a></div></div>
-<div class="ttc" id="amain_8cpp_html_a97afe9b51bfdb410c9296bceeb30c2ca"><div class="ttname"><a href="main_8cpp.html#a97afe9b51bfdb410c9296bceeb30c2ca">wgt</a></div><div class="ttdeci">#define wgt</div><div class="ttdef"><b>Definition:</b> <a href="main_8cpp_source.html#l00051">main.cpp:51</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

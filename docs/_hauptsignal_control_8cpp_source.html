@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.3"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>SpDrS60 Stellwerkssimulation: src/HauptsignalControl.cpp Quellcode</title>
+<title>SpDrS60 Stellwerkssimulation: C:/Users/Lennart/Documents/GBS/Clones/Arduino-signal-box-simulation-1/src/HauptsignalControl.cpp Quellcode</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -46,13 +46,13 @@ $(function() {
   <div class="headertitle"><div class="title">HauptsignalControl.cpp</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="_hauptsignal_control_8cpp.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*Library für die Steuerung eines SpDrS60-Gleisbildstellpults</span></div>
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*Library für die Steuerung eines SpDrS60-Gleisbildstellpults</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> *  mit dieser Library können Weichen, Signale etc. gesteuert werden</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> *  Lennart Klüner 05.09.2020</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> */</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="_hauptsignal_control_8h.html">HauptsignalControl.h</a>&quot;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="_hauptsignal_8h.html">Hauptsignal.h</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;HauptsignalControl.h&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;Hauptsignal.h&quot;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">// Methoden der Klasse besetztmeldungControl</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="class_hauptsignal_control.html#a4123badab29e8def35ea1e8149714ce6">   10</a></span><a class="code hl_function" href="class_hauptsignal_control.html#a4123badab29e8def35ea1e8149714ce6">HauptsignalControl::HauptsignalControl</a>(<span class="keywordtype">int</span> anzahlHauptsignale, <span class="keywordtype">int</span> ledPinsRot[], <span class="keywordtype">int</span> ledPinsGelb[], <span class="keywordtype">int</span> ledPinsGruen[], <span class="keywordtype">int</span> signaltasten[], <span class="keywordtype">int</span> sperrmelder[], <span class="keywordtype">int</span> allgSignaltasten[3], <span class="keywordtype">int</span> registerPin[4], <span class="keywordtype">boolean</span> richtung[])</div>
@@ -93,8 +93,6 @@ $(function() {
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>{</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordflow">return</span> _pHauptsignale[hauptsignalNr]-&gt;<a class="code hl_function" href="class_signal.html#a8fb4bb651c8066da2cacde46d2cb2f88">getSignalsperre</a>();</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>}</div>
-<div class="ttc" id="a_hauptsignal_8h_html"><div class="ttname"><a href="_hauptsignal_8h.html">Hauptsignal.h</a></div></div>
-<div class="ttc" id="a_hauptsignal_control_8h_html"><div class="ttname"><a href="_hauptsignal_control_8h.html">HauptsignalControl.h</a></div></div>
 <div class="ttc" id="aclass_hauptsignal_control_html_a10d2295b0c43f7e830255c50e04856d4"><div class="ttname"><a href="class_hauptsignal_control.html#a10d2295b0c43f7e830255c50e04856d4">HauptsignalControl::hauptsignalSchalten</a></div><div class="ttdeci">void hauptsignalSchalten(int hauptsignalNr, int newStatus)</div><div class="ttdef"><b>Definition:</b> <a href="_hauptsignal_control_8cpp_source.html#l00027">HauptsignalControl.cpp:27</a></div></div>
 <div class="ttc" id="aclass_hauptsignal_control_html_a2dea5f3c587e96f3bc0d980019f49eeb"><div class="ttname"><a href="class_hauptsignal_control.html#a2dea5f3c587e96f3bc0d980019f49eeb">HauptsignalControl::getHauptsignalSperren</a></div><div class="ttdeci">boolean getHauptsignalSperren(int hauptsignalNr)</div><div class="ttdef"><b>Definition:</b> <a href="_hauptsignal_control_8cpp_source.html#l00044">HauptsignalControl.cpp:44</a></div></div>
 <div class="ttc" id="aclass_hauptsignal_control_html_a4123badab29e8def35ea1e8149714ce6"><div class="ttname"><a href="class_hauptsignal_control.html#a4123badab29e8def35ea1e8149714ce6">HauptsignalControl::HauptsignalControl</a></div><div class="ttdeci">HauptsignalControl(int anzahlHauptsignale, int ledPinsRot[], int ledPinsGelb[], int ledPinsGruen[], int signaltasten[], int sperrmelder[], int allgSignaltasten[3], int registerPin[4], boolean richtung[]=nullptr)</div><div class="ttdef"><b>Definition:</b> <a href="_hauptsignal_control_8cpp_source.html#l00010">HauptsignalControl.cpp:10</a></div></div>

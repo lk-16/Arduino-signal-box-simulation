@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.3"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>SpDrS60 Stellwerkssimulation: src/Actor.h Quellcode</title>
+<title>SpDrS60 Stellwerkssimulation: C:/Users/Lennart/Documents/GBS/Clones/Arduino-signal-box-simulation-1/src/Actor.h Quellcode</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -46,7 +46,7 @@ $(function() {
   <div class="headertitle"><div class="title">Actor.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="_actor_8h.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*Library für die Steuerung eines SpDrS60-Gleisbildstellpults</span></div>
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*Library für die Steuerung eines SpDrS60-Gleisbildstellpults</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> *  mit dieser Library können Weichen, Signale etc. gesteuert werden</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> *  Lennart Klüner 05.09.2020</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> */</span></div>
@@ -65,10 +65,10 @@ $(function() {
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  <span class="keywordtype">int</span> _dsPin;</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  <a class="code hl_function" href="class_actor.html#ae7deab7318add38f52e32a5a4fefaabc">Actor</a>(<span class="keywordtype">int</span> <a class="code hl_variable" href="main_8cpp.html#a10ae75d19930ec38568c12a9bbe78b57">anzahl</a>, <span class="keywordtype">int</span> sh, <span class="keywordtype">int</span> st, <span class="keywordtype">int</span> ds);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  <a class="code hl_function" href="class_actor.html#ae7deab7318add38f52e32a5a4fefaabc">Actor</a>(<span class="keywordtype">int</span> anzahl, <span class="keywordtype">int</span> sh, <span class="keywordtype">int</span> st, <span class="keywordtype">int</span> ds);</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="class_actor.html#ad0595d335c3f070ac8bbbbe91b35494a">blinken</a>(<span class="keywordtype">int</span> LedPin); </div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="class_actor.html#a0fa071a76d36b9d864e4235028e17198">digitalSchalten</a>(<span class="keywordtype">int</span> PinNr, <span class="keywordtype">boolean</span> newPinStatus);</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="class_actor.html#a710ddb71e5b877a263a28dd05b630be9">setRegisterPins</a>(<span class="keywordtype">int</span> <a class="code hl_variable" href="main_8cpp.html#a10ae75d19930ec38568c12a9bbe78b57">anzahl</a>, <span class="keywordtype">int</span> sh, <span class="keywordtype">int</span> st, <span class="keywordtype">int</span> ds); </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="class_actor.html#a710ddb71e5b877a263a28dd05b630be9">setRegisterPins</a>(<span class="keywordtype">int</span> anzahl, <span class="keywordtype">int</span> sh, <span class="keywordtype">int</span> st, <span class="keywordtype">int</span> ds); </div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>};</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclass_actor_html"><div class="ttname"><a href="class_actor.html">Actor</a></div><div class="ttdef"><b>Definition:</b> <a href="_actor_8h_source.html#l00020">Actor.h:21</a></div></div>
@@ -76,7 +76,6 @@ $(function() {
 <div class="ttc" id="aclass_actor_html_a710ddb71e5b877a263a28dd05b630be9"><div class="ttname"><a href="class_actor.html#a710ddb71e5b877a263a28dd05b630be9">Actor::setRegisterPins</a></div><div class="ttdeci">void setRegisterPins(int anzahl, int sh, int st, int ds)</div><div class="ttdef"><b>Definition:</b> <a href="_actor_8cpp_source.html#l00042">Actor.cpp:42</a></div></div>
 <div class="ttc" id="aclass_actor_html_ad0595d335c3f070ac8bbbbe91b35494a"><div class="ttname"><a href="class_actor.html#ad0595d335c3f070ac8bbbbe91b35494a">Actor::blinken</a></div><div class="ttdeci">void blinken(int LedPin)</div><div class="ttdef"><b>Definition:</b> <a href="_actor_8cpp_source.html#l00019">Actor.cpp:19</a></div></div>
 <div class="ttc" id="aclass_actor_html_ae7deab7318add38f52e32a5a4fefaabc"><div class="ttname"><a href="class_actor.html#ae7deab7318add38f52e32a5a4fefaabc">Actor::Actor</a></div><div class="ttdeci">Actor(int anzahl, int sh, int st, int ds)</div><div class="ttdef"><b>Definition:</b> <a href="_actor_8cpp_source.html#l00011">Actor.cpp:11</a></div></div>
-<div class="ttc" id="amain_8cpp_html_a10ae75d19930ec38568c12a9bbe78b57"><div class="ttname"><a href="main_8cpp.html#a10ae75d19930ec38568c12a9bbe78b57">anzahl</a></div><div class="ttdeci">int anzahl</div><div class="ttdef"><b>Definition:</b> <a href="main_8cpp_source.html#l00118">main.cpp:118</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
