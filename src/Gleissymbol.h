@@ -56,8 +56,9 @@ public:
     int getWeg();                                                                                                 /**<gibt aus, ob der Knoten als Weg markiert ist oder nicht*/
     void setFahrstrassenelement(unsigned int fahrstrassennr, boolean Fahrstrassenelement);                        /**<Das Gleissymbol wird zu einem Fahrstraßenelement gemacht, somit verschwindet die Besetztmeldung auch bei frei sein des Gleises nicht. Der Besetztmelder zeigt auch frei oder belegt sein an, wenn besetztmelderLicht ausgeschaltet ist. Die Festlegung und Bean-spruchung durch eine Fahrstraße kann nur durch die gleiche Fahrstraße wieder aufgeho-ben werden.*/
     boolean getFahrstrassenelement();                                                                             /**<Gibt aus, ob das Gleissymbol ein Fahrstraßenelement ist.*/
-    void setFlankenschutzweiche(Gleissymbol *flankenschutzweiche, int fahrstrassennummer, boolean weichenposition);
-    Gleissymbol *getFlankenschutzweiche();
+    void setFlankenschutzweiche(Gleissymbol *flankenschutzweiche, int fahrstrassennummer, boolean weichenposition);/**<Die zur Weiche gehörende Flankenschutzweiche wird gestellt. Dazu wird die ermittelte Weiche in die richtige Position gestellt, als Flankenschutz markiert und im Gleissymbol gespeichert.*/
+    void resetFlankenschutzweiche(int fahrstrassennummer);
+    Gleissymbol *getFlankenschutzweiche();                                                                        /**<Die Flankenschutzweiche wird als Gleissymbol zurückgegeben*/
     boolean isAnfang();                                                                                           /**<Gibt aus, ob das Gleissymbol den Anfang einer Fahrstraße bildet.*/
     void setAnfang(boolean status);                                                                               /**<Setzt den STatus, ob das Gleissymbol am Anfang einer Fahrstraße steht auf status*/
 };

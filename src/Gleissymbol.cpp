@@ -131,6 +131,14 @@ void Gleissymbol::setFlankenschutzweiche(Gleissymbol *flankenschutzweiche, int f
     }
 }
 
+void Gleissymbol::resetFlankenschutzweiche(int fahrstrassennummer){
+    if(_weiche != nullptr && _flankenschutzweiche != nullptr)//wenn Weiche und als Flankenschutzweiche
+    {
+        _flankenschutzweiche->getWeiche()->setFlankenschutz(false, fahrstrassennummer);
+        _flankenschutzweiche = nullptr;
+    }
+}
+
 Gleissymbol *Gleissymbol::getFlankenschutzweiche(){
     return _flankenschutzweiche;
 }

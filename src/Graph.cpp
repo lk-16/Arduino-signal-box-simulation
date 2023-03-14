@@ -44,6 +44,10 @@ void Graph::updateSymbole()
             if (getKnoten(i)->getWeiche() != nullptr)
             {
                 getKnoten(i)->getWeiche()->setWeichenfestlegung(false, getKnoten(i)->getWeg());
+                if(getKnoten(i)->getFlankenschutzweiche() != nullptr)
+                {
+                    getKnoten(i)->resetFlankenschutzweiche(getKnoten(i)->getWeg());
+                }
             }
             getKnoten(i)->setFahrstrassenelement(getKnoten(i)->getWeg(), false); // setze das Fahrstrassenelement zurück
         }
