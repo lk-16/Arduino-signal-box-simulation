@@ -139,8 +139,8 @@ void setup()
                                                    0, 0, 0, 0, 1, 0, 2, 0, 0,
                                                    0, 0, 0, 0, 3, 0, 0, 0};                                                       // Weichennummern werden übergeben
   int besetztmelderEingaenge[besetztmelderAnzahl] = {69, 69, 59, 59, 63, 65, 65, 68, 68, 67, 67, 60, 60, 64, 64, 62, 62, 61, 61}; // an gnd angeschlossen
-  int besetztmelderLedsGelb[besetztmelderAnzahl] = {33, 45, 130, 116, 117, 114, 0, 102, 0, 31, 43, 121, 128, 133, 112, 0, 37, 35, 41};
-  int besetztmelderLedsRot[besetztmelderAnzahl] = {32, 44, 58, 0, 118, 115, 0, 103, 0, 30, 42, 132, 129, 120, 113, 0, 36, 34, 40};
+  int besetztmelderLedsGelb[besetztmelderAnzahl] = {33, 45, 130, 116, 117, 114, 0, PIN_A3, 0, 31, 43, 121, 128, 119, 112, 0, 37, 35, 41};
+  int besetztmelderLedsRot[besetztmelderAnzahl] = {32, 44, 58, 131, 118, 115, 0, 103, 0, 30, 42, 132, 129, 120, 113, 0, 36, 34, 40};
   BesetztmeldungControl besetztmeldung(besetztmelderEingaenge, besetztmelderLedsGelb, besetztmelderLedsRot, weichenbesetztmelder, besetztmelderAnzahl, schieberegisterPins);
 
   // Weichen
